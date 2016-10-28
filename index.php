@@ -15,7 +15,6 @@
 		<div class="middle">
 			<div class="inner">
 				<div class="login-card">
-					<h1>ITS<strong>RMS</strong></h1><br>
 					<form action="main.php?login" method="post">
 						<input type="text" name="username" placeholder="Username">
 						<input type="password" name="password" placeholder="Password">
