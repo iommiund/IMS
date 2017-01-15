@@ -10,22 +10,21 @@
 	}		
 	//connection to database
 	include_once ("dbc.php");	
-		
-	$get=mysql_query ("SELECT user_status_id FROM users WHERE USERNAME = \"$username\"");
+
+	$get=mysqli_query ($con,"SELECT user_status_id FROM users WHERE USERNAME = \"$username\"");
 	
-	$result=mysql_result($get,0);
+	$result=mysqli_fetch_assoc($get);
 						
 		if ($result == 1) {
 		
-		$get=mysql_query ("select count(user_id) from users where username=\"$username\" and user_password=\"$password\"");
+		$get=mysqli_query ($con,"select count(user_id) from users where username=\"$username\" and user_password=\"$password\"");
 		
-		$result=mysql_result($get,0);
+		$result=mysqli_fetch_assoc($get);
 							
 			if ($result!=1) {
 		  		
 				header ('location: index.php?error');
 				die();
-				exit();
 		  					
 			} else {
 		  					
@@ -38,7 +37,6 @@
 		
 			header ('location: index.php?disable');
 			die();
-			exit();
 
 		} 
 			

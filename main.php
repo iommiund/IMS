@@ -7,7 +7,6 @@
 	
 		header ('location: index.php?nologin');
 		die();
-		exit();
 
 	}	
 ?>

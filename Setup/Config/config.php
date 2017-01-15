@@ -6,7 +6,7 @@ $dbpass = "";
 $dbname = "ims_iommiunderwood";
 
 //connection to mysql server
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+$con = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 //test connection
 if (mysqli_connect_errno()) {
