@@ -2,7 +2,7 @@
 //defining variables
 $dbhost = "localhost";
 $dbuser = "root";
-$dbpass = "root";
+$dbpass = "";
 $dbname = "ims_iommiunderwood";
 
 //connection to mysql server

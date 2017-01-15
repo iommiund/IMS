@@ -1,0 +1,553 @@
+-- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: ims_iommiunderwood
+-- ------------------------------------------------------
+-- Server version	10.1.16-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `ims_iommiunderwood`
+--
+
+/*!40000 DROP DATABASE IF EXISTS `ims_iommiunderwood`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ims_iommiunderwood` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `ims_iommiunderwood`;
+
+--
+-- Table structure for table `customer_account_statuses`
+--
+
+DROP TABLE IF EXISTS `customer_account_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customer_account_statuses` (
+  `customer_account_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_account_status` varchar(50) NOT NULL,
+  PRIMARY KEY (`customer_account_status_id`),
+  UNIQUE KEY `uq_customer_account_status` (`customer_account_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_account_statuses`
+--
+
+LOCK TABLES `customer_account_statuses` WRITE;
+/*!40000 ALTER TABLE `customer_account_statuses` DISABLE KEYS */;
+INSERT INTO `customer_account_statuses` VALUES (2,'Disabled'),(1,'Enabled');
+/*!40000 ALTER TABLE `customer_account_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customer_accounts`
+--
+
+DROP TABLE IF EXISTS `customer_accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customer_accounts` (
+  `customer_account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(50) NOT NULL,
+  `customer_surname` varchar(50) NOT NULL,
+  `customer_email` varchar(100) NOT NULL,
+  `customer_dob` date NOT NULL,
+  `nationality_id` int(11) NOT NULL,
+  `customer_account_status_id` int(11) NOT NULL,
+  PRIMARY KEY (`customer_account_id`),
+  UNIQUE KEY `uq_customer_email` (`customer_email`),
+  KEY `fk_nationality_id` (`nationality_id`),
+  KEY `fk_customer_account_status_id` (`customer_account_status_id`),
+  CONSTRAINT `fk_customer_account_status_id` FOREIGN KEY (`customer_account_status_id`) REFERENCES `customer_account_statuses` (`customer_account_status_id`),
+  CONSTRAINT `fk_nationality_id` FOREIGN KEY (`nationality_id`) REFERENCES `nationalities` (`nationality_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_accounts`
+--
+
+LOCK TABLES `customer_accounts` WRITE;
+/*!40000 ALTER TABLE `customer_accounts` DISABLE KEYS */;
+INSERT INTO `customer_accounts` VALUES (1,'Veronica','Galea','VeronicaGalea@fakemailaddress.com','1976-01-01',106,1),(2,'Chantelle','Fenech','ChantelleFenech@fakemailaddress.com','1993-02-19',106,1),(3,'Maria','Sciberras','MariaSciberras@fakemailaddress.com','1946-12-12',106,1),(4,'Keith','Pace','KeithPace@fakemailaddress.com','1982-06-29',106,1),(5,'Charles','Spiteri','CharlesSpiteri@fakemailaddress.com','1984-05-04',106,1),(6,'Salvina','Vella','SalvinaVella@fakemailaddress.com','1947-08-15',106,2),(7,'Josmar','Said','JosmarSaid@fakemailaddress.com','1994-07-17',106,1),(8,'Daniel','Cordina','DanielCordina@fakemailaddress.com','1984-12-12',106,1),(9,'Johnathan','Vella','JohnathanVella@fakemailaddress.com','1986-01-01',106,1),(10,'Nicholas','Azzopardi','NicholasAzzopardi@fakemailaddress.com','1977-07-24',106,1),(11,'Lorianne','Fava','LorianneFava@fakemailaddress.com','1990-07-17',106,1),(12,'Lara','Delceppo','LaraDelceppo@fakemailaddress.com','2011-01-01',106,2),(13,'Carmel','Cutajar','CarmelCutajar@fakemailaddress.com','1958-01-01',106,1),(14,'Asia','Degabriele','AsiaDegabriele@fakemailaddress.com','1972-01-01',106,1),(15,'Filippa','Umbreen','FilippaUmbreen@fakemailaddress.com','1934-01-01',106,1),(16,'Peter','Abela','PeterAbela@fakemailaddress.com','1940-10-22',106,1),(17,'Anthony','Sinclair','AnthonySinclair@fakemailaddress.com','1962-05-16',106,1),(18,'Maria','Tanti','MariaTanti@fakemailaddress.com','1983-03-20',106,2),(19,'Pierre','Muscat','PierreMuscat@fakemailaddress.com','1970-10-28',106,1),(20,'Daniel','Teyssier','DanielTeyssier@fakemailaddress.com','1984-08-19',106,1),(21,'Heather','Attard','HeatherAttard@fakemailaddress.com','1981-01-01',106,1),(22,'Marlene','Cortis','MarleneCortis@fakemailaddress.com','1962-01-01',106,1),(23,'Antonia','Parnis','AntoniaParnis@fakemailaddress.com','1949-01-01',106,1),(24,'Jurgen','Cauchi','JurgenCauchi@fakemailaddress.com','1987-08-15',106,2),(25,'Shawn','Pavanello','ShawnPavanello@fakemailaddress.com','1982-01-01',106,1),(26,'James','Abela','JamesAbela@fakemailaddress.com','1983-10-06',106,1),(27,'Andy','Magro','AndyMagro@fakemailaddress.com','1970-04-20',106,1),(28,'Antonella','Brassel','AntonellaBrassel@fakemailaddress.com','1985-08-15',106,1),(29,'Adrian','Formosa','AdrianFormosa@fakemailaddress.com','1978-11-17',106,1),(30,'Anton','Zerafa','AntonZerafa@fakemailaddress.com','1991-12-12',106,2),(31,'Roslyn','Azzopardi','RoslynAzzopardi@fakemailaddress.com','1975-05-12',106,1),(32,'Anna','Ciantar','AnnaCiantar@fakemailaddress.com','1952-04-14',106,1),(33,'Mario','Borg','MarioBorg@fakemailaddress.com','1972-05-16',106,1),(34,'Lorraine','Ellul','LorraineEllul@fakemailaddress.com','1988-06-02',106,1),(35,'Marko','Muscat','MarkoMuscat@fakemailaddress.com','1990-09-19',106,1),(36,'Miriam','Stefanac','MiriamStefanac@fakemailaddress.com','1963-05-01',106,2),(37,'Melvin','Camilleri','MelvinCamilleri@fakemailaddress.com','1971-12-12',106,1),(38,'Matthew','Fenech','MatthewFenech@fakemailaddress.com','1990-09-19',106,1),(39,'Rosaria','Linskill','RosariaLinskill@fakemailaddress.com','1954-01-01',106,1),(40,'Michael','Allen','MichaelAllen@fakemailaddress.com','2011-01-01',106,1),(41,'Lindsey','Briffa','LindseyBriffa@fakemailaddress.com','1994-01-01',106,1),(42,'Redeemer','Grixti','RedeemerGrixti@fakemailaddress.com','1993-01-01',106,2),(43,'Gejtano','Farrugia','GejtanoFarrugia@fakemailaddress.com','2009-10-10',106,1),(44,'Jacqueline','Cutajar','JacquelineCutajar@fakemailaddress.com','1970-05-10',106,1),(45,'Gianluca','Deguara','GianlucaDeguara@fakemailaddress.com','1976-05-28',106,1),(46,'Christie','Scarponi','ChristieScarponi@fakemailaddress.com','1991-12-12',106,1),(47,'Theodor','Buhagiar','TheodorBuhagiar@fakemailaddress.com','1970-08-01',106,1),(48,'Agnes','Forberg','AgnesForberg@fakemailaddress.com','1960-09-20',106,2),(49,'Lee','Tabone','LeeTabone@fakemailaddress.com','1990-02-28',106,1),(50,'Rachelle','Sammut','RachelleSammut@fakemailaddress.com','1977-02-21',106,1),(51,'Helen','Borg','HelenBorg@fakemailaddress.com','1968-05-19',106,1),(52,'Sarah','Bezzina','SarahBezzina@fakemailaddress.com','1976-07-17',106,1),(53,'Mary','Cutajar','MaryCutajar@fakemailaddress.com','1950-08-01',106,1),(54,'David','Said','DavidSaid@fakemailaddress.com','1986-11-04',106,2),(55,'Samir','Grixti','SamirGrixti@fakemailaddress.com','1980-04-05',106,1),(56,'Zulfqur','Gehel','ZulfqurGehel@fakemailaddress.com','1971-09-07',106,1),(57,'Rudi','Ahmad','RudiAhmad@fakemailaddress.com','1985-12-13',106,1),(58,'Jason','Roles','JasonRoles@fakemailaddress.com','1972-01-01',106,1),(59,'Jason','Galea','JasonGalea@fakemailaddress.com','1972-11-12',106,1),(60,'Roberta','Cutajar','RobertaCutajar@fakemailaddress.com','1987-12-12',106,2),(61,'Yvette','Attard','YvetteAttard@fakemailaddress.com','1972-05-29',106,1),(62,'Thomas','Spiteri','ThomasSpiteri@fakemailaddress.com','1946-02-10',106,1),(63,'Melissa','Welch','MelissaWelch@fakemailaddress.com','1984-01-01',106,1),(64,'John','Xuereb','JohnXuereb@fakemailaddress.com','1947-05-19',106,1),(65,'Maria','Vella','MariaVella@fakemailaddress.com','1969-07-23',106,1),(66,'Miriam','Grech','MiriamGrech@fakemailaddress.com','1986-01-01',106,2),(67,'Emmanuel','Mula','EmmanuelMula@fakemailaddress.com','2029-01-01',106,1),(68,'Pascal','Delia','PascalDelia@fakemailaddress.com','1990-07-06',106,1),(69,'Alfred','Baettig','AlfredBaettig@fakemailaddress.com','1955-05-19',106,1),(70,'Rose','Scicluna','RoseScicluna@fakemailaddress.com','1946-10-06',106,1),(71,'Marius','Bartolo','MariusBartolo@fakemailaddress.com','1981-05-15',106,1),(72,'Matthew','Caruana','MatthewCaruana@fakemailaddress.com','1991-10-12',106,2),(73,'Adrian','Baldacchino','AdrianBaldacchino@fakemailaddress.com','1976-01-31',106,1),(74,'Gladys','Ellul','GladysEllul@fakemailaddress.com','1944-02-10',106,1),(75,'Antoine','Brownrigg','AntoineBrownrigg@fakemailaddress.com','1982-01-01',106,1),(76,'Ibrahim','Zahra','IbrahimZahra@fakemailaddress.com','1980-01-01',106,1),(77,'Charles','Hussein','CharlesHussein@fakemailaddress.com','1970-01-19',106,1),(78,'Mary','Falzon','MaryFalzon@fakemailaddress.com','1956-12-14',106,2),(79,'Alejandro','Azzopardi','AlejandroAzzopardi@fakemailaddress.com','1985-12-10',106,1),(80,'Alain','Morenas','AlainMorenas@fakemailaddress.com','1948-01-10',106,1),(81,'Richard','Salvary','RichardSalvary@fakemailaddress.com','1990-05-15',106,1),(82,'Christine','Bergmair','ChristineBergmair@fakemailaddress.com','1983-04-03',106,1),(83,'Louise','Harmer','LouiseHarmer@fakemailaddress.com','2012-02-01',106,1),(84,'Yakob','Micallef','YakobMicallef@fakemailaddress.com','1981-01-01',106,2),(85,'Michael','Tonna','MichaelTonna@fakemailaddress.com','1951-01-12',106,1),(86,'Maria','Hartland','MariaHartland@fakemailaddress.com','1961-01-01',106,1),(87,'Sylvana','Vella','SylvanaVella@fakemailaddress.com','1964-12-12',106,1),(88,'Maria','Fiteni','MariaFiteni@fakemailaddress.com','1983-01-01',106,1),(89,'Doris','Farrugia','DorisFarrugia@fakemailaddress.com','1973-03-24',106,1),(90,'Anthony','Borg','AnthonyBorg@fakemailaddress.com','1943-05-16',106,2),(91,'Michael','Rizzo','MichaelRizzo@fakemailaddress.com','1993-07-17',106,1),(92,'Lorenza','Hinchy','LorenzaHinchy@fakemailaddress.com','1952-02-03',106,1),(93,'Istvan','Cooper','IstvanCooper@fakemailaddress.com','1987-12-12',106,1),(94,'Cirinna','Polgar','CirinnaPolgar@fakemailaddress.com','1975-05-16',106,1),(95,'Margaret','Corradino','MargaretCorradino@fakemailaddress.com','1969-01-01',106,1),(96,'Neil','Saliba','NeilSaliba@fakemailaddress.com','1988-05-19',106,2),(97,'Oleksandr','Muscat','OleksandrMuscat@fakemailaddress.com','1981-03-13',106,1),(98,'Stephanie','Ilchuk','StephanieIlchuk@fakemailaddress.com','1995-01-04',106,1),(99,'Jurgen','Cordina','JurgenCordina@fakemailaddress.com','1975-05-19',106,1),(100,'Markus','Calleja','MarkusCalleja@fakemailaddress.com','1970-10-28',106,1);
+/*!40000 ALTER TABLE `customer_accounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nationalities`
+--
+
+DROP TABLE IF EXISTS `nationalities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nationalities` (
+  `nationality_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nationality` varchar(50) NOT NULL,
+  PRIMARY KEY (`nationality_id`),
+  UNIQUE KEY `uq_nationality` (`nationality`)
+) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nationalities`
+--
+
+LOCK TABLES `nationalities` WRITE;
+/*!40000 ALTER TABLE `nationalities` DISABLE KEYS */;
+INSERT INTO `nationalities` VALUES (1,'Afghanistan'),(2,'Albania'),(3,'Algeria'),(4,'Andorra'),(5,'Angola'),(6,'Antigua and Barbuda'),(7,'Argentina'),(8,'Armenia'),(9,'Australia'),(10,'Austria'),(11,'Azerbaijan'),(12,'Bahamas'),(13,'Bahrain'),(14,'Bangladesh'),(15,'Barbados'),(16,'Belarus'),(17,'Belgium'),(18,'Belize'),(19,'Benin'),(20,'Bhutan'),(21,'Bolivia'),(22,'Bosnia and Herzegovina'),(23,'Botswana'),(24,'Brazil'),(25,'Brunei Darussalam'),(26,'Bulgaria'),(27,'Burkina Faso'),(28,'Burundi'),(29,'Cabo Verde'),(30,'Cambodia'),(31,'Cameroon'),(32,'Canada'),(33,'Central African Republic'),(34,'Chad'),(35,'Chile'),(36,'China'),(37,'Colombia'),(38,'Comoros'),(39,'Cong'),(40,'Congo'),(41,'Costa Rica'),(43,'Croatia'),(44,'Cuba'),(45,'Cyprus'),(46,'Czech Republic'),(47,'Denmark'),(48,'Djibouti'),(49,'Dominica'),(50,'Dominican Republic'),(51,'Ecuador'),(52,'Egypt'),(53,'El Salvador'),(54,'Equatorial Guinea'),(55,'Eritrea'),(56,'Estonia'),(57,'Ethiopia'),(58,'Fiji'),(59,'Finland'),(60,'France'),(61,'Gabon'),(62,'Gambia'),(63,'Georgia'),(64,'Germany'),(65,'Ghana'),(66,'Greece'),(67,'Grenada'),(68,'Guatemala'),(69,'Guinea'),(70,'Guinea-Bissau'),(71,'Guyana'),(72,'Haiti'),(73,'Honduras'),(74,'Hungary'),(75,'Iceland'),(76,'India'),(77,'Indonesia'),(78,'Iran'),(79,'Iraq'),(80,'Ireland'),(81,'Israel'),(82,'Italy'),(42,'Ivory Coast'),(83,'Jamaica'),(84,'Japan'),(85,'Jordan'),(86,'Kazakhstan'),(87,'Kenya'),(88,'Kiribati'),(89,'Kuwait'),(90,'Kyrgyzstan'),(91,'Laos'),(92,'Latvia'),(93,'Lebanon'),(94,'Lesotho'),(95,'Liberia'),(96,'Libya'),(97,'Liechtenstein'),(98,'Lithuania'),(99,'Luxembourg'),(100,'Macedonia'),(101,'Madagascar'),(102,'Malawi'),(103,'Malaysia'),(104,'Maldives'),(105,'Mali'),(106,'Malta'),(107,'Marshall Islands'),(108,'Mauritania'),(109,'Mauritius'),(110,'Mexico'),(111,'Micronesia'),(112,'Monaco'),(113,'Mongolia'),(114,'Montenegro'),(115,'Morocco'),(116,'Mozambique'),(117,'Myanmar'),(118,'Namibia'),(119,'Nauru'),(120,'Nepal'),(121,'Netherlands'),(122,'New Zealand'),(123,'Nicaragua'),(124,'Niger'),(125,'Nigeria'),(126,'North Korea'),(127,'Norway'),(128,'Oman'),(129,'Pakistan'),(130,'Palau'),(131,'Panama'),(132,'Papua New Guinea'),(133,'Paraguay'),(134,'Peru'),(135,'Philippines'),(136,'Poland'),(137,'Portugal'),(138,'Qatar'),(139,'Republic of Moldova'),(140,'Romania'),(141,'Russian Federation'),(142,'Rwanda'),(143,'Saint Kitts and Nevis'),(144,'Saint Lucia'),(145,'Saint Vincent and the Grenadines'),(146,'Samoa'),(147,'San Marino'),(148,'Sao Tome and Principe'),(149,'Saudi Arabia'),(150,'Senegal'),(151,'Serbia'),(152,'Seychelles'),(153,'Sierra Leone'),(154,'Singapore'),(155,'Slovakia'),(156,'Slovenia'),(157,'Solomon Islands'),(158,'Somalia'),(159,'South Africa'),(160,'South Korea'),(161,'South Sudan'),(162,'Spain'),(163,'Sri Lanka'),(164,'Sudan'),(165,'Suriname'),(166,'Swaziland'),(167,'Sweden'),(168,'Switzerland'),(169,'Syrian Arab Republic'),(170,'Tajikistan'),(171,'Tanzania'),(172,'Thailand'),(173,'Timor-Leste'),(174,'Togo'),(175,'Tonga'),(176,'Trinidad and Tobago'),(177,'Tunisia'),(178,'Turkey'),(179,'Turkmenistan'),(180,'Tuvalu'),(181,'UAE'),(182,'Uganda'),(183,'UK'),(184,'Ukraine'),(185,'Uruguay'),(186,'USA'),(187,'Uzbekistan'),(188,'Vanuatu'),(189,'Venezuela'),(190,'Vietnam'),(191,'Yemen'),(192,'Zambia'),(193,'Zimbabwe');
+/*!40000 ALTER TABLE `nationalities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resouce_model_identifiers`
+--
+
+DROP TABLE IF EXISTS `resouce_model_identifiers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resouce_model_identifiers` (
+  `resource_model_identifier_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_model_identifier` varchar(50) NOT NULL,
+  `resource_model_id` int(11) NOT NULL,
+  `resource_sn_length` int(11) NOT NULL,
+  PRIMARY KEY (`resource_model_identifier_id`),
+  UNIQUE KEY `uq_resource_model_identifier` (`resource_model_identifier`),
+  KEY `fk_resource_model_id2` (`resource_model_id`),
+  CONSTRAINT `fk_resource_model_id2` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resouce_model_identifiers`
+--
+
+LOCK TABLES `resouce_model_identifiers` WRITE;
+/*!40000 ALTER TABLE `resouce_model_identifiers` DISABLE KEYS */;
+INSERT INTO `resouce_model_identifiers` VALUES (1,'385729',6,14),(2,'395729',7,14),(3,'357350',5,14),(4,'24767D',1,12),(5,'7CB21B',1,12),(6,'BCC810',1,12),(7,'E448C7',1,12),(8,'8935677',3,19),(9,'109',2,10),(10,'50500',4,12),(11,'51000',4,12),(12,'52000',4,12),(13,'55000',4,12);
+/*!40000 ALTER TABLE `resouce_model_identifiers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_brands`
+--
+
+DROP TABLE IF EXISTS `resource_brands`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_brands` (
+  `resource_brand_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_brand` varchar(50) NOT NULL,
+  PRIMARY KEY (`resource_brand_id`),
+  UNIQUE KEY `uq_resource_brand` (`resource_brand`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_brands`
+--
+
+LOCK TABLES `resource_brands` WRITE;
+/*!40000 ALTER TABLE `resource_brands` DISABLE KEYS */;
+INSERT INTO `resource_brands` VALUES (4,'Apple'),(1,'Cisco'),(5,'FutureCards'),(6,'Gemalto SIM'),(2,'Nagra'),(3,'Samsung');
+/*!40000 ALTER TABLE `resource_brands` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_location_types`
+--
+
+DROP TABLE IF EXISTS `resource_location_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_location_types` (
+  `resource_location_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_location_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`resource_location_type_id`),
+  UNIQUE KEY `uq_resource_location_type` (`resource_location_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_location_types`
+--
+
+LOCK TABLES `resource_location_types` WRITE;
+/*!40000 ALTER TABLE `resource_location_types` DISABLE KEYS */;
+INSERT INTO `resource_location_types` VALUES (3,'Customer'),(2,'Field Technician'),(1,'Physical Location');
+/*!40000 ALTER TABLE `resource_location_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_locations`
+--
+
+DROP TABLE IF EXISTS `resource_locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_locations` (
+  `resource_location_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_location_name` varchar(50) NOT NULL,
+  `resource_location_description` varchar(200) NOT NULL,
+  `resource_location_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`resource_location_id`),
+  UNIQUE KEY `uq_resource_location_name` (`resource_location_name`),
+  UNIQUE KEY `uq_resource_location_description` (`resource_location_description`),
+  KEY `fk_resource_location_type_id` (`resource_location_type_id`),
+  CONSTRAINT `fk_resource_location_type_id` FOREIGN KEY (`resource_location_type_id`) REFERENCES `resource_location_types` (`resource_location_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_locations`
+--
+
+LOCK TABLES `resource_locations` WRITE;
+/*!40000 ALTER TABLE `resource_locations` DISABLE KEYS */;
+INSERT INTO `resource_locations` VALUES (1,'Main Warehouse','Company main warehouse where resource is delivered from vendor',1),(2,'Paola Branch','Company branch in Paola, Malta',1),(3,'Valletta Branch','Company branch in Valletta, Malta',1),(4,'Naxxar Branch','Company branch in Naxxar, Malta',1),(5,'Service Technician','Company Service Technician, is assigned inventory to replace customer premises equipment',2),(6,'Installation Technician','Company Installation Technician, is assigned inventory to install as customer premises equipment',2),(7,'Customer','Customer is assigned inventory as customer premises equipment',3);
+/*!40000 ALTER TABLE `resource_locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_models`
+--
+
+DROP TABLE IF EXISTS `resource_models`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_models` (
+  `resource_model_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_brand_id` int(11) NOT NULL,
+  `resource_model` varchar(50) NOT NULL,
+  PRIMARY KEY (`resource_model_id`),
+  UNIQUE KEY `uq_resource_model` (`resource_model`),
+  KEY `fk_resource_brand_id` (`resource_brand_id`),
+  CONSTRAINT `fk_resource_brand_id` FOREIGN KEY (`resource_brand_id`) REFERENCES `resource_brands` (`resource_brand_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_models`
+--
+
+LOCK TABLES `resource_models` WRITE;
+/*!40000 ALTER TABLE `resource_models` DISABLE KEYS */;
+INSERT INTO `resource_models` VALUES (1,1,'EPC3925'),(2,2,'NV'),(3,6,'SIM128K'),(4,5,'TUV'),(5,3,'Galaxy S7'),(6,4,'iPhone 6S 16GB'),(7,4,'iPhone 7 Plus');
+/*!40000 ALTER TABLE `resource_models` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_statuses`
+--
+
+DROP TABLE IF EXISTS `resource_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_statuses` (
+  `resource_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_status` varchar(50) NOT NULL,
+  PRIMARY KEY (`resource_status_id`),
+  UNIQUE KEY `uq_resource_status` (`resource_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_statuses`
+--
+
+LOCK TABLES `resource_statuses` WRITE;
+/*!40000 ALTER TABLE `resource_statuses` DISABLE KEYS */;
+INSERT INTO `resource_statuses` VALUES (2,'Allocated'),(1,'Available'),(6,'Destroyed'),(5,'In Repair'),(3,'Reserved'),(4,'Sold');
+/*!40000 ALTER TABLE `resource_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resource_types`
+--
+
+DROP TABLE IF EXISTS `resource_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource_types` (
+  `resource_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`resource_type_id`),
+  UNIQUE KEY `uq_resource_type` (`resource_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource_types`
+--
+
+LOCK TABLES `resource_types` WRITE;
+/*!40000 ALTER TABLE `resource_types` DISABLE KEYS */;
+INSERT INTO `resource_types` VALUES (5,'Internet and VoIP Modem'),(2,'Mobile Handset'),(4,'Mobile Prepaid Top-Up Voucher'),(3,'Mobile Sim Card'),(1,'TV Set-Top Box');
+/*!40000 ALTER TABLE `resource_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resources`
+--
+
+DROP TABLE IF EXISTS `resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resources` (
+  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_status_id` int(11) NOT NULL,
+  `resource_type_id` int(11) NOT NULL,
+  `resource_location_id` int(11) NOT NULL,
+  `customer_account_id` int(11) DEFAULT NULL,
+  `resource_unique_value` varchar(50) NOT NULL,
+  `resource_model_id` int(11) NOT NULL,
+  `voucher_value_id` int(11) DEFAULT NULL,
+  `last_transaction_id` int(11) NOT NULL,
+  `resource_latitude` float(10,6) DEFAULT NULL,
+  `resource_longitude` float(10,6) DEFAULT NULL,
+  PRIMARY KEY (`resource_id`),
+  KEY `fk_resource_status_id` (`resource_status_id`),
+  KEY `fk_resource_type_id` (`resource_type_id`),
+  KEY `fk_resource_location_id` (`resource_location_id`),
+  KEY `fk_customer_account_id` (`customer_account_id`),
+  KEY `fk_resource_model_id` (`resource_model_id`),
+  KEY `fk_voucher_value_id` (`voucher_value_id`),
+  KEY `fk_last_transaction_id` (`last_transaction_id`),
+  CONSTRAINT `fk_customer_account_id` FOREIGN KEY (`customer_account_id`) REFERENCES `customer_accounts` (`customer_account_id`),
+  CONSTRAINT `fk_last_transaction_id` FOREIGN KEY (`last_transaction_id`) REFERENCES `transactions` (`transaction_id`),
+  CONSTRAINT `fk_resource_location_id` FOREIGN KEY (`resource_location_id`) REFERENCES `resource_locations` (`resource_location_id`),
+  CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
+  CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
+  CONSTRAINT `fk_resource_type_id` FOREIGN KEY (`resource_type_id`) REFERENCES `resource_types` (`resource_type_id`),
+  CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resources`
+--
+
+LOCK TABLES `resources` WRITE;
+/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transaction_statuses`
+--
+
+DROP TABLE IF EXISTS `transaction_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transaction_statuses` (
+  `transaction_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `transaction_status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`transaction_status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction_statuses`
+--
+
+LOCK TABLES `transaction_statuses` WRITE;
+/*!40000 ALTER TABLE `transaction_statuses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transaction_types`
+--
+
+DROP TABLE IF EXISTS `transaction_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transaction_types` (
+  `transaction_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `transaction_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`transaction_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction_types`
+--
+
+LOCK TABLES `transaction_types` WRITE;
+/*!40000 ALTER TABLE `transaction_types` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `resource_id` int(11) NOT NULL,
+  `resource_status_id` int(11) NOT NULL,
+  `resource_location_id` int(11) NOT NULL,
+  `customer_account_id` int(11) DEFAULT NULL,
+  `initiation_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `transaction_type_id` int(11) NOT NULL,
+  `transaction_status_id` int(11) NOT NULL,
+  `closing_user_id` int(11) DEFAULT NULL,
+  `closing_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `resource_latitude` float(10,6) DEFAULT NULL,
+  `resource_longitude` float(10,6) DEFAULT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `fk_user_id_tr` (`user_id`),
+  KEY `fk_resource_id_tr` (`resource_id`),
+  KEY `fk_transaction_type_id` (`transaction_type_id`),
+  KEY `fk_transaction_status_id` (`transaction_status_id`),
+  CONSTRAINT `fk_resource_id_tr` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`resource_id`),
+  CONSTRAINT `fk_transaction_status_id` FOREIGN KEY (`transaction_status_id`) REFERENCES `transaction_statuses` (`transaction_status_id`),
+  CONSTRAINT `fk_transaction_type_id` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_types` (`transaction_type_id`),
+  CONSTRAINT `fk_user_id_tr` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_statuses`
+--
+
+DROP TABLE IF EXISTS `user_statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_statuses` (
+  `user_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_status` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_status_id`),
+  UNIQUE KEY `uq_user_status` (`user_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_statuses`
+--
+
+LOCK TABLES `user_statuses` WRITE;
+/*!40000 ALTER TABLE `user_statuses` DISABLE KEYS */;
+INSERT INTO `user_statuses` VALUES (2,'Disabled'),(1,'Enabled');
+/*!40000 ALTER TABLE `user_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_types`
+--
+
+DROP TABLE IF EXISTS `user_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_types` (
+  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_type_id`),
+  UNIQUE KEY `uq_user_type` (`user_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_types`
+--
+
+LOCK TABLES `user_types` WRITE;
+/*!40000 ALTER TABLE `user_types` DISABLE KEYS */;
+INSERT INTO `user_types` VALUES (1,'Admin'),(4,'Field User'),(2,'Location Manager'),(3,'POS User'),(7,'Reporting User'),(8,'Super User'),(6,'Warehouse User');
+/*!40000 ALTER TABLE `user_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL,
+  `user_surname` varchar(50) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_username` varchar(50) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
+  `user_type_id` int(11) NOT NULL,
+  `user_status_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `uq_user_email` (`user_email`),
+  UNIQUE KEY `uq_user_username` (`user_username`),
+  KEY `fk_user_type_id` (`user_type_id`),
+  KEY `fk_user_status_id` (`user_status_id`),
+  CONSTRAINT `fk_user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_statuses` (`user_status_id`),
+  CONSTRAINT `fk_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`user_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Iommi','Underwood','IommiUnderwood@fakecompany.com','iommi','eebe11d291033c61b9ffba9601e5d6e3',1,1),(2,'Russell','Camilleri','RussellCamilleri@fakecompany.com','rcamm','f7c20b3e6847db57880d10f24ff396ff',1,1),(3,'James','Cassar','JamesCassar@fakecompany.com','jcass','dc411f978cb6765fff94495dfea1f4b3',2,2),(4,'Mark','Attard','MarkAttard@fakecompany.com','matta','423c8f5dd72b2ab6d7c3ac2f098c33ed',1,1),(5,'Kyle','Zammit','KyleZammit@fakecompany.com','kzamm','1703461c0284e84d7b4e0fcf1681777b',2,1),(6,'Danijel','Cajic','DanijelCajic@fakecompany.com','dcaji','9591e7e295f80e31616877b3148c13b7',2,1),(7,'Michael','Fava','MichaelFava@fakecompany.com','mfava','583fb9383df04225f368d7435c6a0441',2,1),(8,'Darren','Gatt','DarrenGatt@fakecompany.com','dgatt','73fe5165e54069d9069c071a737a6cbf',2,1),(9,'Ryan','Cassar','RyanCassar@fakecompany.com','rcass','50b75b016497baca15c15cb53d1aacfe',2,1),(10,'Ryan','Scicluna','RyanScicluna@fakecompany.com','rscic','84942f24573d2ef8b0cff8f933301dff',2,1),(11,'Luke','Camilleri','LukeCamilleri@fakecompany.com','lcami','c848d53ec4a4c5559f03bbe769d78779',2,1),(12,'Clayton','Farrugia','ClaytonFarrugia@fakecompany.com','cfarr','d8cdb87bdc894e520f73706fad33b442',2,1),(13,'Stephen','Ciantar','StephenCiantar@fakecompany.com','scian','2e8535947e35ff81b9fbf8d564ecdc53',2,1),(14,'jake','borg','jakeborg@fakecompany.com','jborg','9abc24f9667b1f2c56354e80b23c3598',2,1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `voucher_values`
+--
+
+DROP TABLE IF EXISTS `voucher_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `voucher_values` (
+  `voucher_value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_value` int(11) NOT NULL,
+  PRIMARY KEY (`voucher_value_id`),
+  UNIQUE KEY `uq_voucher_value` (`voucher_value`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `voucher_values`
+--
+
+LOCK TABLES `voucher_values` WRITE;
+/*!40000 ALTER TABLE `voucher_values` DISABLE KEYS */;
+INSERT INTO `voucher_values` VALUES (1,5),(2,10),(3,20),(4,50);
+/*!40000 ALTER TABLE `voucher_values` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-01-15 14:25:53
