@@ -17,13 +17,6 @@
     <file url="file://$PROJECT_DIR$/Setup/Config/dbc.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup/backupDB.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup/install.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/dbc.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/header.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/header1.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/header2.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/index.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/login.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/main.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/topSection.php" dialect="MySQL" />
   </component>
 </project>
