@@ -3,10 +3,10 @@
 /**
  * Created by PhpStorm.
  * User: Iommi
- * Date: 15/01/2017
- * Time: 16:17
+ * Date: 18/01/2017
+ * Time: 20:49
  */
-class ims
+class hash
 {
 
 }

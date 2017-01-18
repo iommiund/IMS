@@ -6,7 +6,7 @@
  * Date: 18/01/2017
  * Time: 20:51
  */
-class user
+class validation
 {
 
 }

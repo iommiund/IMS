@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
+-- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: ims_iommiunderwood
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	10.1.16-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -465,6 +465,7 @@ DROP TABLE IF EXISTS `user_types`;
 CREATE TABLE `user_types` (
   `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_type` varchar(50) NOT NULL,
+  `user_permissions` tinytext,
   PRIMARY KEY (`user_type_id`),
   UNIQUE KEY `uq_user_type` (`user_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
@@ -476,7 +477,7 @@ CREATE TABLE `user_types` (
 
 LOCK TABLES `user_types` WRITE;
 /*!40000 ALTER TABLE `user_types` DISABLE KEYS */;
-INSERT INTO `user_types` VALUES (1,'Admin'),(4,'Field User'),(2,'Location Manager'),(3,'POS User'),(7,'Reporting User'),(8,'Super User'),(6,'Warehouse User');
+INSERT INTO `user_types` VALUES (1,'Admin','{\"admin\": 1}'),(2,'Location Manager',NULL),(3,'POS User',NULL),(4,'Field User',NULL),(6,'Warehouse User',NULL),(7,'Reporting User',NULL),(8,'Super User','{\"SU\": 8}');
 /*!40000 ALTER TABLE `user_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -494,6 +495,7 @@ CREATE TABLE `users` (
   `user_email` varchar(100) NOT NULL,
   `user_username` varchar(50) NOT NULL,
   `user_password` varchar(100) NOT NULL,
+  `user_salt` varchar(32) NOT NULL,
   `user_type_id` int(11) NOT NULL,
   `user_status_id` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
@@ -512,7 +514,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Iommi','Underwood','IommiUnderwood@fakecompany.com','iommi','eebe11d291033c61b9ffba9601e5d6e3',1,1),(2,'Russell','Camilleri','RussellCamilleri@fakecompany.com','rcamm','f7c20b3e6847db57880d10f24ff396ff',1,1),(3,'James','Cassar','JamesCassar@fakecompany.com','jcass','dc411f978cb6765fff94495dfea1f4b3',2,2),(4,'Mark','Attard','MarkAttard@fakecompany.com','matta','423c8f5dd72b2ab6d7c3ac2f098c33ed',1,1),(5,'Kyle','Zammit','KyleZammit@fakecompany.com','kzamm','1703461c0284e84d7b4e0fcf1681777b',2,1),(6,'Danijel','Cajic','DanijelCajic@fakecompany.com','dcaji','9591e7e295f80e31616877b3148c13b7',2,1),(7,'Michael','Fava','MichaelFava@fakecompany.com','mfava','583fb9383df04225f368d7435c6a0441',2,1),(8,'Darren','Gatt','DarrenGatt@fakecompany.com','dgatt','73fe5165e54069d9069c071a737a6cbf',2,1),(9,'Ryan','Cassar','RyanCassar@fakecompany.com','rcass','50b75b016497baca15c15cb53d1aacfe',2,1),(10,'Ryan','Scicluna','RyanScicluna@fakecompany.com','rscic','84942f24573d2ef8b0cff8f933301dff',2,1),(11,'Luke','Camilleri','LukeCamilleri@fakecompany.com','lcami','c848d53ec4a4c5559f03bbe769d78779',2,1),(12,'Clayton','Farrugia','ClaytonFarrugia@fakecompany.com','cfarr','d8cdb87bdc894e520f73706fad33b442',2,1),(13,'Stephen','Ciantar','StephenCiantar@fakecompany.com','scian','2e8535947e35ff81b9fbf8d564ecdc53',2,1),(14,'jake','borg','jakeborg@fakecompany.com','jborg','9abc24f9667b1f2c56354e80b23c3598',2,1);
+INSERT INTO `users` VALUES (1,'Iommi','Underwood','IommiUnderwood@fakecompany.com','iommi','eebe11d291033c61b9ffba9601e5d6e3','',1,1),(2,'Russell','Camilleri','RussellCamilleri@fakecompany.com','rcamm','f7c20b3e6847db57880d10f24ff396ff','',1,1),(3,'James','Cassar','JamesCassar@fakecompany.com','jcass','dc411f978cb6765fff94495dfea1f4b3','',2,2),(4,'Mark','Attard','MarkAttard@fakecompany.com','matta','423c8f5dd72b2ab6d7c3ac2f098c33ed','',1,1),(5,'Kyle','Zammit','KyleZammit@fakecompany.com','kzamm','1703461c0284e84d7b4e0fcf1681777b','',2,1),(6,'Danijel','Cajic','DanijelCajic@fakecompany.com','dcaji','9591e7e295f80e31616877b3148c13b7','',2,1),(7,'Michael','Fava','MichaelFava@fakecompany.com','mfava','583fb9383df04225f368d7435c6a0441','',2,1),(8,'Darren','Gatt','DarrenGatt@fakecompany.com','dgatt','73fe5165e54069d9069c071a737a6cbf','',2,1),(9,'Ryan','Cassar','RyanCassar@fakecompany.com','rcass','50b75b016497baca15c15cb53d1aacfe','',2,1),(10,'Ryan','Scicluna','RyanScicluna@fakecompany.com','rscic','84942f24573d2ef8b0cff8f933301dff','',2,1),(11,'Luke','Camilleri','LukeCamilleri@fakecompany.com','lcami','c848d53ec4a4c5559f03bbe769d78779','',2,1),(12,'Clayton','Farrugia','ClaytonFarrugia@fakecompany.com','cfarr','d8cdb87bdc894e520f73706fad33b442','',2,1),(13,'Stephen','Ciantar','StephenCiantar@fakecompany.com','scian','2e8535947e35ff81b9fbf8d564ecdc53','',2,1),(14,'jake','borg','jakeborg@fakecompany.com','jborg','9abc24f9667b1f2c56354e80b23c3598','',2,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,4 +552,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-17  9:59:08
+-- Dump completed on 2017-01-18 23:38:43

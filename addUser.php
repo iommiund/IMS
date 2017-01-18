@@ -1,47 +1,3 @@
-<?php
-include_once("Classes/user.php");
-$user = new user();
-
-/** Verify that user is logged in */
-if (isset($_REQUEST['submit'])) {
-    extract($_REQUEST);
-    $addUser = $user->addUser($name, $surname, $email, $username, $password);
-    if ($addUser) {
-        /** Add User Successful */
-        echo "User Added";
-    } else {
-        /** Add User Failed */
-        echo "Add User Failed - Username or Email already exists";
-    }
-}
-?>
-<?php /**
- * //IF THE SESSION USERNAME IS EMPTY, REDIRECT TO LOGIN SCREEN
- * if (empty($_SESSION['username'])) {
- *
- * header ('location: index.php?nologin');
- * die();
- * exit();
- *
- * }
- *
- * //SUPER USER VALIDATION - STANDARD USERS ARE REDIRECTED TO MAIN.PHP
- * $username=$_SESSION['username'];
- *
- * include_once ("dbc.php");
- *
- * $get=mysql_query ("SELECT user_type_id FROM users WHERE USERNAME = \"$username\"");
- *
- * $result=mysql_result($get,0);
- *
- * if ($result != 1) {
- *
- * header ('location: main.php');
- * die();
- * exit();
- *
- * } */
-?>
 <!DOCTYPE html>
 <html>
 
@@ -53,28 +9,6 @@ if (isset($_REQUEST['submit'])) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<script type="text/javascript" language="JavaScript">
-    function submitAddUser() {
-        var form = document.addUser;
-        if (form.name.value == "") {
-            alert("Name is mandatory");
-            return false;
-        } else if (form.surname.value == "") {
-            alert("Surname is mandatory");
-            return false;
-        } else if (form.email.value == "") {
-            alert("Email is mandatory");
-            return false;
-        } else if (form.username.value == "") {
-            alert("Username is mandatory");
-            return false
-        } else if (form.password.value == "") {
-            alert("Password is mandatory");
-            return false
-        }
-    }
-</script>
 
 <div class="content">
     <div class="container">
@@ -106,3 +40,7 @@ if (isset($_REQUEST['submit'])) {
 </div>
 </body>
 </html>
+
+https://www.youtube.com/watch?v=rWon2iC-cQ0&list=PLfdtiltiRHWF5Rhuk7k4UAU1_yLAZzhWc&index=2#t=361.438216
+
+Part 11/23

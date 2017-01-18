@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/Classes/customer.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/ims.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/location.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/modem.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/person.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/resourceItem.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/simCard.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/stb.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/transaction.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/tuv.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Classes/user.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup/Config/config.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup/Config/dbc.php" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Setup/Install.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Setup/backupDB.php" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/Setup/install.php" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/index.php" dialect="MySQL" />
   </component>
 </project>
