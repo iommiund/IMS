@@ -3,15 +3,21 @@ session_start();
 include_once 'Classes/user.php';
 $user = new user();
 
-if (isset($_REQUEST['submit'])) {
+if (isset($_REQUEST['username'], $_REQUEST['password'], $_REQUEST['login']) && !empty($_REQUEST['username'])) {
     extract($_REQUEST);
+
+    $username=$_REQUEST['username'];
+    $password=md5($_REQUEST['password']);
+
     $login = $user->loginUser($username, $password);
+
     if ($login) {
         /** Login Successful - redirect to main page */
         header("location:home.php");
     } else {
         /** Login Failed - display error message */
-        header("location:index.php?error");
+        header("location:index.php?error,$username,$password,$login");
+
     }
 }
 ?>
