@@ -1,3 +1,53 @@
+<?php
+require_once 'core/init.php';
+
+//Validate user input
+if(input::exists()){
+
+    // validate whether token exists before performing any action
+    if(token::check(input::get('token'))){
+
+        // if token validation passed continue
+        $validate = new validation();
+        $validation = $validate->check($_POST,array(
+            'name' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 50
+            ),
+            'surname' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 50
+            ),
+            'email' => array(
+                'required' => true,
+                'max' => 50,
+                'unique' => 'users'
+            ),
+            'username' => array(
+                'required' => true,
+                'min' => 4,
+                'max' => 10,
+                'unique' => 'users'
+            ),
+            'password' => array(
+                'required' => true,
+                'min' => 4
+            )
+        ));
+
+        // display error or success messages
+        if ($validation->passed()){
+            echo 'New user added!!';
+        } else {
+            foreach ($validation->errors() as $error){
+                echo "- " . $error . "!!!", '<br>';
+            }
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,11 +66,12 @@
             <h1>Add a New User</h1>
 
             <form action="" method="post" name="addUser">
-                <input type="text" name="name" placeholder="Name" required="required"/>
-                <input type="text" name="surname" placeholder="Surname" required="required"/>
-                <input type="email" name="email" placeholder="Email" required="required"/>
-                <input type="text" name="username" placeholder="Username" required="required"/>
-                <input type="password" name="password" placeholder="Password" required="required" min="4"/>
+                <input type="text" name="name" placeholder="Name" value="<?php echo escape(input::get('name')); ?>" /> <!-- required="required"/> -->
+                <input type="text" name="surname" placeholder="Surname" value="<?php echo escape(input::get('surname')); ?>" /> <!-- required="required"/> -->
+                <input type="email" name="email" placeholder="Email" value="<?php echo escape(input::get('email')); ?>" /> <!-- required="required"/> -->
+                <input type="text" name="username" placeholder="Username" value="<?php echo escape(input::get('username')); ?>" /> <!-- required="required"/> -->
+                <input type="password" name="password" placeholder="Password" /> <!-- required="required"/> -->
+                <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                 <input type="submit" value="REGISTER"/>
             </form>
             <br>
@@ -40,7 +91,3 @@
 </div>
 </body>
 </html>
-
-https://www.youtube.com/watch?v=rWon2iC-cQ0&list=PLfdtiltiRHWF5Rhuk7k4UAU1_yLAZzhWc&index=2#t=361.438216
-
-Part 11/23
