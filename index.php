@@ -3,15 +3,14 @@
 // Require init.php for core config and class auto load
 require_once 'core/init.php';
 
-$user = db::getInstance()->query("select * from ims_iommiunderwood.users");
-
-if (!$user->count()) {
-    echo 'No user';
-} else {
-    foreach ($user->results() as $user) {
-        echo $user->user_username, '<br>';
-    }
+/** get message from redirect
+ *
+if (session::exists('home')){
+    echo session::flash('home');
 }
+ *
+ */
+redirect::to('login.php');
 
 ?>
 <!DOCTYPE html>

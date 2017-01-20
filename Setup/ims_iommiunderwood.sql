@@ -468,7 +468,7 @@ CREATE TABLE `user_types` (
   `user_permissions` tinytext,
   PRIMARY KEY (`user_type_id`),
   UNIQUE KEY `uq_user_type` (`user_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -477,7 +477,7 @@ CREATE TABLE `user_types` (
 
 LOCK TABLES `user_types` WRITE;
 /*!40000 ALTER TABLE `user_types` DISABLE KEYS */;
-INSERT INTO `user_types` VALUES (1,'Admin','{\"admin\": 1}'),(2,'Location Manager',NULL),(3,'POS User',NULL),(4,'Field User',NULL),(6,'Warehouse User',NULL),(7,'Reporting User',NULL),(8,'Super User','{\"SU\": 8}');
+INSERT INTO `user_types` VALUES (1,'Admin','{\"admin\": 1}'),(2,'Location Manager',NULL),(3,'POS User',NULL),(4,'Field User',NULL),(6,'Warehouse User',NULL),(7,'Reporting User',NULL),(8,'Super User','{\"SU\": 8}'),(9,'No Access',NULL);
 /*!40000 ALTER TABLE `user_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,7 +505,7 @@ CREATE TABLE `users` (
   KEY `fk_user_status_id` (`user_status_id`),
   CONSTRAINT `fk_user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_statuses` (`user_status_id`),
   CONSTRAINT `fk_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`user_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -514,7 +514,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Iommi','Underwood','IommiUnderwood@fakecompany.com','iommi','eebe11d291033c61b9ffba9601e5d6e3','',1,1),(2,'Russell','Camilleri','RussellCamilleri@fakecompany.com','rcamm','f7c20b3e6847db57880d10f24ff396ff','',1,1),(3,'James','Cassar','JamesCassar@fakecompany.com','jcass','dc411f978cb6765fff94495dfea1f4b3','',2,2),(4,'Mark','Attard','MarkAttard@fakecompany.com','matta','423c8f5dd72b2ab6d7c3ac2f098c33ed','',1,1),(5,'Kyle','Zammit','KyleZammit@fakecompany.com','kzamm','1703461c0284e84d7b4e0fcf1681777b','',2,1),(6,'Danijel','Cajic','DanijelCajic@fakecompany.com','dcaji','9591e7e295f80e31616877b3148c13b7','',2,1),(7,'Michael','Fava','MichaelFava@fakecompany.com','mfava','583fb9383df04225f368d7435c6a0441','',2,1),(8,'Darren','Gatt','DarrenGatt@fakecompany.com','dgatt','73fe5165e54069d9069c071a737a6cbf','',2,1),(9,'Ryan','Cassar','RyanCassar@fakecompany.com','rcass','50b75b016497baca15c15cb53d1aacfe','',2,1),(10,'Ryan','Scicluna','RyanScicluna@fakecompany.com','rscic','84942f24573d2ef8b0cff8f933301dff','',2,1),(11,'Luke','Camilleri','LukeCamilleri@fakecompany.com','lcami','c848d53ec4a4c5559f03bbe769d78779','',2,1),(12,'Clayton','Farrugia','ClaytonFarrugia@fakecompany.com','cfarr','d8cdb87bdc894e520f73706fad33b442','',2,1),(13,'Stephen','Ciantar','StephenCiantar@fakecompany.com','scian','2e8535947e35ff81b9fbf8d564ecdc53','',2,1),(14,'jake','borg','jakeborg@fakecompany.com','jborg','9abc24f9667b1f2c56354e80b23c3598','',2,1);
+INSERT INTO `users` VALUES (1,'Iommi','Underwood','iommi@fakecompany.com','iommi','9179982a82cbe0c8f224651112b2285f4ab77156d4eedb8e1f9917c9f1feecf4','µŠ +m7ïÎN)R»|ŸZ´ÚN_®$Å?<—öWð‹',9,2),(2,'Russell','Camilleri','rcamm@fakecompany.com','rcamm','1e456859b29138592fe7838205d0d868c762f5561242b1be3d9c4f4db950e9af','›O¼‹”Ì{±PÓW0soe€¬þ¾(i ÞÜâÚÞ ',9,2),(3,'James','Cassar','jcass@fakecompany.com','jcass','d807c992883215878f737e8d8d666b4d7a0137799ce710f0c253a44a8a14eecd','sÝx>Ê¥Õ‹µ\"vVòy 8BQ˜i¬É]±ýlî',9,2),(4,'Kyle','Zammit','kzamm@fakecompany.com','kzamm','779080ec01c45c77b6db3a20643b866ea857736394647531bc502d2d9b16c46e','Ž›/]˜‡)dWãÆ\0Dÿº0‰/#ýIky‹8ðP',9,2),(5,'Danijel','Cajic','dcaji@fakecompany.com','dcaji','54877fc579b2809e8ccf43209b11336365466735543692391d06842e0c8da6ec','þ‚#GóŠ¬ÆÅ«RtmÍÑG“.U/¿T~Ó',9,2),(6,'Michael','Fava','mfava@fakecompany.com','mfava','471e85d24320350bf4225774d70782ea4c99de19300a8098c265758bba5f1481','^È7xdHì—|\"ò¤RÊË\"»Ù%òÃQ2ÁÞ‡Üh',9,2),(7,'Darren','Gatt','dgatt@fakecompany.com','dgatt','cba05a614c6b6389e6e2126df3029c73bd2a44ec6d98752f6af458bea8a0a876','æu¦ö6³5œü ähâªè5¿4: éÃìFí%,&',9,2),(8,'Ryan','Cassar','rcass@fakecompany.com','rcass','0b2297d43746206ec5c94b3d93937df0d9ef43060efda243b5bce064d0cd4584','Më/-!›Æí¯¯„˜ÂeÝf0=¨€Êùç¾Hgq|ÿ',9,2),(9,'Ryan','Scicluna','rscic@fakecompany.com','rscic','2a335b3614317a5c74ac1f23b7ea5e20dd785367106fed2e0135e1d3638cbe6a',',ºHrÅ£8¾a:\r8_9óv(ø¢-S2qÀ×ë¹ê»x',9,2),(10,'Luke','Camilleri','lcami@fakecompany.com','lcami','17d7e11a3b940803bfb11afd479f42dad4605bda3a631ba69fb734aefb121578',':éu}Ï>Q„þNJÌe5æ+Û!¡Ï·;YmY9°Rä',9,2),(11,'Clayton','Farrugia','cfarr@fakecompany.com','cfarr','ba75d0c73bd4cd6067e3ac6b03dbe3ef9737a5a83f47567ffa48fb1763ab4e54','¨+Â¥BåR$Q¼6óîGÜBcu\"\n}À5‚r@ú',9,2),(12,'Stephen','Ciantar','scian@fakecompany.com','scian','6221a0886ed4df87918ba07d9f4f22da54ed99ccd1ab1a0d1d18e7efc23d0711','h\ræ/ámÄ©Iêk$Œ{‹¬ä^çodô¹c×Ã-[Ý',9,2),(13,'Jake','Borg','jborg@fakecompany.com','jborg','327b5b990468ea6f6388241196d363944b7da7af3683e743f01bfb3935efb7f2','ˆ}¯vœ–f/ÓHbÅ\0™Ç5Å‹ØvZl<¸ZâÁwƒ',9,2),(14,'Emanuel','Mallia','emall@fakecompany.com','emall','c33b4fc486e6bf8c84bf02d1c3fbe9a86b91029b0a75f8be942ef9a9273461db','q§ÉË±£R¶é\"&<é–ZŽ›Š«Ý ño€M¯ê9(',9,2),(15,'Melvin','Pace','pacem@fakecompany.com','pacem','14fbac87489d0f1b84328ebb66f38d9f375ffc9d41ecb2612181299ec2f57114','ù¯ìžgûíÖ-Ù§îïÜ3±V–Š‚½çCÓv',9,2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,4 +552,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-18 23:38:43
+-- Dump completed on 2017-01-20 23:51:25

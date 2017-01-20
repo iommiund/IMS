@@ -39,7 +39,29 @@ if(input::exists()){
 
         // display error or success messages
         if ($validation->passed()){
-            echo 'New user added!!';
+            $user = new user();
+
+            $salt = hash::salt(32);
+
+            try {
+
+                $name = input::get('name');
+                $surname = input::get('surname');
+                $email = input::get('email');
+                $username = input::get('username');
+                $password = hash::make(input::get('password'), $salt);
+                $saltValue = $salt;
+                $type = 9;
+                $status = 2;
+
+                $user->create($name,$surname,$email,$username,$password,$saltValue,$type,$status);
+
+                session::flash('home','<b>' . $name . ' ' . $surname . '</b> has been added as a new user!');
+                redirect::to('index.php');
+
+            } catch (Exception $e){
+                die($e->getMessage());
+            }
         } else {
             foreach ($validation->errors() as $error){
                 echo "- " . $error . "!!!", '<br>';

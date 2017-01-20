@@ -28,4 +28,15 @@ class session
             unset($_SESSION[$name]);
         }
     }
+
+    //flash message if user refreshes page, example success message after add user
+    public static function flash($name, $string = ''){
+        if (self::exists($name)){
+            $session = self::get($name);
+            self::delete($name);
+            return $session;
+        } else {
+            self::put($name, $string);
+        }
+    }
 }

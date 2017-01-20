@@ -1,3 +1,39 @@
+<?php
+require_once 'core/init.php';
+
+if (input::exists()){
+    if (token::check(input::get('token'))) {
+
+        $validate = new validation();
+        $validation = $validate->check($_POST, array(
+            'username' => array('required' => true),
+            'password' => array('required' => true)
+        ));
+
+        if ($validation->passed()){
+            $user = new user();
+
+            $username = input::get('username');
+            $password = input::get('password');
+
+            $login = $user->login($username, $password);
+
+            if($login){
+                echo 'success';
+            } else {
+                echo 'login failed';
+            }
+
+        } else {
+            foreach ($validation->errors() as $error){
+                echo "- " . $error . "!!!", '<br>';
+            }
+        }
+
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,8 +51,9 @@
             <div class="login-card">
                 <h1><strong>IMS</strong>login</h1><br>
                 <form action="" method="post" name="login">
-                    <input type="text" name="username" required="required" placeholder="Username">
-                    <input type="password" name="password" required="required" placeholder="Password">
+                    <input type="text" name="username" value="<?php echo escape(input::get('username')); ?>" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                     <input type="submit" name="login" class="login login-submit" value="login">
                 </form>
                 <!--ERROR MESSAGES-->
