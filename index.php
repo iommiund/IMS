@@ -3,14 +3,9 @@
 // Require init.php for core config and class auto load
 require_once 'core/init.php';
 
-/** get message from redirect
- *
-if (session::exists('home')){
-    echo session::flash('home');
-}
- *
- */
-redirect::to('login.php');
+$user = db::getInstance()->update('ims.users', 16, array(
+    'user_password' => 'password'
+));
 
 ?>
 <!DOCTYPE html>

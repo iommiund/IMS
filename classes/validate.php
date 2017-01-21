@@ -6,7 +6,7 @@
  * Date: 18/01/2017
  * Time: 20:51
  */
-class validation
+class validate
 {
     private $_passed = false,
             $_errors = array(),

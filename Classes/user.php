@@ -36,7 +36,10 @@ class user
 
             // get user data from query result
             if ($data->count()){
-                $this->_data = $data;
+
+                $this->_data = $data->results();
+                print_r($this);
+
                 return true;
             }
         }

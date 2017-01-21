@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
 --
--- Host: localhost    Database: ims_iommiunderwood
+-- Host: localhost    Database: ims
 -- ------------------------------------------------------
 -- Server version	10.1.16-MariaDB
 
@@ -16,14 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `ims_iommiunderwood`
+-- Current Database: `ims`
 --
 
-/*!40000 DROP DATABASE IF EXISTS `ims_iommiunderwood`*/;
+/*!40000 DROP DATABASE IF EXISTS `ims`*/;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ims_iommiunderwood` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ims` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `ims_iommiunderwood`;
+USE `ims`;
 
 --
 -- Table structure for table `customer_account_statuses`
@@ -505,7 +505,7 @@ CREATE TABLE `users` (
   KEY `fk_user_status_id` (`user_status_id`),
   CONSTRAINT `fk_user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_statuses` (`user_status_id`),
   CONSTRAINT `fk_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`user_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -516,6 +516,32 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES (1,'Iommi','Underwood','iommi@fakecompany.com','iommi','9179982a82cbe0c8f224651112b2285f4ab77156d4eedb8e1f9917c9f1feecf4','µŠ +m7ïÎN)R»|ŸZ´ÚN_®$Å?<—öWð‹',9,2),(2,'Russell','Camilleri','rcamm@fakecompany.com','rcamm','1e456859b29138592fe7838205d0d868c762f5561242b1be3d9c4f4db950e9af','›O¼‹”Ì{±PÓW0soe€¬þ¾(i ÞÜâÚÞ ',9,2),(3,'James','Cassar','jcass@fakecompany.com','jcass','d807c992883215878f737e8d8d666b4d7a0137799ce710f0c253a44a8a14eecd','sÝx>Ê¥Õ‹µ\"vVòy 8BQ˜i¬É]±ýlî',9,2),(4,'Kyle','Zammit','kzamm@fakecompany.com','kzamm','779080ec01c45c77b6db3a20643b866ea857736394647531bc502d2d9b16c46e','Ž›/]˜‡)dWãÆ\0Dÿº0‰/#ýIky‹8ðP',9,2),(5,'Danijel','Cajic','dcaji@fakecompany.com','dcaji','54877fc579b2809e8ccf43209b11336365466735543692391d06842e0c8da6ec','þ‚#GóŠ¬ÆÅ«RtmÍÑG“.U/¿T~Ó',9,2),(6,'Michael','Fava','mfava@fakecompany.com','mfava','471e85d24320350bf4225774d70782ea4c99de19300a8098c265758bba5f1481','^È7xdHì—|\"ò¤RÊË\"»Ù%òÃQ2ÁÞ‡Üh',9,2),(7,'Darren','Gatt','dgatt@fakecompany.com','dgatt','cba05a614c6b6389e6e2126df3029c73bd2a44ec6d98752f6af458bea8a0a876','æu¦ö6³5œü ähâªè5¿4: éÃìFí%,&',9,2),(8,'Ryan','Cassar','rcass@fakecompany.com','rcass','0b2297d43746206ec5c94b3d93937df0d9ef43060efda243b5bce064d0cd4584','Më/-!›Æí¯¯„˜ÂeÝf0=¨€Êùç¾Hgq|ÿ',9,2),(9,'Ryan','Scicluna','rscic@fakecompany.com','rscic','2a335b3614317a5c74ac1f23b7ea5e20dd785367106fed2e0135e1d3638cbe6a',',ºHrÅ£8¾a:\r8_9óv(ø¢-S2qÀ×ë¹ê»x',9,2),(10,'Luke','Camilleri','lcami@fakecompany.com','lcami','17d7e11a3b940803bfb11afd479f42dad4605bda3a631ba69fb734aefb121578',':éu}Ï>Q„þNJÌe5æ+Û!¡Ï·;YmY9°Rä',9,2),(11,'Clayton','Farrugia','cfarr@fakecompany.com','cfarr','ba75d0c73bd4cd6067e3ac6b03dbe3ef9737a5a83f47567ffa48fb1763ab4e54','¨+Â¥BåR$Q¼6óîGÜBcu\"\n}À5‚r@ú',9,2),(12,'Stephen','Ciantar','scian@fakecompany.com','scian','6221a0886ed4df87918ba07d9f4f22da54ed99ccd1ab1a0d1d18e7efc23d0711','h\ræ/ámÄ©Iêk$Œ{‹¬ä^çodô¹c×Ã-[Ý',9,2),(13,'Jake','Borg','jborg@fakecompany.com','jborg','327b5b990468ea6f6388241196d363944b7da7af3683e743f01bfb3935efb7f2','ˆ}¯vœ–f/ÓHbÅ\0™Ç5Å‹ØvZl<¸ZâÁwƒ',9,2),(14,'Emanuel','Mallia','emall@fakecompany.com','emall','c33b4fc486e6bf8c84bf02d1c3fbe9a86b91029b0a75f8be942ef9a9273461db','q§ÉË±£R¶é\"&<é–ZŽ›Š«Ý ño€M¯ê9(',9,2),(15,'Melvin','Pace','pacem@fakecompany.com','pacem','14fbac87489d0f1b84328ebb66f38d9f375ffc9d41ecb2612181299ec2f57114','ù¯ìžgûíÖ-Ù§îïÜ3±V–Š‚½çCÓv',9,2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users_session`
+--
+
+DROP TABLE IF EXISTS `users_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users_session` (
+  `session_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `hash` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `fk_user_session_id_idx` (`user_id`),
+  CONSTRAINT `fk_user_session_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_session`
+--
+
+LOCK TABLES `users_session` WRITE;
+/*!40000 ALTER TABLE `users_session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -552,4 +578,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-20 23:51:25
+-- Dump completed on 2017-01-21 16:07:54

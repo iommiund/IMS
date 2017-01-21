@@ -1,6 +1,6 @@
 <?php
 
-    $command = "C:\\xampp\\mysql\\bin\\mysqldump -B --add-drop-database ims_iommiunderwood -uroot > C:\\xampp\\htdocs\\IMS\\Setup\\ims_iommiunderwood.sql";
+    $command = "C:\\xampp\\mysql\\bin\\mysqldump -B --add-drop-database ims -uroot > C:\\xampp\\htdocs\\IMS\\Setup\\ims.sql";
 
     exec($command, $output, $return_var);
 

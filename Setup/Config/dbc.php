@@ -3,6 +3,6 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_DATABASE', 'ims_iommiunderwood');
+define('DB_DATABASE', 'ims');
 
 ?>

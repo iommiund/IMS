@@ -3,7 +3,7 @@
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
-$dbname = "ims_iommiunderwood";
+$dbname = "ims";
 
 //connection to mysql server
 $con = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);

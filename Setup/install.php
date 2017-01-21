@@ -4,7 +4,7 @@ include_once('/Config/config.php');
 
 //insert dbdump in the same folder as install.php
 if (empty($dbpass)) {
-    $command = "C:\\xampp\\mysql\\bin\\mysql -u" . $dbuser . " < ims_iommiunderwood.sql";
+    $command = "C:\\xampp\\mysql\\bin\\mysql -u" . $dbuser . " < ims.sql";
 
     exec($command, $output, $return_var);
 
@@ -14,7 +14,7 @@ if (empty($dbpass)) {
 
 } else {
 
-    $command = "C:\\xampp\\mysql\\bin\\mysql -u" . $dbuser . " -p" . $dbpass . " < ims_iommiunderwood.sql";
+    $command = "C:\\xampp\\mysql\\bin\\mysql -u" . $dbuser . " -p" . $dbpass . " < ims.sql";
 
     exec($command, $output, $return_var);
 
