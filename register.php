@@ -8,7 +8,7 @@ if(input::exists()){
     if(token::check(input::get('token'))){
 
         // if token validation passed continue
-        $validate = new validation();
+        $validate = new validate();
         $validation = $validate->check($_POST,array(
             'name' => array(
                 'required' => true,
@@ -41,23 +41,26 @@ if(input::exists()){
         if ($validation->passed()){
             $user = new user();
 
-            $salt = hash::salt(32);
+            $salt = hash::salt(32); // generate salt to insert into create array
+            $name = input::get('name');
+            $surname = input::get('surname');
 
             try {
 
-                $name = input::get('name');
-                $surname = input::get('surname');
-                $email = input::get('email');
-                $username = input::get('username');
-                $password = hash::make(input::get('password'), $salt);
-                $saltValue = $salt;
-                $type = 9;
-                $status = 2;
+                $user->create(array(
+                    'name' => $name,
+                    'surname' => $surname,
+                    'email' => input::get('email'),
+                    'username' => input::get('username'),
+                    'password' => hash::make(input::get('password'), $salt),
+                    'salt' => $salt,
+                    'user_type_id' => 9,
+                    'user_status_id' => 2
+                ));
 
-                $user->create($name,$surname,$email,$username,$password,$saltValue,$type,$status);
-
-                session::flash('home','<b>' . $name . ' ' . $surname . '</b> has been added as a new user!');
-                redirect::to('index.php');
+                //create message to display on user creation
+                session::flash('addUserSuccess','<b>' . $name . ' ' . $surname . '</b> has been added as a new user!');
+                redirect::to('index.php'); //redirect with session home to display message
 
             } catch (Exception $e){
                 die($e->getMessage());
@@ -69,6 +72,7 @@ if(input::exists()){
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -22,12 +22,13 @@ class input
         }
     }
 
+    // Function to eliminate the need of calling $_post each time
     public static function get($item){
         if(isset($_POST[$item])){
             return $_POST[$item];
         } else if (isset($_GET[$item])){
             return $_GET[$item];
         }
-        return '';
+        return ''; // return empty string by default
     }
 }

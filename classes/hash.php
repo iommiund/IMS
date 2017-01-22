@@ -8,7 +8,6 @@
  */
 class hash
 {
-
     // make hash password from string and salt value
     public static function make($string, $salt = ''){
         return hash('sha256', $string . $salt);

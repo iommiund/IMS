@@ -2,9 +2,10 @@
 require_once 'core/init.php';
 
 if (input::exists()){
+
     if (token::check(input::get('token'))) {
 
-        $validate = new validation();
+        $validate = new validate();
         $validation = $validate->check($_POST, array(
             'username' => array('required' => true),
             'password' => array('required' => true)
@@ -13,13 +14,13 @@ if (input::exists()){
         if ($validation->passed()){
             $user = new user();
 
-            $login = $user->login(input::get('username'), input::get('password'));
+            $remember = (input::get('remember') === 'on') ? true : false;
+            $login = $user->login(input::get('username'), input::get('password'), $remember);
 
             if($login){
-                echo 'success';
+                redirect::to('index.php');
             } else {
-                echo $user;
-                //redirect::to('login.php?error');
+                echo 'error';
             }
 
         } else {
@@ -49,8 +50,11 @@ if (input::exists()){
             <div class="login-card">
                 <h1><strong>IMS</strong>login</h1><br>
                 <form action="" method="post" name="login">
-                    <input type="text" name="username" value="<?php echo escape(input::get('username')); ?>" placeholder="Username">
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="text" name="username" value="<?php echo escape(input::get('username')); ?>" placeholder="Username" autocomplete="off">
+                    <input type="password" name="password" placeholder="Password" autocomplete="off">
+                    <label for="remember">
+                        <input type="checkbox" name="remember" id="remember"> Remember Me
+                    </label>
                     <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                     <input type="submit" name="login" class="login login-submit" value="login">
                 </form>

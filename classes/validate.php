@@ -20,9 +20,11 @@ class validate
 
     //loop through all post irems to check if they meet specified requirements
     public function check($source, $items = array()){
+
+        //loop through each validation item
         foreach($items as $item => $rules){
 
-            //loop through each rule
+            //loop through each validation rule
             foreach ($rules as $rule => $rule_value){
 
                 //get the value of each item
@@ -36,20 +38,21 @@ class validate
                     switch ($rule){
                         case 'min';
                             if (strlen($value) < $rule_value){
-                                $this->addError("{$item} must be a minimum of {$rule_value} characters.");
+                                $this->addError("{$item} must be a minimum of {$rule_value} characters");
                             }
                             break;
                         case 'max';
                             if (strlen($value) > $rule_value){
-                                $this->addError("{$item} must be a maximum of {$rule_value} characters.");
+                                $this->addError("{$item} must be a maximum of {$rule_value} characters");
                             }
                             break;
                         case 'unique';
 
-                            $check = $this->_db->query("select * from ims_iommiunderwood.users where user_username = '$value' or user_email = '$value'");
+                            // check that the value does not exist in the database
+                            $check = $this->_db->get($rule_value, array($item, '=', $value));
 
                             if ($check->count()){
-                                $this->addError("{$item} already exists");
+                                $this->addError("{$item} already exists.");
                             }
                             break;
                     }

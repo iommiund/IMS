@@ -397,7 +397,7 @@ DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
   `resource_id` int(11) NOT NULL,
   `resource_status_id` int(11) NOT NULL,
   `resource_location_id` int(11) NOT NULL,
@@ -405,19 +405,19 @@ CREATE TABLE `transactions` (
   `initiation_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `transaction_type_id` int(11) NOT NULL,
   `transaction_status_id` int(11) NOT NULL,
-  `closing_user_id` int(11) DEFAULT NULL,
+  `closing_uid` int(11) DEFAULT NULL,
   `closing_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `resource_latitude` float(10,6) DEFAULT NULL,
   `resource_longitude` float(10,6) DEFAULT NULL,
   PRIMARY KEY (`transaction_id`),
-  KEY `fk_user_id_tr` (`user_id`),
+  KEY `fk_uid_tr` (`uid`),
   KEY `fk_resource_id_tr` (`resource_id`),
   KEY `fk_transaction_type_id` (`transaction_type_id`),
   KEY `fk_transaction_status_id` (`transaction_status_id`),
   CONSTRAINT `fk_resource_id_tr` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`resource_id`),
   CONSTRAINT `fk_transaction_status_id` FOREIGN KEY (`transaction_status_id`) REFERENCES `transaction_statuses` (`transaction_status_id`),
   CONSTRAINT `fk_transaction_type_id` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_types` (`transaction_type_id`),
-  CONSTRAINT `fk_user_id_tr` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+  CONSTRAINT `fk_uid_tr` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -489,18 +489,18 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) NOT NULL,
-  `user_surname` varchar(50) NOT NULL,
-  `user_email` varchar(100) NOT NULL,
-  `user_username` varchar(50) NOT NULL,
-  `user_password` varchar(100) NOT NULL,
-  `user_salt` varchar(32) NOT NULL,
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `surname` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `salt` varchar(32) NOT NULL,
   `user_type_id` int(11) NOT NULL,
   `user_status_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `uq_user_email` (`user_email`),
-  UNIQUE KEY `uq_user_username` (`user_username`),
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `uq_email` (`email`),
+  UNIQUE KEY `uq_username` (`username`),
   KEY `fk_user_type_id` (`user_type_id`),
   KEY `fk_user_status_id` (`user_status_id`),
   CONSTRAINT `fk_user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_statuses` (`user_status_id`),
@@ -527,11 +527,11 @@ DROP TABLE IF EXISTS `users_session`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users_session` (
   `session_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
   `hash` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`session_id`),
-  KEY `fk_user_session_id_idx` (`user_id`),
-  CONSTRAINT `fk_user_session_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_user_session_id_idx` (`uid`),
+  CONSTRAINT `fk_user_session_id` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
