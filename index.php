@@ -4,17 +4,19 @@
 require_once 'core/init.php';
 
 //display message from user creation
-if (session::exists('home')){
+if (session::exists('home')) {
     echo session::flash('home');
 }
 
 $user = new user();
 
-if ($user->isLoggedIn()){
+if ($user->isLoggedIn()) {
 
     $name = $user->data()->name;
     $surname = $user->data()->surname;
-?>
+    $username = $user->data()->username;
+
+    ?>
     <!DOCTYPE html>
     <html>
 
@@ -27,7 +29,9 @@ if ($user->isLoggedIn()){
     </head>
     <body>
     <p>
-        hello <b><a href="#"><?php echo $name . ' ' . $surname; ?></a></b>
+        hello <b><a href="profile.php?user=<?php echo $username; ?>">
+                    <?php echo $name . ' ' . $surname; ?>
+                 </a></b>
     </p>
 
     <ul>
@@ -39,6 +43,12 @@ if ($user->isLoggedIn()){
     </body>
     </html>
     <?php
+
+    //user permissions, apply to menu
+    if ($user->hasPermission('admin')){
+        echo 'you are an administrator';
+    }
+
 } else {
     echo '<p> You need to <a href="login.php">Login</a> or <a href="register.php">register</a> </p>';
 }

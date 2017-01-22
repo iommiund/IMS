@@ -22,7 +22,7 @@ class input
         }
     }
 
-    // Function to eliminate the need of calling $_post each time
+    // Function to eliminate the need of calling $_POST or $_GET each time
     public static function get($item){
         if(isset($_POST[$item])){
             return $_POST[$item];

@@ -131,7 +131,7 @@ class db
             $x++;
         }
 
-        $sql = "update {$table} set {$set} where user_id = {$id}"; //user_id needs to be a variable
+        $sql = "update {$table} set {$set} where uid = {$id}"; //user_id needs to be a variable
 
         if (!$this->query($sql, $fields)->error()){
             return true;

@@ -34,6 +34,10 @@ if(input::exists()){
             'password' => array(
                 'required' => true,
                 'min' => 4
+            ),
+            'retype_password' => array(
+                'required' => true,
+                'matches' => 'password'
             )
         ));
 
@@ -97,6 +101,7 @@ if(input::exists()){
                 <input type="email" name="email" placeholder="Email" value="<?php echo escape(input::get('email')); ?>" /> <!-- required="required"/> -->
                 <input type="text" name="username" placeholder="Username" value="<?php echo escape(input::get('username')); ?>" /> <!-- required="required"/> -->
                 <input type="password" name="password" placeholder="Password" /> <!-- required="required"/> -->
+                <input type="password" name="retype_password" placeholder="Retype Password" /> <!-- required="required"/> -->
                 <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                 <input type="submit" value="REGISTER"/>
             </form>

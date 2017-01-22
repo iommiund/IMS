@@ -25,6 +25,10 @@ if (input::exists()){
             'new_password' => array(
                 'required' => true,
                 'min' => 4
+            ),
+            'retype_new_password' => array(
+                'required' => true,
+                'matches' => 'new_password'
             )
         ));
 
@@ -73,6 +77,7 @@ if (input::exists()){
             <form action="" method="post" name="changePassword">
                 <input type="password" name="current_password" placeholder="Current Password" />
                 <input type="password" name="new_password" placeholder="New Password" />
+                <input type="password" name="retype_new_password" placeholder="Retype New Password" />
                 <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                 <input type="submit" value="CHANGE"/>
             </form>

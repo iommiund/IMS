@@ -46,6 +46,11 @@ class validate
                                 $this->addError("{$item} must be a maximum of {$rule_value} characters");
                             }
                             break;
+                        case 'matches';
+                            if ($value != $source[$rule_value]){
+                                $this->addError("Passwords must match");
+                            }
+                            break;
                         case 'unique';
 
                             // check that the value does not exist in the database

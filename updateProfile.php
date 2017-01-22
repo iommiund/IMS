@@ -44,10 +44,11 @@ if (input::exists()){
                 die($e->getMessage());
             }
 
-        } else foreach($validation->errors() as $error){
-            echo '- ' . $error . '!!!<br>';
+        } else {
+            foreach($validation->errors() as $error) {
+                echo '- ' . $error . '!!!<br>';
+            }
         }
-
     }
 }
 

@@ -122,6 +122,20 @@ class user
         cookie::delete($this->_cookieName);
     }
 
+    public function hasPermission($key){
+        $type = $this->_db->get('user_types', array('user_type_id', '=', $this->data()->user_type_id));
+
+        if ($type->count()){
+            $permissions = json_decode($type->first()->user_permissions, true);
+
+            if ($permissions[$key] == true){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public function exists(){
         return (!empty($this->_data)) ? true : false;
     }
