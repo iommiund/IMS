@@ -3,7 +3,7 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>IMS Login</title>
+    <title>IMS</title>
     <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
@@ -107,11 +107,11 @@ if(input::exists()){
         } else {
             ?>
             <div id="dialogOk" title="Error">
-            <?php
-            foreach ($validation->errors() as $error){
-                echo "- " . $error . "", '<br>';
-            }
-            ?>
+                <?php
+                foreach ($validation->errors() as $error){
+                    echo "- " . $error . "", '<br>';
+                }
+                ?>
             </div>
                 <?php
         }

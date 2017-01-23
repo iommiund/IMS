@@ -1,28 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>IMS Login</title>
-    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $( function() {
-            $( "#dialogOk" ).dialog({
-                modal: true,
-                buttons: {
-                    Ok: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            });
-        } );
-    </script>
-</head>
-<body>
 <?php
 require_once 'core/init.php';
 
@@ -43,15 +18,13 @@ if (input::exists()){
             $login = $user->login(input::get('username'), input::get('password'), $remember);
 
             if($login){
-                redirect::to('index.php');
+                redirect::to('main.php');
             } else {
-                echo 'error';
+                redirect::to('login.php?error');
             }
 
         } else {
-            foreach ($validation->errors() as $error){
-                echo "- " . $error . "!!!", '<br>';
-            }
+            redirect::to('login.php?v');
         }
 
     }
@@ -64,9 +37,11 @@ if (input::exists()){
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>IMS Login</title>
-    <link rel='stylesheet prefetch'
-          href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <div class="outer">
@@ -80,22 +55,30 @@ if (input::exists()){
                     <label for="remember">
                         <input type="checkbox" name="remember" id="remember"> Remember Me
                     </label>
+                    <br>
+                    <br>
                     <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                     <input type="submit" name="login" class="login login-submit" value="login">
                 </form>
                 <!--ERROR MESSAGES-->
                 <div class="reset-password">
-                    <?php
-                    if (isset($_GET['error'])) {
-                        echo "<div id='error'>Incorrect Username or Password!!!!</div>";
-                    } else if (isset($_GET['disable'])) {
-                        echo "<div id='error'>This user is disabled!!!!</div>";
-                    } else if (isset($_GET['nologin'])) {
-                        echo "<div id='error'>You must be logged in!!!!</div>";
-                    } else if (isset($_GET['resetPassword'])) {
-                        echo "<div id='error'>Login using your new Password</div>";
-                    }
-                    ?>
+                    <div id='error'>
+                        <b>
+                            <?php
+                            if (isset($_GET['error'])) {
+                                echo "Incorrect Username or Password!!!!";
+                            } else if (isset($_GET['disable'])) {
+                                echo "This user is disabled!!!!";
+                            } else if (isset($_GET['nologin'])) {
+                                echo "You must be logged in!!!!";
+                            } else if (isset($_GET['resetPassword'])) {
+                                echo "Login using your new Password";
+                            } else if (isset($_GET['v'])) {
+                                echo "All fields are required!!!!";
+                            }
+                            ?>
+                        </b>
+                    </div>
                 </div>
                 <!--ERROR MESSAGES END-->
             </div>
