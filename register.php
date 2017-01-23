@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>IMS Login</title>
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#dialogOk" ).dialog({
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        } );
+    </script>
+</head>
+<body>
 <?php
 require_once 'core/init.php';
 
@@ -63,45 +88,49 @@ if(input::exists()){
                 ));
 
                 //create message to display on user creation
-                session::flash('addUserSuccess','<b>' . $name . ' ' . $surname . '</b> has been added as a new user!');
-                redirect::to('index.php'); //redirect with session home to display message
-
+                ?>
+                <div id="dialogOk" title="Success">
+                    <p>
+                        <?php
+                            echo '<b>' . $name . ' ' . $surname . '</b> was added with:<br><br>';
+                            echo 'Username: ' . input::get('username') . '<br>';
+                            echo 'Email: ' . input::get('email') . '<br>';
+                        ?>
+                        Current Status: <b>Disabled</b><br><br>
+                        <b>Enable</b> from your admin page.</p>
+                    </p>
+                </div>
+                <?php
             } catch (Exception $e){
                 die($e->getMessage());
             }
         } else {
+            ?>
+            <div id="dialogOk" title="Error">
+            <?php
             foreach ($validation->errors() as $error){
-                echo "- " . $error . "!!!", '<br>';
+                echo "- " . $error . "", '<br>';
             }
+            ?>
+            </div>
+                <?php
         }
     }
 }
 
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>IMS Login</title>
-    <link rel='stylesheet prefetch'
-          href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
 <div class="content">
     <div class="container">
         <div class="form-style">
             <h1>Add a New User</h1>
 
             <form action="" method="post" name="addUser">
-                <input type="text" name="name" placeholder="Name" value="<?php echo escape(input::get('name')); ?>" /> <!-- required="required"/> -->
-                <input type="text" name="surname" placeholder="Surname" value="<?php echo escape(input::get('surname')); ?>" /> <!-- required="required"/> -->
-                <input type="email" name="email" placeholder="Email" value="<?php echo escape(input::get('email')); ?>" /> <!-- required="required"/> -->
-                <input type="text" name="username" placeholder="Username" value="<?php echo escape(input::get('username')); ?>" /> <!-- required="required"/> -->
-                <input type="password" name="password" placeholder="Password" /> <!-- required="required"/> -->
-                <input type="password" name="retype_password" placeholder="Retype Password" /> <!-- required="required"/> -->
+                <input type="text" name="name" placeholder="Name" autocomplete="off" value="<?php echo escape(input::get('name')); ?>" />
+                <input type="text" name="surname" placeholder="Surname" autocomplete="off" value="<?php echo escape(input::get('surname')); ?>" />
+                <input type="email" name="email" placeholder="Email" autocomplete="off" value="<?php echo escape(input::get('email')); ?>" />
+                <input type="text" name="username" placeholder="Username" autocomplete="off" value="<?php echo escape(input::get('username')); ?>" />
+                <input type="password" name="password" placeholder="Password" autocomplete="off" />
+                <input type="password" name="retype_password" placeholder="Retype Password" autocomplete="off" />
                 <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                 <input type="submit" value="REGISTER"/>
             </form>
