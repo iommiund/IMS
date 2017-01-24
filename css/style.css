@@ -214,6 +214,11 @@ Layout styles
 	font-family:'Roboto',sans-serif;
 }
 
+.profile {
+    float:left;
+    font-family:'Roboto',sans-serif;
+}
+
 .width-height {
 	position:absolute;
     padding:0;

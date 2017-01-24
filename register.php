@@ -53,7 +53,7 @@ if(input::exists()){
             'username' => array(
                 'required' => true,
                 'min' => 4,
-                'max' => 10,
+                'max' => 20,
                 'unique' => 'users'
             ),
             'password' => array(

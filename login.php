@@ -20,11 +20,11 @@ if (input::exists()){
             if($login){
                 redirect::to('main.php');
             } else {
-                redirect::to('login.php?error');
+                redirect::to('login.php?' . hash::sha256('error'));
             }
 
         } else {
-            redirect::to('login.php?v');
+            redirect::to('login.php?' . hash::sha256('v'));
         }
 
     }
@@ -65,15 +65,15 @@ if (input::exists()){
                     <div id='error'>
                         <b>
                             <?php
-                            if (isset($_GET['error'])) {
+                            if (isset($_GET[hash::sha256('error')])) {
                                 echo "Incorrect Username or Password!!!!";
-                            } else if (isset($_GET['disable'])) {
+                            } else if (isset($_GET[hash::sha256('disable')])) {
                                 echo "This user is disabled!!!!";
-                            } else if (isset($_GET['nologin'])) {
+                            } else if (isset($_GET[hash::sha256('nologin')])) {
                                 echo "You must be logged in!!!!";
-                            } else if (isset($_GET['resetPassword'])) {
+                            } else if (isset($_GET[hash::sha256('resetPassword')])) {
                                 echo "Login using your new Password";
-                            } else if (isset($_GET['v'])) {
+                            } else if (isset($_GET[hash::sha256('v')])) {
                                 echo "All fields are required!!!!";
                             }
                             ?>

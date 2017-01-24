@@ -123,12 +123,17 @@ class user
     }
 
     public function hasPermission($key){
+        //get user permissions by user_type_id
         $type = $this->_db->get('user_types', array('user_type_id', '=', $this->data()->user_type_id));
 
+        //if user has permissions
         if ($type->count()){
+
+            //decode permissions in array
             $permissions = json_decode($type->first()->user_permissions, true);
 
-            if ($permissions[$key] == true){
+            //if the value of permissions is the value of the key return true
+            if (isset($permissions[$key]) == true){
                 return true;
             }
         }

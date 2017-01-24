@@ -54,12 +54,32 @@ if ($user->isLoggedIn()) {
                 </div>
                 <div class="menu">
                     <ul class="nav">
-                        <li><a href="main.php">Main</a></li>
-                        <li><a href="addResource.php">Add Resource</a></li>
-                        <li><a href="searchResource.php">Search</a></li>
-                        <li><a href="profile.php">Profile</a></li>
-                        <li><a href="help.php">Help Centre</a></li>
-                        <li><a href="admin.php">Admin</a></li>
+                        <?php
+                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="main.php">Main</a></li>';
+                        }
+                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="profile.php">Profile</a></li>';
+                        }
+                        if ($user->hasPermission('search') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="search.php">Search</a></li>';
+                        }
+                        if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="newInventory.php">New Inventory</a></li>';
+                        }
+                        if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="newCustomer.php">New Customer</a></li>';
+                        }
+                        if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="stockLevels.php">Stock Levels</a></li>';
+                        }
+                        if ($user->hasPermission('reports') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="reports.php">Reports</a></li>';
+                        }
+                        if ($user->hasPermission('admin') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="admin.php">Admin</a></li>';
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>

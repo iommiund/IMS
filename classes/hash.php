@@ -13,6 +13,10 @@ class hash
         return hash('sha256', $string . $salt);
     }
 
+    public static function sha256($string){
+        return hash('sha256', $string);
+    }
+
     //generate random salt
     public static function salt($length){
         return mcrypt_create_iv($length);
