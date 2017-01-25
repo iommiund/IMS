@@ -1,0 +1,29 @@
+"access": 1, 
+"admin": 1, 
+"changeUserStatus":1, 
+"changeUserType":1, 
+"addUser":1, 
+"addLocation":1, 
+"addLocationType":1, 
+"addResourceType":1, 
+"addResourceStatus":1, 
+"addResourceModel":1, 
+"addResourceBrand":1
+"stockLevels":1
+"search":1, 
+"viewResource":1, 
+"viewResourceHistory":1, 
+"transferResourceLocation":1, 
+"viewCustomer":1, 
+"viewPendingTransfers":1, 
+"acceptTransfer":1, 
+"rejectTransfer":1
+"sellResource":1, 
+"newCustomer":1, 
+"updateCustomerStatus":1, 
+"installResource":1, 
+"replaceResource":1
+"newInventory":1, 
+"reports":1
+"allAccess": 1
+"noAccess": 1

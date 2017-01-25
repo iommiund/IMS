@@ -12,9 +12,17 @@ $user = new user();
 
 if ($user->isLoggedIn()) {
 
-    $name = $user->data()->name;
-    $surname = $user->data()->surname;
-    $uid = $user->data()->uid;
+    //extra layer of access checking in case user is enabled but still not allowed access
+    if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')){
+
+        $hash = new hash();
+        redirect::to('index.php?' . hash::sha256('disabled' . $hash->getSalt()));
+
+    }
+
+    $name = escape($user->data()->name);
+    $surname = escape($user->data()->surname);
+    $uid = escape($user->data()->uid);
 
     ?>
     <!DOCTYPE html>
@@ -23,7 +31,8 @@ if ($user->isLoggedIn()) {
     <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>IMS</title>
-        <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+        <link rel='stylesheet prefetch'
+                href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -42,24 +51,25 @@ if ($user->isLoggedIn()) {
         </script>
     </head>
     <body>
-    <-- Migrated from ITS RMS -->
     <div class="width-height">
         <div class="fixheader">
             <div class="header">
                 <div class="logo">
-                    <h1 class="header-heading"><strong>IMS</strong></h1>
-                    <?php
-                        echo $name . ' ' . $surname;
-                    ?>
+                    <ul class="nav">
+                        <?php
+                        $hash = new hash();
+                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li>';
+                        }
+                        ?>
+                    </ul>
+                    <h1 class="header-heading"><strong>IMS</strong>HUB</h1>
                 </div>
                 <div class="menu">
                     <ul class="nav">
                         <?php
                         if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
                             echo '<li><a href="main.php">Main</a></li>';
-                        }
-                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
-                            echo '<li><a href="profile.php">Profile</a></li>';
                         }
                         if ($user->hasPermission('search') || $user->hasPermission('allAccess')){
                             echo '<li><a href="search.php">Search</a></li>';
@@ -85,33 +95,15 @@ if ($user->isLoggedIn()) {
             </div>
             <div class="nav-bar">
                 <div class="logout">
-                    <a href="main.php?logout">Logout</a>
+                    <a href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
-        <-- migrated from index.php --!>
-    <p>
-        hello <b><a href="profile.php?user=<?php echo $username; ?>">
-                <?php echo $name . ' ' . $surname; ?>
-            </a></b>
-    </p>
-
-    <ul>
-        <li><a href="logout.php">Log Out</a></li>
-        <li><a href="updateProfile.php">Change Name</a></li>
-        <li><a href="changePassword.php">Change Password</a></li>
-    </ul>
-
     </body>
     </html>
     <?php
-
-    //user permissions, apply to menu
-    if ($user->hasPermission('admin')){
-        echo 'you are an administrator';
-    }
-
 } else {
-    echo '<p> You need to <a href="login.php">Login</a> or <a href="register.php">register</a> </p>';
+    $hash = new hash();
+    redirect::to('index.php?' . hash::sha256('nologin' . $hash->getSalt()));
 }
 ?>

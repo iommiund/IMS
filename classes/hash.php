@@ -8,6 +8,8 @@
  */
 class hash
 {
+    private $_salt = '^È7xdHì—|"ò¤RÊË"»Ù%òÃQ2ÁÞ‡Üh';
+
     // make hash password from string and salt value
     public static function make($string, $salt = ''){
         return hash('sha256', $string . $salt);
@@ -24,5 +26,9 @@ class hash
 
     public static function unique(){
         return self::make(uniqid());
+    }
+
+    public function getSalt(){
+        return $this->_salt;
     }
 }

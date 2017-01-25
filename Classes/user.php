@@ -12,7 +12,8 @@ class user
             $_data,
             $_sessionName,
             $_cookieName,
-            $_isLoggedIn;
+            $_isLoggedIn,
+            $_profile;
 
     public function __construct($user = null){
         $this->_db = db::getInstance();
@@ -72,38 +73,51 @@ class user
 
     public function login($username = null, $password = null, $remember = false){
 
+        //if user data is not empty put the user id as session name
         if(!$username && !$password && $this->exists()){
 
+            //bing user id to session name
             session::put($this->_sessionName, $this->data()->uid);
 
         } else {
+            //login user
             $user = $this->find($username);
 
             //If data is returned check that the password+salt match password in db
             if ($user) {
                 if ($this->data()->password === hash::make($password, $this->data()->salt)) {
 
-                    //if passwords match, create session
-                    session::put($this->_sessionName, $this->data()->uid);
+                    //check whether user is disabled or enabled
+                    if ($this->data()->user_status_id === '1'){
 
-                    if ($remember) {
-                        $hash = hash::unique();
-                        $hashCheck = $this->_db->get('users_session', array('uid', '=', $this->data()->uid));
+                        //if user is enabled create session
+                        session::put($this->_sessionName, $this->data()->uid);
 
-                        if (!$hashCheck->count()) {
-                            $this->_db->insert('users_session', array(
-                                'uid' => $this->data()->uid,
-                                'hash' => $hash
-                            ));
-                        } else {
-                            $hash = $hashCheck->first()->hash;
+                        if ($remember) {
+                            $hash = hash::unique();
+                            $hashCheck = $this->_db->get('users_session', array('uid', '=', $this->data()->uid));
+
+                            if (!$hashCheck->count()) {
+                                $this->_db->insert('users_session', array(
+                                    'uid' => $this->data()->uid,
+                                    'hash' => $hash
+                                ));
+                            } else {
+                                $hash = $hashCheck->first()->hash;
+                            }
+
+                            cookie::put($this->_cookieName, $hash, config::get('remember/cookie_expiry'));
+
                         }
 
-                        cookie::put($this->_cookieName, $hash, config::get('remember/cookie_expiry'));
+                        return true;
 
+                    } else {
+                        //redirect to index with error disabled
+                        $hash = new hash();
+                        redirect::to('index.php?' . hash::sha256('disabled' . $hash->getSalt()));
                     }
 
-                    return true;
                 }
             }
 
@@ -147,6 +161,15 @@ class user
 
     public function data(){
         return $this->_data;
+    }
+
+    public function profile(){
+        //get user permissions by user_type_id
+        $type = $this->_db->get('user_types', array('user_type_id', '=', $this->data()->user_type_id));
+
+        $this->_profile = $type->first()->user_type;
+
+        return $this->_profile;
     }
 
     public function isLoggedIn(){
