@@ -11,10 +11,10 @@ class db
 
     private static $_instance = null; // store db instance if initiated
     private $_pdo, //store PDO object
-        $_query, //store last executed query
-        $_error = false, //representing any present errors
-        $_results, // stores results set
-        $_count = 0; // stores count of result
+            $_query, //store last executed query
+            $_error = false, //representing any present errors
+            $_results, // stores results set
+            $_count = 0; // stores count of result
 
     // private prevents from being called directly from other pages multiple times
     private function __construct()
@@ -160,4 +160,5 @@ class db
     {
         return $this->_count;
     }
+
 }

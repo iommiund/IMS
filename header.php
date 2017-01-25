@@ -13,8 +13,9 @@ $user = new user();
 if ($user->isLoggedIn()) {
 
     //extra layer of access checking in case user is enabled but still not allowed access
-    if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('disabled')){
 
+        $user->logout();
         $hash = new hash();
         redirect::to('index.php?' . hash::sha256('disabled' . $hash->getSalt()));
 

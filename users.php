@@ -5,14 +5,11 @@ include_once ("header.php");
 if ($user->isLoggedIn()){
 
     //check if user has permission
-    if ($user->hasPermission('addResourceModel') || $user->hasPermission('allAccess')){
-        ?>
-        <div class="content">
-            <div class="container">
-                <!-- CONTENT -->
-            </div>
-        </div>
-        <?php
+    if ($user->hasPermission('changeUserStatus') || $user->hasPermission('allAccess')){
+
+
+
+
     } else {
         redirect::to('main.php');
     }

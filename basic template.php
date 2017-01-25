@@ -6,7 +6,13 @@ if ($user->isLoggedIn()){
 
     //check if user has permission
     if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')){
-        //content
+?>
+        <div class="content">
+            <div class="container">
+            <!-- CONTENT -->
+            </div>
+        </div>
+<?php
     } else {
         redirect::to('main.php');
     }

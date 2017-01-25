@@ -26,4 +26,4 @@
 "newInventory":1, 
 "reports":1
 "allAccess": 1
-"noAccess": 1
+"disabled": 1

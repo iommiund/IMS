@@ -13,7 +13,8 @@ class user
             $_sessionName,
             $_cookieName,
             $_isLoggedIn,
-            $_profile;
+            $_profile,
+            $_usersList;
 
     public function __construct($user = null){
         $this->_db = db::getInstance();
@@ -174,6 +175,22 @@ class user
 
     public function isLoggedIn(){
         return $this->_isLoggedIn;
+    }
+
+    public function getList(){
+
+        $list = $this->_db->getList('uid','username','users');
+
+        if($list->count()){
+
+            $this->_usersList = $list;
+
+            return true;
+
+        }
+
+        return false;
+
     }
 
 }
