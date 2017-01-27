@@ -76,7 +76,7 @@ if ($user->isLoggedIn()) {
                                     echo 'Status of <b>' . $data->name . '</b> has been updated to <b>' . $data->user_status . '</b>.<br><br>';
                                     echo 'You must ';
                                     if ($user->hasPermission('changeUserType') || $user->hasPermission('allAccess')) {
-                                        echo '<a href="changeUserType.php">update the user profile</a>';
+                                        echo '<a href="changeUserType.php">update the user type</a>';
                                     }
                                     ?>
                                     </p>

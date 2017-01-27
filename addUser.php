@@ -112,7 +112,7 @@ if ($user->isLoggedIn()){
                         <input type="password" name="password" placeholder="Password" autocomplete="off" />
                         <input type="password" name="retype_password" placeholder="Retype Password" autocomplete="off" />
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
-                        <input type="submit" value="REGISTER"/>
+                        <input type="submit" value="ADD USER"/>
                     </form>
                     <br>
                     <div class="form-link">

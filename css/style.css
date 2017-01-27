@@ -501,7 +501,7 @@ Form styles
 }
 
 .form-style textarea {
-	height:300px;
+	height:200px;
 }
 
 .form-style input[type=text]:focus, 
@@ -515,17 +515,17 @@ Form styles
 .form-style input[type=password]:focus, 
 .form-style textarea:focus, 
 .form-style select:focus,
-.new-recipe input[type=text]:focus, 
-.new-recipe input[type=date]:focus, 
-.new-recipe input[type=datetime]:focus, 
-.new-recipe input[type=email]:focus, 
-.new-recipe input[type=number]:focus, 
-.new-recipe input[type=search]:focus, 
-.new-recipe input[type=time]:focus, 
-.new-recipe input[type=url]:focus,
-.new-recipe input[type=password]:focus, 
-.new-recipe textarea:focus, 
-.new-recipe select:focus
+.new input[type=text]:focus, 
+.new input[type=date]:focus, 
+.new input[type=datetime]:focus, 
+.new input[type=email]:focus, 
+.new input[type=number]:focus, 
+.new input[type=search]:focus, 
+.new input[type=time]:focus, 
+.new input[type=url]:focus,
+.new input[type=password]:focus, 
+.new textarea:focus, 
+.new select:focus
 
 {
     box-shadow: 0 0 5px #607D8B;

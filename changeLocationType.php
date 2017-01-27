@@ -12,7 +12,7 @@ if ($user->isLoggedIn()) {
 
                 $validate = new validate();
                 $validation = $validate->check($_POST, array(
-                    'user' => array('required' => true),
+                    'location' => array('required' => true),
                     'type' => array('required' => true)
                 ));
 
@@ -20,13 +20,13 @@ if ($user->isLoggedIn()) {
 
                     try {
 
-                        $u = escape(input::get('user'));
+                        $l = escape(input::get('location'));
                         $t = escape(input::get('type'));
 
-                        $update = db::getInstance()->query("update ims.users set user_type_id = {$t} where uid = {$u}");
+                        $update = db::getInstance()->query("update ims.resource_locations set resource_location_type_id = {$t} where resource_location_id = {$l}");
 
                         //get data to display dialog
-                        $get = db::getInstance()->query("select concat(u.name, ' ', u.surname) name, ut.user_type from ims.users u inner join ims.user_types ut on u.user_type_id = ut.user_type_id where u.uid = {$u}");
+                        $get = db::getInstance()->query("select rl.resource_location_name, lt.resource_location_type from ims.resource_locations rl inner join ims.resource_location_types lt on rl.resource_location_type_id = lt.resource_location_type_id where resource_location_id = {$l}");
 
                         //display dialog
                         if (!$get->count()) {
@@ -41,7 +41,7 @@ if ($user->isLoggedIn()) {
                             <p>
                             <?php
                             foreach ($get->results() as $data) {
-                                echo '<b>' . $data->name . '</b> has been updated to <b>' . $data->user_type . '</b>.';
+                                echo '<b>' . $data->resource_location_name . '</b> has been updated to <b>' . $data->resource_location_type . '</b>.';
                                 ?>
                                 </p>
                                 </div>
@@ -70,21 +70,21 @@ if ($user->isLoggedIn()) {
         <div class="content">
             <div class="container">
                 <div class="form-style">
-                    <h1>Change User Type</h1>
+                    <h1>Change Location Type</h1>
                     <form action="" method="post">
-                        <select name="user">
-                            <option value="">----------------------- Choose a User -----------------------</option>
+                        <select name="location">
+                            <option value="">----------------------- Choose a Location -----------------------</option>
                             <?php
 
-                            $get = db::getInstance()->query("select uid, username from users where uid <> {$uid} order by uid");
+                            $get = db::getInstance()->query("select resource_location_id, resource_location_name from ims.resource_locations order by 1");
 
                             if (!$get->count()) {
                                 echo 'Empty List';
                             } else {
 
-                                foreach ($get->results() as $u): ?>
-                                    <option value="<?php echo escape($u->uid); ?>">
-                                        <?php echo escape($u->username); ?>
+                                foreach ($get->results() as $l): ?>
+                                    <option value="<?php echo escape($l->resource_location_id); ?>">
+                                        <?php echo escape($l->resource_location_name); ?>
                                     </option>
                                 <?php endforeach;
 
@@ -92,17 +92,17 @@ if ($user->isLoggedIn()) {
                             ?>
                         </select>
                         <select name="type">
-                            <option value="">---------------------- Choose a Type ----------------------</option>
+                            <option value="">------------------------- Choose a Type -------------------------</option>
                             <?php
-                            $get = db::getInstance()->query('SELECT user_type_id, user_type FROM ims.user_types where user_type_id <> 9 order by 1');
+                            $get = db::getInstance()->query('select * from ims.resource_location_types order by 1');
 
                             if (!$get->count()) {
                                 echo 'Empty List';
                             } else {
 
                                 foreach ($get->results() as $t): ?>
-                                    <option value="<?php echo escape($t->user_type_id); ?>">
-                                        <?php echo escape($t->user_type); ?>
+                                    <option value="<?php echo escape($t->resource_location_type_id); ?>">
+                                        <?php echo escape($t->resource_location_type); ?>
                                     </option>
                                 <?php endforeach;
 

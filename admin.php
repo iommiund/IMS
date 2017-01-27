@@ -30,6 +30,9 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('addLocationType') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addLocationType.php">Add New Location Type</a></li><br><br>';
                         }
+                        if ($user->hasPermission('changeLocationType') || $user->hasPermission('allAccess')) {
+                            echo '<li><a href="changeLocationType.php">Change Location Type</a></li><br><br>';
+                        }
                         echo '<hr>';
                         if ($user->hasPermission('addResourceType') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addResourceType.php">Add New Resource Type</a></li><br><br>';
