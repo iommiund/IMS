@@ -90,6 +90,7 @@ class db
     }
 
     public function get($table, $where){
+
         return $this->action('select *', $table, $where);
     }
 

@@ -7,7 +7,7 @@ include_once ("header.php");
 if ($user->isLoggedIn()){
 
     //check if user has permission
-    if ($user->hasPermission('addResourceModel') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('addModelIdentifier') || $user->hasPermission('allAccess')){
         //Validate user input
         if(input::exists()){
 
@@ -17,13 +17,14 @@ if ($user->isLoggedIn()){
                 // if token validation passed continue
                 $validate = new validate();
                 $validation = $validate->check($_POST,array(
-                    'resource_model' => array(
+                    'resource_model_identifier' => array(
                         'required' => true,
-                        'min' => 5,
-                        'max' => 50,
-                        'unique' => 'resource_models'
+                        'min' => 6,
+                        'max' => 6,
+                        'unique' => 'resource_model_identifiers'
                     ),
-                    'resource_brand_id' => array('required' => true)
+                    'resource_model_id' => array('required' => true),
+                    'resource_sn_length' => array('required' => true) //CONTINUE FROM HERE
                 ));
 
                 // display error or success messages
@@ -31,34 +32,34 @@ if ($user->isLoggedIn()){
 
                     $inventory = new inventory();
 
-                    $model = escape(input::get('resource_model'));
-                    $brand = escape(input::get('resource_brand_id'));
+                    $model = escape(input::get('resource_model_identifier'));
+                    $brand = escape(input::get('resource_model_id'));
 
                     try {
 
                         $inventory->createResourceModel(array(
-                            'resource_model' => $model,
-                            'resource_brand_id' => $brand
+                            'resource_model_identifier' => $model,
+                            'resource_model_id' => $brand
                         ));
 
                         //get data to display dialog
-                        $get = db::getInstance()->query("select resource_brand from resource_brands where resource_brand_id = {$brand}");
+                        $get = db::getInstance()->query("select resource_brand from resource_brands where resource_model_id = {$brand}");
 
                         if (!$get->count()){
                             echo 'not ok';
                         } else {
-                        //create message to display on user creation
-                        ?>
-                        <div id="dialogOk" title="Success">
+                            //create message to display on user creation
+                            ?>
+                            <div id="dialogOk" title="Success">
                             <p>
-                                <?php
-                                foreach ($get->results() as $data){
+                            <?php
+                            foreach ($get->results() as $data){
                                 echo '<b>' . $data->resource_brand . ' ' . $model . '</b> added successfully.';
                                 ?>
-                            </p>
-                        </div>
-                        <?php
-                        }
+                                </p>
+                                </div>
+                                <?php
+                            }
                         }
                     } catch (Exception $e){
                         die($e->getMessage());
@@ -83,9 +84,9 @@ if ($user->isLoggedIn()){
                 <div class="form-style">
                     <h1>Add a New Resource Model</h1>
 
-                    <form action="" method="post" name="addResourceModel">
-                        <input type="text" name="resource_model" placeholder="New Model Name" autocomplete="off" value="<?php echo escape(input::get('resource_model')); ?>" />
-                        <select name="resource_brand_id">
+                    <form action="" method="post" name="addModelIdentifier">
+                        <input type="text" name="resource_model_identifier" placeholder="New Model Name" autocomplete="off" value="<?php echo escape(input::get('resource_model_identifier')); ?>" />
+                        <select name="resource_model_id">
                             <option value="">------------------------- Choose a Brand -------------------------</option>
                             <?php
                             $get = db::getInstance()->query('select * from ims.resource_brands order by 1');
@@ -95,7 +96,7 @@ if ($user->isLoggedIn()){
                             } else {
 
                                 foreach ($get->results() as $b): ?>
-                                    <option value="<?php echo escape($b->resource_brand_id); ?>">
+                                    <option value="<?php echo escape($b->resource_model_id); ?>">
                                         <?php echo escape($b->resource_brand); ?>
                                     </option>
                                 <?php endforeach;
@@ -108,7 +109,7 @@ if ($user->isLoggedIn()){
                     </form>
                     <br>
                     <div class="form-link">
-                        <a href="addResourceModel.php">Clear Form</a>
+                        <a href="addModelIdentifier.php">Clear Form</a>
                     </div>
                 </div>
             </div>

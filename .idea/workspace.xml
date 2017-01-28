@@ -29,44 +29,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="location.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/location.php">
+      <file leaf-file-name="inventory.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/inventory.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+            <state relative-caret-position="265">
+              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addLocation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addLocation.php">
+      <file leaf-file-name="addResourceModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addResourceModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+            <state relative-caret-position="-81">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
-                <marker date="1485542717188" expanded="true" signature="3462:3514" ph="select * fro... resource_location_types" />
+                <marker date="1485623585314" expanded="true" signature="1546:1615" ph="select resou... resource_brands" />
+                <marker date="1485623585314" expanded="true" signature="1546:1623" ph="select resou... resource_brands" />
+                <marker date="1485623585314" expanded="true" signature="1546:1625" ph="select resou... resource_brands" />
+                <marker date="1485623585314" expanded="true" signature="3563:3607" ph="select * fro... resource_brands" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validate.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Classes/validate.php">
+      <file leaf-file-name="addModelIdentifier.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/addModelIdentifier.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-374">
-              <caret line="17" column="39" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="502" column="22" selection-start-line="502" selection-start-column="22" selection-end-line="502" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="287">
+              <caret line="26" column="90" selection-start-line="26" selection-start-column="90" selection-end-line="26" selection-end-column="90" />
+              <folding>
+                <marker date="1485624496970" expanded="true" signature="1683:1752" ph="select resou... resource_brands" />
+                <marker date="1485624496970" expanded="true" signature="3752:3796" ph="select * fro... resource_brands" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Setup/Config/dbc.php" />
-        <option value="$PROJECT_DIR$/Setup/backupDB.php" />
         <option value="$PROJECT_DIR$/Setup/Install.php" />
         <option value="$PROJECT_DIR$/functions/sanitize.php" />
         <option value="$PROJECT_DIR$/classes/config.php" />
@@ -101,7 +95,6 @@
         <option value="$PROJECT_DIR$/core/init.php" />
         <option value="$PROJECT_DIR$/footer.php" />
         <option value="$PROJECT_DIR$/../ITSRMS/Setup/Config/config.php" />
-        <option value="$PROJECT_DIR$/classes/validate.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/main.php" />
         <option value="$PROJECT_DIR$/profile.php" />
@@ -112,24 +105,27 @@
         <option value="$PROJECT_DIR$/reports.php" />
         <option value="$PROJECT_DIR$/newInventory.php" />
         <option value="$PROJECT_DIR$/newCustomer.php" />
-        <option value="$PROJECT_DIR$/addResourceType.php" />
-        <option value="$PROJECT_DIR$/addResourceStatus.php" />
-        <option value="$PROJECT_DIR$/addResourceModel.php" />
-        <option value="$PROJECT_DIR$/addResourceBrand.php" />
-        <option value="$PROJECT_DIR$/addLocationType.php" />
         <option value="$PROJECT_DIR$/user_statuses.php" />
         <option value="$PROJECT_DIR$/users.php" />
         <option value="$PROJECT_DIR$/classes/user.php" />
-        <option value="$PROJECT_DIR$/classes/db.php" />
         <option value="$PROJECT_DIR$/classes/dropDown.php" />
         <option value="$PROJECT_DIR$/changeUserStatus.php" />
-        <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/changeUserType.php" />
         <option value="$PROJECT_DIR$/changeLocationType.php" />
         <option value="$PROJECT_DIR$/Classes/location.php" />
         <option value="$PROJECT_DIR$/addUser.php" />
         <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/classes/db.php" />
+        <option value="$PROJECT_DIR$/classes/validate.php" />
         <option value="$PROJECT_DIR$/addLocation.php" />
+        <option value="$PROJECT_DIR$/addLocationType.php" />
+        <option value="$PROJECT_DIR$/classes/inventory.php" />
+        <option value="$PROJECT_DIR$/addResourceType.php" />
+        <option value="$PROJECT_DIR$/addResourceStatus.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
+        <option value="$PROJECT_DIR$/addResourceModel.php" />
+        <option value="$PROJECT_DIR$/addResourceBrand.php" />
+        <option value="$PROJECT_DIR$/addModelIdentifier.php" />
       </list>
     </option>
   </component>
@@ -146,8 +142,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -208,6 +204,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -236,7 +233,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -250,13 +247,12 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Classes" />
+              <option name="myItemId" value="classes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -268,12 +264,13 @@
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\IMS\Setup" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\IMS\core" />
       <recent name="C:\xampp\htdocs\IMS" />
       <recent name="C:\xampp\htdocs\IMS\Setup\Config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\IMS\Setup" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.index.php">
@@ -378,17 +375,18 @@
       <workItem from="1485450221517" duration="6511000" />
       <workItem from="1485466118466" duration="3273000" />
       <workItem from="1485537051099" duration="5784000" />
+      <workItem from="1485603239542" duration="15268000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214875000" />
+    <option name="totallyTimeSpent" value="230143000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15812592" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1578125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32810867" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -444,26 +442,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/26eedfb7/32f344e3-c4d4-4e34-9a28-af1c989e13fb/ims.user_types">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/32f344e3-c4d4-4e34-9a28-af1c989e13fb/console.sql" />
-    <entry file="file://$PROJECT_DIR$/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jquery-ui.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -473,7 +451,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login - Copy.php" />
     <entry file="file://$PROJECT_DIR$/loginBK.php" />
-    <entry file="file://$PROJECT_DIR$/Classes/config.php">
+    <entry file="file://$PROJECT_DIR$/classes/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
@@ -573,46 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addResourceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addResourceStatus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addResourceModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addResourceBrand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addLocationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/dropDown.php" />
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -645,48 +583,12 @@
         <state relative-caret-position="340">
           <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="38" />
           <folding>
-            <element signature="e#6#90#0#PHP" expanded="true" />
+            <element signature="e#6#90#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/changeUserStatus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="78" column="95" selection-start-line="78" selection-start-column="95" selection-end-line="78" selection-end-column="95" />
-          <folding>
-            <marker date="1485538093111" expanded="true" signature="957:1030" ph="update ims.u... " />
-            <marker date="1485538093111" expanded="true" signature="1157:1319" ph="select conca... users" />
-            <marker date="1485538093111" expanded="true" signature="2375:2430" ph="update ims.u... " />
-            <marker date="1485538093111" expanded="true" signature="2557:2719" ph="select conca... users" />
-            <marker date="1485538093111" expanded="true" signature="4952:5016" ph="select uid, users" />
-            <marker date="1485538093111" expanded="true" signature="5838:5915" ph="select user_... user_statuses" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/changeUserType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="113" column="27" selection-start-line="113" selection-start-column="27" selection-end-line="113" selection-end-column="27" />
-          <folding>
-            <marker date="1485539022843" expanded="true" signature="791:844" ph="update ims.u... " />
-            <marker date="1485539022843" expanded="true" signature="963:1116" ph="select conca... users" />
-            <marker date="1485539022843" expanded="true" signature="2919:2983" ph="select uid, users" />
-            <marker date="1485539022843" expanded="true" signature="3801:3886" ph="SELECT user_... user_types" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/hash.php">
+    <entry file="file://$PROJECT_DIR$/classes/hash.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
@@ -694,7 +596,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/session.php">
+    <entry file="file://$PROJECT_DIR$/classes/session.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
@@ -702,37 +604,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/input.php">
+    <entry file="file://$PROJECT_DIR$/classes/input.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="195" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="99" column="20" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
-          <folding>
-            <marker date="1485423292094" expanded="true" signature="3260:3333" ph="insert into $... " />
-            <marker date="1485423292094" expanded="true" signature="3746:3785" ph="update ${{$t... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="114" column="60" selection-start-line="114" selection-start-column="60" selection-end-line="114" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -741,50 +616,174 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="110" selection-end-column="33" />
-          <folding>
-            <marker date="1485539569392" expanded="true" signature="799:810" ph="update ims.u... " />
-            <marker date="1485539569392" expanded="true" signature="799:895" ph="update ims.r... " />
-            <marker date="1485539569392" expanded="true" signature="799:899" ph="update ims.r... " />
-            <marker date="1485539569392" expanded="true" signature="1014:1021" ph="select conca... users" />
-            <marker date="1485539569392" expanded="true" signature="1014:1239" ph="select rl.re... resource_locations" />
-            <marker date="1485539569392" expanded="true" signature="1014:1243" ph="select rl.re... resource_locations" />
-            <marker date="1485539569392" expanded="true" signature="3085:3175" ph="select uid, users" />
-            <marker date="1485539569392" expanded="true" signature="4030:4082" ph="select * fro... resource_location_types" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/location.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
+        <state relative-caret-position="17">
           <caret line="502" column="22" selection-start-line="502" selection-start-column="22" selection-end-line="502" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2375">
+          <caret line="114" column="60" selection-start-line="114" selection-start-column="60" selection-end-line="114" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/changeUserStatus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="78" column="95" selection-start-line="78" selection-start-column="95" selection-end-line="78" selection-end-column="95" />
+          <folding>
+            <marker date="1485603084866" expanded="true" signature="957:1030" ph="update ims.u... " />
+            <marker date="1485603084866" expanded="true" signature="1157:1319" ph="select conca... users" />
+            <marker date="1485603084866" expanded="true" signature="2375:2430" ph="update ims.u... " />
+            <marker date="1485603084866" expanded="true" signature="2557:2719" ph="select conca... users" />
+            <marker date="1485603084866" expanded="true" signature="4952:5016" ph="select uid, users" />
+            <marker date="1485603084866" expanded="true" signature="5838:5915" ph="select user_... user_statuses" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/validate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1080">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+          <folding>
+            <marker date="1485609264386" expanded="true" signature="3261:3334" ph="insert into $... " />
+            <marker date="1485609264386" expanded="true" signature="3747:3786" ph="update ${{$t... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/resource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/location.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="832">
+          <caret line="32" column="0" selection-start-line="10" selection-start-column="1" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addLocationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="74" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="91" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/addLocation.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="54" selection-start-line="0" selection-start-column="0" selection-end-line="122" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addResourceType.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/changeUserType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="18" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="125" selection-end-column="1" />
           <folding>
-            <marker date="1485542717188" expanded="true" signature="3462:3514" ph="select * fro... resource_location_types" />
+            <marker date="1485603084912" expanded="true" signature="791:844" ph="update ims.u... " />
+            <marker date="1485603084912" expanded="true" signature="963:1116" ph="select conca... users" />
+            <marker date="1485603084912" expanded="true" signature="2919:2983" ph="select uid, users" />
+            <marker date="1485603084912" expanded="true" signature="3801:3886" ph="SELECT user_... user_types" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/validate.php">
+    <entry file="file://$PROJECT_DIR$/addResourceStatus.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="39" />
+        <state relative-caret-position="225">
+          <caret line="47" column="15" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addResourceBrand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addResourceModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <marker date="1485623585314" expanded="true" signature="1546:1615" ph="select resou... resource_brands" />
+            <marker date="1485623585314" expanded="true" signature="1546:1623" ph="select resou... resource_brands" />
+            <marker date="1485623585314" expanded="true" signature="1546:1625" ph="select resou... resource_brands" />
+            <marker date="1485623585314" expanded="true" signature="3563:3607" ph="select * fro... resource_brands" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addModelIdentifier.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="26" column="90" selection-start-line="26" selection-start-column="90" selection-end-line="26" selection-end-column="90" />
+          <folding>
+            <marker date="1485624496970" expanded="true" signature="1683:1752" ph="select resou... resource_brands" />
+            <marker date="1485624496970" expanded="true" signature="3752:3796" ph="select * fro... resource_brands" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -24,7 +24,7 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="changeUserType.php">Change User Type</a></li><br><br>';
                         }
                         echo '<hr>';
-                        if ($user->hasPermission('allLocation') || $user->hasPermission('allAccess')) {
+                        if ($user->hasPermission('addLocation') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addLocation.php">Add New Location</a></li><br><br>';
                         }
                         if ($user->hasPermission('addLocationType') || $user->hasPermission('allAccess')) {
@@ -45,6 +45,9 @@ if ($user->isLoggedIn()) {
                         }
                         if ($user->hasPermission('addResourceBrand') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addResourceBrand.php">Add New Resource Brand</a></li><br><br>';
+                        }
+                        if ($user->hasPermission('addModelIdentifier') || $user->hasPermission('allAccess')) {
+                            echo '<li><a href="addModelIdentifier.php">Add New Model Identifier</a></li><br><br>';
                         }
                         ?>
                     </ul>

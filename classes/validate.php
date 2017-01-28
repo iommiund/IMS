@@ -18,7 +18,7 @@ class validate
         $this->_db = db::getInstance();
     }
 
-    //loop through all post irems to check if they meet specified requirements
+    //loop through all post items to check if they meet specified requirements
     public function check($source, $items = array()){
 
         //loop through each validation item

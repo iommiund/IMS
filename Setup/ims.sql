@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
+-- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: ims
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	10.1.16-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -150,7 +150,7 @@ CREATE TABLE `resource_brands` (
   `resource_brand` varchar(50) NOT NULL,
   PRIMARY KEY (`resource_brand_id`),
   UNIQUE KEY `uq_resource_brand` (`resource_brand`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `resource_location_types` (
   `resource_location_type` varchar(50) NOT NULL,
   PRIMARY KEY (`resource_location_type_id`),
   UNIQUE KEY `uq_resource_location_type` (`resource_location_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `resource_location_types` (
 
 LOCK TABLES `resource_location_types` WRITE;
 /*!40000 ALTER TABLE `resource_location_types` DISABLE KEYS */;
-INSERT INTO `resource_location_types` VALUES (3,'Customer'),(2,'Field Technician'),(1,'Physical Location');
+INSERT INTO `resource_location_types` VALUES (3,'Customer'),(2,'Field Technician'),(4,'Mobile Location'),(1,'Physical Location');
 /*!40000 ALTER TABLE `resource_location_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +205,7 @@ CREATE TABLE `resource_locations` (
   UNIQUE KEY `uq_resource_location_description` (`resource_location_description`),
   KEY `fk_resource_location_type_id` (`resource_location_type_id`),
   CONSTRAINT `fk_resource_location_type_id` FOREIGN KEY (`resource_location_type_id`) REFERENCES `resource_location_types` (`resource_location_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +214,7 @@ CREATE TABLE `resource_locations` (
 
 LOCK TABLES `resource_locations` WRITE;
 /*!40000 ALTER TABLE `resource_locations` DISABLE KEYS */;
-INSERT INTO `resource_locations` VALUES (1,'Main Warehouse','Company main warehouse where resource is delivered from vendor',1),(2,'Paola Branch','Company branch in Paola, Malta',1),(3,'Valletta Branch','Company branch in Valletta, Malta',1),(4,'Naxxar Branch','Company branch in Naxxar, Malta',1),(5,'Service Technician','Company Service Technician, is assigned inventory to replace customer premises equipment',2),(6,'Installation Technician','Company Installation Technician, is assigned inventory to install as customer premises equipment',2),(7,'Customer','Customer is assigned inventory as customer premises equipment',3);
+INSERT INTO `resource_locations` VALUES (1,'Main Warehouse','Company main warehouse where resource is delivered from vendor',1),(2,'Paola Branch','Company branch in Paola, Malta',1),(3,'Valletta Branch','Company branch in Valletta, Malta',1),(4,'Naxxar Branch','Company branch in Naxxar, Malta',1),(5,'Service Technician','Company Service Technician, is assigned inventory to replace customer premises equipment',2),(6,'Installation Technician','Company Installation Technician, is assigned inventory to install as customer premises equipment',2),(7,'Customer','Customer is assigned inventory as customer premises equipment',3),(11,'Mobile Unit','Company mobile unit used in events',4);
 /*!40000 ALTER TABLE `resource_locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +233,7 @@ CREATE TABLE `resource_models` (
   UNIQUE KEY `uq_resource_model` (`resource_model`),
   KEY `fk_resource_brand_id` (`resource_brand_id`),
   CONSTRAINT `fk_resource_brand_id` FOREIGN KEY (`resource_brand_id`) REFERENCES `resource_brands` (`resource_brand_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +242,7 @@ CREATE TABLE `resource_models` (
 
 LOCK TABLES `resource_models` WRITE;
 /*!40000 ALTER TABLE `resource_models` DISABLE KEYS */;
-INSERT INTO `resource_models` VALUES (1,1,'EPC3925'),(2,2,'NV'),(3,6,'SIM128K'),(4,5,'TUV'),(5,3,'Galaxy S7'),(6,4,'iPhone 6S 16GB'),(7,4,'iPhone 7 Plus');
+INSERT INTO `resource_models` VALUES (1,1,'EPC3925'),(2,2,'NV'),(3,6,'SIM128K'),(4,5,'TUV'),(5,3,'Galaxy S7'),(6,4,'iPhone 6S 16GB'),(7,4,'iPhone 7 Plus'),(9,1,'EPC3925s');
 /*!40000 ALTER TABLE `resource_models` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `resource_statuses` (
   `resource_status` varchar(50) NOT NULL,
   PRIMARY KEY (`resource_status_id`),
   UNIQUE KEY `uq_resource_status` (`resource_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +283,7 @@ CREATE TABLE `resource_types` (
   `resource_type` varchar(50) NOT NULL,
   PRIMARY KEY (`resource_type_id`),
   UNIQUE KEY `uq_resource_type` (`resource_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -477,7 +477,7 @@ CREATE TABLE `user_types` (
 
 LOCK TABLES `user_types` WRITE;
 /*!40000 ALTER TABLE `user_types` DISABLE KEYS */;
-INSERT INTO `user_types` VALUES (1,'Admin','{\"access\": 1, \"admin\": 1, \"changeUserStatus\":1, \"changeUserType\":1, \"addUser\":1, \"addLocation\":1, \"addLocationType\":1, \"changeLocationType\":1, \"addResourceType\":1, \"addResourceStatus\":1, \"addResourceModel\":1, \"addResourceBrand\":1}'),(2,'Location Manager','{\"access\":1, \"stockLevels\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"transferResourceLocation\":1, \"viewCustomer\":1, \"viewPendingTransfers\":1, \"acceptTransfer\":1, \"rejectTransfer\":1}'),(3,'POS User','{\"access\":1, \"search\":1, \"viewResource\":1, \"sellResource\":1, \"viewResourceHistory\", \"newCustomer\":1, \"updateCustomerStatus\":1, \"viewCustomer\":1, \"installResource\":1, \"replaceResource\":1}'),(4,'Field User','{\"access\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"viewCustomer\":1}'),(6,'Warehouse User','{\"access\":1, \"stockLevels\":1, \"newInventory\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"transferResourceLocation\":1, \"viewCustomer\":1, \"viewPendingTransfers\":1, \"acceptTransfer\":1, \"rejectTransfer\":1}'),(7,'Reporting User','{\"access\":1, \"reports\":1}'),(8,'Super User','{\r \"allAccess\": 1}'),(9,'Disabled','{\"disabled\":1}');
+INSERT INTO `user_types` VALUES (1,'Admin','{\"access\": 1, \"admin\": 1, \"changeUserStatus\":1, \"changeUserType\":1, \"addUser\":1, \"addLocation\":1, \"addLocationType\":1, \"changeLocationType\":1, \"addResourceType\":1, \"addResourceStatus\":1, \"addResourceModel\":1, \"addResourceBrand\":1, \"addModelIdentifier\":1}'),(2,'Location Manager','{\"access\":1, \"stockLevels\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"transferResourceLocation\":1, \"viewCustomer\":1, \"viewPendingTransfers\":1, \"acceptTransfer\":1, \"rejectTransfer\":1}'),(3,'POS User','{\"access\":1, \"search\":1, \"viewResource\":1, \"sellResource\":1, \"viewResourceHistory\", \"newCustomer\":1, \"updateCustomerStatus\":1, \"viewCustomer\":1, \"installResource\":1, \"replaceResource\":1}'),(4,'Field User','{\"access\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"viewCustomer\":1}'),(6,'Warehouse User','{\"access\":1, \"stockLevels\":1, \"newInventory\":1, \"search\":1, \"viewResource\":1, \"viewResourceHistory\":1, \"transferResourceLocation\":1, \"viewCustomer\":1, \"viewPendingTransfers\":1, \"acceptTransfer\":1, \"rejectTransfer\":1}'),(7,'Reporting User','{\"access\":1, \"reports\":1}'),(8,'Super User','{\r \"allAccess\": 1}'),(9,'Disabled','{\"disabled\":1}');
 /*!40000 ALTER TABLE `user_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +514,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Iommi','Underwood','iommi@fakecompany.com','iommi','73accacc88e0b33165ad6dce68bf0833ac62270cb7c7097ba8f95aa5b3fe3906','|þ!BØjhµK°$Ìã¢qOiÎe•,vÃü!>',8,1),(2,'Russell','Camilleri','rcamm@fakecompany.com','rcamm','1e456859b29138592fe7838205d0d868c762f5561242b1be3d9c4f4db950e9af','›O¼‹”Ì{±PÓW0soe€¬þ¾(i ÞÜâÚÞ ',3,1),(3,'James','Cassar','jcass@fakecompany.com','jcass','d807c992883215878f737e8d8d666b4d7a0137799ce710f0c253a44a8a14eecd','sÝx>Ê¥Õ‹µ\"vVòy 8BQ˜i¬É]±ýlî',9,2),(4,'Kyle','Zammit','kzamm@fakecompany.com','kzamm','779080ec01c45c77b6db3a20643b866ea857736394647531bc502d2d9b16c46e','Ž›/]˜‡)dWãÆ\0Dÿº0‰/#ýIky‹8ðP',9,2),(5,'Danijel','Cajic','dcaji@fakecompany.com','dcaji','54877fc579b2809e8ccf43209b11336365466735543692391d06842e0c8da6ec','þ‚#GóŠ¬ÆÅ«RtmÍÑG“.U/¿T~Ó',9,2),(6,'Michael','Fava','mfava@fakecompany.com','mfava','471e85d24320350bf4225774d70782ea4c99de19300a8098c265758bba5f1481','^È7xdHì—|\"ò¤RÊË\"»Ù%òÃQ2ÁÞ‡Üh',9,2),(7,'Darren','Gatt','dgatt@fakecompany.com','dgatt','cba05a614c6b6389e6e2126df3029c73bd2a44ec6d98752f6af458bea8a0a876','æu¦ö6³5œü ähâªè5¿4: éÃìFí%,&',9,2),(8,'Ryan','Cassar','rcass@fakecompany.com','rcass','0b2297d43746206ec5c94b3d93937df0d9ef43060efda243b5bce064d0cd4584','Më/-!›Æí¯¯„˜ÂeÝf0=¨€Êùç¾Hgq|ÿ',9,2),(9,'Ryan','Scicluna','rscic@fakecompany.com','rscic','2a335b3614317a5c74ac1f23b7ea5e20dd785367106fed2e0135e1d3638cbe6a',',ºHrÅ£8¾a:\r8_9óv(ø¢-S2qÀ×ë¹ê»x',9,2),(10,'Luke','Camilleri','lcami@fakecompany.com','lcami','17d7e11a3b940803bfb11afd479f42dad4605bda3a631ba69fb734aefb121578',':éu}Ï>Q„þNJÌe5æ+Û!¡Ï·;YmY9°Rä',9,2),(11,'Clayton','Farrugia','cfarr@fakecompany.com','cfarr','ba75d0c73bd4cd6067e3ac6b03dbe3ef9737a5a83f47567ffa48fb1763ab4e54','¨+Â¥BåR$Q¼6óîGÜBcu\"\n}À5‚r@ú',9,2),(12,'Stephen','Ciantar','scian@fakecompany.com','scian','6221a0886ed4df87918ba07d9f4f22da54ed99ccd1ab1a0d1d18e7efc23d0711','h\ræ/ámÄ©Iêk$Œ{‹¬ä^çodô¹c×Ã-[Ý',9,2),(13,'Jake','Borg','jborg@fakecompany.com','jborg','327b5b990468ea6f6388241196d363944b7da7af3683e743f01bfb3935efb7f2','ˆ}¯vœ–f/ÓHbÅ\0™Ç5Å‹ØvZl<¸ZâÁwƒ',9,2),(14,'Emanuel','Mallia','emall@fakecompany.com','emall','c33b4fc486e6bf8c84bf02d1c3fbe9a86b91029b0a75f8be942ef9a9273461db','q§ÉË±£R¶é\"&<é–ZŽ›Š«Ý ño€M¯ê9(',9,2),(15,'Melvin','Pace','pacem@fakecompany.com','pacem','14fbac87489d0f1b84328ebb66f38d9f375ffc9d41ecb2612181299ec2f57114','ù¯ìžgûíÖ-Ù§îïÜ3±V–Š‚½çCÓv',9,2),(18,'Kevin','Abela','kabela@fakecompany.com','kabela','bfc5ddf7b4711a73bce041696c7591132fff8a0e8ada95b6e0cc35389e81e855','‡yXïãÕQÝ|\'üœTÍNÎÈë%w®–@–bááÍ',9,2),(19,'Julian','Falzon','jfalz@fakecompany.com','jfalz','30c50b5aa6da5147860fcfcdf9dd94482015e97a26dc06442c0d2e202c7b4c31','2û–ƒþà	§¿\0X…Ú\\ëR+œA¯É¦úTáM¡žÇŸ',9,2),(20,'Peter','Borg','pborg@fakecompany.com','pborg','e641a7b0f3ff5e62f304166beffe82624428a1a92fbc80f4eb22d3f4650c7613','1J,Úî™íHµ¯¼f¤¸NMÒ-æÀWð¼ÿá€',9,2),(21,'Joseph','Muscat','jmusc@fakecompany.com','jmusc','916976d67011786628fa61a392bdea8bbd1a6842a6133bd968c5fc242be66288',';™çgÇk“ndÉÃÇÚäï¿c!Ä_’+¿Ï[›Æ¥2›',9,2),(22,'System','Administrator','admin@fakecompany.com','admin','24ef5b3a9af9ee611fc2dabfecc924aaf0c2c0d1f02ede12cd2d8c4f714c84be','Ç†ï}W7/ÄAÃûDª¥´©Þ!ÆVÿÿ×€ùvÏ7V—',1,1),(23,'Location','Manager','locationmanager@fakecompany.com','locmng','1a588468655e64b89116a3e3b03b0cd90e242bbc68be242986dfde3ff159ddc1','N?{É*ÀÒ¯Q»#vhÉÐölrëQ Ã$Ë6“',2,1),(24,'POS','User','posuser@fakecompany.com','posuser','543b9097f7df0ac1e208f7f335171e2c067fa15d1c43c2ccf35e624733c00aa0','\rÕx–úÖ…ÜÅxzÕ ›ÞTCŸk¬Zªébƒå\0ØÙÖ',3,1),(25,'Field','User','fielduser@fakecompany.com','fielduser','86841a94f2cada64f8231e1b8bcec4978a1d4a49e32d273a26f0c18b113a71fc','Ññ8˜ÕTdw¢UÂ#Ëÿ3çá[EÖ°l]8ÊÍLø4÷',4,1),(26,'Warehouse','Uder','warehouseuser@fakecompany.com','whuser','03b493342a4502ce8d11975f632a067eb99c763cbaee4fab5ea787538791730f','«D\rïß‘}Îÿ‡øŠ…ÿ¶¯å\ZZ“u˜Oå^',6,1),(27,'Reporting','User','reportinguser@fakecompany.com','rptuser','08abe02cee409ca87e627d2aa29b1df30bac36d0c0052619f8d132e8e8b689c2','—:¸_»ù‚Û6òÇ_â—¸ƒ\"¹Õ¾›Ç.\r;ñë¬ÿÇ€',7,1),(28,'Super','User','superuser@fakecompany.com','superuser','28562279f081539712707d1048d5af1e3f6853e3beee0c20489236bd8578b122','§±o¹)õøD7þÙ £ë·6BEÉAÏÑlCòG_æ98×',8,1);
+INSERT INTO `users` VALUES (1,'Iommi','Underwood','iommi@fakecompany.com','iommi','73accacc88e0b33165ad6dce68bf0833ac62270cb7c7097ba8f95aa5b3fe3906','|þ!BØjhµK°$Ìã¢qOiÎe•,vÃü!>',1,1),(2,'Russell','Camilleri','rcamm@fakecompany.com','rcamm','1e456859b29138592fe7838205d0d868c762f5561242b1be3d9c4f4db950e9af','›O¼‹”Ì{±PÓW0soe€¬þ¾(i ÞÜâÚÞ ',3,1),(3,'James','Cassar','jcass@fakecompany.com','jcass','d807c992883215878f737e8d8d666b4d7a0137799ce710f0c253a44a8a14eecd','sÝx>Ê¥Õ‹µ\"vVòy 8BQ˜i¬É]±ýlî',9,2),(4,'Kyle','Zammit','kzamm@fakecompany.com','kzamm','779080ec01c45c77b6db3a20643b866ea857736394647531bc502d2d9b16c46e','Ž›/]˜‡)dWãÆ\0Dÿº0‰/#ýIky‹8ðP',9,2),(5,'Danijel','Cajic','dcaji@fakecompany.com','dcaji','54877fc579b2809e8ccf43209b11336365466735543692391d06842e0c8da6ec','þ‚#GóŠ¬ÆÅ«RtmÍÑG“.U/¿T~Ó',9,2),(6,'Michael','Fava','mfava@fakecompany.com','mfava','471e85d24320350bf4225774d70782ea4c99de19300a8098c265758bba5f1481','^È7xdHì—|\"ò¤RÊË\"»Ù%òÃQ2ÁÞ‡Üh',9,2),(7,'Darren','Gatt','dgatt@fakecompany.com','dgatt','cba05a614c6b6389e6e2126df3029c73bd2a44ec6d98752f6af458bea8a0a876','æu¦ö6³5œü ähâªè5¿4: éÃìFí%,&',9,2),(8,'Ryan','Cassar','rcass@fakecompany.com','rcass','0b2297d43746206ec5c94b3d93937df0d9ef43060efda243b5bce064d0cd4584','Më/-!›Æí¯¯„˜ÂeÝf0=¨€Êùç¾Hgq|ÿ',9,2),(9,'Ryan','Scicluna','rscic@fakecompany.com','rscic','2a335b3614317a5c74ac1f23b7ea5e20dd785367106fed2e0135e1d3638cbe6a',',ºHrÅ£8¾a:\r8_9óv(ø¢-S2qÀ×ë¹ê»x',9,2),(10,'Luke','Camilleri','lcami@fakecompany.com','lcami','17d7e11a3b940803bfb11afd479f42dad4605bda3a631ba69fb734aefb121578',':éu}Ï>Q„þNJÌe5æ+Û!¡Ï·;YmY9°Rä',9,2),(11,'Clayton','Farrugia','cfarr@fakecompany.com','cfarr','ba75d0c73bd4cd6067e3ac6b03dbe3ef9737a5a83f47567ffa48fb1763ab4e54','¨+Â¥BåR$Q¼6óîGÜBcu\"\n}À5‚r@ú',9,2),(12,'Stephen','Ciantar','scian@fakecompany.com','scian','6221a0886ed4df87918ba07d9f4f22da54ed99ccd1ab1a0d1d18e7efc23d0711','h\ræ/ámÄ©Iêk$Œ{‹¬ä^çodô¹c×Ã-[Ý',9,2),(13,'Jake','Borg','jborg@fakecompany.com','jborg','327b5b990468ea6f6388241196d363944b7da7af3683e743f01bfb3935efb7f2','ˆ}¯vœ–f/ÓHbÅ\0™Ç5Å‹ØvZl<¸ZâÁwƒ',9,2),(14,'Emanuel','Mallia','emall@fakecompany.com','emall','c33b4fc486e6bf8c84bf02d1c3fbe9a86b91029b0a75f8be942ef9a9273461db','q§ÉË±£R¶é\"&<é–ZŽ›Š«Ý ño€M¯ê9(',9,2),(15,'Melvin','Pace','pacem@fakecompany.com','pacem','14fbac87489d0f1b84328ebb66f38d9f375ffc9d41ecb2612181299ec2f57114','ù¯ìžgûíÖ-Ù§îïÜ3±V–Š‚½çCÓv',9,2),(18,'Kevin','Abela','kabela@fakecompany.com','kabela','bfc5ddf7b4711a73bce041696c7591132fff8a0e8ada95b6e0cc35389e81e855','‡yXïãÕQÝ|\'üœTÍNÎÈë%w®–@–bááÍ',9,2),(19,'Julian','Falzon','jfalz@fakecompany.com','jfalz','30c50b5aa6da5147860fcfcdf9dd94482015e97a26dc06442c0d2e202c7b4c31','2û–ƒþà	§¿\0X…Ú\\ëR+œA¯É¦úTáM¡žÇŸ',9,2),(20,'Peter','Borg','pborg@fakecompany.com','pborg','e641a7b0f3ff5e62f304166beffe82624428a1a92fbc80f4eb22d3f4650c7613','1J,Úî™íHµ¯¼f¤¸NMÒ-æÀWð¼ÿá€',9,2),(21,'Joseph','Muscat','jmusc@fakecompany.com','jmusc','916976d67011786628fa61a392bdea8bbd1a6842a6133bd968c5fc242be66288',';™çgÇk“ndÉÃÇÚäï¿c!Ä_’+¿Ï[›Æ¥2›',9,2),(22,'System','Administrator','admin@fakecompany.com','admin','24ef5b3a9af9ee611fc2dabfecc924aaf0c2c0d1f02ede12cd2d8c4f714c84be','Ç†ï}W7/ÄAÃûDª¥´©Þ!ÆVÿÿ×€ùvÏ7V—',1,1),(23,'Location','Manager','locationmanager@fakecompany.com','locmng','1a588468655e64b89116a3e3b03b0cd90e242bbc68be242986dfde3ff159ddc1','N?{É*ÀÒ¯Q»#vhÉÐölrëQ Ã$Ë6“',2,1),(24,'POS','User','posuser@fakecompany.com','posuser','543b9097f7df0ac1e208f7f335171e2c067fa15d1c43c2ccf35e624733c00aa0','\rÕx–úÖ…ÜÅxzÕ ›ÞTCŸk¬Zªébƒå\0ØÙÖ',3,1),(25,'Field','User','fielduser@fakecompany.com','fielduser','86841a94f2cada64f8231e1b8bcec4978a1d4a49e32d273a26f0c18b113a71fc','Ññ8˜ÕTdw¢UÂ#Ëÿ3çá[EÖ°l]8ÊÍLø4÷',4,1),(26,'Warehouse','Uder','warehouseuser@fakecompany.com','whuser','03b493342a4502ce8d11975f632a067eb99c763cbaee4fab5ea787538791730f','«D\rïß‘}Îÿ‡øŠ…ÿ¶¯å\ZZ“u˜Oå^',6,1),(27,'Reporting','User','reportinguser@fakecompany.com','rptuser','08abe02cee409ca87e627d2aa29b1df30bac36d0c0052619f8d132e8e8b689c2','—:¸_»ù‚Û6òÇ_â—¸ƒ\"¹Õ¾›Ç.\r;ñë¬ÿÇ€',7,1),(28,'Super','User','superuser@fakecompany.com','superuser','28562279f081539712707d1048d5af1e3f6853e3beee0c20489236bd8578b122','§±o¹)õøD7þÙ £ë·6BEÉAÏÑlCòG_æ98×',8,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -578,4 +578,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-27 19:47:36
+-- Dump completed on 2017-01-28 18:28:41

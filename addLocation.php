@@ -7,7 +7,7 @@ include_once ("header.php");
 if ($user->isLoggedIn()){
 
     //check if user has permission
-    if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('addLocation') || $user->hasPermission('allAccess')){
         //Validate user input
         if(input::exists()){
 
@@ -17,34 +17,35 @@ if ($user->isLoggedIn()){
                 // if token validation passed continue
                 $validate = new validate();
                 $validation = $validate->check($_POST,array(
-                    'name' => array(
+                    'resource_location_name' => array(
                         'required' => true,
-                        'unique' => true,
                         'min' => 5,
-                        'max' => 50
+                        'max' => 50,
+                        'unique' => 'resource_locations'
                     ),
-                    'description' => array(
+                    'resource_location_description' => array(
                         'required' => true,
                         'min' => 5,
                         'max' => 200
                     ),
-                    'type' => array('required' => true)
+                    'resource_location_type_id' => array('required' => true)
                 ));
 
                 // display error or success messages
                 if ($validation->passed()){
+
                     $location = new location();
 
-                    $name = escape(input::get('name'));
-                    $description = escape(input::get('description'));
-                    $type = escape(input::get('type'));
+                    $name = escape(input::get('resource_location_name'));
+                    $description = escape(input::get('resource_location_description'));
+                    $type = escape(input::get('resource_location_type_id'));
 
                     try {
 
                         $location->createLocation(array(
-                            'name' => $name,
-                            'description' => $description,
-                            'type' => $type
+                            'resource_location_name' => $name,
+                            'resource_location_description' => $description,
+                            'resource_location_type_id' => $type
                         ));
 
                         //create message to display on user creation
@@ -81,9 +82,9 @@ if ($user->isLoggedIn()){
                     <h1>Add a New Location</h1>
 
                     <form action="" method="post" name="addLocation">
-                        <input type="text" name="name" placeholder="New Location Name" autocomplete="off" value="<?php echo escape(input::get('name')); ?>" />
-                        <textarea name="description" placeholder="Type Location Description" autocomplete="off" value="<?php echo escape(input::get('description')); ?> maxlength="200"></textarea>
-                        <select name="type">
+                        <input type="text" name="resource_location_name" placeholder="New Location Name" autocomplete="off" value="<?php echo escape(input::get('name')); ?>" />
+                        <textarea name="resource_location_description" placeholder="Type Location Description" autocomplete="off" value="<?php echo escape(input::get('description')); ?> maxlength="200"></textarea>
+                        <select name="resource_location_type_id">
                             <option value="">------------------------- Choose a Type -------------------------</option>
                             <?php
                             $get = db::getInstance()->query('select * from ims.resource_location_types order by 1');
