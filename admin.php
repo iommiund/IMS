@@ -46,9 +46,6 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('addResourceBrand') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addResourceBrand.php">Add New Resource Brand</a></li><br><br>';
                         }
-                        if ($user->hasPermission('addModelIdentifier') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addModelIdentifier.php">Add New Model Identifier</a></li><br><br>';
-                        }
                         ?>
                     </ul>
                 </div>
