@@ -23,7 +23,8 @@ if ($user->isLoggedIn()){
                         'max' => 50,
                         'unique' => 'resource_models'
                     ),
-                    'resource_brand_id' => array('required' => true)
+                    'resource_brand_id' => array('required' => true),
+                    'resource_type_id' => array('required' => true)
                 ));
 
                 // display error or success messages
@@ -33,12 +34,14 @@ if ($user->isLoggedIn()){
 
                     $model = escape(input::get('resource_model'));
                     $brand = escape(input::get('resource_brand_id'));
+                    $type = escape(input::get('resource_type_id'));
 
                     try {
 
                         $inventory->createResourceModel(array(
                             'resource_model' => $model,
-                            'resource_brand_id' => $brand
+                            'resource_brand_id' => $brand,
+                            'resource_type_id' => $type
                         ));
 
                         //get data to display dialog
@@ -84,7 +87,6 @@ if ($user->isLoggedIn()){
                     <h1>Add a New Resource Model</h1>
 
                     <form action="" method="post" name="addResourceModel">
-                        <input type="text" name="resource_model" placeholder="New Model Name" autocomplete="off" value="<?php echo escape(input::get('resource_model')); ?>" />
                         <select name="resource_brand_id">
                             <option value="">------------------------- Choose a Brand -------------------------</option>
                             <?php
@@ -103,6 +105,25 @@ if ($user->isLoggedIn()){
                             }
                             ?>
                         </select>
+                        <select name="resource_type_id">
+                            <option value="">------------------------- Choose a Type -------------------------</option>
+                            <?php
+                            $get = db::getInstance()->query('select * from ims.resource_types order by 1');
+
+                            if (!$get->count()) {
+                                echo 'Empty List';
+                            } else {
+
+                                foreach ($get->results() as $t): ?>
+                                    <option value="<?php echo escape($t->resource_type_id); ?>">
+                                        <?php echo escape($t->resource_type); ?>
+                                    </option>
+                                <?php endforeach;
+
+                            }
+                            ?>
+                        </select>
+                        <input type="text" name="resource_model" placeholder="New Model Name" autocomplete="off" value="<?php echo escape(input::get('resource_model')); ?>" />
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                         <input type="submit" value="ADD MODEL"/>
                     </form>

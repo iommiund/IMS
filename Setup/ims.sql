@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
 --
 -- Host: localhost    Database: ims
 -- ------------------------------------------------------
--- Server version	10.1.16-MariaDB
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -228,11 +228,14 @@ DROP TABLE IF EXISTS `resource_models`;
 CREATE TABLE `resource_models` (
   `resource_model_id` int(11) NOT NULL AUTO_INCREMENT,
   `resource_brand_id` int(11) NOT NULL,
+  `resource_type_id` int(11) NOT NULL,
   `resource_model` varchar(50) NOT NULL,
   PRIMARY KEY (`resource_model_id`),
   UNIQUE KEY `uq_resource_model` (`resource_model`),
   KEY `fk_resource_brand_id` (`resource_brand_id`),
-  CONSTRAINT `fk_resource_brand_id` FOREIGN KEY (`resource_brand_id`) REFERENCES `resource_brands` (`resource_brand_id`)
+  KEY `fk_resource_type_id_idx` (`resource_type_id`),
+  CONSTRAINT `fk_resource_brand_id` FOREIGN KEY (`resource_brand_id`) REFERENCES `resource_brands` (`resource_brand_id`),
+  CONSTRAINT `fk_resource_type_id` FOREIGN KEY (`resource_type_id`) REFERENCES `resource_types` (`resource_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -242,7 +245,7 @@ CREATE TABLE `resource_models` (
 
 LOCK TABLES `resource_models` WRITE;
 /*!40000 ALTER TABLE `resource_models` DISABLE KEYS */;
-INSERT INTO `resource_models` VALUES (1,1,'EPC3925'),(2,2,'NV'),(3,6,'SIM128K'),(4,5,'TUV'),(5,3,'Galaxy S7'),(6,4,'iPhone 6S 16GB'),(7,4,'iPhone 7 Plus'),(9,1,'EPC3925s');
+INSERT INTO `resource_models` VALUES (1,1,5,'EPC3925'),(2,2,1,'NV'),(3,6,3,'SIM128K'),(4,5,4,'TUV'),(5,3,2,'Galaxy S7'),(6,4,2,'iPhone 6S 16GB'),(7,4,2,'iPhone 7 Plus'),(9,1,5,'EPC3925s');
 /*!40000 ALTER TABLE `resource_models` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +331,6 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resource_location_id` FOREIGN KEY (`resource_location_id`) REFERENCES `resource_locations` (`resource_location_id`),
   CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
   CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
-  CONSTRAINT `fk_resource_type_id` FOREIGN KEY (`resource_type_id`) REFERENCES `resource_types` (`resource_type_id`),
   CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -340,6 +342,34 @@ CREATE TABLE `resources` (
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `temp_resource`
+--
+
+DROP TABLE IF EXISTS `temp_resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `temp_resource` (
+  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_unique_value` varchar(50) NOT NULL,
+  `resource_model_id` int(11) NOT NULL,
+  `voucher_value_id` int(11) DEFAULT NULL,
+  `vr_id` int(11) NOT NULL,
+  PRIMARY KEY (`resource_id`),
+  KEY `fk_vr_id` (`vr_id`),
+  CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `temp_resource`
+--
+
+LOCK TABLES `temp_resource` WRITE;
+/*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
+/*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -545,6 +575,30 @@ LOCK TABLES `users_session` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `validation_results`
+--
+
+DROP TABLE IF EXISTS `validation_results`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `validation_results` (
+  `vr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`vr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `validation_results`
+--
+
+LOCK TABLES `validation_results` WRITE;
+/*!40000 ALTER TABLE `validation_results` DISABLE KEYS */;
+INSERT INTO `validation_results` VALUES (1,'Validation OK'),(2,'Resource exists'),(3,'Resource model identifier does not match'),(4,'Serial number length is incorrect');
+/*!40000 ALTER TABLE `validation_results` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `voucher_values`
 --
 
@@ -578,4 +632,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-29 14:15:56
+-- Dump completed on 2017-01-30 17:55:34
