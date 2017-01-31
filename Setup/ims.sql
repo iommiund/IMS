@@ -236,7 +236,7 @@ CREATE TABLE `resource_models` (
   KEY `fk_resource_type_id_idx` (`resource_type_id`),
   CONSTRAINT `fk_resource_brand_id` FOREIGN KEY (`resource_brand_id`) REFERENCES `resource_brands` (`resource_brand_id`),
   CONSTRAINT `fk_resource_type_id` FOREIGN KEY (`resource_type_id`) REFERENCES `resource_types` (`resource_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `resource_models` (
 
 LOCK TABLES `resource_models` WRITE;
 /*!40000 ALTER TABLE `resource_models` DISABLE KEYS */;
-INSERT INTO `resource_models` VALUES (1,1,5,'EPC3925'),(2,2,1,'NV'),(3,6,3,'SIM128K'),(4,5,4,'TUV'),(5,3,2,'Galaxy S7'),(6,4,2,'iPhone 6S 16GB'),(7,4,2,'iPhone 7 Plus'),(9,1,5,'EPC3925s');
+INSERT INTO `resource_models` VALUES (1,1,5,'EPC3925'),(2,2,1,'NV'),(3,6,3,'SIM128K'),(4,5,4,'TUV'),(5,3,2,'Galaxy S7'),(6,4,2,'iPhone 6S 16GB'),(7,4,2,'iPhone 7 Plus'),(9,1,5,'EPC3925s'),(10,2,1,'HSC 100');
 /*!40000 ALTER TABLE `resource_models` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,13 +354,18 @@ DROP TABLE IF EXISTS `temp_resource`;
 CREATE TABLE `temp_resource` (
   `resource_id` int(11) NOT NULL AUTO_INCREMENT,
   `resource_unique_value` varchar(50) NOT NULL,
-  `resource_model_id` int(11) NOT NULL,
-  `voucher_value_id` int(11) DEFAULT NULL,
-  `vr_id` int(11) NOT NULL,
+  `resource_brand_id` int(11) DEFAULT NULL,
+  `resource_model_id` int(11) DEFAULT NULL,
+  `resource_type_id` int(11) DEFAULT NULL,
+  `resource_model_identifier` varchar(45) DEFAULT NULL,
+  `resource_sn_length` int(11) DEFAULT NULL,
+  `voucher_value_id` varchar(4) DEFAULT NULL,
+  `vr_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,6 +374,7 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
+INSERT INTO `temp_resource` VALUES (29,'test',NULL,NULL,NULL,'test',4,'',NULL),(30,'voucher',NULL,NULL,NULL,'vouche',7,'10',NULL),(31,'voucher1',NULL,NULL,NULL,'vouche',8,'10',NULL),(32,'voucher2',NULL,NULL,NULL,'vouche',8,'5',NULL),(33,'anothertest',NULL,NULL,NULL,'anothe',11,'',NULL),(34,'12345678910',NULL,NULL,NULL,'123456',11,'',NULL),(35,'1112131415',NULL,NULL,NULL,'111213',10,'',NULL),(36,'1718192021',NULL,NULL,NULL,'171819',10,'',NULL),(37,'2223242526',NULL,NULL,NULL,'222324',10,'',NULL);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -607,10 +613,10 @@ DROP TABLE IF EXISTS `voucher_values`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `voucher_values` (
   `voucher_value_id` int(11) NOT NULL AUTO_INCREMENT,
-  `voucher_value` int(11) NOT NULL,
+  `voucher_value` varchar(4) NOT NULL,
   PRIMARY KEY (`voucher_value_id`),
   UNIQUE KEY `uq_voucher_value` (`voucher_value`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -619,7 +625,7 @@ CREATE TABLE `voucher_values` (
 
 LOCK TABLES `voucher_values` WRITE;
 /*!40000 ALTER TABLE `voucher_values` DISABLE KEYS */;
-INSERT INTO `voucher_values` VALUES (1,5),(2,10),(3,20),(4,50);
+INSERT INTO `voucher_values` VALUES (10,'10'),(20,'20'),(5,'5'),(50,'50');
 /*!40000 ALTER TABLE `voucher_values` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -632,4 +638,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-30 17:55:34
+-- Dump completed on 2017-01-31 19:53:18

@@ -1,74 +1,43 @@
 <?php
 require_once 'core/init.php';
-include_once ("header.php");
+include_once("header.php");
 
 //$user = new user();
 
-if ($user->isLoggedIn()){
+if ($user->isLoggedIn()) {
 
     //check if user has permission
-    if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
+
         //Validate user input
-        if(input::exists()){
+        if (input::exists()) {
 
             // validate whether token exists before performing any action
-            if(token::check(input::get('token'))){
+            if (token::check(input::get('token'))) {
 
-                // if token validation passed continue
-                $validate = new validate();
-                $validation = $validate->check($_POST,array(
-                    'resource_location_name' => array(
-                        'required' => true,
-                        'min' => 5,
-                        'max' => 50,
-                        'unique' => 'resource_locations'
-                    ),
-                    'resource_location_description' => array(
-                        'required' => true,
-                        'min' => 5,
-                        'max' => 200
-                    ),
-                    'resource_location_type_id' => array('required' => true)
-                ));
+                $inventory = new inventory();
 
-                // display error or success messages
-                if ($validation->passed()){
+                try {
+                    //delete all rows from temp table
+                    $inventory->clearTemp();
 
-                    $location = new location();
+                    //load new inventory to temp table
+                    $file = $_FILES['file']['tmp_name'];
 
-                    $name = escape(input::get('resource_location_name'));
-                    $description = escape(input::get('resource_location_description'));
-                    $type = escape(input::get('resource_location_type_id'));
+                    $inventory->loadInventory($file);
 
-                    try {
+                    //validate inventory and populate other temp table fields
 
-                        $location->createLocation(array(
-                            'resource_location_name' => $name,
-                            'resource_location_description' => $description,
-                            'resource_location_type_id' => $type
-                        ));
 
-                        //create message to display on user creation
-                        ?>
-                        <div id="dialogOk" title="Success">
-                            <p>
-                                <?php
-                                echo '<b>' . $name . '</b> added successfully.';
-                                ?>
-                            </p>
-                        </div>
-                        <?php
-                    } catch (Exception $e){
-                        die($e->getMessage());
-                    }
-                } else {
+                } catch (Exception $e) {
+                    //create message to display on user creation
                     ?>
                     <div id="dialogOk" title="Error">
-                        <?php
-                        foreach ($validation->errors() as $error){
-                            echo '&#x26a0; ' . $error . "", '<br>';
-                        }
-                        ?>
+                        <p>
+                            <?php
+                            echo '&#x26a0; Please remove all <b>duplicate records</b> from file and try again.';
+                            ?>
+                        </p>
                     </div>
                     <?php
                 }
@@ -79,16 +48,12 @@ if ($user->isLoggedIn()){
         <div class="content">
             <div class="container">
                 <div class="form-style">
-                    <?php
-                        if(!input::exists()) {
-                            echo '<h1>Load From File</h1>';
-                            echo '<form action="" method="post" name="loadTemp" enctype="multipart/form-data">';
-                            echo '<input type="file" name="file"/><br><br>';
-                            echo '<input type="hidden" name="token" value="<?php echo token::generate(); ?>">';
-                            echo '<input type="submit" value="LOAD"/>';
-                            echo '</form>';
-                        }
-                    ?>
+                    <h1>Load From File</h1>
+                    <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
+                        <input type="file" name="file"/><br><br>
+                        <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
+                        <input type="submit" value="LOAD & VALIDATE"/>
+                    </form>
                 </div>
             </div>
         </div>
