@@ -134,7 +134,7 @@ CREATE TABLE `resouce_model_identifiers` (
 
 LOCK TABLES `resouce_model_identifiers` WRITE;
 /*!40000 ALTER TABLE `resouce_model_identifiers` DISABLE KEYS */;
-INSERT INTO `resouce_model_identifiers` VALUES (1,'385729',6,14),(2,'395729',7,14),(3,'357350',5,14),(4,'24767D',1,12),(5,'7CB21B',1,12),(6,'BCC810',1,12),(7,'E448C7',1,12),(8,'8935677',3,19),(9,'109',2,10),(10,'50500',4,12),(11,'51000',4,12),(12,'52000',4,12),(13,'55000',4,12);
+INSERT INTO `resouce_model_identifiers` VALUES (1,'385729',6,14),(2,'395729',7,14),(3,'357350',5,14),(4,'24767D',1,12),(5,'7CB21B',1,12),(6,'BCC810',1,12),(7,'E448C7',1,12),(8,'895376',3,12),(9,'109868',2,12),(10,'505000',4,12),(11,'510000',4,12),(12,'520000',4,12),(13,'550000',4,12);
 /*!40000 ALTER TABLE `resouce_model_identifiers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,14 +358,15 @@ CREATE TABLE `temp_resource` (
   `resource_model_id` int(11) DEFAULT NULL,
   `resource_type_id` int(11) DEFAULT NULL,
   `resource_model_identifier` varchar(45) DEFAULT NULL,
-  `resource_sn_length` int(11) DEFAULT NULL,
+  `current_sn_length` int(11) DEFAULT NULL,
+  `req_sn_length` int(11) DEFAULT NULL,
   `voucher_value_id` varchar(4) DEFAULT NULL,
   `vr_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`resource_id`),
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,7 +375,7 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
-INSERT INTO `temp_resource` VALUES (29,'test',NULL,NULL,NULL,'test',4,'',NULL),(30,'voucher',NULL,NULL,NULL,'vouche',7,'10',NULL),(31,'voucher1',NULL,NULL,NULL,'vouche',8,'10',NULL),(32,'voucher2',NULL,NULL,NULL,'vouche',8,'5',NULL),(33,'anothertest',NULL,NULL,NULL,'anothe',11,'',NULL),(34,'12345678910',NULL,NULL,NULL,'123456',11,'',NULL),(35,'1112131415',NULL,NULL,NULL,'111213',10,'',NULL),(36,'1718192021',NULL,NULL,NULL,'171819',10,'',NULL),(37,'2223242526',NULL,NULL,NULL,'222324',10,'',NULL);
+INSERT INTO `temp_resource` VALUES (44,'24767D000001',NULL,NULL,NULL,'24767D',12,NULL,'',NULL);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -638,4 +639,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-31 19:53:18
+-- Dump completed on 2017-02-01 19:31:48
