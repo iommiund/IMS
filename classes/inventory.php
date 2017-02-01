@@ -34,18 +34,38 @@ class inventory
         }
     }
 
-    public function loadInventory($file)
+    public function loadAndValidateInventory($file)
     {
 
+        //set handle
         $handle = fopen($file, "r");
 
+        //for each row
         while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
 
+            //set the initial voucher value to empty
+            $voucherValue = '';
+
+            //set initial variables to use for loading and validation
             $resourceUniqueValue = $fileop[0];
-            $voucherValue = $fileop[1];
+            if (isset($fileop[1])){$voucherValue = $fileop[1];}
             $modelIdentifier = substr($resourceUniqueValue, 0, 6);
             $resourceLength = strlen($resourceUniqueValue);
 
+            //get resource brand, model, type and resource_sn_length for resource validation
+                //query pending
+
+            //set variables for brand, model, type and resource_sn_length from previous query
+
+            //check if resource exists
+
+            //check if serial number length matches
+
+            //check if resource model identifier matches
+
+            //check if validation ok
+
+            //create fields array to insert values in temp table
             $fields = array(
                 'resource_unique_value' => $resourceUniqueValue,
                 'voucher_value_id' => $voucherValue,
@@ -53,6 +73,7 @@ class inventory
                 'resource_sn_length' => $resourceLength
             );
 
+            //insert all records in temp table
             if (!$this->_db->insert('temp_resource', $fields)) {
                 throw new Exception('Your file contains duplicate records.');
             }

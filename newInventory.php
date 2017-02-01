@@ -21,14 +21,21 @@ if ($user->isLoggedIn()) {
                     //delete all rows from temp table
                     $inventory->clearTemp();
 
-                    //load new inventory to temp table
+                    //load and validate new inventory to temp table
                     $file = $_FILES['file']['tmp_name'];
 
-                    $inventory->loadInventory($file);
+                    $inventory->loadAndValidateInventory($file);
 
-                    //validate inventory and populate other temp table fields
-
-
+                    //create message to display on user creation
+                    ?>
+                    <div id="dialogOk" title="Success">
+                        <p>
+                            <?php
+                            echo 'Resources Loaded';
+                            ?>
+                        </p>
+                    </div>
+                    <?php
                 } catch (Exception $e) {
                     //create message to display on user creation
                     ?>
