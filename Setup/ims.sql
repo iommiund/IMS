@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
+-- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: ims
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	10.1.16-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -360,6 +360,7 @@ CREATE TABLE `temp_resource` (
   `resource_model_identifier` varchar(45) DEFAULT NULL,
   `current_sn_length` int(11) DEFAULT NULL,
   `req_sn_length` int(11) DEFAULT NULL,
+  `exists` int(11) DEFAULT NULL,
   `voucher_value_id` varchar(4) DEFAULT NULL,
   `vr_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`resource_id`),
@@ -375,7 +376,7 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
-INSERT INTO `temp_resource` VALUES (44,'24767D000001',NULL,NULL,NULL,'24767D',12,NULL,'',NULL);
+INSERT INTO `temp_resource` VALUES (44,'24767D000001',NULL,NULL,NULL,'24767D',12,NULL,NULL,'',NULL);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -639,4 +640,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-01 19:31:48
+-- Dump completed on 2017-02-02  3:45:24
