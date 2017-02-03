@@ -1,8 +1,8 @@
 <?php
 require_once 'core/init.php';
-include_once("header.php");
+//include_once("header.php");
 
-//$user = new user();
+$user = new user();
 
 if ($user->isLoggedIn()) {
 

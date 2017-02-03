@@ -315,7 +315,7 @@ CREATE TABLE `resources` (
   `resource_unique_value` varchar(50) NOT NULL,
   `resource_model_id` int(11) NOT NULL,
   `voucher_value_id` int(11) DEFAULT NULL,
-  `last_transaction_id` int(11) NOT NULL,
+  `last_transaction_id` int(11) DEFAULT NULL,
   `resource_latitude` float(10,6) DEFAULT NULL,
   `resource_longitude` float(10,6) DEFAULT NULL,
   PRIMARY KEY (`resource_id`),
@@ -332,7 +332,7 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
   CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
   CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +376,6 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
-INSERT INTO `temp_resource` VALUES (44,'24767D000001',1,1,5,'24767D',12,12,NULL,'',NULL);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,4 +639,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-02  9:29:21
+-- Dump completed on 2017-02-03 20:31:01
