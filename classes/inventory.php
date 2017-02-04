@@ -43,17 +43,11 @@ class inventory
         //for each row
         while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
 
-            //set the initial voucher value to empty
+            //set initial variable values
             $voucherValue = '';
-            $existsFlag = '';
-            $vrID = '1';
+            $vrID = 1;
             $reqSNLength = '';
-
-            //set initial variables to use for loading and validation
             $resourceUniqueValue = escape($fileop[0]);
-            if (isset($fileop[1])) {
-                $voucherValue = escape($fileop[1]);
-            }
             $modelIdentifier = escape(substr($resourceUniqueValue, 0, 6));
             $resourceLength = escape(strlen($resourceUniqueValue));
 
@@ -62,7 +56,8 @@ class inventory
                         rb.resource_brand_id,
                         rm.resource_model_id,
                         rt.resource_type_id,
-                        rmi.resource_sn_length
+                        rmi.resource_sn_length,
+                        rmi.voucher_value_id
                     FROM
                         ims.resouce_model_identifiers rmi
                             INNER JOIN
@@ -74,48 +69,68 @@ class inventory
                     WHERE
                         rmi.resource_model_identifier = \"$modelIdentifier\"";
 
+            //Run query
             $get = $this->_db->query($sql);
 
+            //If no results are returned
             if (!$get->count()) {
 
                 //resource model identifier does not match
                 $vrID = 3;
 
+                //create fields array to insert values in temp table
+                $fields = array(
+                    'resource_unique_value' => $resourceUniqueValue,
+                    'resource_model_identifier' => $modelIdentifier,
+                    'current_sn_length' => $resourceLength,
+                    'vr_id' => $vrID
+                );
+
+                //insert records in temp table
+                if (!$this->_db->insert('temp_resource', $fields)) {
+                    throw new Exception('Your file contains duplicate records.');
+                }
+
             } else {
 
+                //If results are returned
                 foreach ($get->results() as $r) {
 
-                    //set variables for brand, model, type and resource_sn_length from previous query
+                    //Set variables for brand, model, type and resource_sn_length from previous query
                     if (isset($r->resource_brand_id, $r->resource_model_id, $r->resource_type_id, $r->resource_sn_length)){
                         $resourceBrandId = escape($r->resource_brand_id);
                         $resourceModelId = escape($r->resource_model_id);
                         $resourceTypeId = escape($r->resource_type_id);
                         $reqSNLength = escape($r->resource_sn_length);
+                        if (isset($r->voucher_value_id)) {$voucherValue = escape($r->voucher_value_id);}
                     }
 
-                    //check if resource exists
+                    //Check if resource already exists
                     $sql = "select * from ims.resources r where r.resource_unique_value = \"$resourceUniqueValue\"";
 
+                    //Run query
                     $get = $this->_db->query($sql);
 
                     if(!$get->count()){
+
+                        //If the resource does not exist, set flag to O
                         $existsFlag = 0;
 
                     } else {
+
+                        //If the resource exists, set flag to 1
                         $existsFlag = 1;
 
-                        //resource exists
+                        //And set validation result to resource exists
                         $vrID = 2;
                     }
 
-                    //check if serial number length matches
+                    //If serial number length does not match
                     if($resourceLength !== $reqSNLength){
 
-                        //serial number length is incorrect
+                        //Ser validation result to serial number length is incorrect
                         $vrID = 4;
                     }
-
-                    //check if validation ok
 
                     //create fields array to insert values in temp table
                     $fields = array(
@@ -131,7 +146,7 @@ class inventory
                         'vr_id' => $vrID
                     );
 
-                    echo 'resource unique value: ' . $resourceUniqueValue . '<br>';
+                    /* echo 'resource unique value: ' . $resourceUniqueValue . '<br>';
                     echo 'resource brand: ' . $resourceBrandId . '<br>';
                     echo 'resource model: ' . $resourceModelId . '<br>';
                     echo 'resource type: ' . $resourceTypeId . '<br>';
@@ -141,7 +156,7 @@ class inventory
                     echo 'voucher value: ' . $voucherValue . '<br>';
                     echo 'exists flag: ' . $existsFlag . '<br>';
                     echo 'validation: ' . $vrID;
-                    die();
+                    die();*/
 
                     //insert all records in temp table
                     if (!$this->_db->insert('temp_resource', $fields)) {
