@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
+-- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: ims
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	10.1.16-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -121,9 +121,11 @@ CREATE TABLE `resouce_model_identifiers` (
   `resource_model_identifier` varchar(50) NOT NULL,
   `resource_model_id` int(11) NOT NULL,
   `resource_sn_length` int(11) NOT NULL,
+  `voucher_value_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`resource_model_identifier_id`),
   UNIQUE KEY `uq_resource_model_identifier` (`resource_model_identifier`),
   KEY `fk_resource_model_id2` (`resource_model_id`),
+  KEY `fk_voucher_value_id_idx` (`voucher_value_id`),
   CONSTRAINT `fk_resource_model_id2` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -134,7 +136,7 @@ CREATE TABLE `resouce_model_identifiers` (
 
 LOCK TABLES `resouce_model_identifiers` WRITE;
 /*!40000 ALTER TABLE `resouce_model_identifiers` DISABLE KEYS */;
-INSERT INTO `resouce_model_identifiers` VALUES (1,'385729',6,14),(2,'395729',7,14),(3,'357350',5,14),(4,'24767D',1,12),(5,'7CB21B',1,12),(6,'BCC810',1,12),(7,'E448C7',1,12),(8,'895376',3,12),(9,'109868',2,12),(10,'505000',4,12),(11,'510000',4,12),(12,'520000',4,12),(13,'550000',4,12);
+INSERT INTO `resouce_model_identifiers` VALUES (1,'385729',6,14,NULL),(2,'395729',7,14,NULL),(3,'357350',5,14,NULL),(4,'24767D',1,12,NULL),(5,'7CB21B',1,12,NULL),(6,'BCC810',1,12,NULL),(7,'E448C7',1,12,NULL),(8,'895376',3,12,NULL),(9,'109868',2,12,NULL),(10,'505000',4,12,5),(11,'510000',4,12,10),(12,'520000',4,12,20),(13,'550000',4,12,50);
 /*!40000 ALTER TABLE `resouce_model_identifiers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +334,7 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
   CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
   CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,6 +343,7 @@ CREATE TABLE `resources` (
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+INSERT INTO `resources` VALUES (4,1,5,1,NULL,'24767D000001',1,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +370,7 @@ CREATE TABLE `temp_resource` (
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,6 +379,7 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
+INSERT INTO `temp_resource` VALUES (100,'24767D000001',1,1,5,'24767D',12,12,1,'',2),(101,'505000000001',5,4,4,'505000',12,12,0,'5',1),(102,'24767D000002',1,1,5,'24767D',12,12,0,'',1),(103,'24767D000003',1,1,5,'24767D',12,12,0,'',1),(104,'24767D000004',1,1,5,'24767D',12,12,0,'',1),(105,'24767D000005',1,1,5,'24767D',12,12,0,'',1),(106,'24767D000006',1,1,5,'24767D',12,12,0,'',1),(107,'24767D000007',1,1,5,'24767D',12,12,0,'',1),(108,'24767D000008',1,1,5,'24767D',12,12,0,'',1),(109,'24767D000009',1,1,5,'24767D',12,12,0,'',1),(110,'24767D000010',1,1,5,'24767D',12,12,0,'',1),(111,'24767D000011',1,1,5,'24767D',12,12,0,'',1),(112,'24767D000012',1,1,5,'24767D',12,12,0,'',1),(113,'24767D000013',1,1,5,'24767D',12,12,0,'',1),(114,'24767D000014',1,1,5,'24767D',12,12,0,'',1),(115,'24767D000015',1,1,5,'24767D',12,12,0,'',1),(116,'24767D000016',1,1,5,'24767D',12,12,0,'',1);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -601,7 +605,7 @@ CREATE TABLE `validation_results` (
 
 LOCK TABLES `validation_results` WRITE;
 /*!40000 ALTER TABLE `validation_results` DISABLE KEYS */;
-INSERT INTO `validation_results` VALUES (1,'Validation OK'),(2,'Resource exists'),(3,'Resource model identifier does not match'),(4,'Serial number length is incorrect');
+INSERT INTO `validation_results` VALUES (1,'OK'),(2,'Resource exists'),(3,'Model does not exist'),(4,'Incorrect serial number length');
 /*!40000 ALTER TABLE `validation_results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -639,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-03 20:31:01
+-- Dump completed on 2017-02-04 16:58:59
