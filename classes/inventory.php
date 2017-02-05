@@ -146,21 +146,179 @@ class inventory
                         'vr_id' => $vrID
                     );
 
-                    /* echo 'resource unique value: ' . $resourceUniqueValue . '<br>';
-                    echo 'resource brand: ' . $resourceBrandId . '<br>';
-                    echo 'resource model: ' . $resourceModelId . '<br>';
-                    echo 'resource type: ' . $resourceTypeId . '<br>';
-                    echo 'model identifier: ' . $modelIdentifier . '<br>';
-                    echo 'resource length: ' . $resourceLength . '<br>';
-                    echo 'req length: ' . $reqSNLength . '<br>';
-                    echo 'voucher value: ' . $voucherValue . '<br>';
-                    echo 'exists flag: ' . $existsFlag . '<br>';
-                    echo 'validation: ' . $vrID;
-                    die();*/
-
                     //insert all records in temp table
                     if (!$this->_db->insert('temp_resource', $fields)) {
                         throw new Exception('Your file contains duplicate records.');
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public function getValidationResults($operator, $value)
+    {
+        //Prepare sql query
+        $sql = "SELECT 
+                    tr.resource_unique_value,
+                    rb.resource_brand,
+                    rm.resource_model,
+                    rt.resource_type,
+                    vv.voucher_value,
+                    vr.description
+                FROM
+                    ims.temp_resource tr
+                        LEFT JOIN
+                    ims.resource_models rm ON tr.resource_model_id = rm.resource_model_id
+                        LEFT JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        LEFT JOIN
+                    ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                        LEFT JOIN
+                    ims.validation_results vr ON tr.vr_id = vr.vr_id
+                        LEFT JOIN
+                    ims.voucher_values vv ON tr.voucher_value_id = vv.voucher_value_id
+                WHERE
+                    tr.vr_id {$operator} {$value}";
+
+        //Run query
+        $get = $this->_db->query($sql);
+
+        //If no results returned
+        if (!$get->count()) {
+
+            echo '<tr>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '</tr>';
+
+        } else {
+
+            foreach ($get->results() as $r) {
+
+                //Set initial variable value to empty
+                $resourceUniqueValue = '';
+                $resourceBrand = '';
+                $resourceModel = '';
+                $resourceType = '';
+                $voucherValue = '';
+                $validationResult = '';
+
+                //Set variables for brand, model, type and resource_sn_length from previous query
+                if (isset($r->resource_unique_value)){
+                    $resourceUniqueValue = escape($r->resource_unique_value);
+                    if (isset($r->resource_brand)){$resourceBrand = escape($r->resource_brand);}
+                    if (isset($r->resource_model)){$resourceModel = escape($r->resource_model);}
+                    if (isset($r->resource_type)){$resourceType = escape($r->resource_type);}
+                    if (isset($r->voucher_value)) {$voucherValue = escape($r->voucher_value);}
+                    $validationResult = escape($r->description);
+                }
+
+                echo '<tr>';
+                echo '<td>' . $resourceUniqueValue . '</td>';
+                echo '<td>' . $resourceBrand . '</td>';
+                echo '<td>' . $resourceModel . '</td>';
+                echo '<td>' . $resourceType . '</td>';
+                echo '<td>' . $voucherValue . '</td>';
+                echo '<td>' . $validationResult . '</td>';
+                echo '</tr>';
+            }
+        }
+
+    }
+
+    public function uploadResource()
+    {
+
+        //Get all records from temp_resource with vr_id = 1
+        $sql = "SELECT 
+                    tr.resource_unique_value,
+                    tr.resource_model_id,
+                    tr.resource_type_id,
+                    tr.voucher_value_id
+                FROM
+                    ims.temp_resource tr
+                WHERE
+                    tr.vr_id = 1";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+            echo 'Nothing to upload';
+        } else {
+
+            //for each record
+            foreach ($get->results() as $r) {
+
+                //Set initial variable value to empty
+                $voucherValueId = '';
+
+                //declare variables
+                $resourceUniqueValue = escape($r->resource_unique_value);
+                $resourceModelId = escape($r->resource_model_id);
+                $resourceTypeId = escape($r->resource_type_id);
+                if (isset($r->voucher_value_id)){$voucherValueId = escape($r->voucher_value_id);}
+
+                //create fields array to insert values in temp table
+                $fields = array(
+                    'resource_unique_value' => $resourceUniqueValue,
+                    'resource_model_id' => $resourceModelId,
+                    'resource_type_id' => $resourceTypeId,
+                    'voucher_value_id' => $voucherValueId,
+                    'resource_status_id' => 1, //Available
+                    'resource_location_id' => 1 //Main Warehouse
+                );
+
+
+                //insert resources
+                if (!$this->_db->insert('resources', $fields)) {
+                    throw new Exception('There was a problem creating entry');
+                } else {
+
+                    $user = new user();
+
+                    //get resource id for newly added resource
+                    $sql = "select * from ims.resources r where r.resource_unique_value = {$resourceUniqueValue}";
+
+                    $get = $this->_db->query($sql);
+
+                    if (!$get->count()) {
+                        echo 'Nothing to upload';
+                    } else {
+
+                        //for each record
+                        foreach ($get->results() as $r) {
+
+                            //declare variables
+                            $uid = escape($user->data()->uid);
+                            $resourceId = escape($r->resource_id);
+                            $resourceStatusId = escape($r->resource_status_id);
+                            $resourceLocationId = escape($r->resource_location_id);
+
+                            //create fields array to insert values in temp table
+                            $fields = array(
+                                'uid' => $uid,
+                                'resource_id' => $resourceId,
+                                'resource_status_id' => $resourceStatusId,
+                                'resource_location_id' => $resourceLocationId,
+                                'transaction_type_id' => 1, //Resource Upload
+                                'transaction_status_id' => 1 //Complete
+                            );
+
+                            //insert transaction
+                            if (!$this->_db->insert('transactions', $fields)) {
+                                throw new Exception('There was a problem creating entry');
+                            }
+
+                        }
+
                     }
 
                 }

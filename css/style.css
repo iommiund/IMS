@@ -273,7 +273,7 @@ Layout styles
 	margin:0 auto;
 }
 
-.center-table {
+.center-table table{
     font: 95% Arial, Helvetica, sans-serif;
     max-width: 1000px;
     margin: 0px auto;
@@ -308,6 +308,10 @@ th {
 	font-weight: 600;
 	color: #FFFFFF;
 	padding:3px;
+}
+
+td {
+    text-align: center;
 }
 
 /*.footer
@@ -479,7 +483,8 @@ Form styles
 .form-style input[type=search], 
 .form-style input[type=time], 
 .form-style input[type=url],
-.form-style input[type=password], 
+.form-style input[type=password],
+.form-style input[type=file],
 .form-style textarea, 
 .form-style select 
 {
@@ -512,7 +517,8 @@ Form styles
 .form-style input[type=search]:focus, 
 .form-style input[type=time]:focus, 
 .form-style input[type=url]:focus,
-.form-style input[type=password]:focus, 
+.form-style input[type=password]:focus,
+.form-style input[type=file]:focus,
 .form-style textarea:focus, 
 .form-style select:focus,
 .new input[type=text]:focus, 
@@ -523,7 +529,8 @@ Form styles
 .new input[type=search]:focus, 
 .new input[type=time]:focus, 
 .new input[type=url]:focus,
-.new input[type=password]:focus, 
+.new input[type=password]:focus,
+.new input[type=file]:focus,
 .new textarea:focus, 
 .new select:focus
 
