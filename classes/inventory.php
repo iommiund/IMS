@@ -44,9 +44,9 @@ class inventory
         while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
 
             //set initial variable values
-            $voucherValue = '';
+            $voucherValue = NULL;
             $vrID = 1;
-            $reqSNLength = '';
+            $reqSNLength = NULL;
             $resourceUniqueValue = escape($fileop[0]);
             $modelIdentifier = escape(substr($resourceUniqueValue, 0, 6));
             $resourceLength = escape(strlen($resourceUniqueValue));
@@ -204,12 +204,12 @@ class inventory
             foreach ($get->results() as $r) {
 
                 //Set initial variable value to empty
-                $resourceUniqueValue = '';
-                $resourceBrand = '';
-                $resourceModel = '';
-                $resourceType = '';
-                $voucherValue = '';
-                $validationResult = '';
+                $resourceUniqueValue = NULL;
+                $resourceBrand = NULL;
+                $resourceModel = NULL;
+                $resourceType = NULL;
+                $voucherValue = NULL;
+                $validationResult = NULL;
 
                 //Set variables for brand, model, type and resource_sn_length from previous query
                 if (isset($r->resource_unique_value)){
@@ -236,6 +236,8 @@ class inventory
 
     public function uploadResource()
     {
+        //set initial variable values
+        $voucherValueId = NULL;
 
         //Get all records from temp_resource with vr_id = 1
         $sql = "SELECT 
@@ -257,14 +259,11 @@ class inventory
             //for each record
             foreach ($get->results() as $r) {
 
-                //Set initial variable value to empty
-                $voucherValueId = '';
-
                 //declare variables
                 $resourceUniqueValue = escape($r->resource_unique_value);
                 $resourceModelId = escape($r->resource_model_id);
                 $resourceTypeId = escape($r->resource_type_id);
-                if (isset($r->voucher_value_id)){$voucherValueId = escape($r->voucher_value_id);}
+                if (isset($r->voucher_value_id)) {$voucherValueId = escape($r->voucher_value_id);}
 
                 //create fields array to insert values in temp table
                 $fields = array(
@@ -275,7 +274,6 @@ class inventory
                     'resource_status_id' => 1, //Available
                     'resource_location_id' => 1 //Main Warehouse
                 );
-
 
                 //insert resources
                 if (!$this->_db->insert('resources', $fields)) {
@@ -294,13 +292,13 @@ class inventory
                     } else {
 
                         //for each record
-                        foreach ($get->results() as $r) {
+                        foreach ($get->results() as $t) {
 
                             //declare variables
                             $uid = escape($user->data()->uid);
-                            $resourceId = escape($r->resource_id);
-                            $resourceStatusId = escape($r->resource_status_id);
-                            $resourceLocationId = escape($r->resource_location_id);
+                            $resourceId = escape($t->resource_id);
+                            $resourceStatusId = escape($t->resource_status_id);
+                            $resourceLocationId = escape($t->resource_location_id);
 
                             //create fields array to insert values in temp table
                             $fields = array(

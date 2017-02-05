@@ -321,6 +321,7 @@ CREATE TABLE `resources` (
   `resource_latitude` float(10,6) DEFAULT NULL,
   `resource_longitude` float(10,6) DEFAULT NULL,
   PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_resource_status_id` (`resource_status_id`),
   KEY `fk_resource_type_id` (`resource_type_id`),
   KEY `fk_resource_location_id` (`resource_location_id`),
@@ -335,7 +336,7 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
   CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
   CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,6 +345,7 @@ CREATE TABLE `resources` (
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+INSERT INTO `resources` VALUES (13,'24767D000001',1,5,NULL,1,1,NULL,NULL,NULL,NULL),(14,'24767D000002',1,5,NULL,1,1,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,7 +372,7 @@ CREATE TABLE `temp_resource` (
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=638 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=718 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,7 +381,7 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
-INSERT INTO `temp_resource` VALUES (618,'24767D000001',1,1,5,'24767D',12,12,0,'',1),(619,'5.05E+11',NULL,NULL,NULL,'5.05E+',8,NULL,NULL,NULL,3),(620,'24767D000002',1,1,5,'24767D',12,12,0,'',1),(621,'24767D000003',1,1,5,'24767D',12,12,0,'',1),(622,'24767D000004',1,1,5,'24767D',12,12,0,'',1),(623,'24767D000005',1,1,5,'24767D',12,12,0,'',1),(624,'24767D000006',1,1,5,'24767D',12,12,0,'',1),(625,'24767D000007',1,1,5,'24767D',12,12,0,'',1),(626,'24767D000008',1,1,5,'24767D',12,12,0,'',1),(627,'24767D000009',1,1,5,'24767D',12,12,0,'',1),(628,'24767D000010',1,1,5,'24767D',12,12,0,'',1),(629,'24767D000011',1,1,5,'24767D',12,12,0,'',1),(630,'24767D000012',1,1,5,'24767D',12,12,0,'',1),(631,'24767D000013',1,1,5,'24767D',12,12,0,'',1),(632,'24767D000014',1,1,5,'24767D',12,12,0,'',1),(633,'24767D000015',1,1,5,'24767D',12,12,0,'',1),(634,'24767D000016',1,1,5,'24767D',12,12,0,'',1),(635,'test',NULL,NULL,NULL,'test',4,NULL,NULL,NULL,3),(636,'testingagain',NULL,NULL,NULL,'testin',12,NULL,NULL,NULL,3),(637,'24767D00017',1,1,5,'24767D',11,12,0,'',4);
+INSERT INTO `temp_resource` VALUES (698,'24767D000001',1,1,5,'24767D',12,12,1,NULL,2),(699,'5.05E+11',NULL,NULL,NULL,'5.05E+',8,NULL,NULL,NULL,3),(700,'24767D000002',1,1,5,'24767D',12,12,0,NULL,1),(701,'24767D000003',1,1,5,'24767D',12,12,0,NULL,1),(702,'24767D000004',1,1,5,'24767D',12,12,0,NULL,1),(703,'24767D000005',1,1,5,'24767D',12,12,0,NULL,1),(704,'24767D000006',1,1,5,'24767D',12,12,0,NULL,1),(705,'24767D000007',1,1,5,'24767D',12,12,0,NULL,1),(706,'24767D000008',1,1,5,'24767D',12,12,0,NULL,1),(707,'24767D000009',1,1,5,'24767D',12,12,0,NULL,1),(708,'24767D000010',1,1,5,'24767D',12,12,0,NULL,1),(709,'24767D000011',1,1,5,'24767D',12,12,0,NULL,1),(710,'24767D000012',1,1,5,'24767D',12,12,0,NULL,1),(711,'24767D000013',1,1,5,'24767D',12,12,0,NULL,1),(712,'24767D000014',1,1,5,'24767D',12,12,0,NULL,1),(713,'24767D000015',1,1,5,'24767D',12,12,0,NULL,1),(714,'24767D000016',1,1,5,'24767D',12,12,0,NULL,1),(715,'test',NULL,NULL,NULL,'test',4,NULL,NULL,NULL,3),(716,'testingagain',NULL,NULL,NULL,'testin',12,NULL,NULL,NULL,3),(717,'24767D00017',1,1,5,'24767D',11,12,0,NULL,4);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,7 +463,7 @@ CREATE TABLE `transactions` (
   CONSTRAINT `fk_transaction_status_id` FOREIGN KEY (`transaction_status_id`) REFERENCES `transaction_statuses` (`transaction_status_id`),
   CONSTRAINT `fk_transaction_type_id` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_types` (`transaction_type_id`),
   CONSTRAINT `fk_uid_tr` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -645,4 +647,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 18:30:09
+-- Dump completed on 2017-02-05 23:59:07
