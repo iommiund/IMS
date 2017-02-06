@@ -56,22 +56,15 @@ if ($user->isLoggedIn()) {
         <div class="fixheader">
             <div class="header">
                 <div class="logo">
-                    <ul class="nav">
-                        <?php
-                        $hash = new hash();
-                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
-                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li>';
-                        }
-                        ?>
-                    </ul>
-                    <h1 class="header-heading"><strong>IMS</strong>HUB</h1>
+                    <?php
+                    if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                    echo '<h1 class="header-heading"><a href="main.php"><strong>IMS</strong>HUB</a></h1>';
+                    }
+                    ?>
                 </div>
                 <div class="menu">
                     <ul class="nav">
                         <?php
-                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
-                            echo '<li><a href="main.php">Main</a></li>';
-                        }
                         if ($user->hasPermission('search') || $user->hasPermission('allAccess')){
                             echo '<li><a href="search.php">Search</a></li>';
                         }
@@ -90,13 +83,16 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('admin') || $user->hasPermission('allAccess')){
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
+                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li>';
+                        }
                         ?>
                     </ul>
                 </div>
             </div>
             <div class="nav-bar">
                 <div class="logout">
-                    <a href="logout.php">Logout</a>
+                    <a href="logout.php" class="button-small">Logout</a>
                 </div>
             </div>
         </div>

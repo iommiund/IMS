@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.16-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.6.21, for Win32 (x86)
 --
 -- Host: localhost    Database: ims
 -- ------------------------------------------------------
--- Server version	10.1.16-MariaDB
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -320,6 +320,7 @@ CREATE TABLE `resources` (
   `last_transaction_id` int(11) DEFAULT NULL,
   `resource_latitude` float(10,6) DEFAULT NULL,
   `resource_longitude` float(10,6) DEFAULT NULL,
+  `last_update_user` int(11) NOT NULL,
   PRIMARY KEY (`resource_id`),
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_resource_status_id` (`resource_status_id`),
@@ -336,7 +337,7 @@ CREATE TABLE `resources` (
   CONSTRAINT `fk_resource_model_id` FOREIGN KEY (`resource_model_id`) REFERENCES `resource_models` (`resource_model_id`),
   CONSTRAINT `fk_resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_statuses` (`resource_status_id`),
   CONSTRAINT `fk_voucher_value_id` FOREIGN KEY (`voucher_value_id`) REFERENCES `voucher_values` (`voucher_value_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,9 +346,28 @@ CREATE TABLE `resources` (
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
-INSERT INTO `resources` VALUES (13,'24767D000001',1,5,NULL,1,1,NULL,NULL,NULL,NULL),(14,'24767D000002',1,5,NULL,1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `resources` VALUES (62,'24767D000001',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(63,'24767D000002',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(64,'24767D000003',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(65,'24767D000004',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(66,'24767D000005',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(67,'24767D000006',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(68,'24767D000007',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(69,'24767D000008',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(70,'24767D000009',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(71,'24767D000010',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(72,'24767D000011',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(73,'24767D000012',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(74,'24767D000013',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(75,'24767D000014',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(76,'24767D000015',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1),(77,'24767D000016',1,5,NULL,1,1,NULL,NULL,NULL,NULL,1);
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger ims.onInsertResource
+after insert on ims.resources 
+for each row
+	INSERT INTO ims.transactions (uid,resource_id,resource_status_id,resource_location_id,transaction_type_id,transaction_status_id)
+    values (NEW.last_update_user,NEW.resource_id,NEW.resource_status_id,NEW.resource_location_id,1,1) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `temp_resource`
@@ -372,7 +392,7 @@ CREATE TABLE `temp_resource` (
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=718 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=938 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -381,7 +401,6 @@ CREATE TABLE `temp_resource` (
 
 LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
-INSERT INTO `temp_resource` VALUES (698,'24767D000001',1,1,5,'24767D',12,12,1,NULL,2),(699,'5.05E+11',NULL,NULL,NULL,'5.05E+',8,NULL,NULL,NULL,3),(700,'24767D000002',1,1,5,'24767D',12,12,0,NULL,1),(701,'24767D000003',1,1,5,'24767D',12,12,0,NULL,1),(702,'24767D000004',1,1,5,'24767D',12,12,0,NULL,1),(703,'24767D000005',1,1,5,'24767D',12,12,0,NULL,1),(704,'24767D000006',1,1,5,'24767D',12,12,0,NULL,1),(705,'24767D000007',1,1,5,'24767D',12,12,0,NULL,1),(706,'24767D000008',1,1,5,'24767D',12,12,0,NULL,1),(707,'24767D000009',1,1,5,'24767D',12,12,0,NULL,1),(708,'24767D000010',1,1,5,'24767D',12,12,0,NULL,1),(709,'24767D000011',1,1,5,'24767D',12,12,0,NULL,1),(710,'24767D000012',1,1,5,'24767D',12,12,0,NULL,1),(711,'24767D000013',1,1,5,'24767D',12,12,0,NULL,1),(712,'24767D000014',1,1,5,'24767D',12,12,0,NULL,1),(713,'24767D000015',1,1,5,'24767D',12,12,0,NULL,1),(714,'24767D000016',1,1,5,'24767D',12,12,0,NULL,1),(715,'test',NULL,NULL,NULL,'test',4,NULL,NULL,NULL,3),(716,'testingagain',NULL,NULL,NULL,'testin',12,NULL,NULL,NULL,3),(717,'24767D00017',1,1,5,'24767D',11,12,0,NULL,4);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,7 +482,7 @@ CREATE TABLE `transactions` (
   CONSTRAINT `fk_transaction_status_id` FOREIGN KEY (`transaction_status_id`) REFERENCES `transaction_statuses` (`transaction_status_id`),
   CONSTRAINT `fk_transaction_type_id` FOREIGN KEY (`transaction_type_id`) REFERENCES `transaction_types` (`transaction_type_id`),
   CONSTRAINT `fk_uid_tr` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,6 +491,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (23,1,62,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(24,1,63,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(25,1,64,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(26,1,65,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(27,1,66,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(28,1,67,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(29,1,68,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(30,1,69,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(31,1,70,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(32,1,71,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(33,1,72,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(34,1,73,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(35,1,74,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(36,1,75,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(37,1,76,1,1,NULL,'2017-02-06 17:57:21',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL),(38,1,77,1,1,NULL,'2017-02-06 17:57:22',1,1,NULL,'0000-00-00 00:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -647,4 +667,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 23:59:07
+-- Dump completed on 2017-02-06 19:51:05

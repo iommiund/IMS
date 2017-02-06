@@ -255,9 +255,9 @@ Layout styles
 .nav-bar
 {
 	background: #607D8B;
-	padding: 0;
+	padding: 5px;
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	height:20px;
+	height:27px;
 }
 
 .content
@@ -352,20 +352,24 @@ Nav
 	border-bottom: 1px solid gray;
 	font-family:'Roboto',sans-serif;
 }
+.header-heading a:link,
+.header-heading a:visited,
+.nav a:link,
+.nav a:visited,
+.admin a:link,
+.admin a:visited
+{
+    color: #607D8B;
+}
 
-.nav a:link { color: #607D8B; }
-.nav a:visited { color: #607D8B; }
-.admin a:link { color: #607D8B; }
-.admin a:visited { color: #607D8B; }
-
-
+.header-heading a:focus {color: #607D8B;}
 .nav a:focus,
 .admin a:focus
 {
 	color: #607D8B;
 	font-weight:bolder;
 }
-
+.header-heading a:hover {color: #607D8B;}
 .nav a:hover,
 .admin a:hover
 {
@@ -373,6 +377,7 @@ Nav
 	font-weight:bolder;
 }
 
+.header-heading a:active,
 .nav a:active,
 .admin a:active
 {
@@ -399,31 +404,67 @@ Nav
 {
 	/*display: block;*/
 	padding: .7em 1.25em;
-	color: #FFFFFF;
+	color: #607D8B;
 	text-decoration:none;
 	/*border-bottom: 1px solid gray;*/
 	font-family:'Roboto',sans-serif;
 }
 
-.logout a:link { color: #FFFFFF; }
+.logout a:link { color: #607D8B; }
 
-.logout a:visited { color: #FFFFFF; }
+.logout a:visited { color: #607D8B; }
 
 .logout a:focus
 {
-	color: #FFFFFF;
+	color: #607D8B;
 	font-weight:bolder;
 }
 
 .logout a:hover
 {
-	color: #FFFFFF;
+	color: #607D8B;
 	font-weight:bolder;
 }
 
 .logout a:active
 {
-	color: #ECEFF1;
+	color: #607D8B;
+}
+
+.button-small {
+    display: inline-block;
+    margin: 0px 10px;
+    padding: 5px 5px;
+    background: #F7F7F7;
+    -moz-transition: background-color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out;
+    -o-transition: background-color .25s ease-in-out;
+    -ms-transition: background-color .25s ease-in-out;
+    transition: background-color .25s ease-in-out;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #607D8B;
+
+    border-bottom: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.button-small:hover {
+    background-color: #B0BEC5;
+    color: #607D8B;
+}
+
+.button-small:active {
+    background-color: #CFD8DC;
+    color: #607D8B;
+
 }
 
 

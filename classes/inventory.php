@@ -259,7 +259,10 @@ class inventory
             //for each record
             foreach ($get->results() as $r) {
 
+                $user = new user();
+
                 //declare variables
+                $uid = escape($user->data()->uid);
                 $resourceUniqueValue = escape($r->resource_unique_value);
                 $resourceModelId = escape($r->resource_model_id);
                 $resourceTypeId = escape($r->resource_type_id);
@@ -272,55 +275,14 @@ class inventory
                     'resource_type_id' => $resourceTypeId,
                     'voucher_value_id' => $voucherValueId,
                     'resource_status_id' => 1, //Available
-                    'resource_location_id' => 1 //Main Warehouse
+                    'resource_location_id' => 1, //Main Warehouse
+                    'last_update_user' => $uid,
                 );
 
                 //insert resources
                 if (!$this->_db->insert('resources', $fields)) {
                     throw new Exception('There was a problem creating entry');
-                } else {
-
-                    $user = new user();
-
-                    //get resource id for newly added resource
-                    $sql = "select * from ims.resources r where r.resource_unique_value = {$resourceUniqueValue}";
-
-                    $get = $this->_db->query($sql);
-
-                    if (!$get->count()) {
-                        echo 'Nothing to upload';
-                    } else {
-
-                        //for each record
-                        foreach ($get->results() as $t) {
-
-                            //declare variables
-                            $uid = escape($user->data()->uid);
-                            $resourceId = escape($t->resource_id);
-                            $resourceStatusId = escape($t->resource_status_id);
-                            $resourceLocationId = escape($t->resource_location_id);
-
-                            //create fields array to insert values in temp table
-                            $fields = array(
-                                'uid' => $uid,
-                                'resource_id' => $resourceId,
-                                'resource_status_id' => $resourceStatusId,
-                                'resource_location_id' => $resourceLocationId,
-                                'transaction_type_id' => 1, //Resource Upload
-                                'transaction_status_id' => 1 //Complete
-                            );
-
-                            //insert transaction
-                            if (!$this->_db->insert('transactions', $fields)) {
-                                throw new Exception('There was a problem creating entry');
-                            }
-
-                        }
-
-                    }
-
                 }
-
             }
 
         }

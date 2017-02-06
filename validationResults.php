@@ -45,6 +45,14 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
+                <?php
+
+                $get = db::getInstance()->query("select * from ims.temp_resource where vr_id = 1");
+
+                if (!$get->count()) {
+
+                } else {
+                ?>
                 <div class="form-style">
                     <form action="" method="post">
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
@@ -67,21 +75,35 @@ if ($user->isLoggedIn()) {
                         ?>
                     </table>
                     <hr>
-                    <p align="center">Resources listed below cannot be uploaded due to validation failure.</p>
-                    <table>
-                        <tr>
-                            <th>Resource</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Type</th>
-                            <th>Value</th>
-                            <th>Result</th>
-                        </tr>
-                        <?php
-                        $inventory = new inventory();
-                        $inventory->getValidationResults('<>', '1');
+                    <?php
+                    }
+
+                    $get = db::getInstance()->query("select * from ims.temp_resource where vr_id <> 1");
+
+                    if (!$get->count()) {
+
+                    } else {
                         ?>
-                    </table>
+                        <p align="center">Resources listed below cannot be uploaded due to validation failure.</p>
+                        <table>
+                            <tr>
+                                <th>Resource</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                                <th>Result</th>
+                            </tr>
+                            <?php
+                            $inventory = new inventory();
+                            $inventory->getValidationResults('<>', '1');
+                            ?>
+                        </table>
+                        <?php
+                    }
+
+                    ?>
+
                     <script type="text/javascript">
                         $(document).ready(function () {
                             $('table tr:nth-child(odd)').addClass('alt');
