@@ -84,7 +84,7 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
                         if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
-                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li>';
+                            echo '<li><a href="profile.php">Profile</a></li>';
                         }
                         ?>
                     </ul>
