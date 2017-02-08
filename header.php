@@ -13,7 +13,7 @@ $user = new user();
 if ($user->isLoggedIn()) {
 
     //extra layer of access checking in case user is enabled but still not allowed access
-    if ($user->hasPermission('disabled')){
+    if ($user->hasPermission('disabled')) {
 
         $user->logout();
         $hash = new hash();
@@ -33,22 +33,22 @@ if ($user->isLoggedIn()) {
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>IMS</title>
         <link rel='stylesheet prefetch'
-                href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+              href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
-            $( function() {
-                $( "#dialogOk" ).dialog({
+            $(function () {
+                $("#dialogOk").dialog({
                     modal: true,
                     buttons: {
-                        Ok: function() {
-                            $( this ).dialog( "close" );
+                        Ok: function () {
+                            $(this).dialog("close");
                         }
                     }
                 });
-            } );
+            });
         </script>
     </head>
     <body>
@@ -57,33 +57,30 @@ if ($user->isLoggedIn()) {
             <div class="header">
                 <div class="logo">
                     <?php
-                    if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
-                    echo '<h1 class="header-heading"><a href="main.php"><strong>IMS</strong>HUB</a></h1>';
+                    if ($user->hasPermission('access') || $user->hasPermission('allAccess')) {
+                        echo '<h1 class="header-heading"><a href="main.php"><strong>IMS</strong>HUB</a></h1>';
                     }
                     ?>
                 </div>
                 <div class="menu">
                     <ul class="nav">
                         <?php
-                        if ($user->hasPermission('search') || $user->hasPermission('allAccess')){
-                            echo '<li><a href="search.php">Search</a></li>';
-                        }
-                        if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="newInventory.php">New Inventory</a></li>';
                         }
-                        if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="newCustomer.php">New Customer</a></li>';
                         }
-                        if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="stockLevels.php">Stock Levels</a></li>';
                         }
-                        if ($user->hasPermission('reports') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('reports') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="reports.php">Reports</a></li>';
                         }
-                        if ($user->hasPermission('admin') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('admin') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
-                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
+                        if ($user->hasPermission('access') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="profile.php">Profile</a></li>';
                         }
                         ?>
@@ -91,6 +88,18 @@ if ($user->isLoggedIn()) {
                 </div>
             </div>
             <div class="nav-bar">
+                <div class="search">
+                    <?php
+                    if ($user->hasPermission('search') || $user->hasPermission('allAccess')) {
+                        ?>
+                        <form action="" method="post">
+                            <input type="search" placeholder="Search here..." required>
+                            <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
+                            <input type="submit" value="Search">
+                        </form>
+                        <?php
+                    } ?>
+                </div>
                 <div class="logout">
                     <a href="logout.php" class="button-small">Logout</a>
                 </div>
