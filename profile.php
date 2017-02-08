@@ -25,13 +25,13 @@ if ($user->isLoggedIn()){
             echo '<h1>' . $name . ' ' . $surname . '</h1>';
 
             //Profile type
-            echo '<b>Profile:</b> ' . $profile . '<br>';
+            echo '<p><b>Profile:</b> ' . $profile . '<br>';
 
             //username
             echo '<b>Username:</b> ' . $username . '<br>';
 
             //email
-            echo '<b>Email:</b> ' . $email . '<br><br>';
+            echo '<b>Email:</b> ' . $email . '</p>';
 
             ?>
             <!-- User Information End -->

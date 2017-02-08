@@ -81,7 +81,8 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
                         if ($user->hasPermission('access') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="profile.php">Profile</a></li>';
+                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li><br>';
+                            echo '<div class="logout"><a href="logout.php">Logout</a></div>';
                         }
                         ?>
                     </ul>
@@ -92,16 +93,12 @@ if ($user->isLoggedIn()) {
                     <?php
                     if ($user->hasPermission('search') || $user->hasPermission('allAccess')) {
                         ?>
-                        <form action="" method="post">
-                            <input type="search" placeholder="Search here..." required>
-                            <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
-                            <input type="submit" value="Search">
+                        <form action="" method="post" class="form-wrapper cf">
+                            <input type="text" placeholder="Search here..." required>
+                            <button type="submit">Search</button>
                         </form>
                         <?php
                     } ?>
-                </div>
-                <div class="logout">
-                    <a href="logout.php" class="button-small">Logout</a>
                 </div>
             </div>
         </div>
