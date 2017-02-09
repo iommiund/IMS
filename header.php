@@ -92,13 +92,14 @@ if ($user->isLoggedIn()) {
                 <div class="search">
                     <?php
                     if ($user->hasPermission('search') || $user->hasPermission('allAccess')) {
-                        ?>
-                        <form action="" method="post" class="form-wrapper cf">
-                            <input type="text" placeholder="Search here..." required>
+                    ?>
+                        <form action="search.php" method="post" class="form-wrapper cf">
+                            <input type="text" name="search" placeholder="Search here..." required>
                             <button type="submit">Search</button>
                         </form>
-                        <?php
-                    } ?>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

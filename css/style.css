@@ -273,7 +273,7 @@ Layout styles
 {
 	padding: 1em 1.25em;
 	background-color: #fff;
-	margin:70px auto;
+	margin: 70px auto;
 }
 
 #center-form {
@@ -405,7 +405,7 @@ Nav
 }
 
 .search {
-    margin-left: 155px;
+    margin: 0 auto;
 }
 
 .cf:before, .cf:after{
@@ -423,6 +423,7 @@ Nav
 
 /* Form wrapper styling */
 .form-wrapper {
+    margin: 0 auto;
     width: 450px;
     background: #444;
     background: rgba(0,0,0,.2);
@@ -437,32 +438,33 @@ Nav
     height: 20px;
     padding: 10px 5px;
     float: left;
-    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    font: 95% Arial, Helvetica, sans-serif;
+    color: #90A4AE;
     border: 0;
-    background: #F7F7F7;
+    background: #546E7A;
     /*border-radius: 3px 0 0 3px;*/
 }
 
 .form-wrapper input:focus {
     outline: 0;
-    background: #fff;
+    background: #546E7A;
     /*box-shadow: 0 0 2px rgba(0,0,0,.8) inset;*/
 }
 
 .form-wrapper input::-webkit-input-placeholder {
-    color: #999;
+    color: #607D8B;
     font-weight: normal;
     font-style: italic;
 }
 
 .form-wrapper input:-moz-placeholder {
-    color: #999;
+    color: #607D8B;
     font-weight: normal;
     font-style: italic;
 }
 
 .form-wrapper input:-ms-input-placeholder {
-    color: #999;
+    color: #78909C;
     font-weight: normal;
     font-style: italic;
 }
@@ -478,20 +480,22 @@ Nav
     height: 40px;
     width: 110px;
     font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
-    color: #fff;
+    color: #78909C;
     text-transform: uppercase;
-    background: #607D8B;
+    background: #546E7A;
     /*border-radius: 0 3px 3px 0;*/
     /*text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);*/
 }
 
 .form-wrapper button:hover{
-    background: #78909C;
+    color: #90A4AE;
+    background: #546E7A;
 }
 
 .form-wrapper button:active,
 .form-wrapper button:focus{
-    background: #607D8B;
+    color: #90A4AE;
+    background: #546E7A;
     outline: 0;
 }
 
