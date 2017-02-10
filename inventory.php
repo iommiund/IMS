@@ -48,7 +48,7 @@ if ($user->isLoggedIn()) {
                 <div class="form-style">
                     <h1> Load From File </h1>
                     <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
-                        <input type="file" name="file"/>
+                        <input type="file" name="file" required="required"/>
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                         <input type="submit" value="LOAD & VALIDATE"/>
                     </form>

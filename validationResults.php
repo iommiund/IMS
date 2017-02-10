@@ -25,9 +25,9 @@ if ($user->isLoggedIn()) {
                     //clear temp resources
                     $inventory->clearTemp();
 
-                    // redirect back to newInventory.php and display message
+                    // redirect back to inventory.php and display message
                     $hash = new hash();
-                    redirect::to('newInventory.php?' . hash::sha256('uploadSuccess' . $hash->getSalt()));
+                    redirect::to('inventory.php?' . hash::sha256('uploadSuccess' . $hash->getSalt()));
 
                 } catch (Exception $e) {
                     //create message to display on user creation

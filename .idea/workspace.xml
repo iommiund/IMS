@@ -29,24 +29,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="newInventory.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/newInventory.php">
+      <file leaf-file-name="header.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/header.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-              <folding>
-                <element signature="e#1121#1129#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="561">
+              <caret line="80" column="72" selection-start-line="80" selection-start-column="72" selection-end-line="80" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/header.php">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="96" column="99" selection-start-line="96" selection-start-column="99" selection-end-line="96" selection-end-column="99" />
+            <state relative-caret-position="273">
+              <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addLocation.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addLocation.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="588">
+              <caret line="108" column="34" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
+              <folding>
+                <marker date="1485613325227" expanded="true" signature="3711:3763" ph="select * fro... resource_location_types" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,7 +69,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/classes/cookie.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/32f344e3-c4d4-4e34-9a28-af1c989e13fb/console.sql" />
         <option value="$PROJECT_DIR$/updateProfile.php" />
@@ -103,12 +112,13 @@
         <option value="$PROJECT_DIR$/addResourceModel.php" />
         <option value="$PROJECT_DIR$/classes/inventory.php" />
         <option value="$PROJECT_DIR$/Classes/inventory.php" />
-        <option value="$PROJECT_DIR$/validationResults.php" />
         <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/main.php" />
-        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/newInventory.php" />
+        <option value="$PROJECT_DIR$/validationResults.php" />
+        <option value="$PROJECT_DIR$/inventory.php" />
+        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/header.php" />
       </list>
     </option>
@@ -188,8 +198,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,12 +240,14 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Classes" />
+              <option name="myItemId" value="classes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -376,11 +386,12 @@
       <workItem from="1486574501266" duration="2902000" />
       <workItem from="1486579972218" duration="10766000" />
       <workItem from="1486659059520" duration="5329000" />
+      <workItem from="1486717581356" duration="4025000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="326120000" />
+    <option name="totallyTimeSpent" value="330145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -442,13 +453,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Classes/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/functions/sanitize.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -508,7 +512,7 @@
     <entry file="file://$PROJECT_DIR$/classes/dropDown.php" />
     <entry file="file://$PROJECT_DIR$/user_statuses.php" />
     <entry file="file://$PROJECT_DIR$/users.php" />
-    <entry file="file://$PROJECT_DIR$/Classes/hash.php">
+    <entry file="file://$PROJECT_DIR$/classes/hash.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
@@ -516,14 +520,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/session.php">
+    <entry file="file://$PROJECT_DIR$/classes/session.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/input.php">
+    <entry file="file://$PROJECT_DIR$/classes/input.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
@@ -532,7 +536,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/classes/resource.php" />
-    <entry file="file://$PROJECT_DIR$/Classes/location.php">
+    <entry file="file://$PROJECT_DIR$/classes/location.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="832">
           <caret line="32" column="0" selection-start-line="10" selection-start-column="1" selection-end-line="32" selection-end-column="0" />
@@ -555,14 +559,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
+    <entry file="file://$PROJECT_DIR$/classes/customer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/validate.php">
+    <entry file="file://$PROJECT_DIR$/classes/validate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="823">
           <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
@@ -577,18 +581,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Recipes/header4.php" />
-    <entry file="file://$PROJECT_DIR$/Classes/user.php">
+    <entry file="file://$PROJECT_DIR$/classes/user.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2259">
           <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addLocation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -615,11 +611,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/db.php">
+    <entry file="file://$PROJECT_DIR$/classes/db.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1634">
           <caret line="119" column="9" selection-start-line="119" selection-start-column="9" selection-end-line="119" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -630,41 +625,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/validationResults.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="80" column="99" selection-start-line="80" selection-start-column="99" selection-end-line="80" selection-end-column="99" />
-          <folding>
-            <marker date="1486403768584" expanded="true" signature="1449:1496" ph="select * fro... temp_resource" />
-            <marker date="1486403768584" expanded="true" signature="2630:2678" ph="select * fro... temp_resource" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/changeLocationType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="25" column="163" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="163" />
-          <folding>
-            <marker date="1485539569392" expanded="true" signature="799:895" ph="update ims.r... " />
-            <marker date="1485539569392" expanded="true" signature="1014:1239" ph="select rl.re... resource_locations" />
-            <marker date="1485539569392" expanded="true" signature="3085:3175" ph="select resou... resource_locations" />
-            <marker date="1485539569392" expanded="true" signature="4030:4082" ph="select * fro... resource_location_types" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/inventory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3383">
-          <caret line="324" column="1" selection-start-line="324" selection-start-column="1" selection-end-line="324" selection-end-column="1" />
-          <folding>
-            <marker date="1486403192694" expanded="true" signature="296:325" ph="delete from " />
-            <marker date="1486403192694" expanded="true" signature="1321:2141" ph="SELECT rb.re... resouce_model_identifiers" />
-            <marker date="1486403192694" expanded="true" signature="3794:3880" ph="select * fro... resources" />
-            <marker date="1486403192694" expanded="true" signature="5801:6762" ph="SELECT tr.re... temp_resource" />
-            <marker date="1486403192694" expanded="true" signature="8814:9107" ph="SELECT tr.re... temp_resource" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -708,14 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2577">
-          <caret line="490" column="19" selection-start-line="490" selection-start-column="19" selection-end-line="490" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-678">
@@ -742,18 +699,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/newInventory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        <state relative-caret-position="374">
+          <caret line="22" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="51" column="85" selection-start-line="51" selection-start-column="85" selection-end-line="51" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/validationResults.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#1121#1129#0#HTML" expanded="true" />
+            <marker date="1486718632095" expanded="true" signature="1443:1490" ph="select * fro... temp_resource" />
+            <marker date="1486718632095" expanded="true" signature="2624:2672" ph="select * fro... temp_resource" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2941">
+          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+          <folding>
+            <marker date="1486717570469" expanded="true" signature="296:325" ph="delete from " />
+            <marker date="1486717570469" expanded="true" signature="1321:2141" ph="SELECT rb.re... resouce_model_identifiers" />
+            <marker date="1486717570469" expanded="true" signature="3794:3880" ph="select * fro... resources" />
+            <marker date="1486717570469" expanded="true" signature="5801:6762" ph="SELECT tr.re... temp_resource" />
+            <marker date="1486717570469" expanded="true" signature="8814:9107" ph="SELECT tr.re... temp_resource" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addLocation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="108" column="34" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
+          <folding>
+            <marker date="1485613325227" expanded="true" signature="3711:3763" ph="select * fro... resource_location_types" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="96" column="99" selection-start-line="96" selection-start-column="99" selection-end-line="96" selection-end-column="99" />
+        <state relative-caret-position="561">
+          <caret line="80" column="72" selection-start-line="80" selection-start-column="72" selection-end-line="80" selection-end-column="72" />
           <folding />
         </state>
       </provider>

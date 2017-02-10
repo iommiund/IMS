@@ -65,8 +65,8 @@ if ($user->isLoggedIn()) {
                 <div class="menu">
                     <ul class="nav">
                         <?php
-                        if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="newInventory.php">New Inventory</a></li>';
+                        if ($user->hasPermission('inventory') || $user->hasPermission('allAccess')) {
+                            echo '<li><a href="inventory.php">Inventory</a></li>';
                         }
                         if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="newCustomer.php">New Customer</a></li>';
@@ -81,8 +81,7 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
                         if ($user->hasPermission('access') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="profile.php">' . $name . ' ' . $surname . '</a></li><br>';
-                            echo '<div class="logout"><a href="logout.php">Logout</a></div>';
+                            echo '<a  class="user" href="profile.php">' . $name . ' ' . $surname . '</a> | <a class="user" href="logout.php">Logout</a>';
                         }
                         ?>
                     </ul>

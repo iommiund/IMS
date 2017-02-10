@@ -28,6 +28,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
+    background-color: #607D8B;
 }
 
 .login-card {
@@ -36,7 +37,7 @@ body {
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
   overflow: hidden;
 }
 
@@ -99,7 +100,8 @@ body {
 
 .login-card a,
 .form-link a,
-.center-table a {
+.center-table a,
+.user a {
   text-decoration: none;
   color: #666;
   font-weight: 400;
@@ -130,7 +132,8 @@ body {
 }
 
 .login-card a:hover,
-.form-link a:hover {
+.form-link a:hover,
+.user a:hover {
   opacity: 1;
 }
 
@@ -149,6 +152,8 @@ body {
     box-shadow: 0 0 5px #37474F;
     padding: 3%;
 }
+
+.user {font-size: 12px;}
 
 .reset-password,
 .form-link {
@@ -267,13 +272,17 @@ Layout styles
 	background: #607D8B;
     width: 100%;
 	height:40px;
+    /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
 }
 
 .content
 {
 	padding: 1em 1.25em;
-	background-color: #fff;
+	background-color: #FFFFFF;
 	margin: 70px auto;
+    max-width: 50em;
+    height: 100%;
+    /*box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);*/
 }
 
 #center-form {
