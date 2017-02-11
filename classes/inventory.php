@@ -190,15 +190,6 @@ class inventory
         //If no results returned
         if (!$get->count()) {
 
-            echo '<tr>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '</tr>';
-
         } else {
 
             foreach ($get->results() as $r) {
@@ -230,6 +221,7 @@ class inventory
                 echo '<td>' . $validationResult . '</td>';
                 echo '</tr>';
             }
+
         }
 
     }
@@ -287,6 +279,95 @@ class inventory
 
         }
 
+    }
+
+    public function searchResource($field){
+
+        $sql = "select
+                    r.resource_id,
+                    r.resource_unique_value,
+                    rb.resource_brand,
+                    rm.resource_model,
+                    rt.resource_type,
+                    vv.voucher_value,
+                    rs.resource_status,
+                    rl.resource_location_name,
+                    ca.customer_account_id
+                FROM
+                    ims.resources r
+                        LEFT JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        LEFT JOIN
+                    ims.resource_types rt ON r.resource_type_id = rt.resource_type_id
+                        LEFT JOIN
+                    ims.voucher_values vv ON r.voucher_value_id = vv.voucher_value_id
+                        LEFT JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        LEFT JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
+                        LEFT JOIN
+                    ims.customer_accounts ca ON r.customer_account_id = ca.customer_account_id  
+                where r.resource_unique_value like '%$field%'
+                order by 6,7,1";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Customer ID</th>
+                        <th>Options</th>
+                    </tr>
+            <?php
+            $hash = new hash();
+            foreach ($get->results() as $r) {
+
+                //Set initial variable value to empty
+                $voucherValue = NULL;
+                $customerId = NULL;
+
+                //Set variables from result set
+                $resourceId = escape($r->resource_id);
+                $resourceUniqueValue = escape($r->resource_unique_value);
+                $resourceBrand = escape($r->resource_brand);
+                $resourceModel = escape($r->resource_model);
+                $resourceType = escape($r->resource_type);
+                if (isset($r->voucher_value)) {$voucherValue = escape($r->voucher_value);}
+                $resourceStatus = escape($r->resource_status);
+                $resourceLocation = escape($r->resource_location_name);
+                if (isset($r->customer_account_id)) {$customerId = escape($r->customer_account_id);}
+
+                echo '<tr>';
+                echo '<td><a href="viewInventoryDetails.php?id=' . $resourceId . '">' . $resourceUniqueValue . '</a></td>';
+                echo '<td>' . $resourceBrand . '</td>';
+                echo '<td>' . $resourceModel . '</td>';
+                echo '<td>' . $resourceType . '</td>';
+                echo '<td>' . $voucherValue . '</td>';
+                echo '<td>' . $resourceStatus . '</td>';
+                echo '<td>' . $resourceLocation . '</td>';
+                echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a></td>';
+                echo '<td></td>';
+                echo '</tr>';
+            }
+            ?>
+                </table>
+            </div>
+            <hr>
+            <?php
+        }
     }
 
     public function createResourceType($fields = array())

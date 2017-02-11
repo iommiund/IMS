@@ -71,9 +71,6 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="newCustomer.php">New Customer</a></li>';
                         }
-                        if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="stockLevels.php">Stock Levels</a></li>';
-                        }
                         if ($user->hasPermission('reports') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="reports.php">Reports</a></li>';
                         }
@@ -81,7 +78,11 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="admin.php">Admin</a></li>';
                         }
                         if ($user->hasPermission('access') || $user->hasPermission('allAccess')) {
-                            echo '<a  class="user" href="profile.php">' . $name . ' ' . $surname . '</a> | <a class="user" href="logout.php">Logout</a>';
+                            echo '<br><div  class="user">
+                                    <a href="profile.php">' . $name . ' ' . $surname . '</a>
+                                    | 
+                                    <a href="logout.php">Logout</a>
+                                  </div>';
                         }
                         ?>
                     </ul>

@@ -9,9 +9,9 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
-                <h1>Administration Page</h1>
-                <hr>
                 <div class="admin">
+                    <h1>Administration Page</h1>
+                    <hr>
                     <ul class="admin">
                         <?php
                         if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')) {

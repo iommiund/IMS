@@ -19,6 +19,7 @@ if ($user->isLoggedIn()){
     ?>
     <div class="content">
         <div class="container">
+            <div class="form-style">
             <!-- User Information -->
             <?php
             //full name
@@ -93,7 +94,6 @@ if ($user->isLoggedIn()){
                     }
                 }
             ?>
-            <div class="form-style">
                 <h1>Change Password</h1>
 
                 <form action="" method="post" name="changePassword">

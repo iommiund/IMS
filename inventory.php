@@ -7,7 +7,7 @@ include_once("header.php");
 if ($user->isLoggedIn()) {
 
     //check if user has permission
-    if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
+    if ($user->hasPermission('inventory') || $user->hasPermission('allAccess')) {
 
         //Validate user input
         if (input::exists()) {
@@ -45,14 +45,26 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
-                <div class="form-style">
-                    <h1> Load From File </h1>
-                    <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
-                        <input type="file" name="file" required="required"/>
-                        <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
-                        <input type="submit" value="LOAD & VALIDATE"/>
-                    </form>
-                </div>
+                <?php
+                    if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
+                        ?>
+                        <div class="form-style">
+                            <h1> Load From File </h1>
+                            <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
+                                <input type="file" name="file" required="required"/>
+                                <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
+                                <input type="submit" value="LOAD & VALIDATE"/>
+                            </form>
+                        </div>
+                        <?php
+                    }
+
+                    if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
+                        ?>
+
+                        <?php
+                    }
+                ?>
             </div>
         </div>
         <?php

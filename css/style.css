@@ -28,7 +28,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
-    background-color: #607D8B;
+  background-color: #607D8B;
 }
 
 .login-card {
@@ -36,7 +36,7 @@ body {
   width: 274px;
   background-color: #F7F7F7;
   margin: 0 auto 10px;
-  border-radius: 2px;
+  border-radius: 50px;
   /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
   overflow: hidden;
 }
@@ -100,7 +100,6 @@ body {
 
 .login-card a,
 .form-link a,
-.center-table a,
 .user a {
   text-decoration: none;
   color: #666;
@@ -109,6 +108,15 @@ body {
   display: inline-block;
   opacity: 0.6;
   transition: opacity ease 0.5s;
+}
+
+.center-table a {
+    text-decoration: none;
+    color: #607D8B;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    transition: opacity ease 0.5s;
 }
 
 #error {
@@ -153,7 +161,12 @@ body {
     padding: 3%;
 }
 
-.user {font-size: 12px;}
+.user {
+    font-size: 12px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 10px;
+}
 
 .reset-password,
 .form-link {
@@ -239,8 +252,13 @@ Layout styles
 
 .container
 {
-	max-width: 50em;
+    max-width: 70em;
+    padding-top: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
 	margin: 0 auto;
+    background-color: #FFFFFF;
 }
 
 .fixheader {
@@ -277,10 +295,9 @@ Layout styles
 
 .content
 {
-	padding: 1em 1.25em;
 	background-color: #FFFFFF;
-	margin: 70px auto;
-    max-width: 50em;
+	margin: 0 auto;
+    max-width: 70em;
     height: 100%;
     /*box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);*/
 }
@@ -330,6 +347,9 @@ th {
 
 td {
     text-align: center;
+    padding: 3px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 14px;
 }
 
 /*.footer
@@ -347,7 +367,7 @@ Nav
 .admin
 {
 	margin: 0;
-	padding: 0;
+	padding: 50px;
 	list-style: none;
 }
 
@@ -377,7 +397,7 @@ Nav
 .admin a:link,
 .admin a:visited
 {
-    color: #78909C;
+    color: #757575;
 }
 
 .header-heading a:focus {color: #607D8B;}
@@ -390,7 +410,7 @@ Nav
 .nav a:hover,
 .admin a:hover
 {
-	color: #546E7A;
+	color: #607D8B;
 	/*font-weight:bolder;*/
 }
 
@@ -407,7 +427,7 @@ Nav
 {
 	/*display: block;*/
 	/*padding: .7em 1em;*/
-	color: #607D8B;
+	color: #009688;
 	text-decoration:none;
 	/*border-bottom: 1px solid gray;*/
 	font-family:'Roboto',sans-serif;
@@ -531,7 +551,7 @@ Wide styles
 {
 	/*.header { padding: 0.5em 3em; }*/
 	/*.nav-bar { padding: 1em 3em; }*/
-	.content { padding: 2em 3em; }
+	/*.content { padding: 2em 3em; }*/
 	/*.footer { padding: 0.5em 3em; }*/
 	
 	.nav li,
