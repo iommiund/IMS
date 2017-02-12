@@ -19,12 +19,15 @@ if ($user->isLoggedIn()){
     ?>
     <div class="content">
         <div class="container">
+            <div class="separator">
+                <?php
+                //full name
+                echo '<h1>' . $name . ' ' . $surname . '</h1>';
+                ?>
+            </div>
             <div class="form-style">
             <!-- User Information -->
             <?php
-            //full name
-            echo '<h1>' . $name . ' ' . $surname . '</h1>';
-
             //Profile type
             echo '<p><b>Profile:</b> ' . $profile . '<br>';
 

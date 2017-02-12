@@ -10,8 +10,11 @@ if ($user->isLoggedIn()) {
         <div class="content">
             <div class="container">
                 <div class="admin">
-                    <h1>Administration Page</h1>
-                    <hr>
+                    <div class="separator">
+                        <h1>Administration</h1>
+                        <h2>Users</h2>
+                    </div>
+                    <br>
                     <ul class="admin">
                         <?php
                         if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')) {
@@ -23,7 +26,9 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('changeUserType') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="changeUserType.php">Change User Type</a></li><br><br>';
                         }
-                        echo '<hr>';
+                        echo '<div class="separator">';
+                        echo '<h2>Locations</h2>';
+                        echo '</div><br>';
                         if ($user->hasPermission('addLocation') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addLocation.php">Add New Location</a></li><br><br>';
                         }
@@ -33,7 +38,9 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('changeLocationType') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="changeLocationType.php">Change Location Type</a></li><br><br>';
                         }
-                        echo '<hr>';
+                        echo '<div class="separator">';
+                        echo '<h2>Resources</h2>';
+                        echo '</div><br>';
                         if ($user->hasPermission('addResourceType') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="addResourceType.php">Add New Resource Type</a></li><br><br>';
                         }

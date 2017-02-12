@@ -45,6 +45,7 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
+                <div class="center-table">
                 <?php
 
                 $get = db::getInstance()->query("select * from ims.temp_resource where vr_id = 1");
@@ -59,7 +60,6 @@ if ($user->isLoggedIn()) {
                         <input type="submit" value="UPLOAD VALID RESOURCES">
                     </form>
                 </div>
-                <div class="center-table">
                     <table>
                         <tr>
                             <th>Resource</th>
@@ -84,7 +84,9 @@ if ($user->isLoggedIn()) {
 
                     } else {
                         ?>
-                        <p align="center">Resources listed below cannot be uploaded due to validation failure.</p>
+                        <div class="separator">
+                            <h2>Inventory listed below cannot be uploaded due to validation failure</h2>
+                        </div>
                         <table>
                             <tr>
                                 <th>Resource</th>

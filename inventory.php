@@ -45,11 +45,13 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
+                <div class="separator">
+                    <h1>Load Inventory From File</h1>
+                </div>
                 <?php
                     if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
                         ?>
                         <div class="form-style">
-                            <h1> Load From File </h1>
                             <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
                                 <input type="file" name="file" required="required"/>
                                 <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
@@ -59,9 +61,59 @@ if ($user->isLoggedIn()) {
                         <?php
                     }
 
-                    if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
-                        ?>
+                    if ($user->hasPermission('transferResourceLocation') || $user->hasPermission('allAccess')) {
+                        $user = new user();
+                        $locationId = escape($user->data()->resource_location_id);
 
+                        ?>
+                        <div class="separator">
+                            <h1>Inventory Transfer</h1>
+                        </div>
+                        <div class="form-style">
+                            <form action="validateTransfer.php" method="post" name="validateTransfer">
+                                <input type="text" name="from" placeholder="Start SN" autocomplete="off" required="required">
+                                <input type="text" name="to" placeholder="End SN" autocomplete="off" required="required">
+                                <p> <b> Note: </b>Input same value above for single resource transfer.</p>
+                                <input type="hidden" name="currentLocationId" value="<?php echo $locationId; ?>">
+                                <?php
+
+                                $sql = "SELECT resource_location_name FROM ims.resource_locations rl where rl.resource_location_id = {$locationId}";
+
+                                $get = db::getInstance()->query($sql);
+
+                                if (!$get->count()) {
+                                } else {
+
+                                    foreach ($get->results() as $l): ?>
+                                        <input type="text" name="currentLocation"
+                                               value="<?php echo $l->resource_location_name; ?>" disabled>
+                                    <?php endforeach;
+
+                                }
+                                ?>
+                                <select name="location">
+                                    <option value="">---------------------- Choose a Location ----------------------</option>
+                                    <?php
+                                    $sql = "SELECT resource_location_id, resource_location_name FROM ims.resource_locations rl where rl.resource_location_id <> {$locationId} order by 1";
+
+                                    $get = db::getInstance()->query($sql);
+
+                                    if (!$get->count()) {
+                                        echo 'Empty List';
+                                    } else {
+
+                                        foreach ($get->results() as $l): ?>
+                                            <option value="<?php echo escape($l->resource_location_id); ?>">
+                                                <?php echo escape($l->resource_location_name); ?>
+                                            </option>
+                                        <?php endforeach;
+
+                                    }
+                                    ?>
+                                </select>
+                                <input type="submit" value="VALIDATE TRANSFER"/>
+                            </form>
+                        </div>
                         <?php
                     }
                 ?>

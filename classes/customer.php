@@ -53,6 +53,9 @@ class customer
 
         } else {
             ?>
+            <div class="separator">
+                <h2>Customers</h2>
+            </div>
             <div class="center-table">
                 <table>
                     <tr>

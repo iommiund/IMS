@@ -33,7 +33,7 @@ if ($user->isLoggedIn()){
                     'username' => array(
                         'required' => true,
                         'min' => 4,
-                        'max' => 20,
+                        'max' => 30,
                         'unique' => 'users'
                     ),
                     'password' => array(
@@ -43,7 +43,8 @@ if ($user->isLoggedIn()){
                     'retype_password' => array(
                         'required' => true,
                         'matches' => 'password'
-                    )
+                    ),
+                    'location' => array('required' => true)
                 ));
 
                 // display error or success messages
@@ -51,20 +52,21 @@ if ($user->isLoggedIn()){
                     $user = new user();
 
                     $salt = hash::salt(32); // generate salt to insert into create array
-                    $name = input::get('name');
-                    $surname = input::get('surname');
+                    $name = escape(input::get('name'));
+                    $surname = escape(input::get('surname'));
 
                     try {
 
                         $user->create(array(
                             'name' => $name,
                             'surname' => $surname,
-                            'email' => input::get('email'),
-                            'username' => input::get('username'),
-                            'password' => hash::make(input::get('password'), $salt),
+                            'email' => escape(input::get('email')),
+                            'username' => escape(input::get('username')),
+                            'password' => escape(hash::make(input::get('password'), $salt)),
                             'salt' => $salt,
                             'user_type_id' => 9,
-                            'user_status_id' => 2
+                            'user_status_id' => 2,
+                            'resource_location_id' => escape(input::get('location'))
                         ));
 
                         //create message to display on user creation
@@ -105,12 +107,30 @@ if ($user->isLoggedIn()){
                     <h1>Add a New User</h1>
 
                     <form action="" method="post" name="addUser">
-                        <input type="text" name="name" placeholder="Name" autocomplete="off" value="<?php echo escape(input::get('name')); ?>" />
-                        <input type="text" name="surname" placeholder="Surname" autocomplete="off" value="<?php echo escape(input::get('surname')); ?>" />
-                        <input type="email" name="email" placeholder="Email" autocomplete="off" value="<?php echo escape(input::get('email')); ?>" />
-                        <input type="text" name="username" placeholder="Username" autocomplete="off" value="<?php echo escape(input::get('username')); ?>" />
-                        <input type="password" name="password" placeholder="Password" autocomplete="off" />
-                        <input type="password" name="retype_password" placeholder="Retype Password" autocomplete="off" />
+                        <input type="text" name="name" placeholder="Name" autocomplete="off" value="<?php echo escape(input::get('name')); ?>" required="required"/>
+                        <input type="text" name="surname" placeholder="Surname" autocomplete="off" value="<?php echo escape(input::get('surname')); ?>" required="required"/>
+                        <input type="text" name="username" placeholder="Username" autocomplete="off" value="<?php echo escape(input::get('username')); ?>" required="required"/>
+                        <input type="email" name="email" placeholder="Email" autocomplete="off" value="<?php echo escape(input::get('email')); ?>" required="required"/>
+                        <select name="location">
+                            <option value="">---------------------- Choose a Location ----------------------</option>
+                            <?php
+                            $get = db::getInstance()->query('SELECT resource_location_id, resource_location_name FROM ims.resource_locations order by 1');
+
+                            if (!$get->count()) {
+                                echo 'Empty List';
+                            } else {
+
+                                foreach ($get->results() as $l): ?>
+                                    <option value="<?php echo escape($l->resource_location_id); ?>">
+                                        <?php echo escape($l->resource_location_name); ?>
+                                    </option>
+                                <?php endforeach;
+
+                            }
+                            ?>
+                        </select>
+                        <input type="password" name="password" placeholder="Password" autocomplete="off" required="required"/>
+                        <input type="password" name="retype_password" placeholder="Retype Password" autocomplete="off" required="required"/>
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                         <input type="submit" value="ADD USER"/>
                     </form>

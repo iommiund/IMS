@@ -97,12 +97,14 @@ class inventory
                 foreach ($get->results() as $r) {
 
                     //Set variables for brand, model, type and resource_sn_length from previous query
-                    if (isset($r->resource_brand_id, $r->resource_model_id, $r->resource_type_id, $r->resource_sn_length)){
+                    if (isset($r->resource_brand_id, $r->resource_model_id, $r->resource_type_id, $r->resource_sn_length)) {
                         $resourceBrandId = escape($r->resource_brand_id);
                         $resourceModelId = escape($r->resource_model_id);
                         $resourceTypeId = escape($r->resource_type_id);
                         $reqSNLength = escape($r->resource_sn_length);
-                        if (isset($r->voucher_value_id)) {$voucherValue = escape($r->voucher_value_id);}
+                        if (isset($r->voucher_value_id)) {
+                            $voucherValue = escape($r->voucher_value_id);
+                        }
                     }
 
                     //Check if resource already exists
@@ -111,7 +113,7 @@ class inventory
                     //Run query
                     $get = $this->_db->query($sql);
 
-                    if(!$get->count()){
+                    if (!$get->count()) {
 
                         //If the resource does not exist, set flag to O
                         $existsFlag = 0;
@@ -126,7 +128,7 @@ class inventory
                     }
 
                     //If serial number length does not match
-                    if($resourceLength !== $reqSNLength){
+                    if ($resourceLength !== $reqSNLength) {
 
                         //Ser validation result to serial number length is incorrect
                         $vrID = 4;
@@ -203,12 +205,20 @@ class inventory
                 $validationResult = NULL;
 
                 //Set variables for brand, model, type and resource_sn_length from previous query
-                if (isset($r->resource_unique_value)){
+                if (isset($r->resource_unique_value)) {
                     $resourceUniqueValue = escape($r->resource_unique_value);
-                    if (isset($r->resource_brand)){$resourceBrand = escape($r->resource_brand);}
-                    if (isset($r->resource_model)){$resourceModel = escape($r->resource_model);}
-                    if (isset($r->resource_type)){$resourceType = escape($r->resource_type);}
-                    if (isset($r->voucher_value)) {$voucherValue = escape($r->voucher_value);}
+                    if (isset($r->resource_brand)) {
+                        $resourceBrand = escape($r->resource_brand);
+                    }
+                    if (isset($r->resource_model)) {
+                        $resourceModel = escape($r->resource_model);
+                    }
+                    if (isset($r->resource_type)) {
+                        $resourceType = escape($r->resource_type);
+                    }
+                    if (isset($r->voucher_value)) {
+                        $voucherValue = escape($r->voucher_value);
+                    }
                     $validationResult = escape($r->description);
                 }
 
@@ -258,7 +268,9 @@ class inventory
                 $resourceUniqueValue = escape($r->resource_unique_value);
                 $resourceModelId = escape($r->resource_model_id);
                 $resourceTypeId = escape($r->resource_type_id);
-                if (isset($r->voucher_value_id)) {$voucherValueId = escape($r->voucher_value_id);}
+                if (isset($r->voucher_value_id)) {
+                    $voucherValueId = escape($r->voucher_value_id);
+                }
 
                 //create fields array to insert values in temp table
                 $fields = array(
@@ -281,7 +293,8 @@ class inventory
 
     }
 
-    public function searchResource($field){
+    public function searchResource($field)
+    {
 
         $sql = "select
                     r.resource_id,
@@ -318,6 +331,9 @@ class inventory
 
         } else {
             ?>
+            <div class="separator">
+                <h2>Inventory</h2>
+            </div>
             <div class="center-table">
                 <table>
                     <tr>
@@ -331,43 +347,232 @@ class inventory
                         <th>Customer ID</th>
                         <th>Options</th>
                     </tr>
-            <?php
-            $hash = new hash();
-            foreach ($get->results() as $r) {
+                    <?php
 
-                //Set initial variable value to empty
-                $voucherValue = NULL;
-                $customerId = NULL;
+                    foreach ($get->results() as $r) {
 
-                //Set variables from result set
-                $resourceId = escape($r->resource_id);
-                $resourceUniqueValue = escape($r->resource_unique_value);
-                $resourceBrand = escape($r->resource_brand);
-                $resourceModel = escape($r->resource_model);
-                $resourceType = escape($r->resource_type);
-                if (isset($r->voucher_value)) {$voucherValue = escape($r->voucher_value);}
-                $resourceStatus = escape($r->resource_status);
-                $resourceLocation = escape($r->resource_location_name);
-                if (isset($r->customer_account_id)) {$customerId = escape($r->customer_account_id);}
+                        //Set initial variable value to empty
+                        $voucherValue = NULL;
+                        $customerId = NULL;
 
-                echo '<tr>';
-                echo '<td><a href="viewInventoryDetails.php?id=' . $resourceId . '">' . $resourceUniqueValue . '</a></td>';
-                echo '<td>' . $resourceBrand . '</td>';
-                echo '<td>' . $resourceModel . '</td>';
-                echo '<td>' . $resourceType . '</td>';
-                echo '<td>' . $voucherValue . '</td>';
-                echo '<td>' . $resourceStatus . '</td>';
-                echo '<td>' . $resourceLocation . '</td>';
-                echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a></td>';
-                echo '<td></td>';
-                echo '</tr>';
-            }
-            ?>
+                        //Set variables from result set
+                        $resourceId = escape($r->resource_id);
+                        $resourceUniqueValue = escape($r->resource_unique_value);
+                        $resourceBrand = escape($r->resource_brand);
+                        $resourceModel = escape($r->resource_model);
+                        $resourceType = escape($r->resource_type);
+                        if (isset($r->voucher_value)) {
+                            $voucherValue = escape($r->voucher_value);
+                        }
+                        $resourceStatus = escape($r->resource_status);
+                        $resourceLocation = escape($r->resource_location_name);
+                        if (isset($r->customer_account_id)) {
+                            $customerId = escape($r->customer_account_id);
+                        }
+
+                        echo '<tr>';
+                        echo '<td><a href="viewInventoryDetails.php?id=' . $resourceId . '">' . $resourceUniqueValue . '</a></td>';
+                        echo '<td>' . $resourceBrand . '</td>';
+                        echo '<td>' . $resourceModel . '</td>';
+                        echo '<td>' . $resourceType . '</td>';
+                        echo '<td>' . $voucherValue . '</td>';
+                        echo '<td>' . $resourceStatus . '</td>';
+                        echo '<td>' . $resourceLocation . '</td>';
+                        echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a></td>';
+                        echo '<td></td>';
+                        echo '</tr>';
+                    }
+                    ?>
                 </table>
             </div>
-            <hr>
             <?php
         }
+    }
+
+    public function validateTransfer($from, $to, $currentLocationId, $location)
+    {
+
+        //select valid
+        $sql = "SELECT 
+                    r.resource_unique_value,
+                    rm.resource_model,
+                    rb.resource_brand,
+                    rt.resource_type,
+                    vv.voucher_value,
+                    rs.resource_status,
+                    rl.resource_location_name
+                FROM
+                    ims.resources r
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON r.resource_type_id = rt.resource_type_id
+                        LEFT JOIN
+                    ims.voucher_values vv ON r.voucher_value_id = vv.voucher_value_id
+                        INNER JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        INNER JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
+                WHERE
+                    r.resource_unique_value BETWEEN '$from' AND '$to'
+                        AND r.resource_status_id = 1
+                        AND r.resource_location_id = '$currentLocationId'
+                        AND r.customer_account_id IS NULL";
+
+        //display valid
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+            <div class="form-style">
+                <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
+                    <input type="hidden" name="from" value="<?php echo $from; ?>">
+                    <input type="hidden" name="to" value="<?php echo $to; ?>">
+                    <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
+                    <input type="hidden" name="currentLocationId" value="<?php echo $location; ?>">
+                    <input type="submit" value="TRANSFER"/>
+                </form>
+            </div>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                    </tr>
+                    <?php
+
+                    foreach ($get->results() as $r) {
+
+                        //Set initial variable value to empty
+                        $voucherValue = NULL;
+
+                        //Set variables from result set
+                        $resourceUniqueValue = escape($r->resource_unique_value);
+                        $resourceBrand = escape($r->resource_brand);
+                        $resourceModel = escape($r->resource_model);
+                        $resourceType = escape($r->resource_type);
+                        if (isset($r->voucher_value)) {
+                            $voucherValue = escape($r->voucher_value);
+                        }
+                        $resourceStatus = escape($r->resource_status);
+                        $resourceLocation = escape($r->resource_location_name);
+
+                        echo '<tr>';
+                        echo '<td>' . $resourceUniqueValue . '</td>';
+                        echo '<td>' . $resourceBrand . '</td>';
+                        echo '<td>' . $resourceModel . '</td>';
+                        echo '<td>' . $resourceType . '</td>';
+                        echo '<td>' . $voucherValue . '</td>';
+                        echo '<td>' . $resourceStatus . '</td>';
+                        echo '<td>' . $resourceLocation . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+
+        //select not valid
+        $sql = "SELECT 
+                    r.resource_unique_value,
+                    rb.resource_brand,
+                    rm.resource_model,
+                    rt.resource_type,
+                    vv.voucher_value,
+                    rs.resource_status,
+                    rl.resource_location_name,
+                    r.customer_account_id
+                FROM
+                    ims.resources r
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON r.resource_type_id = rt.resource_type_id
+                        LEFT JOIN
+                    ims.voucher_values vv ON r.voucher_value_id = vv.voucher_value_id
+                        INNER JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        INNER JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
+                WHERE
+                    r.resource_unique_value BETWEEN '$from' AND '$to'
+                        AND (r.resource_status_id <> 1
+                        OR r.resource_location_id <> '$currentLocationId'
+                        OR r.customer_account_id IS NOT NULL)";
+
+        //display invalid
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+            <div class="separator">
+                <h2>Inventory listed below cannot be transferred</h2>
+            </div>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Customer</th>
+                    </tr>
+                    <?php
+
+                    foreach ($get->results() as $r) {
+
+                        //Set initial variable value to empty
+                        $voucherValue = NULL;
+                        $customer = NULL;
+
+                        //Set variables from result set
+                        $resourceUniqueValue = escape($r->resource_unique_value);
+                        $resourceBrand = escape($r->resource_brand);
+                        $resourceModel = escape($r->resource_model);
+                        $resourceType = escape($r->resource_type);
+                        if (isset($r->voucher_value)) {
+                            $voucherValue = escape($r->voucher_value);
+                        }
+                        $resourceStatus = escape($r->resource_status);
+                        $resourceLocation = escape($r->resource_location_name);
+                        if (isset($r->customer_account_id)) {
+                            $customer = escape($r->customer_account_id);
+                        }
+
+                        echo '<tr>';
+                        echo '<td>' . $resourceUniqueValue . '</td>';
+                        echo '<td>' . $resourceBrand . '</td>';
+                        echo '<td>' . $resourceModel . '</td>';
+                        echo '<td>' . $resourceType . '</td>';
+                        echo '<td>' . $voucherValue . '</td>';
+                        echo '<td>' . $resourceStatus . '</td>';
+                        echo '<td>' . $resourceLocation . '</td>';
+                        echo '<td>' . $customer . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+
     }
 
     public function createResourceType($fields = array())
