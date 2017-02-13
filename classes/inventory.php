@@ -392,8 +392,33 @@ class inventory
     public function validateTransfer($from, $to, $currentLocationId, $location)
     {
 
-        //select valid
-        $sql = "SELECT 
+        //confirm that resource range is of the same type
+        $fromModel = escape(substr($from, 0, 6));
+        $toModel = escape(substr($to, 0, 6));
+
+        if($fromModel !== $toModel){
+
+            $hash = new hash();
+            redirect::to('inventory.php?' . hash::sha256('notSameModel' . $hash->getSalt()));
+
+        }
+
+        //check if resource range returns any results
+        $sql = "select * from ims.resources r where r.resource_unique_value BETWEEN '$from' AND '$to'";
+
+        //get records
+        $get = $this->_db->query($sql);
+
+        //get records
+        if (!$get->count()) {
+
+            $hash = new hash();
+            redirect::to('inventory.php?' . hash::sha256('empty' . $hash->getSalt()));
+
+        } else {
+
+            //select valid
+            $sql = "SELECT 
                     r.resource_unique_value,
                     rm.resource_model,
                     rb.resource_brand,
@@ -421,69 +446,69 @@ class inventory
                         AND r.resource_location_id = '$currentLocationId'
                         AND r.customer_account_id IS NULL";
 
-        //display valid
-        $get = $this->_db->query($sql);
+            //display valid
+            $get = $this->_db->query($sql);
 
-        if (!$get->count()) {
+            if (!$get->count()) {
 
-        } else {
-            ?>
-            <div class="form-style">
-                <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
-                    <input type="hidden" name="from" value="<?php echo $from; ?>">
-                    <input type="hidden" name="to" value="<?php echo $to; ?>">
-                    <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
-                    <input type="hidden" name="currentLocationId" value="<?php echo $location; ?>">
-                    <input type="submit" value="TRANSFER"/>
-                </form>
-            </div>
-            <div class="center-table">
-                <table>
-                    <tr>
-                        <th>Resource</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Type</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                        <th>Location</th>
-                    </tr>
-                    <?php
+            } else {
+                ?>
+                <div class="form-style">
+                    <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
+                        <input type="hidden" name="from" value="<?php echo $from; ?>">
+                        <input type="hidden" name="to" value="<?php echo $to; ?>">
+                        <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
+                        <input type="hidden" name="LocationId" value="<?php echo $location; ?>">
+                        <input type="submit" value="TRANSFER"/>
+                    </form>
+                </div>
+                <div class="center-table">
+                    <table>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>Location</th>
+                        </tr>
+                        <?php
 
-                    foreach ($get->results() as $r) {
+                        foreach ($get->results() as $r) {
 
-                        //Set initial variable value to empty
-                        $voucherValue = NULL;
+                            //Set initial variable value to empty
+                            $voucherValue = NULL;
 
-                        //Set variables from result set
-                        $resourceUniqueValue = escape($r->resource_unique_value);
-                        $resourceBrand = escape($r->resource_brand);
-                        $resourceModel = escape($r->resource_model);
-                        $resourceType = escape($r->resource_type);
-                        if (isset($r->voucher_value)) {
-                            $voucherValue = escape($r->voucher_value);
+                            //Set variables from result set
+                            $resourceUniqueValue = escape($r->resource_unique_value);
+                            $resourceBrand = escape($r->resource_brand);
+                            $resourceModel = escape($r->resource_model);
+                            $resourceType = escape($r->resource_type);
+                            if (isset($r->voucher_value)) {
+                                $voucherValue = escape($r->voucher_value);
+                            }
+                            $resourceStatus = escape($r->resource_status);
+                            $resourceLocation = escape($r->resource_location_name);
+
+                            echo '<tr>';
+                            echo '<td>' . $resourceUniqueValue . '</td>';
+                            echo '<td>' . $resourceBrand . '</td>';
+                            echo '<td>' . $resourceModel . '</td>';
+                            echo '<td>' . $resourceType . '</td>';
+                            echo '<td>' . $voucherValue . '</td>';
+                            echo '<td>' . $resourceStatus . '</td>';
+                            echo '<td>' . $resourceLocation . '</td>';
+                            echo '</tr>';
                         }
-                        $resourceStatus = escape($r->resource_status);
-                        $resourceLocation = escape($r->resource_location_name);
+                        ?>
+                    </table>
+                </div>
+                <?php
+            }
 
-                        echo '<tr>';
-                        echo '<td>' . $resourceUniqueValue . '</td>';
-                        echo '<td>' . $resourceBrand . '</td>';
-                        echo '<td>' . $resourceModel . '</td>';
-                        echo '<td>' . $resourceType . '</td>';
-                        echo '<td>' . $voucherValue . '</td>';
-                        echo '<td>' . $resourceStatus . '</td>';
-                        echo '<td>' . $resourceLocation . '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </table>
-            </div>
-            <?php
-        }
-
-        //select not valid
-        $sql = "SELECT 
+            //select not valid
+            $sql = "SELECT 
                     r.resource_unique_value,
                     rb.resource_brand,
                     rm.resource_model,
@@ -512,67 +537,77 @@ class inventory
                         OR r.resource_location_id <> '$currentLocationId'
                         OR r.customer_account_id IS NOT NULL)";
 
-        //display invalid
-        $get = $this->_db->query($sql);
+            //display invalid
+            $get = $this->_db->query($sql);
 
-        if (!$get->count()) {
+            if (!$get->count()) {
 
-        } else {
-            ?>
-            <div class="separator">
-                <h2>Inventory listed below cannot be transferred</h2>
-            </div>
-            <div class="center-table">
-                <table>
-                    <tr>
-                        <th>Resource</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Type</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                        <th>Location</th>
-                        <th>Customer</th>
-                    </tr>
-                    <?php
+            } else {
+                ?>
+                <div class="separator">
+                    <h2>Inventory listed below cannot be transferred</h2>
+                </div>
+                <div class="center-table">
+                    <table>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>Location</th>
+                            <th>Customer</th>
+                        </tr>
+                        <?php
 
-                    foreach ($get->results() as $r) {
+                        foreach ($get->results() as $r) {
 
-                        //Set initial variable value to empty
-                        $voucherValue = NULL;
-                        $customer = NULL;
+                            //Set initial variable value to empty
+                            $voucherValue = NULL;
+                            $customer = NULL;
 
-                        //Set variables from result set
-                        $resourceUniqueValue = escape($r->resource_unique_value);
-                        $resourceBrand = escape($r->resource_brand);
-                        $resourceModel = escape($r->resource_model);
-                        $resourceType = escape($r->resource_type);
-                        if (isset($r->voucher_value)) {
-                            $voucherValue = escape($r->voucher_value);
+                            //Set variables from result set
+                            $resourceUniqueValue = escape($r->resource_unique_value);
+                            $resourceBrand = escape($r->resource_brand);
+                            $resourceModel = escape($r->resource_model);
+                            $resourceType = escape($r->resource_type);
+                            if (isset($r->voucher_value)) {
+                                $voucherValue = escape($r->voucher_value);
+                            }
+                            $resourceStatus = escape($r->resource_status);
+                            $resourceLocation = escape($r->resource_location_name);
+                            if (isset($r->customer_account_id)) {
+                                $customer = escape($r->customer_account_id);
+                            }
+
+                            echo '<tr>';
+                            echo '<td>' . $resourceUniqueValue . '</td>';
+                            echo '<td>' . $resourceBrand . '</td>';
+                            echo '<td>' . $resourceModel . '</td>';
+                            echo '<td>' . $resourceType . '</td>';
+                            echo '<td>' . $voucherValue . '</td>';
+                            echo '<td>' . $resourceStatus . '</td>';
+                            echo '<td>' . $resourceLocation . '</td>';
+                            echo '<td>' . $customer . '</td>';
+                            echo '</tr>';
                         }
-                        $resourceStatus = escape($r->resource_status);
-                        $resourceLocation = escape($r->resource_location_name);
-                        if (isset($r->customer_account_id)) {
-                            $customer = escape($r->customer_account_id);
-                        }
+                        ?>
+                    </table>
+                </div>
+                <?php
+            }
 
-                        echo '<tr>';
-                        echo '<td>' . $resourceUniqueValue . '</td>';
-                        echo '<td>' . $resourceBrand . '</td>';
-                        echo '<td>' . $resourceModel . '</td>';
-                        echo '<td>' . $resourceType . '</td>';
-                        echo '<td>' . $voucherValue . '</td>';
-                        echo '<td>' . $resourceStatus . '</td>';
-                        echo '<td>' . $resourceLocation . '</td>';
-                        echo '<td>' . $customer . '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </table>
-            </div>
-            <?php
         }
 
+    }
+
+    public function createTransferRequest($from, $to, $currentLocationId, $location)
+    {
+        //continue from here
+            //update resources to reserved
+
+            //insert row in inventory transfers
     }
 
     public function createResourceType($fields = array())

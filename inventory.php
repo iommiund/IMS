@@ -128,6 +128,20 @@ if ($user->isLoggedIn()) {
             </div>
             <?php
         }
+        if (isset($_GET[hash::sha256('empty' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>&#x26a0; Resource range not found.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET[hash::sha256('notSameModel' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>&#x26a0; Resource range must contain only one distinct type of resource.</p>
+            </div>
+            <?php
+        }
     } else {
         redirect::to('main.php');
     }

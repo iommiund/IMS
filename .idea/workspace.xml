@@ -28,7 +28,43 @@
     <favorites_list name="IMS" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="inventory.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/inventory.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="609" column="47" selection-start-line="609" selection-start-column="47" selection-end-line="609" selection-end-column="47" />
+              <folding>
+                <marker date="1487011876038" expanded="true" signature="296:325" ph="delete from " />
+                <marker date="1487011876038" expanded="true" signature="1321:2141" ph="SELECT rb.re... resouce_model_identifiers" />
+                <marker date="1487011876038" expanded="true" signature="3849:3935" ph="select * fro... resources" />
+                <marker date="1487011876038" expanded="true" signature="5860:6821" ph="SELECT tr.re... temp_resource" />
+                <marker date="1487011876038" expanded="true" signature="8830:9123" ph="SELECT tr.re... temp_resource" />
+                <marker date="1487011876038" expanded="true" signature="10636:12003" ph="select r.res... resources" />
+                <marker date="1487011876038" expanded="true" signature="10636:12034" ph="select r.res... resources" />
+                <marker date="1487011876038" expanded="true" signature="15189:15216" ph="select * fro... resources" />
+                <marker date="1487011876038" expanded="true" signature="15189:15248" ph="select * fro... resources" />
+                <marker date="1487011876038" expanded="true" signature="15189:15274" ph="select * fro... resources" />
+                <marker date="1487011876038" expanded="true" signature="15579:16956" ph="SELECT r.res... resources" />
+                <marker date="1487011876038" expanded="true" signature="19833:21259" ph="SELECT r.res... resources" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inventoryTransfer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/inventoryTransfer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+              <folding>
+                <marker date="1487009482797" expanded="true" signature="91:1048" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,7 +72,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/jquery.min.js" />
         <option value="$PROJECT_DIR$/jquery-ui.min.js" />
         <option value="$PROJECT_DIR$/Classes/hash.php" />
         <option value="$PROJECT_DIR$/login.php" />
@@ -84,8 +119,9 @@
         <option value="$PROJECT_DIR$/Classes/customer.php" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/admin.php" />
-        <option value="$PROJECT_DIR$/inventory.php" />
         <option value="$PROJECT_DIR$/Classes/inventoryTransfer.php" />
+        <option value="$PROJECT_DIR$/inventory.php" />
+        <option value="$PROJECT_DIR$/inventoryTransfer.php" />
         <option value="$PROJECT_DIR$/Classes/inventory.php" />
       </list>
     </option>
@@ -101,10 +137,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="width" value="1920" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -165,7 +199,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -214,7 +248,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -356,17 +390,18 @@
       <workItem from="1486717581356" duration="4025000" />
       <workItem from="1486802134194" duration="19632000" />
       <workItem from="1486890564851" duration="17634000" />
+      <workItem from="1487005491544" duration="3805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="367411000" />
+    <option name="totallyTimeSpent" value="371216000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122395836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12289916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706374" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -422,7 +457,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MarkedForDeletion/BKindex.php" />
     <entry file="file://$PROJECT_DIR$/updateProfile.php" />
     <entry file="file://$PROJECT_DIR$/changePassword.php" />
     <entry file="file://$PROJECT_DIR$/register.php" />
@@ -462,7 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -582,14 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/addLocationType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -602,14 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="699">
           <caret line="110" column="33" selection-start-line="93" selection-start-column="24" selection-end-line="110" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/basic template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -655,9 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
           <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
-          <folding>
-            <marker date="1486909099987" expanded="true" signature="567:1451" ph="select r.res... resources" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -688,30 +702,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/viewInventoryDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/viewCustomerDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/inventoryTransfer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/viewInventoryDetails.php" />
+    <entry file="file://$PROJECT_DIR$/Classes/viewCustomerDetails.php" />
+    <entry file="file://$PROJECT_DIR$/Classes/inventoryTransfer.php" />
     <entry file="file://$PROJECT_DIR$/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -722,43 +715,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/inventory.php">
+    <entry file="file://$PROJECT_DIR$/inventory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="427" column="12" selection-start-line="427" selection-start-column="12" selection-end-line="427" selection-end-column="12" />
+        <state relative-caret-position="688">
+          <caret line="140" column="73" selection-start-line="140" selection-start-column="73" selection-end-line="140" selection-end-column="73" />
           <folding>
-            <marker date="1486912645827" expanded="true" signature="296:325" ph="delete from " />
-            <marker date="1486912645827" expanded="true" signature="1321:2141" ph="SELECT rb.re... resouce_model_identifiers" />
-            <marker date="1486912645827" expanded="true" signature="3849:3935" ph="select * fro... resources" />
-            <marker date="1486912645827" expanded="true" signature="5860:6821" ph="SELECT tr.re... temp_resource" />
-            <marker date="1486912645827" expanded="true" signature="8830:9123" ph="SELECT tr.re... temp_resource" />
-            <marker date="1486912645827" expanded="true" signature="10636:12003" ph="select r.res... resources" />
-            <marker date="1486912645827" expanded="true" signature="10636:12034" ph="select r.res... resources" />
-            <marker date="1486912645827" expanded="true" signature="14827:16204" ph="SELECT r.res... resources" />
-            <marker date="1486912645827" expanded="true" signature="18864:20290" ph="SELECT r.res... resources" />
+            <element signature="e#1118#1126#0#HTML" expanded="true" />
+            <element signature="e#5760#5768#0#HTML" expanded="true" />
+            <element signature="e#6003#6011#0#HTML" expanded="true" />
+            <marker date="1487008212068" expanded="true" signature="3254:3347" ph="SELECT resou... resource_locations" />
+            <marker date="1487008212068" expanded="true" signature="3254:3360" ph="SELECT resou... resource_locations" />
+            <marker date="1487008212068" expanded="true" signature="4186:4302" ph="SELECT resou... resource_locations" />
+            <marker date="1487008212068" expanded="true" signature="4186:4326" ph="SELECT resou... resource_locations" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basic template.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/validateTransfer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+        <state relative-caret-position="17">
+          <caret line="7" column="54" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="54" />
           <folding>
             <marker date="1486906507273" expanded="true" signature="1949:1968" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inventory.php">
+    <entry file="file://$PROJECT_DIR$/inventoryTransfer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="72" column="51" selection-start-line="72" selection-start-column="51" selection-end-line="72" selection-end-column="51" />
+        <state relative-caret-position="561">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
           <folding>
-            <marker date="1486910398754" expanded="true" signature="3254:3347" ph="SELECT resou... resource_locations" />
-            <marker date="1486910398754" expanded="true" signature="3254:3360" ph="SELECT resou... resource_locations" />
-            <marker date="1486910398754" expanded="true" signature="4186:4302" ph="SELECT resou... resource_locations" />
-            <marker date="1486910398754" expanded="true" signature="4186:4326" ph="SELECT resou... resource_locations" />
+            <marker date="1487009482797" expanded="true" signature="91:1048" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="609" column="47" selection-start-line="609" selection-start-column="47" selection-end-line="609" selection-end-column="47" />
+          <folding>
+            <marker date="1487011876038" expanded="true" signature="296:325" ph="delete from " />
+            <marker date="1487011876038" expanded="true" signature="1321:2141" ph="SELECT rb.re... resouce_model_identifiers" />
+            <marker date="1487011876038" expanded="true" signature="3849:3935" ph="select * fro... resources" />
+            <marker date="1487011876038" expanded="true" signature="5860:6821" ph="SELECT tr.re... temp_resource" />
+            <marker date="1487011876038" expanded="true" signature="8830:9123" ph="SELECT tr.re... temp_resource" />
+            <marker date="1487011876038" expanded="true" signature="10636:12003" ph="select r.res... resources" />
+            <marker date="1487011876038" expanded="true" signature="10636:12034" ph="select r.res... resources" />
+            <marker date="1487011876038" expanded="true" signature="15189:15216" ph="select * fro... resources" />
+            <marker date="1487011876038" expanded="true" signature="15189:15248" ph="select * fro... resources" />
+            <marker date="1487011876038" expanded="true" signature="15189:15274" ph="select * fro... resources" />
+            <marker date="1487011876038" expanded="true" signature="15579:16956" ph="SELECT r.res... resources" />
+            <marker date="1487011876038" expanded="true" signature="19833:21259" ph="SELECT r.res... resources" />
           </folding>
         </state>
       </provider>
