@@ -110,7 +110,7 @@ CREATE TABLE `inventory_transfers` (
   KEY `fk_inventory_transfers_statuses_idx` (`status_id`),
   CONSTRAINT `fk_inventory_transfers_recejt_reasons` FOREIGN KEY (`reject_reason_id`) REFERENCES `inventory_transfers_reject_reasons` (`reason_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventory_transfers_statuses` FOREIGN KEY (`status_id`) REFERENCES `inventory_transfers_statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +121,26 @@ LOCK TABLES `inventory_transfers` WRITE;
 /*!40000 ALTER TABLE `inventory_transfers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `inventory_transfers` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger ims.onInitiateTransfer
+after insert on ims.inventory_transfers
+for each row
+update ims.resources r
+set r.resource_status_id = 3 -- set resource status to reserved
+where r.resource_unique_value between NEW.from_resource and NEW.to_resource */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `inventory_transfers_reject_reasons`
@@ -157,7 +177,7 @@ CREATE TABLE `inventory_transfers_statuses` (
   `status_id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +186,7 @@ CREATE TABLE `inventory_transfers_statuses` (
 
 LOCK TABLES `inventory_transfers_statuses` WRITE;
 /*!40000 ALTER TABLE `inventory_transfers_statuses` DISABLE KEYS */;
-INSERT INTO `inventory_transfers_statuses` VALUES (1,'Open'),(2,'Closed');
+INSERT INTO `inventory_transfers_statuses` VALUES (1,'Pending'),(2,'Accepted'),(3,'Rejected');
 /*!40000 ALTER TABLE `inventory_transfers_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +403,7 @@ CREATE TABLE `resource_types` (
 
 LOCK TABLES `resource_types` WRITE;
 /*!40000 ALTER TABLE `resource_types` DISABLE KEYS */;
-INSERT INTO `resource_types` VALUES (5,'Internet and VoIP Modem'),(2,'Mobile Handset'),(4,'Mobile Prepaid Top-Up Voucher'),(3,'Mobile Sim Card'),(1,'TV Set-Top Box');
+INSERT INTO `resource_types` VALUES (2,'Mobile Handset'),(4,'Mobile Prepaid Top-Up Voucher'),(3,'Mobile Sim Card'),(5,'Modem'),(1,'TV Set-Top Box');
 /*!40000 ALTER TABLE `resource_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -478,7 +498,7 @@ CREATE TABLE `temp_resource` (
   UNIQUE KEY `resource_unique_value_UNIQUE` (`resource_unique_value`),
   KEY `fk_vr_id` (`vr_id`),
   CONSTRAINT `fk_vr_id` FOREIGN KEY (`vr_id`) REFERENCES `validation_results` (`vr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -761,4 +781,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-13 19:50:10
+-- Dump completed on 2017-02-14 19:31:41

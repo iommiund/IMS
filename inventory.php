@@ -45,12 +45,12 @@ if ($user->isLoggedIn()) {
         ?>
         <div class="content">
             <div class="container">
-                <div class="separator">
-                    <h1>Load Inventory From File</h1>
-                </div>
                 <?php
                     if ($user->hasPermission('newInventory') || $user->hasPermission('allAccess')) {
                         ?>
+                        <div class="separator">
+                            <h1>Load Inventory From File</h1>
+                        </div>
                         <div class="form-style">
                             <form action="" method="post" name="loadTemp" enctype="multipart/form-data">
                                 <input type="file" name="file" required="required"/>
@@ -85,7 +85,7 @@ if ($user->isLoggedIn()) {
                                 } else {
 
                                     foreach ($get->results() as $l): ?>
-                                        <input type="text" name="currentLocation"
+                                        <input type="hidden" name="currentLocation"
                                                value="<?php echo $l->resource_location_name; ?>" disabled>
                                     <?php endforeach;
 
@@ -115,6 +115,14 @@ if ($user->isLoggedIn()) {
                             </form>
                         </div>
                         <?php
+                        if ($user->hasPermission('transferResourceLocation') || $user->hasPermission('allAccess')) {
+
+                            $inventory = new inventory();
+
+                            //show pending transfers
+                            $inventory->showPendingTransfers();
+
+                        }
                     }
                 ?>
             </div>
@@ -135,10 +143,24 @@ if ($user->isLoggedIn()) {
             </div>
             <?php
         }
+        if (isset($_GET[hash::sha256('allFieldsRequired' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>&#x26a0; All fields are required.</p>
+            </div>
+            <?php
+        }
         if (isset($_GET[hash::sha256('notSameModel' . $hash->getSalt())])) {
             ?>
             <div id="dialogOk" title="Error">
                 <p>&#x26a0; Resource range must contain only one distinct type of resource.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET[hash::sha256('createTransferRequestSuccess' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Success">
+                <p>Resource transfer was successfully initiated and is pending acceptance.</p>
             </div>
             <?php
         }

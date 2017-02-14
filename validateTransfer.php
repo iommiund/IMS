@@ -50,6 +50,8 @@ if ($user->isLoggedIn()){
 
             } else {
                 //redirect to inventory.php with error
+                $hash = new hash();
+                redirect::to('inventory.php?' . hash::sha256('allFieldsRequired' . $hash->getSalt()));
             }
 
 

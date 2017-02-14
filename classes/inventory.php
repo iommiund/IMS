@@ -391,7 +391,6 @@ class inventory
 
     public function validateTransfer($from, $to, $currentLocationId, $location)
     {
-
         //confirm that resource range is of the same type
         $fromModel = escape(substr($from, 0, 6));
         $toModel = escape(substr($to, 0, 6));
@@ -452,7 +451,12 @@ class inventory
             if (!$get->count()) {
 
             } else {
-                ?>
+                echo $from . '<br>';
+                echo $to . '<br>';
+                echo $currentLocationId . '<br>';
+                echo $location . '<br>';
+                die();
+                /*?>
                 <div class="form-style">
                     <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
                         <input type="hidden" name="from" value="<?php echo $from; ?>">
@@ -461,6 +465,7 @@ class inventory
                         <input type="hidden" name="LocationId" value="<?php echo $location; ?>">
                         <input type="submit" value="TRANSFER"/>
                     </form>
+
                 </div>
                 <div class="center-table">
                     <table>
@@ -595,7 +600,7 @@ class inventory
                         ?>
                     </table>
                 </div>
-                <?php
+                <?php*/
             }
 
         }
@@ -604,10 +609,120 @@ class inventory
 
     public function createTransferRequest($from, $to, $currentLocationId, $location)
     {
-        //continue from here
-            //update resources to reserved
+        $user = new user();
 
-            //insert row in inventory transfers
+        //declare variables
+        $uid = escape($user->data()->uid);
+
+        //create fields array to insert values in temp table
+        $fields = array(
+            'creation_uid' => $uid,
+            'from_resource' => $from,
+            'to_resource' => $to,
+            'from_location' => $currentLocationId,
+            'to_location' => $location,
+            'status_id' => 1
+        );
+
+        //insert records in temp table
+        if (!$this->_db->insert('inventory_transfers', $fields)) {
+            throw new Exception('Your file contains duplicate records.');
+        } else {
+
+            $hash = new hash();
+            redirect::to('inventory.php?' . hash::sha256('createTransferRequestSuccess' . $hash->getSalt()));
+
+        }
+
+
+
+    }
+
+    public function showPendingTransfers (){
+
+        $user = new user();
+
+        //get user location
+        $userLocation = escape($user->data()->resource_location_id);
+
+        //get pending resource transfers for destined for user location
+        $sql = "SELECT
+                it.transfer_id,
+                concat(u.name, ' ' , u.surname) as full_name,
+                it.from_resource,
+                it.to_resource,
+                rl.resource_location_name,
+                its.status,
+                date(it.initiation_timestamp) as pending_since
+                FROM ims.inventory_transfers it
+                    inner join
+                    ims.users u on it.creation_uid = u.uid
+                    inner join
+                    ims.resource_locations rl on it.from_location = rl.resource_location_id
+                    inner join
+                    ims.inventory_transfers_statuses its on it.status_id = its.status_id
+                where to_location = {$userLocation}";
+
+        //display invalid
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+
+            <div class="separator">
+                <h2>Pending Transfers</h2>
+            </div>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Initiator</th>
+                        <th>First Resource</th>
+                        <th>Last Resource</th>
+                        <th>Arriving From</th>
+                        <th>Transfer Status</th>
+                        <th>Pending Since</th>
+                        <th colspan="2">Options</th>
+                    </tr>
+                    <?php
+
+                    foreach ($get->results() as $t) {
+
+                        //Set variables from result set
+                        $transferId = escape($t->transfer_id);
+                        $initiator = escape($t->full_name);
+                        $firstResource = escape($t->from_resource);
+                        $lastResource = escape($t->to_resource);
+                        $arrivingFrom = escape($t->resource_location_name);
+                        $transferStatus = escape($t->status);
+                        $pendingSince = escape($t->pending_since);
+
+                        echo '<tr>';
+                        echo '<td>' . $initiator . '</td>';
+                        echo '<td>' . $firstResource . '</td>';
+                        echo '<td>' . $lastResource . '</td>';
+                        echo '<td>' . $arrivingFrom . '</td>';
+                        echo '<td>' . $transferStatus . '</td>';
+                        echo '<td>' . $pendingSince . '</td>';
+                        if ($user->hasPermission('acceptTransfer') || $user->hasPermission('allAccess')) {
+                            echo '<td><a href="acceptTransfer.php?id=' . $transferId . '">Accept</a></td>';
+                        } else {
+                            echo '<td></td>';
+                        }
+                        if ($user->hasPermission('rejectTransfer') || $user->hasPermission('allAccess')) {
+                            echo '<td><a href="rejectTransfer.php?id=' . $transferId . '">Reject</a></td>';
+                        } else {
+                            echo '<td></td>';
+                        }
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+
     }
 
     public function createResourceType($fields = array())
