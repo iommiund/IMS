@@ -114,7 +114,7 @@ if ($user->isLoggedIn()){
                         <select name="location">
                             <option value="">---------------------- Choose a Location ----------------------</option>
                             <?php
-                            $get = db::getInstance()->query('SELECT resource_location_id, resource_location_name FROM ims.resource_locations order by 1');
+                            $get = db::getInstance()->query('SELECT resource_location_id, resource_location_name FROM ims.resource_locations where resource_location_id <> 7 order by 1');
 
                             if (!$get->count()) {
                                 echo 'Empty List';

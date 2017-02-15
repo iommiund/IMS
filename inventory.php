@@ -94,7 +94,7 @@ if ($user->isLoggedIn()) {
                                 <select name="location">
                                     <option value="">---------------------- Choose a Location ----------------------</option>
                                     <?php
-                                    $sql = "SELECT resource_location_id, resource_location_name FROM ims.resource_locations rl where rl.resource_location_id <> {$locationId} order by 1";
+                                    $sql = "SELECT resource_location_id, resource_location_name FROM ims.resource_locations rl where rl.resource_location_id not in ({$locationId},7) order by 1";
 
                                     $get = db::getInstance()->query($sql);
 
@@ -115,7 +115,7 @@ if ($user->isLoggedIn()) {
                             </form>
                         </div>
                         <?php
-                        if ($user->hasPermission('transferResourceLocation') || $user->hasPermission('allAccess')) {
+                        if ($user->hasPermission('viewPendingTransfers') || $user->hasPermission('allAccess')) {
 
                             $inventory = new inventory();
 
@@ -123,8 +123,21 @@ if ($user->isLoggedIn()) {
                             $inventory->showPendingTransfers();
 
                         }
+                        if ($user->hasPermission('viewAllPendingTransfers') || $user->hasPermission('allAccess')) {
+
+                            $inventory = new inventory();
+
+                            //show pending transfers
+                            $inventory->showAllPendingTransfers();
+
+                        }
                     }
                 ?>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('table tr:nth-child(odd)').addClass('alt');
+                    });
+                </script>
             </div>
         </div>
         <?php
@@ -161,6 +174,13 @@ if ($user->isLoggedIn()) {
             ?>
             <div id="dialogOk" title="Success">
                 <p>Resource transfer was successfully initiated and is pending acceptance.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET[hash::sha256('couldNotCreateTransfer' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>&#x26a0; Could not create transfer</p>
             </div>
             <?php
         }

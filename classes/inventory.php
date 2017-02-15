@@ -451,21 +451,15 @@ class inventory
             if (!$get->count()) {
 
             } else {
-                echo $from . '<br>';
-                echo $to . '<br>';
-                echo $currentLocationId . '<br>';
-                echo $location . '<br>';
-                die();
-                /*?>
+                ?>
                 <div class="form-style">
                     <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
                         <input type="hidden" name="from" value="<?php echo $from; ?>">
                         <input type="hidden" name="to" value="<?php echo $to; ?>">
                         <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
-                        <input type="hidden" name="LocationId" value="<?php echo $location; ?>">
+                        <input type="hidden" name="locationId" value="<?php echo $location; ?>">
                         <input type="submit" value="TRANSFER"/>
                     </form>
-
                 </div>
                 <div class="center-table">
                     <table>
@@ -600,7 +594,7 @@ class inventory
                         ?>
                     </table>
                 </div>
-                <?php*/
+                <?php
             }
 
         }
@@ -609,32 +603,56 @@ class inventory
 
     public function createTransferRequest($from, $to, $currentLocationId, $location)
     {
-        $user = new user();
+        //get description
+        $sql = "select
+                  concat(rb.resource_brand, ' ', rm.resource_model, ' ', rt.resource_type) as description
+                from ims.resources r
+                    inner join
+                    ims.resource_models rm on r.resource_model_id = rm.resource_model_id
+                    inner join
+                    ims.resource_brands rb on rm.resource_brand_id = rb.resource_brand_id
+                    inner join ims.resource_types rt on rm.resource_type_id = rt.resource_type_id
+                    where r.resource_unique_value = {$from}";
 
-        //declare variables
-        $uid = escape($user->data()->uid);
+        $get = $this->_db->query($sql);
 
-        //create fields array to insert values in temp table
-        $fields = array(
-            'creation_uid' => $uid,
-            'from_resource' => $from,
-            'to_resource' => $to,
-            'from_location' => $currentLocationId,
-            'to_location' => $location,
-            'status_id' => 1
-        );
+        if (!$get->count()) {
 
-        //insert records in temp table
-        if (!$this->_db->insert('inventory_transfers', $fields)) {
-            throw new Exception('Your file contains duplicate records.');
         } else {
 
-            $hash = new hash();
-            redirect::to('inventory.php?' . hash::sha256('createTransferRequestSuccess' . $hash->getSalt()));
+            foreach ($get->results() as $d) {
+
+                //Set variables from result set
+                $description = escape($d->description);
+            }
+
+            $user = new user();
+
+            //declare variables
+            $uid = escape($user->data()->uid);
+
+            //create fields array to insert values in temp table
+            $fields = array(
+                'creation_uid' => $uid,
+                'from_resource' => $from,
+                'to_resource' => $to,
+                'description' => $description,
+                'from_location' => $currentLocationId,
+                'to_location' => $location,
+                'status_id' => 1
+            );
+
+            //insert records in temp table
+            if (!$this->_db->insert('inventory_transfers', $fields)) {
+                throw new Exception('error');
+            } else {
+
+                $hash = new hash();
+                redirect::to('inventory.php?' . hash::sha256('createTransferRequestSuccess' . $hash->getSalt()));
+
+            }
 
         }
-
-
 
     }
 
@@ -651,9 +669,9 @@ class inventory
                 concat(u.name, ' ' , u.surname) as full_name,
                 it.from_resource,
                 it.to_resource,
+                it.description,
                 rl.resource_location_name,
-                its.status,
-                date(it.initiation_timestamp) as pending_since
+                date_format(it.timestamp,'%D %b %Y') as pending_since
                 FROM ims.inventory_transfers it
                     inner join
                     ims.users u on it.creation_uid = u.uid
@@ -661,7 +679,7 @@ class inventory
                     ims.resource_locations rl on it.from_location = rl.resource_location_id
                     inner join
                     ims.inventory_transfers_statuses its on it.status_id = its.status_id
-                where to_location = {$userLocation}";
+                where to_location = {$userLocation} and it.status_id = 1";
 
         //display invalid
         $get = $this->_db->query($sql);
@@ -680,8 +698,8 @@ class inventory
                         <th>Initiator</th>
                         <th>First Resource</th>
                         <th>Last Resource</th>
+                        <th>Description</th>
                         <th>Arriving From</th>
-                        <th>Transfer Status</th>
                         <th>Pending Since</th>
                         <th colspan="2">Options</th>
                     </tr>
@@ -694,16 +712,16 @@ class inventory
                         $initiator = escape($t->full_name);
                         $firstResource = escape($t->from_resource);
                         $lastResource = escape($t->to_resource);
+                        $description = escape($t->description);
                         $arrivingFrom = escape($t->resource_location_name);
-                        $transferStatus = escape($t->status);
                         $pendingSince = escape($t->pending_since);
 
                         echo '<tr>';
                         echo '<td>' . $initiator . '</td>';
                         echo '<td>' . $firstResource . '</td>';
                         echo '<td>' . $lastResource . '</td>';
+                        echo '<td>' . $description . '</td>';
                         echo '<td>' . $arrivingFrom . '</td>';
-                        echo '<td>' . $transferStatus . '</td>';
                         echo '<td>' . $pendingSince . '</td>';
                         if ($user->hasPermission('acceptTransfer') || $user->hasPermission('allAccess')) {
                             echo '<td><a href="acceptTransfer.php?id=' . $transferId . '">Accept</a></td>';
@@ -721,6 +739,182 @@ class inventory
                 </table>
             </div>
             <?php
+        }
+
+    }
+
+    public function showAllPendingTransfers (){
+
+        //get pending resource transfers for destined for user location
+        $sql = "SELECT
+                concat(u.name, ' ' , u.surname) as full_name,
+                it.from_resource,
+                it.to_resource,
+                it.description,
+                rl.resource_location_name,
+                date_format(it.timestamp,'%D %b %Y') as pending_since
+                FROM ims.inventory_transfers it
+                    inner join
+                    ims.users u on it.creation_uid = u.uid
+                    inner join
+                    ims.resource_locations rl on it.to_location = rl.resource_location_id
+                    inner join
+                    ims.inventory_transfers_statuses its on it.status_id = its.status_id
+                    where it.status_id = 1";
+
+        //display invalid
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+
+            <div class="separator">
+                <h2>All Pending Transfers</h2>
+            </div>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Initiator</th>
+                        <th>First Resource</th>
+                        <th>Last Resource</th>
+                        <th>Description</th>
+                        <th>Destination</th>
+                        <th>Pending Since</th>
+                    </tr>
+                    <?php
+
+                    foreach ($get->results() as $t) {
+
+                        //Set variables from result set
+                        $initiator = escape($t->full_name);
+                        $firstResource = escape($t->from_resource);
+                        $lastResource = escape($t->to_resource);
+                        $description = escape($t->description);
+                        $arrivingFrom = escape($t->resource_location_name);
+                        $pendingSince = escape($t->pending_since);
+
+                        echo '<tr>';
+                        echo '<td>' . $initiator . '</td>';
+                        echo '<td>' . $firstResource . '</td>';
+                        echo '<td>' . $lastResource . '</td>';
+                        echo '<td>' . $description . '</td>';
+                        echo '<td>' . $arrivingFrom . '</td>';
+                        echo '<td>' . $pendingSince . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+
+    }
+
+    public function acceptTransfer ($uid, $transferId){
+
+        try {
+
+            //update transaction status, closing user and closing_timestamp
+            db::getInstance()->query("update ims.inventory_transfers set status_id = 2, closing_uid = {$uid} where transfer_id = {$transferId}");
+
+            //get transfer information to update resource status and location
+            $sql = "select from_resource, to_resource, to_location from ims.inventory_transfers where transfer_id = {$transferId}";
+
+            //display invalid
+            $get = $this->_db->query($sql);
+
+            if (!$get->count()) {
+
+            } else {
+
+                //update resource status back to available at the transferred location
+                foreach ($get->results() as $t) {
+
+                    //Set variables from result set
+                    $fromResource = escape($t->from_resource);
+                    $toResource = escape($t->to_resource);
+                    $toLocation = escape($t->to_location);
+
+                    db::getInstance()->query("update ims.resources set resource_status_id = 1, resource_location_id = {$toLocation}, last_update_user = {$uid} where resource_unique_value between {$fromResource} and {$toResource}");
+
+                }
+
+                //get data to insert new transaction
+                $sql = "SELECT
+                                r.resource_id,
+                                r.resource_status_id,
+                                r.resource_location_id
+                            FROM
+                                ims.resources r
+                            WHERE
+                                r.resource_unique_value BETWEEN {$fromResource} AND {$toResource}";
+
+                //display invalid
+                $get = $this->_db->query($sql);
+
+                if (!$get->count()) {
+
+                } else {
+
+                    //register new transaction for each resource
+                    foreach ($get->results() as $r) {
+
+                        //set variables from result set
+                        $resourceId = escape($r->resource_id);
+                        $resourceStatusId = escape($r->resource_status_id);
+                        $resourceLocationId = escape($r->resource_location_id);
+
+                        db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, transaction_type_id,transaction_status_id)
+                                                                             values({$uid},{$resourceId},{$resourceStatusId},{$resourceLocationId},2,1)");
+                    }
+                }
+
+                $hash = new hash();
+                redirect::to('main.php?' . hash::sha256('transferAccepted' . $hash->getSalt()));
+            }
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function rejectTransfer ($uid, $transferId) {
+
+        try {
+
+            //update transaction status, closing user and closing_timestamp
+            db::getInstance()->query("update ims.inventory_transfers set status_id = 3, closing_uid = {$uid} where transfer_id = {$transferId}");
+
+            //get transfer information to update resource status and location
+            $sql = "select from_resource, to_resource from ims.inventory_transfers where transfer_id = {$transferId}";
+
+            //display invalid
+            $get = $this->_db->query($sql);
+
+            if (!$get->count()) {
+
+            } else {
+
+                //update resource status back to available at the previous location
+                foreach ($get->results() as $t) {
+
+                    //Set variables from result set
+                    $fromResource = escape($t->from_resource);
+                    $toResource = escape($t->to_resource);
+
+                }
+
+                db::getInstance()->query("update ims.resources set resource_status_id = 1 where resource_unique_value between {$fromResource} and {$toResource}");
+
+                $hash = new hash();
+                redirect::to('main.php?' . hash::sha256('transferRejected' . $hash->getSalt()));
+            }
+
+        } catch (Exception $e) {
+            die($e->getMessage());
         }
 
     }

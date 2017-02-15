@@ -13,7 +13,7 @@ if ($user->isLoggedIn()) {
             $from = escape(input::get('from'));
             $to = escape(input::get('to'));
             $currentLocationId = escape(input::get('currentLocationId'));
-            $location = escape(input::get('location'));
+            $location = escape(input::get('locationId'));
 
             $inventory = new inventory();
 
@@ -24,12 +24,8 @@ if ($user->isLoggedIn()) {
 
 
             } catch (Exception $e) {
-                //create message to display on user creation
-                ?>
-                <div id="dialogOk" title="Error">
-                    <p>&#x26a0; ERROR</p>
-                </div>
-                <?php
+                $hash = new hash();
+                redirect::to('inventory.php?' . hash::sha256('couldNotCreateTransfer' . $hash->getSalt()));
             }
         }
     } else {
