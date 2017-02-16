@@ -10,6 +10,17 @@ if ($user->isLoggedIn()){
         <div class="content">
             <div class="container">
                 <?php
+                if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
+
+                    //declare initial variables
+                    $userLocation = escape($user->data()->resource_location_id);
+
+                    $inventory = new inventory();
+
+                    //show pending transfers
+                    $inventory->stockLevels($userLocation);
+
+                }
                 if ($user->hasPermission('viewPendingTransfers') || $user->hasPermission('allAccess')) {
 
                     $inventory = new inventory();

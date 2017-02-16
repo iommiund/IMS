@@ -438,6 +438,14 @@ Nav
     margin: 0 auto;
 }
 
+.chart {
+    margin: 0 auto;
+}
+
+#chart_div {
+    margin: 0 auto;
+}
+
 .cf:before, .cf:after{
     content:"";
     display:table;

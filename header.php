@@ -38,6 +38,7 @@ if ($user->isLoggedIn()) {
         <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
             $(function () {
                 $("#dialogOk").dialog({

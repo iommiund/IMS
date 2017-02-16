@@ -13,6 +13,8 @@ if ($user->isLoggedIn()){
 
             //set variables
             $transferId = escape($_GET['id']);
+            $firstResource = escape($_GET['firstResource']);
+            $lastResource = escape($_GET['lastResource']);
             $uid = escape($user->data()->uid);
 
             //call method to accept transfer
@@ -21,7 +23,7 @@ if ($user->isLoggedIn()){
             try {
 
                 //validate resource transfer
-                $inventory->rejectTransfer($uid,$transferId);
+                $inventory->rejectTransfer($uid,$transferId,$firstResource,$lastResource);
 
             } catch (Exception $e) {
                 $hash = new hash();
