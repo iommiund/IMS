@@ -897,28 +897,26 @@ class inventory
             function drawChart() {
 
                 // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
-                data.addRows([
-                    ['Mushrooms', 3],
-                    ['Onions', 1],
-                    ['Olives', 1],
-                    ['Zucchini', 1],
-                    ['Pepperoni', 2]
+                var data = google.visualization.arrayToDataTable([
+                    ['Ingredient','',{role: 'style'}, {role: 'annotation'}],
+                    ['Mushrooms', 3, 'color: #009688', 3],
+                    ['Onions', 1, 'color: #009688', 1],
+                    ['Olives', 1, 'color: #009688', 1],
+                    ['Zucchini', 1, 'color: #009688', 1],
+                    ['Pepperoni', 2, 'color: #009688', 2]
                 ]);
 
                 var options = {
-                    'title': 'How Much Pizza I Ate Last Night',
-                    'width': 500,
+                    legend: {position: 'none'},
+                    'width': 1120,
                     'height': 300};
 
-                var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
 
             }
         </script>
-        <div id="chart_div" class="chart"></div>
+        <div id="chart_div"></div>
         <?php
     }
 

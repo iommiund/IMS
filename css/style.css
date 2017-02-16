@@ -438,11 +438,8 @@ Nav
     margin: 0 auto;
 }
 
-.chart {
-    margin: 0 auto;
-}
-
-#chart_div {
+div.chart_div table {
+    display: block;
     margin: 0 auto;
 }
 
