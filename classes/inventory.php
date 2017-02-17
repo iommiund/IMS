@@ -888,9 +888,6 @@ class inventory
 
     public function stockLevels($userLocation){
         ?>
-        <div class="separator">
-            <h2>Stock levels for your location</h2>
-        </div>
         <script type="text/javascript">
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
@@ -898,18 +895,60 @@ class inventory
 
                 // Create the data table.
                 var data = google.visualization.arrayToDataTable([
-                    ['Ingredient','',{role: 'style'}, {role: 'annotation'}],
-                    ['Mushrooms', 3, 'color: #009688', 3],
-                    ['Onions', 1, 'color: #009688', 1],
-                    ['Olives', 1, 'color: #009688', 1],
-                    ['Zucchini', 1, 'color: #009688', 1],
-                    ['Pepperoni', 2, 'color: #009688', 2]
+                    ['Model','Quantity',{role: 'style'}, {role: 'annotation'}]
+                    <?php
+
+                    //get data to populate table
+                    $sql = "SELECT 
+                                CONCAT(rm.resource_model,
+                                        ' ',
+                                        IFNULL(r.voucher_value_id, '')) AS model,
+                                COUNT(*) AS quantity,
+                                rm.warning,
+                                rm.danger
+                            FROM
+                                ims.resources r
+                                    INNER JOIN
+                                ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                            WHERE
+                                r.resource_location_id = {$userLocation}
+                                    AND r.resource_status_id = 1
+                            GROUP BY model
+                            ORDER BY 1";
+
+                    $get = $this->_db->query($sql);
+
+                    if (!$get->count()) {
+                    echo 'could not get data';
+                    } else {
+
+                        foreach ($get->results() as $m) {
+
+                            //set variables from result set
+                            $model = escape($m->model);
+                            $quantity = escape($m->quantity);
+                            $warning = escape($m->warning);
+                            $danger = escape($m->danger);
+
+                            if ($quantity > $warning){
+                                echo ",['" . $model . "', " . $quantity . ", 'color: #009688', " . $quantity . "]";
+                            } elseif ($quantity <= $warning && $quantity > $danger) {
+                                echo ",['" . $model . "', " . $quantity . ", 'color: #FFC107', " . $quantity . "]";
+                            } elseif ($quantity <= $danger) {
+                                echo ",['" . $model . "', " . $quantity . ", 'color: #F44336', " . $quantity . "]";
+                            }
+
+                        }
+
+                    }
+
+                    ?>
                 ]);
 
                 var options = {
                     legend: {position: 'none'},
-                    'width': 1120,
-                    'height': 300};
+                    width: 1120,
+                    height: 300};
 
                 var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
@@ -918,6 +957,37 @@ class inventory
         </script>
         <div id="chart_div"></div>
         <?php
+    }
+
+    public function allStockLevels (){
+
+        //prepare sql query to get all locations
+        $sql = "SELECT 
+                    rl.resource_location_id, rl.resource_location_name
+                FROM
+                    resource_locations rl
+                WHERE
+                    rl.resource_location_type_id <> 3";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+            echo 'could not get data';
+        } else {
+
+            foreach ($get->results() as $l) {
+                $locationId = escape($l->resource_location_id);
+                $locationName = escape($l->resource_location_name);
+
+                echo '<div class="separator">';
+                    echo '<h2>Stock levels for ' . $locationName .'</h2>';
+                echo '</div>';
+
+                $this->stockLevels($locationId);
+            }
+
+        }
+
     }
 
     public function createResourceType($fields = array())

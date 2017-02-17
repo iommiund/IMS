@@ -5,11 +5,20 @@ include_once ("header.php");
 if ($user->isLoggedIn()){
 
     //check if user has permission
-    if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('allStockLevels') || $user->hasPermission('allAccess')){
         ?>
         <div class="content">
             <div class="container">
-                <!-- CONTENT -->
+        <?php
+        if ($user->hasPermission('allStockLevels') || $user->hasPermission('allAccess')) {
+
+            $inventory = new inventory();
+
+            //show pending transfers
+            $inventory->allStockLevels();
+
+        }
+        ?>
             </div>
         </div>
         <?php

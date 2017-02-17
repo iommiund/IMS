@@ -11,13 +11,17 @@ if ($user->isLoggedIn()){
             <div class="container">
                 <?php
                 if ($user->hasPermission('stockLevels') || $user->hasPermission('allAccess')) {
-
+                    ?>
+                    <div class="separator">
+                        <h2>Stock levels for your location</h2>
+                    </div>
+                    <?php
                     //declare initial variables
                     $userLocation = escape($user->data()->resource_location_id);
 
                     $inventory = new inventory();
 
-                    //show pending transfers
+                    //show stock levels at location
                     $inventory->stockLevels($userLocation);
 
                 }

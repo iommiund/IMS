@@ -69,6 +69,9 @@ if ($user->isLoggedIn()) {
                         if ($user->hasPermission('inventory') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="inventory.php">Inventory</a></li>';
                         }
+                        if ($user->hasPermission('allStockLevels') || $user->hasPermission('allAccess')) {
+                            echo '<li><a href="stockLevels.php">Stock</a></li>';
+                        }
                         if ($user->hasPermission('newCustomer') || $user->hasPermission('allAccess')) {
                             echo '<li><a href="newCustomer.php">New Customer</a></li>';
                         }
