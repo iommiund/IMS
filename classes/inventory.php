@@ -947,15 +947,16 @@ class inventory
 
                 var options = {
                     legend: {position: 'none'},
-                    width: 1120,
+                    backgroundColor: "transparent",
+                    width: 1175,
                     height: 300};
 
-                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div<?php echo $userLocation; ?>'));
                 chart.draw(data, options);
 
             }
         </script>
-        <div id="chart_div"></div>
+        <div id="chart_div<?php echo $userLocation; ?>"></div>
         <?php
     }
 

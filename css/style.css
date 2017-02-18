@@ -263,6 +263,7 @@ Layout styles
 
 .fixheader {
 	position:fixed;
+    z-index: 999;
 	width:100%;
     height: 67px;
 }
