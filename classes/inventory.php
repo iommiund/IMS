@@ -408,7 +408,7 @@ class inventory
         //get records
         $get = $this->_db->query($sql);
 
-        //get records
+        //if records returned
         if (!$get->count()) {
 
             $hash = new hash();
@@ -424,7 +424,9 @@ class inventory
                     rt.resource_type,
                     vv.voucher_value,
                     rs.resource_status,
-                    rl.resource_location_name
+                    rl.resource_location_name,
+                    rl.latitude,
+                    rl.longitude
                 FROM
                     ims.resources r
                         INNER JOIN
@@ -451,6 +453,10 @@ class inventory
             if (!$get->count()) {
 
             } else {
+                foreach ($get->results() as $l) {
+                    $latitude = escape($l->latitude);
+                    $longitude = escape($l->longitude);
+                }
                 ?>
                 <div class="form-style">
                     <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
@@ -458,6 +464,8 @@ class inventory
                         <input type="hidden" name="to" value="<?php echo $to; ?>">
                         <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
                         <input type="hidden" name="locationId" value="<?php echo $location; ?>">
+                        <input type="hidden" name="latitude" value="<?php echo $latitude; ?>">
+                        <input type="hidden" name="longitude" value="<?php echo $longitude; ?>">
                         <input type="submit" value="TRANSFER"/>
                     </form>
                 </div>
@@ -601,7 +609,7 @@ class inventory
 
     }
 
-    public function createTransferRequest($from, $to, $currentLocationId, $location)
+    public function createTransferRequest($from, $to, $currentLocationId, $location, $latitude, $longitude)
     {
         //get description
         $sql = "select
@@ -614,12 +622,15 @@ class inventory
                     inner join ims.resource_types rt on rm.resource_type_id = rt.resource_type_id
                     where r.resource_unique_value = '$from'";
 
+        //get data
         $get = $this->_db->query($sql);
 
+        //if results returned
         if (!$get->count()) {
 
         } else {
 
+            //declare description variable
             foreach ($get->results() as $d) {
 
                 //Set variables from result set
@@ -631,7 +642,7 @@ class inventory
             //declare variables
             $uid = escape($user->data()->uid);
 
-            //create fields array to insert values in temp table
+            //create fields array to insert values in inventory transfers table
             $fields = array(
                 'creation_uid' => $uid,
                 'from_resource' => $from,
@@ -639,10 +650,12 @@ class inventory
                 'description' => $description,
                 'from_location' => $currentLocationId,
                 'to_location' => $location,
+                'latitude' => $latitude,
+                'longitude' => $longitude,
                 'status_id' => 1
             );
 
-            //insert records in temp table
+            //insert records in inventory transfers table
             if (!$this->_db->insert('inventory_transfers', $fields)) {
                 throw new Exception('error');
             } else {
@@ -673,7 +686,9 @@ class inventory
                 it.description,
                 rl.resource_location_name,
                 it.to_location,
-                date_format(it.timestamp,'%D %b %Y') as pending_since
+                date_format(it.timestamp,'%D %b %Y') as pending_since,
+                it.latitude,
+                it.longitude
                 FROM ims.inventory_transfers it
                     inner join
                     ims.users u on it.creation_uid = u.uid
@@ -683,9 +698,10 @@ class inventory
                     ims.inventory_transfers_statuses its on it.status_id = its.status_id
                 where to_location = {$userLocation} and it.status_id = 1";
 
-        //display invalid
+        //get data
         $get = $this->_db->query($sql);
 
+        //if data returned
         if (!$get->count()) {
 
         } else {
@@ -718,6 +734,8 @@ class inventory
                         $arrivingFrom = escape($t->resource_location_name);
                         $destination = escape($t->to_location);
                         $pendingSince = escape($t->pending_since);
+                        $latitude = escape($t->latitude);
+                        $longitude = escape($t->longitude);
 
                         echo '<tr>';
                         echo '<td>' . $initiator . '</td>';
@@ -727,7 +745,7 @@ class inventory
                         echo '<td>' . $arrivingFrom . '</td>';
                         echo '<td>' . $pendingSince . '</td>';
                         if ($user->hasPermission('acceptTransfer') || $user->hasPermission('allAccess')) {
-                            echo '<td><a href="acceptTransfer.php?id=' . $transferId . '&firstResource=' . $firstResource . '&lastResource=' . $lastResource . '&destination=' . $destination . '">Accept</a></td>';
+                            echo '<td><a href="acceptTransfer.php?id=' . $transferId . '&firstResource=' . $firstResource . '&lastResource=' . $lastResource . '&destination=' . $destination . '&latitude=' . $latitude . '&longitude=' . $longitude . '">Accept</a></td>';
                         } else {
                             echo '<td></td>';
                         }
@@ -816,16 +834,16 @@ class inventory
 
     }
 
-    public function acceptTransfer($uid,$transferId,$firstResource,$lastResource,$destination)
+    public function acceptTransfer($uid, $transferId, $firstResource, $lastResource, $destination,$latitude,$longitude)
     {
 
         //update transaction status and closing user
-        if (!db::getInstance()->query("update ims.inventory_transfers set status_id = 2, closing_uid = {$uid} where transfer_id = {$transferId}")){
+        if (!db::getInstance()->query("update ims.inventory_transfers set status_id = 2, closing_uid = {$uid} where transfer_id = {$transferId}")) {
             echo 'could not update inventory transfers table';
         } else {
 
             //update resources with available status and final destination
-            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1, resource_location_id = {$destination}, last_update_user = {$uid} where resource_unique_value between '$firstResource' and '$lastResource'")){
+            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1, resource_location_id = {$destination}, resource_latitude = {$latitude}, resource_longitude = {$longitude} last_update_user = {$uid} where resource_unique_value between '$firstResource' and '$lastResource'")) {
                 echo 'could not update resources table';
             } else {
 
@@ -849,7 +867,7 @@ class inventory
                         $resourceId = escape($r->resource_id);
 
                         //insert a new transaction for the updated resource
-                        db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, transaction_type_id,transaction_status_id) values({$uid},{$resourceId},1,{$destination},2,1)");
+                        db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, transaction_type_id,transaction_status_id, resource_latitude, resource_longitude) values({$uid},{$resourceId},1,{$destination},2,1, '$latitude', '$longitude')");
 
                     }
 
@@ -864,21 +882,21 @@ class inventory
 
     }
 
-    public function rejectTransfer($uid,$transferId,$firstResource,$lastResource)
+    public function rejectTransfer($uid, $transferId, $firstResource, $lastResource)
     {
 
         //update transaction status and closing user
-        if (!db::getInstance()->query("update ims.inventory_transfers set status_id = 3, closing_uid = {$uid} where transfer_id = {$transferId}")){
+        if (!db::getInstance()->query("update ims.inventory_transfers set status_id = 3, closing_uid = {$uid} where transfer_id = {$transferId}")) {
             echo 'could not update inventory transfers table';
         } else {
 
             //update resources with available status
-            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1 where resource_unique_value between '$firstResource' and '$lastResource'")){
+            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1 where resource_unique_value between '$firstResource' and '$lastResource'")) {
                 echo 'could not update resources table';
             } else {
 
-                    $hash = new hash();
-                    redirect::to('main.php?' . hash::sha256('transferRejected' . $hash->getSalt()));
+                $hash = new hash();
+                redirect::to('main.php?' . hash::sha256('transferRejected' . $hash->getSalt()));
 
             }
 
@@ -886,16 +904,49 @@ class inventory
 
     }
 
-    public function stockLevels($userLocation){
+    public function allStockLevels()
+    {
+
+        //prepare sql query to get all locations
+        $sql = "SELECT 
+                    rl.resource_location_id, rl.resource_location_name
+                FROM
+                    resource_locations rl
+                WHERE
+                    rl.resource_location_type_id <> 3";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+            echo 'could not get data';
+        } else {
+
+            foreach ($get->results() as $l) {
+                $locationId = escape($l->resource_location_id);
+                $locationName = escape($l->resource_location_name);
+
+                echo '<div class="separator">';
+                echo '<h2>Stock levels for ' . $locationName . '</h2>';
+                echo '</div>';
+
+                $this->stockLevels($locationId);
+            }
+
+        }
+
+    }
+
+    public function stockLevels($userLocation)
+    {
         ?>
         <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', {'packages': ['corechart']});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
 
                 // Create the data table.
                 var data = google.visualization.arrayToDataTable([
-                    ['Model','Quantity',{role: 'style'}, {role: 'annotation'}]
+                    ['Model', 'Quantity', {role: 'style'}, {role: 'annotation'}]
                     <?php
 
                     //get data to populate table
@@ -919,7 +970,7 @@ class inventory
                     $get = $this->_db->query($sql);
 
                     if (!$get->count()) {
-                    echo 'could not get data';
+                        echo 'could not get data';
                     } else {
 
                         foreach ($get->results() as $m) {
@@ -930,7 +981,7 @@ class inventory
                             $warning = escape($m->warning);
                             $danger = escape($m->danger);
 
-                            if ($quantity > $warning){
+                            if ($quantity > $warning) {
                                 echo ",['" . $model . "', " . $quantity . ", 'color: #009688', " . $quantity . "]";
                             } elseif ($quantity <= $warning && $quantity > $danger) {
                                 echo ",['" . $model . "', " . $quantity . ", 'color: #FFC107', " . $quantity . "]";
@@ -949,7 +1000,8 @@ class inventory
                     legend: {position: 'none'},
                     backgroundColor: "transparent",
                     width: 1175,
-                    height: 300};
+                    height: 300
+                };
 
                 var chart = new google.visualization.ColumnChart(document.getElementById('chart_div<?php echo $userLocation; ?>'));
                 chart.draw(data, options);
@@ -960,33 +1012,226 @@ class inventory
         <?php
     }
 
-    public function allStockLevels (){
+    public function getInventoryDetails($resourceId)
+    {
 
-        //prepare sql query to get all locations
+        //prepare sql query to get resource details
         $sql = "SELECT 
-                    rl.resource_location_id, rl.resource_location_name
+                    r.resource_id,
+                    r.resource_unique_value,
+                    rb.resource_brand,
+                    CONCAT(rm.resource_model,
+                            ' ',
+                            IFNULL(r.voucher_value_id, '')) AS model,
+                    rt.resource_type,
+                    rs.resource_status,
+                    rl.resource_location_name,
+                    r.customer_account_id,
+                    r.resource_latitude,
+                    r.resource_longitude
                 FROM
-                    resource_locations rl
-                WHERE
-                    rl.resource_location_type_id <> 3";
+                    ims.resources r
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON r.resource_type_id = rt.resource_type_id
+                        INNER JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        INNER JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
+                where r.resource_id = {$resourceId}";
 
+        //execute sql query
         $get = $this->_db->query($sql);
 
+        //if no error returned display details
         if (!$get->count()) {
             echo 'could not get data';
         } else {
 
-            foreach ($get->results() as $l) {
-                $locationId = escape($l->resource_location_id);
-                $locationName = escape($l->resource_location_name);
+            foreach ($get->results() as $i) {
 
-                echo '<div class="separator">';
-                    echo '<h2>Stock levels for ' . $locationName .'</h2>';
-                echo '</div>';
+                //set initial variable values
+                $customer = 'Not allocated to any customer';
+                $latitude = null;
+                $longitude = null;
 
-                $this->stockLevels($locationId);
+                //Set variables from result set
+                $resourceUniqueValue = escape($i->resource_unique_value);
+                $resourceBrand = escape($i->resource_brand);
+                $resourceModel = escape($i->model);
+                $resourceType = escape($i->resource_type);
+                $resourceStatus = escape($i->resource_status);
+                $resourceLocation = escape($i->resource_location_name);
+                if (isset($i->customer_account_id)) {
+                    $customerId = escape($i->customer_account_id);
+                    $customer = '<a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a>';
+                }
+                if (isset($i->resource_latitude)) {
+                    $latitude = escape($i->resource_latitude);
+                }
+                if (isset($i->resource_longitude)) {
+                    $longitude = escape($i->resource_longitude);
+                }
+
+                ?>
+                <div class="separator">
+                    <h1>Inventory Details</h1>
+                </div>
+                <table class="ctable">
+                    <tr>
+                        <td><b>Resource SN: </b></td>
+                        <td><?php echo $resourceUniqueValue; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Vendor: </b></td>
+                        <td><?php echo $resourceBrand; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Model: </b></td>
+                        <td><?php echo $resourceModel; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Type: </b></td>
+                        <td><?php echo $resourceType; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Status: </b></td>
+                        <td><?php echo $resourceStatus; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Location: </b></td>
+                        <td><?php echo $resourceLocation; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Customer: </b></td>
+                        <td><?php echo $customer; ?></td>
+                    </tr>
+                </table>
+                <?php
+                if ($latitude == null && $longitude == null) {
+
+                } else {
+                    ?>
+                    <div class="separator">
+                        <h2>Resource Map Location</h2>
+                    </div>
+                    <div id="map"></div>
+                    <script>
+                        function initMap() {
+                            var location = {lat: <?php echo $latitude; ?>, lng: <?php echo $longitude; ?>};
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 14,
+                                center: location,
+                                disableDefaultUI: true,
+                                styles: <?php include_once('includes/mapStyle.php');?>
+                            });
+                            var marker = new google.maps.Marker({
+                                position: location,
+                                map: map
+                            });
+                        }
+                    </script>
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWv5w-eY6YEfFCJfbQBaHsxHMplfhpxEc&callback=initMap">
+                    </script>
+                    <?php
+                }
+
             }
 
+        }
+
+    }
+
+    public function getResourceHistory($resourceId)
+    {
+        ?>
+        <div class="separator">
+            <h2>Resource History</h2>
+        </div>
+        <?php
+
+        //prepare sql query to get resource history
+        $sql = "SELECT 
+                    t.transaction_id,
+                    CONCAT(u.name, ' ', u.surname) as fullName,
+                    rs.resource_status,
+                    rl.resource_location_name,
+                    t.customer_account_id,
+                    t.initiation_timestamp,
+                    tt.transaction_type,
+                    ts.transaction_status
+                FROM
+                    ims.transactions t
+                        INNER JOIN
+                    ims.users u ON t.uid = u.uid
+                        INNER JOIN
+                    ims.resources r ON t.resource_id = r.resource_id
+                        INNER JOIN
+                    ims.resource_statuses rs ON t.resource_status_id = rs.resource_status_id
+                        INNER JOIN
+                    ims.resource_locations rl ON t.resource_location_id = rl.resource_location_id
+                        INNER JOIN
+                    ims.transaction_types tt ON t.transaction_type_id = tt.transaction_type_id
+                        INNER JOIN
+                    ims.transaction_statuses ts ON t.transaction_status_id = ts.transaction_status_id
+                WHERE
+                    t.resource_id = {$resourceId}
+                ORDER BY t.transaction_id DESC";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+            ?>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Customer</th>
+                        <th>Date & Time</th>
+                        <th>Type</th>
+                        <th>Transaction Status</th>
+                    </tr>
+                    <?php
+
+                    foreach ($get->results() as $h) {
+
+                        //Set initial variable value to empty
+                        $customer = NULL;
+
+                        //Set variables from result set
+                        $fullName = escape($h->fullName);
+                        $resourceStatus = escape($h->resource_status);
+                        $resourceLocation = escape($h->resource_location_name);
+                        if (isset($h->customer_account_id)) {
+                            $customerId = escape($h->customer_account_id);
+                            $customer = '<a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a>';
+                        }
+                        $timestamp = escape($h->initiation_timestamp);
+                        $transactionType = escape($h->transaction_type);
+                        $transactionStatus = escape($h->transaction_status);
+
+                        echo '<tr>';
+                        echo '<td>' . $fullName . '</td>';
+                        echo '<td>' . $resourceStatus . '</td>';
+                        echo '<td>' . $resourceLocation . '</td>';
+                        echo '<td>' . $customer . '</td>';
+                        echo '<td>' . $timestamp . '</td>';
+                        echo '<td>' . $transactionType . '</td>';
+                        echo '<td>' . $transactionStatus . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
         }
 
     }

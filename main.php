@@ -79,6 +79,13 @@ if ($user->isLoggedIn()){
             </div>
             <?php
         }
+        if (isset($_GET[hash::sha256('couldNotFindInventory' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Success">
+                <p>Resource could not be found</p>
+            </div>
+            <?php
+        }
     } else {
         redirect::to('main.php');
     }

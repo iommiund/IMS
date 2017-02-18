@@ -110,13 +110,38 @@ body {
   transition: opacity ease 0.5s;
 }
 
-.center-table a {
+.center-table a  {
     text-decoration: none;
     color: #607D8B;
     font-weight: 400;
     text-align: center;
     display: inline-block;
     transition: opacity ease 0.5s;
+}
+
+.ctable {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+    margin: 0 auto;
+    color: #757575;
+    text-align: left;
+    font-size: larger;
+}
+
+.ctable td {
+    width: 50%;
+}
+
+.ctable a {
+    text-decoration: none;
+    color: #607D8B;
+    text-align: center;
+}
+
+#map {
+    width: 1120px;
+    height: 300px;
 }
 
 #error {

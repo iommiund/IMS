@@ -14,13 +14,15 @@ if ($user->isLoggedIn()) {
             $to = escape(input::get('to'));
             $currentLocationId = escape(input::get('currentLocationId'));
             $location = escape(input::get('locationId'));
+            $latitude = escape(input::get('latitude'));
+            $longitude = escape(input::get('longitude'));
 
             $inventory = new inventory();
 
             try {
 
                 //validate resource transfer
-                $inventory->createTransferRequest($from, $to, $currentLocationId, $location);
+                $inventory->createTransferRequest($from, $to, $currentLocationId, $location, $latitude, $longitude);
 
 
             } catch (Exception $e) {

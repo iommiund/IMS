@@ -16,6 +16,8 @@ if ($user->isLoggedIn()){
             $firstResource = escape($_GET['firstResource']);
             $lastResource = escape($_GET['lastResource']);
             $destination = escape($_GET['destination']);
+            $latitude = escape($_GET['latitude']);
+            $longitude = escape($_GET['longitude']);
             $uid = escape($user->data()->uid);
 
             //call method to accept transfer
@@ -24,7 +26,7 @@ if ($user->isLoggedIn()){
             try {
 
                 //validate resource transfer
-                $inventory->acceptTransfer($uid,$transferId,$firstResource,$lastResource,$destination);
+                $inventory->acceptTransfer($uid,$transferId,$firstResource,$lastResource,$destination,$latitude,$longitude);
 
             } catch (Exception $e) {
                 $hash = new hash();

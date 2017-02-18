@@ -98,7 +98,7 @@ if ($user->isLoggedIn()) {
                     if ($user->hasPermission('search') || $user->hasPermission('allAccess')) {
                     ?>
                         <form action="search.php" method="post" class="form-wrapper cf">
-                            <input type="text" name="search" placeholder="Search here..." required>
+                            <input type="text" name="search" placeholder="Search here..." autocomplete="off" required="required">
                             <button type="submit">Search</button>
                         </form>
                     <?php
