@@ -66,7 +66,6 @@ class customer
                         <th>Options</th>
                     </tr>
                     <?php
-                    $hash = new hash();
                     foreach ($get->results() as $r) {
 
                         //Set variables from result set
@@ -91,6 +90,147 @@ class customer
             <hr>
             <?php
         }
+    }
+
+    public function getCustomerDetails($customerId){
+
+        //prepare sql query to ger customer details
+        $sql = "SELECT 
+                    CONCAT(ca.customer_name,
+                            ' ',
+                            ca.customer_surname) AS fullName,
+                    ca.customer_email,
+                    ca.customer_dob,
+                    n.nationality,
+                    ca.customer_account_status_id,
+                    cas.customer_account_status
+                FROM
+                    ims.customer_accounts ca
+                        INNER JOIN
+                    ims.nationalities n ON ca.nationality_id = n.nationality_id
+                        INNER JOIN
+                    ims.customer_account_statuses cas ON ca.customer_account_status_id = cas.customer_account_status_id
+                WHERE
+                    ca.customer_account_id = {$customerId}";
+
+        //execute sql query
+        $get = $this->_db->query($sql);
+
+        //if no error returned display details
+        if (!$get->count()) {
+            echo 'could not get data';
+        } else {
+
+            foreach ($get->results() as $c) {
+
+                //set variables for result set
+                $fullName = escape($c->fullName);
+                $email = escape($c->customer_email);
+                $dob = escape($c->customer_dob);
+                $nationality = escape($c->nationality);
+                $customerStatusId = escape($c->customer_account_status_id);
+                $customerStatus = escape($c->customer_account_status);
+
+            }
+            ?>
+            <div class="separator">
+                <h1>Customer Details</h1>
+            </div>
+            <table class="ctable">
+                <tr>
+                    <td><b>Customer Name: </b></td>
+                    <td><?php echo $fullName; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Email: </b></td>
+                    <td><?php echo $email; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Date Of Birth: </b></td>
+                    <td><?php echo $dob; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Nationality: </b></td>
+                    <td><?php echo $nationality; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Customer Status: </b></td>
+                    <td><?php echo $customerStatus; ?></td>
+                </tr>
+                <?php
+                if ($customerStatusId == 2){
+                ?>
+                <tr>
+                    <td colspan="2"><a href="changeCustomerStatus.php?id=<?php echo $customerId; ?>&statusId=1">Enable</a></td>
+                </tr>
+                <?php
+                }
+                if ($customerStatusId == 1){
+                    ?>
+                    <tr>
+                        <td colspan="2"><a href="changeCustomerStatus.php?id=<?php echo $customerId; ?>&statusId=2">Disable</a></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+            <?php
+
+        }
+    }
+
+    public function changeCustomerStatus($customerId,$statusId) {
+
+        //check whether customer is already disabled/enabled
+        $sql = "select customer_account_status_id from ims.customer_accounts where customer_account_id = {$customerId}";
+
+        //execute sql query
+        $get = $this->_db->query($sql);
+
+        //if no error returned display details
+        if (!$get->count()) {
+            redirect::to('viewCustomerDetails.php?id=' . $customerId . '&noStatusReturned');
+        } else {
+
+            foreach ($get->results() as $s) {
+
+                //set variables for result set
+                $currentStatus = escape($s->customer_account_status_id);
+
+            }
+
+            //if the current status = requested status redirect with error
+            if ($statusId == $currentStatus){
+                redirect::to('viewCustomerDetails.php?id=' . $customerId . '&notUpdated');
+
+            } elseif ($statusId == 1){
+
+                //if new status = enabled enable customer account
+                db::getInstance()->query("update ims.customer_accounts set customer_account_status_id = 1 where customer_account_id = {$customerId} and customer_account_status_id = 2");
+
+                //redirect with success message
+                redirect::to('viewCustomerDetails.php?id=' . $customerId . '&updated');
+
+            } elseif ($statusId == 2){
+
+                //if new status = disabled disable customer account
+                db::getInstance()->query("update ims.customer_accounts set customer_account_status_id = 2 where customer_account_id = {$customerId} and customer_account_status_id = 1");
+
+                //check whether customer has any inventory and create order to collect inventory from customer
+
+
+                //redirect with success message
+                redirect::to('viewCustomerDetails.php?id=' . $customerId . '&updated');
+            }
+
+        }
+
+    }
+
+    public function getInventoryCPE($customerId) {
+
+
+
     }
 
 }

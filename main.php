@@ -81,8 +81,15 @@ if ($user->isLoggedIn()){
         }
         if (isset($_GET[hash::sha256('couldNotFindInventory' . $hash->getSalt())])) {
             ?>
-            <div id="dialogOk" title="Success">
+            <div id="dialogOk" title="Error">
                 <p>Resource could not be found</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET[hash::sha256('couldNotFindCustomer' . $hash->getSalt())])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Customer could not be found</p>
             </div>
             <?php
         }
