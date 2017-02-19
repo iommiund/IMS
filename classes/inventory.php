@@ -389,7 +389,7 @@ class inventory
         }
     }
 
-    public function validateTransfer($from, $to, $currentLocationId, $location)
+    public function validateTransfer($from, $to, $currentLocationId, $location,$latitude,$longitude)
     {
         //confirm that resource range is of the same type
         $fromModel = escape(substr($from, 0, 6));
@@ -406,15 +406,18 @@ class inventory
         $sql = "select * from ims.resources r where r.resource_unique_value BETWEEN '$from' AND '$to'";
 
         //get records
-        $get = $this->_db->query($sql);
+        $getResults = $this->_db->query($sql);
 
         //if records returned
-        if (!$get->count()) {
+        if (!$getResults->count()) {
 
             $hash = new hash();
             redirect::to('inventory.php?' . hash::sha256('empty' . $hash->getSalt()));
 
         } else {
+
+            //hold the count of rows for all resources
+            $allRowsCount = $getResults->count();
 
             //select valid
             $sql = "SELECT 
@@ -424,9 +427,7 @@ class inventory
                     rt.resource_type,
                     vv.voucher_value,
                     rs.resource_status,
-                    rl.resource_location_name,
-                    rl.latitude,
-                    rl.longitude
+                    rl.resource_location_name
                 FROM
                     ims.resources r
                         INNER JOIN
@@ -448,27 +449,43 @@ class inventory
                         AND r.customer_account_id IS NULL";
 
             //display valid
-            $get = $this->_db->query($sql);
+            $getValid = $this->_db->query($sql);
 
-            if (!$get->count()) {
+            if (!$getValid->count()) {
 
             } else {
-                foreach ($get->results() as $l) {
-                    $latitude = escape($l->latitude);
-                    $longitude = escape($l->longitude);
+
+                //hold the count of rows for valid resources
+                $validRowsCount = $getValid->count();
+
+                //if all valid rows is less than all rows count display message to edit range
+                if ($validRowsCount < $allRowsCount){
+                    ?>
+                        <div class="reset-password">
+                        <div id="error">
+                            <br>
+                            The range you entered is not all valid, please <a href="inventory.php">go back</a> and edit range.
+                        </div>
+                        </div>
+                    <?php
+
+                //else if rows count = valid rows display transfer button
+                } else {
+                    ?>
+                    <div class="form-style">
+                        <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
+                            <input type="hidden" name="from" value="<?php echo $from; ?>">
+                            <input type="hidden" name="to" value="<?php echo $to; ?>">
+                            <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
+                            <input type="hidden" name="locationId" value="<?php echo $location; ?>">
+                            <input type="hidden" name="latitude" value="<?php echo $latitude; ?>">
+                            <input type="hidden" name="longitude" value="<?php echo $longitude; ?>">
+                            <input type="submit" value="TRANSFER"/>
+                        </form>
+                    </div>
+                    <?php
                 }
                 ?>
-                <div class="form-style">
-                    <form action="inventoryTransfer.php" method="post" name="inventoryTransfer">
-                        <input type="hidden" name="from" value="<?php echo $from; ?>">
-                        <input type="hidden" name="to" value="<?php echo $to; ?>">
-                        <input type="hidden" name="currentLocationId" value="<?php echo $currentLocationId; ?>">
-                        <input type="hidden" name="locationId" value="<?php echo $location; ?>">
-                        <input type="hidden" name="latitude" value="<?php echo $latitude; ?>">
-                        <input type="hidden" name="longitude" value="<?php echo $longitude; ?>">
-                        <input type="submit" value="TRANSFER"/>
-                    </form>
-                </div>
                 <div class="center-table">
                     <table>
                         <tr>
@@ -482,7 +499,7 @@ class inventory
                         </tr>
                         <?php
 
-                        foreach ($get->results() as $r) {
+                        foreach ($getValid->results() as $r) {
 
                             //Set initial variable value to empty
                             $voucherValue = NULL;
@@ -840,11 +857,13 @@ class inventory
         //update transaction status and closing user
         if (!db::getInstance()->query("update ims.inventory_transfers set status_id = 2, closing_uid = {$uid} where transfer_id = {$transferId}")) {
             echo 'could not update inventory transfers table';
+            die();
         } else {
 
             //update resources with available status and final destination
-            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1, resource_location_id = {$destination}, resource_latitude = {$latitude}, resource_longitude = {$longitude} last_update_user = {$uid} where resource_unique_value between '$firstResource' and '$lastResource'")) {
+            if (!db::getInstance()->query("update ims.resources set resource_status_id = 1, resource_location_id = {$destination}, resource_latitude = '$latitude', resource_longitude = '$longitude', last_update_user = {$uid} where resource_unique_value between '$firstResource' and '$lastResource'")) {
                 echo 'could not update resources table';
+                die();
             } else {
 
                 //prepare query to get all resource_ids for the updated resources

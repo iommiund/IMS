@@ -33,19 +33,44 @@ if ($user->isLoggedIn()){
 
                 $inventory = new inventory();
 
-                try {
+                //execute query to get latitude and longitude
+                $get = db::getInstance()->query("SELECT rl.latitude, rl.longitude FROM ims.resource_locations rl WHERE resource_location_id = '$location'");
 
-                    //validate resource transfer
-                    $inventory->validateTransfer($from, $to, $currentLocationId, $location);
+                // if results returned
+                if (!$get->count()) {
+
+                } else {
+
+                    foreach ($get->results() as $l) {
+
+                        //Set initial variable value to empty
+                        $latitude = NULL;
+                        $longitude = NULL;
+
+                        //Set variables from result set
+                        if (isset($l->latitude)) {
+                            $latitude = escape($l->latitude);
+                        }
+                        if (isset($l->longitude)) {
+                            $longitude = escape($l->longitude);
+                        }
+                    }
+
+                    try {
+
+                        //validate resource transfer
+                        $inventory->validateTransfer($from, $to, $currentLocationId, $location,$latitude,$longitude);
 
 
-                } catch (Exception $e) {
-                    //create message to display on user creation
-                    ?>
-                    <div id="dialogOk" title="Error">
-                        <p>&#x26a0; ERROR</p>
-                    </div>
-                    <?php
+                    } catch (Exception $e) {
+                        //create message to display on user creation
+                        ?>
+                        <div id="dialogOk" title="Error">
+                            <p>&#x26a0; ERROR</p>
+                        </div>
+                        <?php
+                    }
+
                 }
 
             } else {

@@ -133,10 +133,19 @@ body {
     width: 50%;
 }
 
-.ctable a {
+.ctable a,
+.ctext a {
     text-decoration: none;
     color: #607D8B;
     text-align: center;
+}
+
+.ctext {
+    color: #757575;
+    display: inline-block;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 0px;
 }
 
 #map {
@@ -152,6 +161,10 @@ body {
   display: inline-block;
   opacity: 0.6;
   transition: opacity ease 0.5s;
+}
+
+#error a {
+    color: red;
 }
 
 #success {
