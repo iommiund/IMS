@@ -10,6 +10,8 @@ if ($user->isLoggedIn()){
             $resourceId = escape($_GET['id']);
 
             $inventory = new inventory();
+        } else {
+            redirect::to('main.php');
         }
         ?>
         <div class="content">
@@ -19,6 +21,9 @@ if ($user->isLoggedIn()){
 
                         //get inventory details
                         $inventory->getInventoryDetails($resourceId);
+
+                        //show options
+                        $inventory->getInventoryOptions($resourceId);
 
                     } catch (Exception $e) {
                         $hash = new hash();
@@ -46,6 +51,41 @@ if ($user->isLoggedIn()){
             </div>
         </div>
         <?php
+        if (isset($_GET['cannotBeSold'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Resource cannot be sold.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['cannotBeSoldMainOrField'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Resource location cannot sell resources.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['resourceNotUpdated'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Resource cannot be updated.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['transferNotUpdated'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Transfer cannot be updated.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['resourceSold'])) {
+            ?>
+            <div id="dialogOk" title="Success">
+                <p>Resource successfully sold.</p>
+            </div>
+            <?php
+        }
     } else {
         redirect::to('main.php');
     }

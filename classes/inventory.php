@@ -130,7 +130,7 @@ class inventory
                     //If serial number length does not match
                     if ($resourceLength !== $reqSNLength) {
 
-                        //Ser validation result to serial number length is incorrect
+                        //Set validation result to serial number length is incorrect
                         $vrID = 4;
                     }
 
@@ -280,6 +280,8 @@ class inventory
                     'voucher_value_id' => $voucherValueId,
                     'resource_status_id' => 1, //Available
                     'resource_location_id' => 1, //Main Warehouse
+                    'resource_latitude' => 35.891747,
+                    'resource_longitude' => 14.458700,
                     'last_update_user' => $uid,
                 );
 
@@ -303,9 +305,14 @@ class inventory
                     rm.resource_model,
                     rt.resource_type,
                     vv.voucher_value,
+                    rs.resource_status_id,
                     rs.resource_status,
+                    rl.resource_location_id,
                     rl.resource_location_name,
-                    ca.customer_account_id
+                    rl.resource_location_type_id,
+                    ca.customer_account_id,
+                    rm.sell,
+                    rm.install
                 FROM
                     ims.resources r
                         LEFT JOIN
@@ -323,7 +330,7 @@ class inventory
                         LEFT JOIN
                     ims.customer_accounts ca ON r.customer_account_id = ca.customer_account_id  
                 where r.resource_unique_value like '%$field%'
-                order by 6,7,1";
+                order by 1";
 
         $get = $this->_db->query($sql);
 
@@ -345,7 +352,7 @@ class inventory
                         <th>Status</th>
                         <th>Location</th>
                         <th>Customer ID</th>
-                        <th>Options</th>
+                        <th colspan="3">Options</th>
                     </tr>
                     <?php
 
@@ -364,11 +371,16 @@ class inventory
                         if (isset($r->voucher_value)) {
                             $voucherValue = escape($r->voucher_value);
                         }
+                        $resourceStatusId = escape($r->resource_status_id);
                         $resourceStatus = escape($r->resource_status);
+                        $resourceLocationId = escape($r->resource_location_id);
                         $resourceLocation = escape($r->resource_location_name);
+                        $resourceLocationTypeId = escape($r->resource_location_type_id);
                         if (isset($r->customer_account_id)) {
                             $customerId = escape($r->customer_account_id);
                         }
+                        $sellFlag = escape($r->sell);
+                        $installFlag = escape($r->install);
 
                         echo '<tr>';
                         echo '<td><a href="viewInventoryDetails.php?id=' . $resourceId . '">' . $resourceUniqueValue . '</a></td>';
@@ -379,7 +391,58 @@ class inventory
                         echo '<td>' . $resourceStatus . '</td>';
                         echo '<td>' . $resourceLocation . '</td>';
                         echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">' . $customerId . '</a></td>';
-                        echo '<td></td>';
+
+                        $user = new user();
+                        $userLocationId = escape($user->data()->resource_location_id);
+
+                        //if customer id is null, and status = available, and location <> customer, and install = 1 leave blank
+                        if ($installFlag == 1 && $customerId == null && $resourceStatusId == 1 && $resourceLocationId !== 7) {
+                            echo '<td></td>';
+
+                            //else if customer id is not null, and status = allocated and location = customer and install = 1 insert link for replace
+                        } elseif ($installFlag == 1 && $customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7) {
+
+                            if ($user->hasPermission('orderReplaceResource') || $user->hasPermission('allAccess')) {
+                                echo '<td><a href="replaceResource.php?id=' . $resourceId . '">Replace</a></td>';
+                            }
+
+                            //else leave blank
+                        } else {
+                            echo '<td></td>';
+                        }
+
+                        //if customer id is null, and status = available, and location <> customer, and install = 1 leave blank
+                        if ($installFlag == 1 && $customerId == null && $resourceStatusId == 1 && $resourceLocationId != 7) {
+                            echo '<td></td>';
+
+                            //else if customer id is not null, and status = allocated and location = customer and install = 1 insert link for collection
+                        } elseif ($customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7 && $installFlag == 1) {
+
+                            if ($user->hasPermission('orderCollectResource') || $user->hasPermission('allAccess')) {
+                                echo '<td><a href="collectResource.php?id=' . $resourceId . '">Collect</a></td>';
+                            }
+
+                            //else leave blank
+                        } else {
+                            echo '<td></td>';
+                        }
+
+                        //if resource location is main warehouse or location type = field user leave blank
+                        if (($sellFlag == 1 && $resourceLocationId == 1) || ($sellFlag == 1 && $resourceLocationTypeId == 2)) {
+                            echo '<td></td>';
+
+                            //else if sell = 1, and status = available, and location = user location link for sell
+                        } elseif ($sellFlag == 1 && $resourceStatusId == 1 && $resourceLocationId == $userLocationId) {
+
+                            if ($user->hasPermission('sellResource') || $user->hasPermission('allAccess')) {
+                                echo '<td><a href="sellResource.php?id=' . $resourceId . '">Sell</a></td>';
+                            }
+
+                            //else leave blank
+                        } else {
+                            echo '<td></td>';
+
+                        }
                         echo '</tr>';
                     }
                     ?>
@@ -389,7 +452,7 @@ class inventory
         }
     }
 
-    public function validateTransfer($from, $to, $currentLocationId, $location,$latitude,$longitude)
+    public function validateTransfer($from, $to, $currentLocationId, $location, $latitude, $longitude)
     {
         //confirm that resource range is of the same type
         $fromModel = escape(substr($from, 0, 6));
@@ -459,17 +522,18 @@ class inventory
                 $validRowsCount = $getValid->count();
 
                 //if all valid rows is less than all rows count display message to edit range
-                if ($validRowsCount < $allRowsCount){
+                if ($validRowsCount < $allRowsCount) {
                     ?>
-                        <div class="reset-password">
+                    <div class="reset-password">
                         <div id="error">
                             <br>
-                            The range you entered is not all valid, please <a href="inventory.php">go back</a> and edit range.
+                            The range you entered is not all valid, please <a href="inventory.php">go back</a> and edit
+                            range.
                         </div>
-                        </div>
+                    </div>
                     <?php
 
-                //else if rows count = valid rows display transfer button
+                    //else if rows count = valid rows display transfer button
                 } else {
                     ?>
                     <div class="form-style">
@@ -851,7 +915,7 @@ class inventory
 
     }
 
-    public function acceptTransfer($uid, $transferId, $firstResource, $lastResource, $destination,$latitude,$longitude)
+    public function acceptTransfer($uid, $transferId, $firstResource, $lastResource, $destination, $latitude, $longitude)
     {
 
         //update transaction status and closing user
@@ -1255,35 +1319,214 @@ class inventory
 
     }
 
-    public function createResourceType($fields = array())
+    public function getInventoryOptions($resourceId)
+    {
+
+        $sql = "select
+                    r.resource_id,
+                    rs.resource_status_id,
+                    rl.resource_location_id,
+                    rl.resource_location_type_id,
+                    r.customer_account_id,
+                    rm.sell,
+                    rm.install
+                FROM
+                    ims.resources r
+                        LEFT JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        LEFT JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        LEFT JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id  
+                where r.resource_id like '$resourceId'";
+
+        $get = $this->_db->query($sql);
+
+        if (!$get->count()) {
+
+        } else {
+
+            foreach ($get->results() as $r) {
+
+                //Set initial variable value to empty
+                $customerId = NULL;
+
+                //Set variables from result set
+                $resourceId = escape($r->resource_id);
+                $resourceStatusId = escape($r->resource_status_id);
+                $resourceLocationId = escape($r->resource_location_id);
+                $resourceLocationTypeId = escape($r->resource_location_type_id);
+                if (isset($r->customer_account_id)) {
+                    $customerId = escape($r->customer_account_id);
+                }
+                $sellFlag = escape($r->sell);
+                $installFlag = escape($r->install);
+
+                $user = new user();
+                $userLocationId = escape($user->data()->resource_location_id);
+
+                //if customer id is null, and status = available, and location <> customer, and install = 1 leave blank
+                if ($installFlag == 1 && $customerId == null && $resourceStatusId == 1 && $resourceLocationId !== 7) {
+
+                    //else if customer id is not null, and status = allocated and location = customer and install = 1 insert link for replace
+                } elseif ($installFlag == 1 && $customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7) {
+
+                    echo '<div class="separator">';
+                    echo '<h2>options</h2>';
+                    echo '</div>';
+                    echo '<table class="ctable">';
+                    echo '<tr>';
+                    if ($user->hasPermission('orderReplaceResource') || $user->hasPermission('allAccess')) {
+                        echo '<td><a href="replaceResource.php?id=' . $resourceId . '">Replace</a></td>';
+                    }
+                    if ($user->hasPermission('orderCollectResource') || $user->hasPermission('allAccess')) {
+                        echo '<td><a href="collectResource.php?id=' . $resourceId . '">Collect</a></td>';
+                    }
+                    echo '</tr>';
+                    echo '</table>';
+
+                    //else leave blank
+                } else {
+
+                }
+
+                //if resource location is main warehouse or location type = field user leave blank
+                if (($sellFlag == 1 && $resourceLocationId == 1) || ($sellFlag == 1 && $resourceLocationTypeId == 2)) {
+
+                    //else if sell = 1, and status = available, and location = user location link for sell
+                } elseif ($sellFlag == 1 && $resourceStatusId == 1 && $resourceLocationId == $userLocationId) {
+
+                    if ($user->hasPermission('sellResource') || $user->hasPermission('allAccess')) {
+                        echo '<div class="separator">';
+                        echo '<h2>options</h2>';
+                        echo '</div>';
+                        echo '<table class="ctable">';
+                        echo '<tr>';
+                        echo '<td><a href="sellResource.php?id=' . $resourceId . '">Sell</a></td>';
+                        echo '</tr>';
+                        echo '</table>';
+                    }
+
+                    //else leave blank
+                } else {
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public function sellResource($resourceId, $userLocationId)
+    {
+
+        //prepare sql query to get other params
+        $sql = "select
+                    rs.resource_status_id,
+                    rl.resource_location_id,
+                    rl.resource_location_type_id,
+                    rm.sell
+                FROM
+                    ims.resources r
+                        LEFT JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        LEFT JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        LEFT JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id  
+                where r.resource_id = {$resourceId}";
+
+        //get data
+        $get = $this->_db->query($sql);
+
+        //if data returned
+        if (!$get->count()) {
+            echo 'no results returned';
+            die();
+        } else {
+
+            foreach ($get->results() as $r) {
+
+                //Set variables from result set
+                $resourceStatusId = escape($r->resource_status_id);
+                $resourceLocationId = escape($r->resource_location_id);
+                $resourceLocationTypeId = escape($r->resource_location_type_id);
+                $sellFlag = escape($r->sell);
+
+                //if resource location is main warehouse or location type = field user leave blank
+                if (($sellFlag == 1 && $resourceLocationId == 1) || ($sellFlag == 1 && $resourceLocationTypeId == 2)) {
+                    redirect::to('viewInventoryDetails.php?id=' . $resourceId . '&cannotBeSoldMainOrField');
+
+                    //else if sell = 1, and status = available, and location = user location link for sell
+                } elseif ($sellFlag == 1 && $resourceStatusId == 1 && $resourceLocationId == $userLocationId) {
+
+                    $user = new user();
+                    $uid = $user->data()->uid;
+
+                    if ($user->hasPermission('sellResource') || $user->hasPermission('allAccess')) {
+
+                        //update status, location, latitude, longitude, and user
+                        if (!db::getInstance()->query("UPDATE ims.resources r SET resource_status_id = 4, resource_location_id = 7, resource_latitude = NULL, resource_longitude = NULL, last_update_user = {$uid} WHERE resource_id = {$resourceId}")) {
+                            redirect::to('viewInventoryDetails.php?id=' . $resourceId . '&resourceNotUpdated');
+                            die();
+                        } else {
+
+                            if (!db::getInstance()->query("insert into ims.transactions (uid,resource_id,resource_status_id,resource_location_id,transaction_type_id,transaction_status_id,resource_latitude,resource_longitude) values ({$uid},{$resourceId},4,7,3,1,null,null)")) {
+                                redirect::to('viewInventoryDetails.php?id=' . $resourceId . '&transferNotUpdated');
+                                die();
+                            } else {
+                                redirect::to('viewInventoryDetails.php?id=' . $resourceId . '&resourceSold');
+                            }
+
+                        }
+
+                    }
+
+                    //else leave blank
+                } else {
+                    redirect::to('viewInventoryDetails.php?id=' . $resourceId . '&cannotBeSold');
+                }
+
+            }
+        }
+
+    }
+
+    public
+    function createResourceType($fields = array())
     {
         if (!$this->_db->insert('resource_types', $fields)) {
             throw new Exception('There was a problem creating entry');
         }
     }
 
-    public function createResourceStatus($fields = array())
+    public
+    function createResourceStatus($fields = array())
     {
         if (!$this->_db->insert('resource_statuses', $fields)) {
             throw new Exception('There was a problem creating entry');
         }
     }
 
-    public function createResourceModel($fields = array())
+    public
+    function createResourceModel($fields = array())
     {
         if (!$this->_db->insert('resource_models', $fields)) {
             throw new Exception('There was a problem creating entry');
         }
     }
 
-    public function createResourceBrand($fields = array())
+    public
+    function createResourceBrand($fields = array())
     {
         if (!$this->_db->insert('resource_brands', $fields)) {
             throw new Exception('There was a problem creating entry');
         }
     }
 
-    public function data()
+    public
+    function data()
     {
         return $this->_data;
     }
