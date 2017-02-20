@@ -59,11 +59,11 @@ class customer
             <div class="center-table">
                 <table>
                     <tr>
+                        <th>Options</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Nationality</th>
                         <th>Account Status</th>
-                        <th>Options</th>
                     </tr>
                     <?php
                     foreach ($get->results() as $r) {
@@ -77,11 +77,11 @@ class customer
                         $status = escape($r->customer_account_status);
 
                         echo '<tr>';
+                        echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">View</a></td>';
                         echo '<td>' . $customerName . ' ' . $customerSurname . '</td>';
                         echo '<td>' . $email . '</td>';
                         echo '<td>' . $nationality . '</td>';
                         echo '<td>' . $status . '</td>';
-                        echo '<td><a href="viewCustomerDetails.php?id=' . $customerId . '">View</a></td>';
                         echo '</tr>';
                     }
                     ?>
@@ -229,7 +229,119 @@ class customer
 
     public function getInventoryCPE($customerId) {
 
+        // show header for inventory installed at customer premises
+        ?>
+        <div class="separator">
+            <h2>Inventory installed at customer premises</h2>
+        </div>
+        <?php
 
+        //prepare sql query to get resources allocated to customer
+        $sql = "SELECT 
+                    r.resource_id,
+                    r.resource_unique_value,
+                    rm.resource_model,
+                    rt.resource_type,
+                    rb.resource_brand,
+                    rs.resource_status,
+                    rl.resource_location_name,
+                    ca.customer_account_status_id
+                FROM
+                    ims.resources r
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON r.resource_type_id = rt.resource_type_id
+                        INNER JOIN
+                    ims.resource_statuses rs ON r.resource_status_id = rs.resource_status_id
+                        INNER JOIN
+                    ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
+                        INNER JOIN
+                    ims.customer_accounts ca ON r.customer_account_id = ca.customer_account_id    
+                WHERE
+                    r.customer_account_id = {$customerId}
+                        AND r.resource_status_id = 2
+                        AND r.resource_location_id = 7";
+
+        //execute query
+        $get = $this->_db->query($sql);
+
+        //if record count = 0 display install link
+        if (!$get->count()) {
+            ?>
+            <table class="ctable">
+                <tr>
+                    <td colspan="2"><a href="installResource.php?id=<?php echo $customerId; ?>">Install New Resource</a></td>
+                </tr>
+            </table>
+            <?php
+
+            //else if count > 0 display resources assigned to customer
+        } else {
+            foreach ($get->results() as $r) {
+                $customerStatusId = escape($r->customer_account_status_id);
+            }
+            ?>
+            <table class="ctable">
+                <tr>
+                    <td colspan="2"><a href="installResource.php?id=<?php echo $customerId; ?>">Install New Resource</a></td>
+                </tr>
+            </table>
+            <div class="center-table">
+                <table>
+                    <tr>
+                        <th>Resource SN</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <?php
+                        if ($customerStatusId == 1) {
+                            echo '<th colspan="2">Options</th>';
+                        } elseif ($customerStatusId == 2){
+                            echo '<th>Options</th>';
+                        }
+                        ?>
+
+                    </tr>
+            <?php
+            //declare variables
+            foreach ($get->results() as $r) {
+
+                //set variables for result set
+                $resourceId = escape($r->resource_id);
+                $resourceUniqueValue = escape($r->resource_unique_value);
+                $resourceModel = escape($r->resource_model);
+                $resourceType = escape($r->resource_type);
+                $resourceBrand = escape($r->resource_brand);
+                $resourceStatus = escape($r->resource_status);
+                $resourceLocation = escape($r->resource_location_name);
+
+                //display row
+                echo '<tr>';
+                    echo '<td><a href="viewInventoryDetails.php?id=' . $resourceId . '">' . $resourceUniqueValue . '</a></td>';
+                    echo '<td>' . $resourceBrand . '</td>';
+                    echo '<td>' . $resourceModel . '</td>';
+                    echo '<td>' . $resourceType . '</td>';
+                    echo '<td>' . $resourceStatus . '</td>';
+                    echo '<td>' . $resourceLocation . '</td>';
+                    if ($customerStatusId == 1){
+                        echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resourceId=' . $resourceId . '">Replace</a></td>';
+                    } elseif ($customerStatusId == 2) {
+
+                    }
+                    echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resourceId=' . $resourceId . '">Collect</a></td>';
+                echo '</tr>';
+
+            }
+            ?>
+                </table>
+            </div>
+            <?php
+        }
 
     }
 

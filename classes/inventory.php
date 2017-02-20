@@ -1197,30 +1197,38 @@ class inventory
                 if ($latitude == null && $longitude == null) {
 
                 } else {
-                    ?>
-                    <div class="separator">
-                        <h2>Resource Map Location</h2>
-                    </div>
-                    <div id="map"></div>
-                    <script>
-                        function initMap() {
-                            var location = {lat: <?php echo $latitude; ?>, lng: <?php echo $longitude; ?>};
-                            var map = new google.maps.Map(document.getElementById('map'), {
-                                zoom: 14,
-                                center: location,
-                                disableDefaultUI: true,
-                                styles: <?php include_once('includes/mapStyle.php');?>
-                            });
-                            var marker = new google.maps.Marker({
-                                position: location,
-                                map: map
-                            });
-                        }
-                    </script>
-                    <script async defer
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWv5w-eY6YEfFCJfbQBaHsxHMplfhpxEc&callback=initMap">
-                    </script>
-                    <?php
+
+                    //if no map data do not display map
+                    if ($latitude == 0.000000 and $longitude == 0.000000) {
+
+                        //else display map
+                    } elseif ($latitude !== 0.000000 and $longitude !== 0.000000) {
+                        ?>
+                        <div class="separator">
+                            <h2>Resource Map Location</h2>
+                        </div>
+                        <div id="map"></div>
+                        <script>
+                            function initMap() {
+                                var location = {lat: <?php echo $latitude; ?>, lng: <?php echo $longitude; ?>};
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                    zoom: 14,
+                                    center: location,
+                                    disableDefaultUI: true,
+                                    styles: <?php include_once('includes/mapStyle.php');?>
+                                });
+                                var marker = new google.maps.Marker({
+                                    position: location,
+                                    map: map
+                                });
+                            }
+                        </script>
+                        <script async defer
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWv5w-eY6YEfFCJfbQBaHsxHMplfhpxEc&callback=initMap">
+                        </script>
+                        <?php
+                    }
+
                 }
 
             }
@@ -1274,12 +1282,12 @@ class inventory
             <div class="center-table">
                 <table>
                     <tr>
+                        <th>Type</th>
                         <th>User Name</th>
                         <th>Status</th>
                         <th>Location</th>
                         <th>Customer</th>
                         <th>Date & Time</th>
-                        <th>Type</th>
                         <th>Transaction Status</th>
                     </tr>
                     <?php
@@ -1302,12 +1310,12 @@ class inventory
                         $transactionStatus = escape($h->transaction_status);
 
                         echo '<tr>';
+                        echo '<td>' . $transactionType . '</td>';
                         echo '<td>' . $fullName . '</td>';
                         echo '<td>' . $resourceStatus . '</td>';
                         echo '<td>' . $resourceLocation . '</td>';
                         echo '<td>' . $customer . '</td>';
                         echo '<td>' . $timestamp . '</td>';
-                        echo '<td>' . $transactionType . '</td>';
                         echo '<td>' . $transactionStatus . '</td>';
                         echo '</tr>';
                     }
