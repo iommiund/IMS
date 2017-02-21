@@ -59,6 +59,57 @@ if ($user->isLoggedIn()){
             </div>
             <?php
         }
+        if (isset($_GET['accessDenied'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Access is denied</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['installResource'])) {
+
+            $customerId = escape($_GET['id']);
+
+            if ($user->hasPermission('orderInstallResource') || $user->hasPermission('allAccess')){
+
+                echo '<div class="form-style" id="form-dialog" title="Select type of resource">';
+                echo '<form action="installResource.php" method="post" name="installResource">';
+                echo '  <input type="hidden" name="customerId" value="' . $customerId . '">';
+                echo '  <select name="Type" required="required">';
+                echo '      <option value="">----------------------- Choose a Type -----------------------</option>';
+
+                $get = db::getInstance()->query("SELECT 
+                                                            rt.resource_type_id, rt.resource_type
+                                                        FROM
+                                                            ims.resource_types rt
+                                                                INNER JOIN
+                                                            ims.resource_models rm ON rt.resource_type_id = rm.resource_type_id
+                                                        WHERE
+                                                            rm.install = 1
+                                                        GROUP BY 1");
+
+                if (!$get->count()) {
+                    echo 'Empty List';
+                } else {
+
+                    foreach ($get->results() as $t): ?>
+                        <option value="<?php echo escape($t->resource_type_id); ?>">
+                            <?php echo escape($t->resource_type); ?>
+                        </option>
+                    <?php endforeach;
+
+                }
+
+                echo '  </select>';
+                echo '<input type="submit" value="CREATE ORDER"/>';
+                echo '</form>';
+                echo '</div>';
+
+            } else {
+                redirect::to('viewCustomerDetails.php?id=' . $customerId . '&accessDenied');
+            }
+
+        }
     } else {
         redirect::to('main.php');
     }

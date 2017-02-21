@@ -100,7 +100,7 @@ class customer
                             ' ',
                             ca.customer_surname) AS fullName,
                     ca.customer_email,
-                    ca.customer_dob,
+                    date_format(ca.customer_dob,'%D %b %Y') as customer_dob,
                     n.nationality,
                     ca.customer_account_status_id,
                     cas.customer_account_status
@@ -158,19 +158,24 @@ class customer
                     <td><?php echo $customerStatus; ?></td>
                 </tr>
                 <?php
+                $user = new user();
                 if ($customerStatusId == 2){
-                ?>
+                    if ($user->hasPermission('changeCustomerStatus') || $user->hasPermission('allAccess')){
+                    ?>
                 <tr>
                     <td colspan="2"><a href="changeCustomerStatus.php?id=<?php echo $customerId; ?>&statusId=1">Enable</a></td>
                 </tr>
                 <?php
+                    }
                 }
                 if ($customerStatusId == 1){
-                    ?>
-                    <tr>
-                        <td colspan="2"><a href="changeCustomerStatus.php?id=<?php echo $customerId; ?>&statusId=2">Disable</a></td>
-                    </tr>
-                    <?php
+                    if ($user->hasPermission('changeCustomerStatus') || $user->hasPermission('allAccess')) {
+                        ?>
+                        <tr>
+                            <td colspan="2"><a href="changeCustomerStatus.php?id=<?php echo $customerId; ?>&statusId=2">Disable</a></td>
+                        </tr>
+                        <?php
+                    }
                 }
                 ?>
             </table>
@@ -273,7 +278,7 @@ class customer
             ?>
             <table class="ctable">
                 <tr>
-                    <td colspan="2"><a href="installResource.php?id=<?php echo $customerId; ?>">Install New Resource</a></td>
+                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
                 </tr>
             </table>
             <?php
@@ -286,7 +291,7 @@ class customer
             ?>
             <table class="ctable">
                 <tr>
-                    <td colspan="2"><a href="installResource.php?id=<?php echo $customerId; ?>">Install New Resource</a></td>
+                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
                 </tr>
             </table>
             <div class="center-table">
@@ -342,6 +347,12 @@ class customer
             </div>
             <?php
         }
+
+    }
+
+    public function createInstallOrder($customerId,$resourceType){
+
+
 
     }
 

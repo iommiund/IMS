@@ -51,6 +51,12 @@ if ($user->isLoggedIn()) {
                 });
             });
         </script>
+        <script>
+            $( function() {
+
+                $( "#form-dialog" ).dialog({height:'auto',width:'auto'});
+            } );
+        </script>
     </head>
     <body>
     <div class="width-height">
