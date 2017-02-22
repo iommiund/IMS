@@ -233,7 +233,6 @@ class customer
     }
 
     public function getInventoryCPE($customerId) {
-
         // show header for inventory installed at customer premises
         ?>
         <div class="separator">
@@ -278,7 +277,8 @@ class customer
             ?>
             <table class="ctable">
                 <tr>
-                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
+                    <td><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
+                    <td><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
                 </tr>
             </table>
             <?php
@@ -291,7 +291,8 @@ class customer
             ?>
             <table class="ctable">
                 <tr>
-                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
+                    <td><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
+                    <td><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
                 </tr>
             </table>
             <div class="center-table">
@@ -347,12 +348,6 @@ class customer
             </div>
             <?php
         }
-
-    }
-
-    public function createInstallOrder($customerId,$resourceType){
-
-
 
     }
 

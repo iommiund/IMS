@@ -10,11 +10,12 @@ if ($user->isLoggedIn()){
         if(input::exists()){
 
             $customerId = escape(input::get('customerId'));
-            $resourceType = escape(input::get('Type'));
+            $resourceTypeId = escape(input::get('Type'));
+            $uid = escape($user->data()->uid);
 
-            $customer = new customer();
+            $inventory = new inventory();
 
-            $customerId->createInstallOrder($customerId,$resourceType);
+            $inventory->createInstallOrder($customerId,$resourceTypeId,$uid);
 
         }
 

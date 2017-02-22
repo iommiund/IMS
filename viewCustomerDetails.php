@@ -23,7 +23,7 @@ if ($user->isLoggedIn()){
                     $customer->getCustomerDetails($customerId);
 
                     //get list of inventory installed at customer premises
-                    $customer ->getInventoryCPE($customerId);
+                    $customer->getInventoryCPE($customerId);
 
                 } catch (Exception $e) {
                     $hash = new hash();
@@ -66,6 +66,20 @@ if ($user->isLoggedIn()){
             </div>
             <?php
         }
+        if (isset($_GET['orderCreated'])) {
+            ?>
+            <div id="dialogOk" title="Success">
+                <p>Order successfully created.</p>
+            </div>
+            <?php
+        }
+        if (isset($_GET['orderNotCreated'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Failed to create order.</p>
+            </div>
+            <?php
+        }
         if (isset($_GET['installResource'])) {
 
             $customerId = escape($_GET['id']);
@@ -79,14 +93,14 @@ if ($user->isLoggedIn()){
                 echo '      <option value="">----------------------- Choose a Type -----------------------</option>';
 
                 $get = db::getInstance()->query("SELECT 
-                                                            rt.resource_type_id, rt.resource_type
-                                                        FROM
-                                                            ims.resource_types rt
-                                                                INNER JOIN
-                                                            ims.resource_models rm ON rt.resource_type_id = rm.resource_type_id
-                                                        WHERE
-                                                            rm.install = 1
-                                                        GROUP BY 1");
+                                                    rt.resource_type_id, rt.resource_type
+                                                FROM
+                                                    ims.resource_types rt
+                                                        INNER JOIN
+                                                    ims.resource_models rm ON rt.resource_type_id = rm.resource_type_id
+                                                WHERE
+                                                    rm.install = 1
+                                                GROUP BY 1");
 
                 if (!$get->count()) {
                     echo 'Empty List';
