@@ -10,12 +10,14 @@ if ($user->isLoggedIn()){
         if(input::exists()){
 
             $customerId = escape(input::get('customerId'));
+            $street = escape(input::get('street'));
+            $town = escape(input::get('town'));
             $resourceTypeId = escape(input::get('Type'));
             $uid = escape($user->data()->uid);
 
             $inventory = new inventory();
 
-            $inventory->createInstallOrder($customerId,$resourceTypeId,$uid);
+            $inventory->createInstallOrder($customerId,$street,$town,$resourceTypeId,$uid);
 
         }
 

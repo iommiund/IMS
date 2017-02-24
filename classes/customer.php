@@ -100,16 +100,23 @@ class customer
                             ' ',
                             ca.customer_surname) AS fullName,
                     ca.customer_email,
-                    date_format(ca.customer_dob,'%D %b %Y') as customer_dob,
+                    DATE_FORMAT(ca.customer_dob, '%D %b %Y') AS customer_dob,
                     n.nationality,
                     ca.customer_account_status_id,
-                    cas.customer_account_status
+                    cas.customer_account_status,
+                    ca.street_id,
+                    ca.town_id,
+                    CONCAT(s.street_name, ', ', t.town_name) AS address
                 FROM
                     ims.customer_accounts ca
                         INNER JOIN
                     ims.nationalities n ON ca.nationality_id = n.nationality_id
                         INNER JOIN
                     ims.customer_account_statuses cas ON ca.customer_account_status_id = cas.customer_account_status_id
+                        INNER JOIN
+                    ims.towns t ON ca.town_id = t.town_id
+                        INNER JOIN
+                    ims.streets s ON ca.street_id = s.street_id
                 WHERE
                     ca.customer_account_id = {$customerId}";
 
@@ -130,6 +137,9 @@ class customer
                 $nationality = escape($c->nationality);
                 $customerStatusId = escape($c->customer_account_status_id);
                 $customerStatus = escape($c->customer_account_status);
+                $street = escape($c->street_id);
+                $town = escape($c->town_id);
+                $address = escape($c->address);
 
             }
             ?>
@@ -157,6 +167,10 @@ class customer
                     <td><b>Customer Status: </b></td>
                     <td><?php echo $customerStatus; ?></td>
                 </tr>
+                <tr>
+                    <td><b>Address: </b></td>
+                    <td><?php echo $address; ?></td>
+                </tr>
                 <?php
                 $user = new user();
                 if ($customerStatusId == 2){
@@ -178,6 +192,12 @@ class customer
                     }
                 }
                 ?>
+                <tr>
+                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource&street='<?php $street; ?>'&town='<?php $town; ?>'">Install New Resource</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
+                </tr>
             </table>
             <?php
 
@@ -263,7 +283,7 @@ class customer
                         INNER JOIN
                     ims.resource_locations rl ON r.resource_location_id = rl.resource_location_id
                         INNER JOIN
-                    ims.customer_accounts ca ON r.customer_account_id = ca.customer_account_id    
+                    ims.customer_accounts ca ON r.customer_account_id = ca.customer_account_id
                 WHERE
                     r.customer_account_id = {$customerId}
                         AND r.resource_status_id = 2
@@ -274,14 +294,6 @@ class customer
 
         //if record count = 0 display install link
         if (!$get->count()) {
-            ?>
-            <table class="ctable">
-                <tr>
-                    <td><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
-                    <td><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
-                </tr>
-            </table>
-            <?php
 
             //else if count > 0 display resources assigned to customer
         } else {
@@ -289,12 +301,6 @@ class customer
                 $customerStatusId = escape($r->customer_account_status_id);
             }
             ?>
-            <table class="ctable">
-                <tr>
-                    <td><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
-                    <td><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
-                </tr>
-            </table>
             <div class="center-table">
                 <table>
                     <tr>

@@ -83,12 +83,16 @@ if ($user->isLoggedIn()){
         if (isset($_GET['installResource'])) {
 
             $customerId = escape($_GET['id']);
+            $street = escape($_GET['street']);
+            $town = escape($_GET['town']);
 
             if ($user->hasPermission('orderInstallResource') || $user->hasPermission('allAccess')){
 
                 echo '<div class="form-style" id="form-dialog" title="Select type of resource">';
                 echo '<form action="installResource.php" method="post" name="installResource">';
                 echo '  <input type="hidden" name="customerId" value="' . $customerId . '">';
+                echo '  <input type="hidden" name="street" value="' . $street . '">';
+                echo '  <input type="hidden" name="town" value="' . $town . '">';
                 echo '  <select name="Type" required="required">';
                 echo '      <option value="">----------------------- Choose a Type -----------------------</option>';
 

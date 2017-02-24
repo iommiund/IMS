@@ -63,6 +63,8 @@ CREATE TABLE `customer_accounts` (
   `customer_surname` varchar(50) NOT NULL,
   `customer_email` varchar(100) NOT NULL,
   `customer_dob` date NOT NULL,
+  `street_id` int(11) NOT NULL,
+  `town_id` int(11) NOT NULL,
   `nationality_id` int(11) NOT NULL,
   `customer_account_status_id` int(11) NOT NULL,
   PRIMARY KEY (`customer_account_id`),
@@ -71,9 +73,10 @@ CREATE TABLE `customer_accounts` (
   KEY `fk_customer_account_status_id` (`customer_account_status_id`),
   KEY `ix_name` (`customer_name`),
   KEY `ix_surname` (`customer_surname`),
+  KEY `fk_street_id_idx` (`street_id`),
   CONSTRAINT `fk_customer_account_status_id` FOREIGN KEY (`customer_account_status_id`) REFERENCES `customer_account_statuses` (`customer_account_status_id`),
   CONSTRAINT `fk_nationality_id` FOREIGN KEY (`nationality_id`) REFERENCES `nationalities` (`nationality_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +85,7 @@ CREATE TABLE `customer_accounts` (
 
 LOCK TABLES `customer_accounts` WRITE;
 /*!40000 ALTER TABLE `customer_accounts` DISABLE KEYS */;
-INSERT INTO `customer_accounts` VALUES (1,'Veronica','Galea','VeronicaGalea@fakemailaddress.com','1976-01-01',106,1),(2,'Chantelle','Fenech','ChantelleFenech@fakemailaddress.com','1993-02-19',106,1),(3,'Maria','Sciberras','MariaSciberras@fakemailaddress.com','1946-12-12',106,1),(4,'Keith','Pace','KeithPace@fakemailaddress.com','1982-06-29',106,1),(5,'Charles','Spiteri','CharlesSpiteri@fakemailaddress.com','1984-05-04',106,1),(6,'Salvina','Vella','SalvinaVella@fakemailaddress.com','1947-08-15',106,2),(7,'Josmar','Said','JosmarSaid@fakemailaddress.com','1994-07-17',106,1),(8,'Daniel','Cordina','DanielCordina@fakemailaddress.com','1984-12-12',106,1),(9,'Johnathan','Vella','JohnathanVella@fakemailaddress.com','1986-01-01',106,1),(10,'Nicholas','Azzopardi','NicholasAzzopardi@fakemailaddress.com','1977-07-24',106,1),(11,'Lorianne','Fava','LorianneFava@fakemailaddress.com','1990-07-17',106,1),(12,'Lara','Delceppo','LaraDelceppo@fakemailaddress.com','2011-01-01',106,2),(13,'Carmel','Cutajar','CarmelCutajar@fakemailaddress.com','1958-01-01',106,1),(14,'Asia','Degabriele','AsiaDegabriele@fakemailaddress.com','1972-01-01',106,1),(15,'Filippa','Umbreen','FilippaUmbreen@fakemailaddress.com','1934-01-01',106,1),(16,'Peter','Abela','PeterAbela@fakemailaddress.com','1940-10-22',106,1),(17,'Anthony','Sinclair','AnthonySinclair@fakemailaddress.com','1962-05-16',106,1),(18,'Maria','Tanti','MariaTanti@fakemailaddress.com','1983-03-20',106,2),(19,'Pierre','Muscat','PierreMuscat@fakemailaddress.com','1970-10-28',106,1),(20,'Daniel','Teyssier','DanielTeyssier@fakemailaddress.com','1984-08-19',106,1),(21,'Heather','Attard','HeatherAttard@fakemailaddress.com','1981-01-01',106,1),(22,'Marlene','Cortis','MarleneCortis@fakemailaddress.com','1962-01-01',106,1),(23,'Antonia','Parnis','AntoniaParnis@fakemailaddress.com','1949-01-01',106,1),(24,'Jurgen','Cauchi','JurgenCauchi@fakemailaddress.com','1987-08-15',106,2),(25,'Shawn','Pavanello','ShawnPavanello@fakemailaddress.com','1982-01-01',106,1),(26,'James','Abela','JamesAbela@fakemailaddress.com','1983-10-06',106,1),(27,'Andy','Magro','AndyMagro@fakemailaddress.com','1970-04-20',106,1),(28,'Antonella','Brassel','AntonellaBrassel@fakemailaddress.com','1985-08-15',106,1),(29,'Adrian','Formosa','AdrianFormosa@fakemailaddress.com','1978-11-17',106,1),(30,'Anton','Zerafa','AntonZerafa@fakemailaddress.com','1991-12-12',106,2),(31,'Roslyn','Azzopardi','RoslynAzzopardi@fakemailaddress.com','1975-05-12',106,1),(32,'Anna','Ciantar','AnnaCiantar@fakemailaddress.com','1952-04-14',106,1),(33,'Mario','Borg','MarioBorg@fakemailaddress.com','1972-05-16',106,1),(34,'Lorraine','Ellul','LorraineEllul@fakemailaddress.com','1988-06-02',106,1),(35,'Marko','Muscat','MarkoMuscat@fakemailaddress.com','1990-09-19',106,1),(36,'Miriam','Stefanac','MiriamStefanac@fakemailaddress.com','1963-05-01',106,2),(37,'Melvin','Camilleri','MelvinCamilleri@fakemailaddress.com','1971-12-12',106,1),(38,'Matthew','Fenech','MatthewFenech@fakemailaddress.com','1990-09-19',106,1),(39,'Rosaria','Linskill','RosariaLinskill@fakemailaddress.com','1954-01-01',106,1),(40,'Michael','Allen','MichaelAllen@fakemailaddress.com','2011-01-01',106,1),(41,'Lindsey','Briffa','LindseyBriffa@fakemailaddress.com','1994-01-01',106,1),(42,'Redeemer','Grixti','RedeemerGrixti@fakemailaddress.com','1993-01-01',106,2),(43,'Gejtano','Farrugia','GejtanoFarrugia@fakemailaddress.com','2009-10-10',106,1),(44,'Jacqueline','Cutajar','JacquelineCutajar@fakemailaddress.com','1970-05-10',106,1),(45,'Gianluca','Deguara','GianlucaDeguara@fakemailaddress.com','1976-05-28',106,1),(46,'Christie','Scarponi','ChristieScarponi@fakemailaddress.com','1991-12-12',106,1),(47,'Theodor','Buhagiar','TheodorBuhagiar@fakemailaddress.com','1970-08-01',106,1),(48,'Agnes','Forberg','AgnesForberg@fakemailaddress.com','1960-09-20',106,2),(49,'Lee','Tabone','LeeTabone@fakemailaddress.com','1990-02-28',106,1),(50,'Rachelle','Sammut','RachelleSammut@fakemailaddress.com','1977-02-21',106,1),(51,'Helen','Borg','HelenBorg@fakemailaddress.com','1968-05-19',106,1),(52,'Sarah','Bezzina','SarahBezzina@fakemailaddress.com','1976-07-17',106,1),(53,'Mary','Cutajar','MaryCutajar@fakemailaddress.com','1950-08-01',106,1),(54,'David','Said','DavidSaid@fakemailaddress.com','1986-11-04',106,2),(55,'Samir','Grixti','SamirGrixti@fakemailaddress.com','1980-04-05',106,1),(56,'Zulfqur','Gehel','ZulfqurGehel@fakemailaddress.com','1971-09-07',106,1),(57,'Rudi','Ahmad','RudiAhmad@fakemailaddress.com','1985-12-13',106,1),(58,'Jason','Roles','JasonRoles@fakemailaddress.com','1972-01-01',106,1),(59,'Jason','Galea','JasonGalea@fakemailaddress.com','1972-11-12',106,1),(60,'Roberta','Cutajar','RobertaCutajar@fakemailaddress.com','1987-12-12',106,2),(61,'Yvette','Attard','YvetteAttard@fakemailaddress.com','1972-05-29',106,1),(62,'Thomas','Spiteri','ThomasSpiteri@fakemailaddress.com','1946-02-10',106,1),(63,'Melissa','Welch','MelissaWelch@fakemailaddress.com','1984-01-01',106,1),(64,'John','Xuereb','JohnXuereb@fakemailaddress.com','1947-05-19',106,1),(65,'Maria','Vella','MariaVella@fakemailaddress.com','1969-07-23',106,1),(66,'Miriam','Grech','MiriamGrech@fakemailaddress.com','1986-01-01',106,2),(67,'Emmanuel','Mula','EmmanuelMula@fakemailaddress.com','2029-01-01',106,1),(68,'Pascal','Delia','PascalDelia@fakemailaddress.com','1990-07-06',106,1),(69,'Alfred','Baettig','AlfredBaettig@fakemailaddress.com','1955-05-19',106,1),(70,'Rose','Scicluna','RoseScicluna@fakemailaddress.com','1946-10-06',106,1),(71,'Marius','Bartolo','MariusBartolo@fakemailaddress.com','1981-05-15',106,1),(72,'Matthew','Caruana','MatthewCaruana@fakemailaddress.com','1991-10-12',106,2),(73,'Adrian','Baldacchino','AdrianBaldacchino@fakemailaddress.com','1976-01-31',106,1),(74,'Gladys','Ellul','GladysEllul@fakemailaddress.com','1944-02-10',106,1),(75,'Antoine','Brownrigg','AntoineBrownrigg@fakemailaddress.com','1982-01-01',106,1),(76,'Ibrahim','Zahra','IbrahimZahra@fakemailaddress.com','1980-01-01',106,1),(77,'Charles','Hussein','CharlesHussein@fakemailaddress.com','1970-01-19',106,1),(78,'Mary','Falzon','MaryFalzon@fakemailaddress.com','1956-12-14',106,2),(79,'Alejandro','Azzopardi','AlejandroAzzopardi@fakemailaddress.com','1985-12-10',106,1),(80,'Alain','Morenas','AlainMorenas@fakemailaddress.com','1948-01-10',106,1),(81,'Richard','Salvary','RichardSalvary@fakemailaddress.com','1990-05-15',106,1),(82,'Christine','Bergmair','ChristineBergmair@fakemailaddress.com','1983-04-03',106,1),(83,'Louise','Harmer','LouiseHarmer@fakemailaddress.com','2012-02-01',106,1),(84,'Yakob','Micallef','YakobMicallef@fakemailaddress.com','1981-01-01',106,2),(85,'Michael','Tonna','MichaelTonna@fakemailaddress.com','1951-01-12',106,1),(86,'Maria','Hartland','MariaHartland@fakemailaddress.com','1961-01-01',106,1),(87,'Sylvana','Vella','SylvanaVella@fakemailaddress.com','1964-12-12',106,1),(88,'Maria','Fiteni','MariaFiteni@fakemailaddress.com','1983-01-01',106,1),(89,'Doris','Farrugia','DorisFarrugia@fakemailaddress.com','1973-03-24',106,1),(90,'Anthony','Borg','AnthonyBorg@fakemailaddress.com','1943-05-16',106,1),(91,'Michael','Rizzo','MichaelRizzo@fakemailaddress.com','1993-07-17',106,1),(92,'Lorenza','Hinchy','LorenzaHinchy@fakemailaddress.com','1952-02-03',106,1),(93,'Istvan','Cooper','IstvanCooper@fakemailaddress.com','1987-12-12',106,1),(94,'Cirinna','Polgar','CirinnaPolgar@fakemailaddress.com','1975-05-16',106,1),(95,'Margaret','Corradino','MargaretCorradino@fakemailaddress.com','1969-01-01',106,1),(96,'Neil','Saliba','NeilSaliba@fakemailaddress.com','1988-05-19',106,2),(97,'Oleksandr','Muscat','OleksandrMuscat@fakemailaddress.com','1981-03-13',106,1),(98,'Stephanie','Ilchuk','StephanieIlchuk@fakemailaddress.com','1995-01-04',106,1),(99,'Jurgen','Cordina','JurgenCordina@fakemailaddress.com','1975-05-19',106,1),(100,'Markus','Calleja','MarkusCalleja@fakemailaddress.com','1970-10-28',106,1),(104,'Jason','Barbara','JasonBarbara@fakemailaddress.com','1987-10-22',106,1);
+INSERT INTO `customer_accounts` VALUES (1,'Veronica','Galea','VeronicaGalea@fakemailaddress.com','1976-01-01',1,1,106,1),(2,'Chantelle','Fenech','ChantelleFenech@fakemailaddress.com','1993-02-19',2,2,106,1),(3,'Maria','Sciberras','MariaSciberras@fakemailaddress.com','1946-12-12',3,3,106,1),(4,'Keith','Pace','KeithPace@fakemailaddress.com','1982-06-29',38,38,106,1),(5,'Charles','Spiteri','CharlesSpiteri@fakemailaddress.com','1984-05-04',5,5,106,1),(6,'Salvina','Vella','SalvinaVella@fakemailaddress.com','1947-08-15',6,6,106,2),(7,'Josmar','Said','JosmarSaid@fakemailaddress.com','1994-07-17',7,7,106,1),(8,'Daniel','Cordina','DanielCordina@fakemailaddress.com','1984-12-12',8,8,106,1),(9,'Johnathan','Vella','JohnathanVella@fakemailaddress.com','1986-01-01',9,9,106,1),(10,'Nicholas','Azzopardi','NicholasAzzopardi@fakemailaddress.com','1977-07-24',1,1,106,1),(11,'Lorianne','Fava','LorianneFava@fakemailaddress.com','1990-07-17',2,2,106,1),(12,'Lara','Delceppo','LaraDelceppo@fakemailaddress.com','2011-01-01',3,3,106,2),(13,'Carmel','Cutajar','CarmelCutajar@fakemailaddress.com','1958-01-01',4,4,106,1),(14,'Asia','Degabriele','AsiaDegabriele@fakemailaddress.com','1972-01-01',5,5,106,1),(15,'Filippa','Umbreen','FilippaUmbreen@fakemailaddress.com','1934-01-01',6,6,106,1),(16,'Peter','Abela','PeterAbela@fakemailaddress.com','1940-10-22',7,7,106,1),(17,'Anthony','Sinclair','AnthonySinclair@fakemailaddress.com','1962-05-16',8,8,106,1),(18,'Maria','Tanti','MariaTanti@fakemailaddress.com','1983-03-20',9,9,106,2),(19,'Pierre','Muscat','PierreMuscat@fakemailaddress.com','1970-10-28',1,1,106,1),(20,'Daniel','Teyssier','DanielTeyssier@fakemailaddress.com','1984-08-19',2,2,106,1),(21,'Heather','Attard','HeatherAttard@fakemailaddress.com','1981-01-01',3,3,106,1),(22,'Marlene','Cortis','MarleneCortis@fakemailaddress.com','1962-01-01',4,4,106,1),(23,'Antonia','Parnis','AntoniaParnis@fakemailaddress.com','1949-01-01',5,5,106,1),(24,'Jurgen','Cauchi','JurgenCauchi@fakemailaddress.com','1987-08-15',6,6,106,2),(25,'Shawn','Pavanello','ShawnPavanello@fakemailaddress.com','1982-01-01',7,7,106,1),(26,'James','Abela','JamesAbela@fakemailaddress.com','1983-10-06',8,8,106,1),(27,'Andy','Magro','AndyMagro@fakemailaddress.com','1970-04-20',9,9,106,1),(28,'Antonella','Brassel','AntonellaBrassel@fakemailaddress.com','1985-08-15',1,1,106,1),(29,'Adrian','Formosa','AdrianFormosa@fakemailaddress.com','1978-11-17',2,2,106,1),(30,'Anton','Zerafa','AntonZerafa@fakemailaddress.com','1991-12-12',3,3,106,2),(31,'Roslyn','Azzopardi','RoslynAzzopardi@fakemailaddress.com','1975-05-12',4,4,106,1),(32,'Anna','Ciantar','AnnaCiantar@fakemailaddress.com','1952-04-14',5,5,106,1),(33,'Mario','Borg','MarioBorg@fakemailaddress.com','1972-05-16',38,38,106,1),(34,'Lorraine','Ellul','LorraineEllul@fakemailaddress.com','1988-06-02',7,7,106,1),(35,'Marko','Muscat','MarkoMuscat@fakemailaddress.com','1990-09-19',8,8,106,1),(36,'Miriam','Stefanac','MiriamStefanac@fakemailaddress.com','1963-05-01',9,9,106,2),(37,'Melvin','Camilleri','MelvinCamilleri@fakemailaddress.com','1971-12-12',1,1,106,1),(38,'Matthew','Fenech','MatthewFenech@fakemailaddress.com','1990-09-19',2,2,106,1),(39,'Rosaria','Linskill','RosariaLinskill@fakemailaddress.com','1954-01-01',3,3,106,1),(40,'Michael','Allen','MichaelAllen@fakemailaddress.com','2011-01-01',4,4,106,1),(41,'Lindsey','Briffa','LindseyBriffa@fakemailaddress.com','1994-01-01',38,38,106,1),(42,'Redeemer','Grixti','RedeemerGrixti@fakemailaddress.com','1993-01-01',6,6,106,2),(43,'Gejtano','Farrugia','GejtanoFarrugia@fakemailaddress.com','2009-10-10',7,7,106,1),(44,'Jacqueline','Cutajar','JacquelineCutajar@fakemailaddress.com','1970-05-10',8,8,106,1),(45,'Gianluca','Deguara','GianlucaDeguara@fakemailaddress.com','1976-05-28',9,9,106,1),(46,'Christie','Scarponi','ChristieScarponi@fakemailaddress.com','1991-12-12',1,1,106,1),(47,'Theodor','Buhagiar','TheodorBuhagiar@fakemailaddress.com','1970-08-01',2,2,106,1),(48,'Agnes','Forberg','AgnesForberg@fakemailaddress.com','1960-09-20',3,3,106,2),(49,'Lee','Tabone','LeeTabone@fakemailaddress.com','1990-02-28',4,4,106,1),(50,'Rachelle','Sammut','RachelleSammut@fakemailaddress.com','1977-02-21',5,5,106,1),(51,'Helen','Borg','HelenBorg@fakemailaddress.com','1968-05-19',38,38,106,1),(52,'Sarah','Bezzina','SarahBezzina@fakemailaddress.com','1976-07-17',7,7,106,1),(53,'Mary','Cutajar','MaryCutajar@fakemailaddress.com','1950-08-01',8,8,106,1),(54,'David','Said','DavidSaid@fakemailaddress.com','1986-11-04',9,9,106,2),(55,'Samir','Grixti','SamirGrixti@fakemailaddress.com','1980-04-05',1,1,106,1),(56,'Zulfqur','Gehel','ZulfqurGehel@fakemailaddress.com','1971-09-07',2,2,106,1),(57,'Rudi','Ahmad','RudiAhmad@fakemailaddress.com','1985-12-13',3,3,106,1),(58,'Jason','Roles','JasonRoles@fakemailaddress.com','1972-01-01',4,4,106,1),(59,'Jason','Galea','JasonGalea@fakemailaddress.com','1972-11-12',5,5,106,1),(60,'Roberta','Cutajar','RobertaCutajar@fakemailaddress.com','1987-12-12',6,6,106,2),(61,'Yvette','Attard','YvetteAttard@fakemailaddress.com','1972-05-29',7,7,106,1),(62,'Thomas','Spiteri','ThomasSpiteri@fakemailaddress.com','1946-02-10',8,8,106,1),(63,'Melissa','Welch','MelissaWelch@fakemailaddress.com','1984-01-01',9,9,106,1),(64,'John','Xuereb','JohnXuereb@fakemailaddress.com','1947-05-19',1,1,106,1),(65,'Maria','Vella','MariaVella@fakemailaddress.com','1969-07-23',2,2,106,1),(66,'Miriam','Grech','MiriamGrech@fakemailaddress.com','1986-01-01',3,3,106,2),(67,'Emmanuel','Mula','EmmanuelMula@fakemailaddress.com','2029-01-01',4,4,106,1),(68,'Pascal','Delia','PascalDelia@fakemailaddress.com','1990-07-06',5,5,106,1),(69,'Alfred','Baettig','AlfredBaettig@fakemailaddress.com','1955-05-19',6,6,106,1),(70,'Rose','Scicluna','RoseScicluna@fakemailaddress.com','1946-10-06',7,7,106,1),(71,'Marius','Bartolo','MariusBartolo@fakemailaddress.com','1981-05-15',8,8,106,1),(72,'Matthew','Caruana','MatthewCaruana@fakemailaddress.com','1991-10-12',9,9,106,2),(73,'Adrian','Baldacchino','AdrianBaldacchino@fakemailaddress.com','1976-01-31',1,1,106,1),(74,'Gladys','Ellul','GladysEllul@fakemailaddress.com','1944-02-10',2,2,106,1),(75,'Antoine','Brownrigg','AntoineBrownrigg@fakemailaddress.com','1982-01-01',3,3,106,1),(76,'Ibrahim','Zahra','IbrahimZahra@fakemailaddress.com','1980-01-01',4,4,106,1),(77,'Charles','Hussein','CharlesHussein@fakemailaddress.com','1970-01-19',5,5,106,1),(78,'Mary','Falzon','MaryFalzon@fakemailaddress.com','1956-12-14',6,6,106,2),(79,'Alejandro','Azzopardi','AlejandroAzzopardi@fakemailaddress.com','1985-12-10',7,7,106,1),(80,'Alain','Morenas','AlainMorenas@fakemailaddress.com','1948-01-10',8,8,106,1),(81,'Richard','Salvary','RichardSalvary@fakemailaddress.com','1990-05-15',9,9,106,1),(82,'Christine','Bergmair','ChristineBergmair@fakemailaddress.com','1983-04-03',1,1,106,1),(83,'Louise','Harmer','LouiseHarmer@fakemailaddress.com','2012-02-01',2,2,106,1),(84,'Yakob','Micallef','YakobMicallef@fakemailaddress.com','1981-01-01',3,3,106,2),(85,'Michael','Tonna','MichaelTonna@fakemailaddress.com','1951-01-12',4,4,106,1),(86,'Maria','Hartland','MariaHartland@fakemailaddress.com','1961-01-01',5,5,106,1),(87,'Sylvana','Vella','SylvanaVella@fakemailaddress.com','1964-12-12',6,6,106,1),(88,'Maria','Fiteni','MariaFiteni@fakemailaddress.com','1983-01-01',7,7,106,1),(89,'Doris','Farrugia','DorisFarrugia@fakemailaddress.com','1973-03-24',8,8,106,1),(90,'Anthony','Borg','AnthonyBorg@fakemailaddress.com','1943-05-16',38,38,106,1),(91,'Michael','Rizzo','MichaelRizzo@fakemailaddress.com','1993-07-17',1,1,106,1),(92,'Lorenza','Hinchy','LorenzaHinchy@fakemailaddress.com','1952-02-03',2,2,106,1),(93,'Istvan','Cooper','IstvanCooper@fakemailaddress.com','1987-12-12',3,3,106,1),(94,'Cirinna','Polgar','CirinnaPolgar@fakemailaddress.com','1975-05-16',4,4,106,1),(95,'Margaret','Corradino','MargaretCorradino@fakemailaddress.com','1969-01-01',5,5,106,1),(96,'Neil','Saliba','NeilSaliba@fakemailaddress.com','1988-05-19',6,6,106,2),(97,'Oleksandr','Muscat','OleksandrMuscat@fakemailaddress.com','1981-03-13',7,7,106,1),(98,'Stephanie','Ilchuk','StephanieIlchuk@fakemailaddress.com','1995-01-04',8,8,106,1),(99,'Jurgen','Cordina','JurgenCordina@fakemailaddress.com','1975-05-19',9,9,106,1),(100,'Markus','Calleja','MarkusCalleja@fakemailaddress.com','1970-10-28',1,1,106,1),(104,'Jason','Barbara','JasonBarbara@fakemailaddress.com','1987-10-22',2,2,106,1);
 /*!40000 ALTER TABLE `customer_accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,6 +206,8 @@ CREATE TABLE `orders` (
   `order_type_id` int(11) NOT NULL,
   `order_status_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
+  `street_id` int(11) DEFAULT NULL,
+  `town_id` int(11) DEFAULT NULL,
   `resource_type_id` int(11) NOT NULL,
   `resource_id` int(11) DEFAULT NULL,
   `initiation_timestamp` datetime DEFAULT NULL,
@@ -219,7 +224,7 @@ CREATE TABLE `orders` (
   KEY `ix_closing_uid` (`closing_uid`),
   KEY `ix_closing_timestamp` (`closing_timestamp`),
   KEY `ix_order_type_id` (`order_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,7 +233,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,4,2,90,5,NULL,'2017-02-22 18:15:52',1,NULL,NULL),(2,4,3,90,5,NULL,'2017-02-22 19:14:28',1,1,'2017-02-22 19:42:31'),(3,4,2,90,1,NULL,'2017-02-22 19:15:15',1,NULL,NULL);
+INSERT INTO `orders` VALUES (1,4,2,90,38,38,5,NULL,'2017-02-22 18:15:52',1,NULL,NULL),(2,4,3,90,38,38,5,NULL,'2017-02-22 19:14:28',1,1,'2017-02-22 19:42:31'),(3,4,2,90,38,38,1,NULL,'2017-02-22 19:15:15',1,NULL,NULL),(4,4,2,90,38,38,1,NULL,'2017-02-24 20:02:22',1,NULL,NULL),(5,4,2,90,38,38,1,NULL,'2017-02-24 20:14:04',1,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -499,6 +504,33 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `streets`
+--
+
+DROP TABLE IF EXISTS `streets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `streets` (
+  `street_id` int(11) NOT NULL,
+  `street_name` varchar(250) NOT NULL,
+  `town_id` int(11) NOT NULL,
+  PRIMARY KEY (`street_id`),
+  KEY `fk_town_id_idx` (`town_id`),
+  CONSTRAINT `fk_town_id` FOREIGN KEY (`town_id`) REFERENCES `towns` (`town_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `streets`
+--
+
+LOCK TABLES `streets` WRITE;
+/*!40000 ALTER TABLE `streets` DISABLE KEYS */;
+INSERT INTO `streets` VALUES (1,'Archbishop Street',1),(2,' Triq Inguanez',2),(3,'Triq Guzeppi Decelis',3),(4,'Triq Il Ponta',4),(5,'Sqaq Guza Chetcuti',5),(6,'Triq Fonzu Meli',6),(7,'Trejqet Daqqaq It Tajjar',7),(8,'Sqaq Il Palm',8),(9,'Triq In Newba',9),(10,'Triq Guzeppina Curmi',10),(11,'Triq Alfred Camilleri',11),(12,'Triq Il Mithna',12),(13,'Triq Fonzu Marija Galea',13),(14,'Triq Il Kus',14),(15,'Triq Carmelo Bugeja',15),(16,'Triq Gorg Stevens',16),(17,'Triq Antonino Agius',17),(18,'Triq Hal Safi',18),(19,'Triq Il Flotta',19),(20,'Triq Excelsior',20),(21,'Triq Dar Il Bebbux',21),(22,'Triq Atocia',22),(23,'Pjazza Ninu Cremona',23),(24,'Triq Il Gir',24),(25,'Triq Dun Guzeppi Barbara',25),(26,'Triq Geraldu Azzopardi',26),(27,'Triq L Iskola',27),(28,'Triq Is Serkin',28),(29,'Triq Gebel Hanxul',29),(30,'Triq Ic Cippi',30),(31,'Triq Churchill',31),(32,'Sqaq Iz Zabra',32),(33,'Triq Durumblat',33),(34,'Triq George Martin',34),(35,'Triq Gioacchino Navarro',35),(36,'Triq Castro',36),(37,'Triq Ghajn Dwieli',37),(38,'Triq Alamein',38),(39,'Triq K Mifsud',39),(40,'Triq Cagliares',40),(41,'Triq Doni',41),(42,'Triq Hlantun',42),(43,'Triq Alfred Gauci',43),(44,'Triq Bernardette',44),(45,'Triq Il Lampuki',45),(46,'Triq De Hosa',46),(47,'Triq Il Franka',47),(48,'Sqaq Sajjan',48),(49,'Triq Il Fjorin',49),(50,'Triq Il Watar',50),(51,'Triq Bjagju Galea',51),(52,'Triq Ic- Cern',52),(53,'Sqaq San Gwann',53),(54,'Triq Il Gizi',54);
+/*!40000 ALTER TABLE `streets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `temp_resource`
 --
 
@@ -532,6 +564,30 @@ LOCK TABLES `temp_resource` WRITE;
 /*!40000 ALTER TABLE `temp_resource` DISABLE KEYS */;
 INSERT INTO `temp_resource` VALUES (1,'24767D000001',1,1,5,'24767D',12,12,1,NULL,2),(2,'24767D004000',1,1,5,'24767D',12,12,0,NULL,1);
 /*!40000 ALTER TABLE `temp_resource` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `towns`
+--
+
+DROP TABLE IF EXISTS `towns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `towns` (
+  `town_id` int(11) NOT NULL,
+  `town_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`town_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `towns`
+--
+
+LOCK TABLES `towns` WRITE;
+/*!40000 ALTER TABLE `towns` DISABLE KEYS */;
+INSERT INTO `towns` VALUES (1,'Valletta'),(2,'Imdina'),(3,'Birgu'),(4,'Isla'),(5,'Bormla'),(6,'Qormi'),(7,'Zebbug'),(8,'Zabbar'),(9,'Siggiewi'),(10,'Zejtun'),(11,'Attard'),(12,'Balzan'),(13,'Birkirkara'),(14,'Birzebbugia'),(15,'Dingli'),(16,'Fgura'),(17,'Furjana'),(18,'Gudja'),(19,'Gzira'),(20,'Gharghur'),(21,'Ghaxaq'),(22,'Hamrun'),(23,'Iklin'),(24,'Kalkara'),(25,'Kirkop'),(26,'Lija'),(27,'Luqa'),(28,'Marsa'),(29,'Marsaskala'),(30,'Marsaxlokk'),(31,'Mellieha'),(32,'Imgarr'),(33,'Mosta'),(34,'Imqabba'),(35,'Imsida'),(36,'Naxxar'),(37,'Paola'),(38,'Pembroke'),(39,'Pieta'),(40,'Qrendi'),(41,'Rabat'),(42,'Safi'),(43,'San Giljan'),(44,'San Gwann'),(45,'San Pawl Il Bahar'),(46,'Santa Lucija'),(47,'Santa Venera'),(48,'Sliema'),(49,'Swieqi'),(50,'Ta Xbiex'),(51,'Hal Tarxien'),(52,'Xghajra'),(53,'Zurrieq'),(54,'Imtarfa');
+/*!40000 ALTER TABLE `towns` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -801,4 +857,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-22 19:48:41
+-- Dump completed on 2017-02-24 20:29:31
