@@ -17,14 +17,19 @@ if ($user->isLoggedIn()){
 
                     $customerId = escape($_GET['id']);
 
-                    $inventory = new inventory();
+                    $order = new order();
 
-                    $inventory->getPendingOrders($customerId);
+                    $order->getPendingOrders($customerId);
 
-                    $inventory->getAllOrders($customerId);
+                    $order->getAllOrders($customerId);
 
                 }
                 ?>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('table tr:nth-child(odd)').addClass('alt');
+                    });
+                </script>
             </div>
         </div>
         <?php

@@ -15,9 +15,9 @@ if ($user->isLoggedIn()){
             $resourceTypeId = escape(input::get('Type'));
             $uid = escape($user->data()->uid);
 
-            $inventory = new inventory();
+            $order = new order();
 
-            $inventory->createInstallOrder($customerId,$street,$town,$resourceTypeId,$uid);
+            $order->createInstallOrder($customerId,$resourceTypeId,$uid);
 
         }
 

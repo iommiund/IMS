@@ -36,7 +36,9 @@ if ($user->isLoggedIn()){
                         'required' => true,
                         'adult' => true
                     ),
-                    'nationality_id' => array('required' => true)
+                    'nationality_id' => array('required' => true),
+                    'town' => array('required' => true),
+                    'street' => array('required' => true)
                 ));
 
                 // display error or success messages
@@ -48,9 +50,8 @@ if ($user->isLoggedIn()){
                     $email = escape(input::get('customer_email'));
                     $dob = escape(input::get('customer_dob'));
                     $nationality = escape(input::get('nationality_id'));
-
-                    //echo $name, $surname, $email, $dob, $nationality;
-                    //die();
+                    $town = escape(input::get('town'));
+                    $street = escape(input::get('street'));
 
                     try {
 
@@ -60,6 +61,8 @@ if ($user->isLoggedIn()){
                             'customer_email' => $email,
                             'customer_dob' => $dob,
                             'nationality_id' => $nationality,
+                            'town_id' => $town,
+                            'street_id' => $street,
                             'customer_account_status_id' => 1
                         ));
 
@@ -120,6 +123,30 @@ if ($user->isLoggedIn()){
                             }
                             ?>
                         </select>
+                        <select onchange="change_town()" id="towndd" name="town">
+                            <option value="">------------------ Choose Town Of Residence ------------------</option>
+                            <?php
+
+                            $get = db::getInstance()->query("select town_id, town_name from towns order by 2");
+
+                            if (!$get->count()) {
+                                echo 'Empty List';
+                            } else {
+
+                                foreach ($get->results() as $t): ?>
+                                    <option value="<?php echo escape($t->town_id); ?>">
+                                        <?php echo escape($t->town_name); ?>
+                                    </option>
+                                <?php endforeach;
+
+                            }
+                            ?>
+                        </select>
+                        <div id="street">
+                            <select id="streetdd" name="street" disabled>
+                                <option value=""></option>
+                            </select>
+                        </div>
                         <input type="hidden" name="token" value="<?php echo token::generate(); ?>">
                         <input type="submit" value="ADD CUSTOMER"/>
                     </form>
@@ -127,6 +154,14 @@ if ($user->isLoggedIn()){
                     <div class="form-link">
                         <a href="newCustomer.php">Clear Form</a>
                     </div>
+                    <script type="text/javascript">
+                        function change_town() {
+                            var xmlhttp=new XMLHttpRequest();
+                            xmlhttp.open("GET","streetdd.php?townId="+document.getElementById("towndd").value,false);
+                            xmlhttp.send(null);
+                            document.getElementById("street").innerHTML=xmlhttp.responseText;
+                        }
+                    </script>
                 </div>
             </div>
         </div>

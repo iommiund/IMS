@@ -80,19 +80,22 @@ if ($user->isLoggedIn()){
             </div>
             <?php
         }
+        if (isset($_GET['alreadyCreated'])) {
+            ?>
+            <div id="dialogOk" title="Error">
+                <p>Order not created, previous order still pending.</p>
+            </div>
+            <?php
+        }
         if (isset($_GET['installResource'])) {
 
             $customerId = escape($_GET['id']);
-            $street = escape($_GET['street']);
-            $town = escape($_GET['town']);
 
             if ($user->hasPermission('orderInstallResource') || $user->hasPermission('allAccess')){
 
                 echo '<div class="form-style" id="form-dialog" title="Select type of resource">';
                 echo '<form action="installResource.php" method="post" name="installResource">';
                 echo '  <input type="hidden" name="customerId" value="' . $customerId . '">';
-                echo '  <input type="hidden" name="street" value="' . $street . '">';
-                echo '  <input type="hidden" name="town" value="' . $town . '">';
                 echo '  <select name="Type" required="required">';
                 echo '      <option value="">----------------------- Choose a Type -----------------------</option>';
 
@@ -122,6 +125,24 @@ if ($user->isLoggedIn()){
                 echo '<input type="submit" value="CREATE ORDER"/>';
                 echo '</form>';
                 echo '</div>';
+
+            } else {
+                redirect::to('viewCustomerDetails.php?id=' . $customerId . '&accessDenied');
+            }
+
+        }
+        if (isset($_GET['collectResource'])) {
+
+            $customerId = escape($_GET['id']);
+            $resource = escape($_GET['resource']);
+            $resourceTypeId = escape($_GET['resourceTypeId']);
+            $uid = escape($user->data()->uid);
+
+            if ($user->hasPermission('orderInstallResource') || $user->hasPermission('allAccess')){
+
+                $order = new order();
+
+                $order->createCollectOrder($customerId,$resource,$resourceTypeId,$uid);
 
             } else {
                 redirect::to('viewCustomerDetails.php?id=' . $customerId . '&accessDenied');

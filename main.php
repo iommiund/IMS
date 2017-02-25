@@ -41,6 +41,14 @@ if ($user->isLoggedIn()){
                 $inventory->showAllPendingTransfers();
 
                 }
+                if ($user->hasPermission('viewAllPendingOrders') || $user->hasPermission('allAccess')) {
+
+                    $order = new order();
+
+                    //show pending transfers
+                    $order->getAllPendingOrders();
+
+                }
                 ?>
                 <script type="text/javascript">
                     $(document).ready(function () {

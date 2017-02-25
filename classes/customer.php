@@ -104,8 +104,6 @@ class customer
                     n.nationality,
                     ca.customer_account_status_id,
                     cas.customer_account_status,
-                    ca.street_id,
-                    ca.town_id,
                     CONCAT(s.street_name, ', ', t.town_name) AS address
                 FROM
                     ims.customer_accounts ca
@@ -137,8 +135,6 @@ class customer
                 $nationality = escape($c->nationality);
                 $customerStatusId = escape($c->customer_account_status_id);
                 $customerStatus = escape($c->customer_account_status);
-                $street = escape($c->street_id);
-                $town = escape($c->town_id);
                 $address = escape($c->address);
 
             }
@@ -193,7 +189,7 @@ class customer
                 }
                 ?>
                 <tr>
-                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource&street='<?php $street; ?>'&town='<?php $town; ?>'">Install New Resource</a></td>
+                    <td colspan="2"><a href="viewCustomerDetails.php?id=<?php echo $customerId; ?>&installResource">Install New Resource</a></td>
                 </tr>
                 <tr>
                     <td colspan="2"><a href="viewOrders.php?id=<?php echo $customerId; ?>">View Order History</a></td>
@@ -265,6 +261,7 @@ class customer
                     r.resource_id,
                     r.resource_unique_value,
                     rm.resource_model,
+                    rt.resource_type_id,
                     rt.resource_type,
                     rb.resource_brand,
                     rs.resource_status,
@@ -327,6 +324,7 @@ class customer
                 $resourceId = escape($r->resource_id);
                 $resourceUniqueValue = escape($r->resource_unique_value);
                 $resourceModel = escape($r->resource_model);
+                $resourceTypeId = escape($r->resource_type_id);
                 $resourceType = escape($r->resource_type);
                 $resourceBrand = escape($r->resource_brand);
                 $resourceStatus = escape($r->resource_status);
@@ -341,11 +339,11 @@ class customer
                     echo '<td>' . $resourceStatus . '</td>';
                     echo '<td>' . $resourceLocation . '</td>';
                     if ($customerStatusId == 1){
-                        echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resourceId=' . $resourceId . '">Replace</a></td>';
+                        echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Replace</a></td>';
                     } elseif ($customerStatusId == 2) {
 
                     }
-                    echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resourceId=' . $resourceId . '">Collect</a></td>';
+                        echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Collect</a></td>';
                 echo '</tr>';
 
             }
