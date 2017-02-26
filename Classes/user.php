@@ -72,6 +72,34 @@ class user
         return false;
     }
 
+    public function androidLogin($username,$password){
+
+        //login user
+        $user = $this->find($username);
+
+        //If data is returned check that the password+salt match password in db
+        if ($user) {
+            if ($this->data()->password === hash::make($password, $this->data()->salt)) {
+
+                //check whether user is disabled or enabled
+                if ($this->data()->user_status_id === '1'){
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        return false;
+
+    }
+
     public function login($username = null, $password = null, $remember = false){
 
         //if user data is not empty put the user id as session name

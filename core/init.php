@@ -26,10 +26,10 @@ $GLOBALS['config'] = array(
 
 // auto initiate classes
 spl_autoload_register(function ($class){
-    require_once 'classes/' . $class . '.php';
+    require_once 'C:/xampp/htdocs/IMS/classes/' . $class . '.php';
 });
 
-require_once 'functions/sanitize.php';
+require_once 'C:/xampp/htdocs/IMS/functions/sanitize.php';
 
 if (cookie::exists(config::get('remember/cookie_name')) && !session::exists(config::get('session/session_name'))){
     $hash = cookie::get(config::get('remember/cookie_name'));
