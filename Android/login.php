@@ -1,15 +1,15 @@
 <?php
 require_once '../core/init.php';
 
-$username = "iommi";
-$password = "iommi";
+$username = escape($_POST['username']);
+$password = escape($_POST['password']);
 
 $user = new user();
 
 $login = $user->androidLogin($username,$password);
 
 if($login){
-    echo 'login success';
+    echo 'Login Success';
 } else {
-    echo 'deep shit';
+    echo 'Login Unsuccessful';
 }
