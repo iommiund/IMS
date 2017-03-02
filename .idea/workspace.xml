@@ -29,12 +29,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Android/login.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="15" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getOrders.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Android/getOrders.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+              <folding>
+                <marker date="1488471256973" expanded="true" signature="76:1253" ph="SELECT o.ord... orders" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Setup/Config/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/order.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="716">
+              <caret line="386" column="22" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
+              <folding>
+                <marker date="1488470726035" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+                <marker date="1488470726035" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
+                <marker date="1488470726035" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
+                <marker date="1488470726035" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
+                <marker date="1488470726035" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
+                <marker date="1488470726035" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
+                <marker date="1488470726035" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
+                <marker date="1488470726035" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
+                <marker date="1488470726035" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
+                <marker date="1488470726035" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,6 +108,7 @@
       <find>FULL</find>
       <find>date</find>
       <find>main.php</find>
+      <find>android</find>
     </findStrings>
     <replaceStrings>
       <replace>$customer</replace>
@@ -77,7 +121,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/addResourceBrand.php" />
         <option value="$PROJECT_DIR$/addModelIdentifier.php" />
         <option value="$PROJECT_DIR$/classes/customer.php" />
         <option value="$PROJECT_DIR$/classes/db.php" />
@@ -122,12 +165,13 @@
         <option value="$PROJECT_DIR$/collectResource.php" />
         <option value="$PROJECT_DIR$/viewCustomerDetails.php" />
         <option value="$PROJECT_DIR$/viewOrders.php" />
-        <option value="$PROJECT_DIR$/Classes/order.php" />
         <option value="$PROJECT_DIR$/core/init.php" />
         <option value="$PROJECT_DIR$/Classes/user.php" />
         <option value="$PROJECT_DIR$/Setup/Config/dbc.php" />
         <option value="$PROJECT_DIR$/Setup/Config/config.php" />
         <option value="$PROJECT_DIR$/Android/login.php" />
+        <option value="$PROJECT_DIR$/Classes/order.php" />
+        <option value="$PROJECT_DIR$/Android/getOrders.php" />
       </list>
     </option>
   </component>
@@ -197,7 +241,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,8 +253,69 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Setup" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Setup" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -383,11 +487,12 @@
       <workItem from="1488100246657" duration="8000" />
       <workItem from="1488100425322" duration="6507000" />
       <workItem from="1488388863439" duration="1833000" />
+      <workItem from="1488458657856" duration="4068000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="535518000" />
+    <option name="totallyTimeSpent" value="539586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -452,7 +557,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Classes/viewInventoryDetails.php" />
     <entry file="file://$PROJECT_DIR$/Classes/viewCustomerDetails.php" />
     <entry file="file://$PROJECT_DIR$/includes/mapStyle.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -583,17 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="124" column="26" lean-forward="false" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="26" />
-          <folding>
-            <marker date="1485767169642" expanded="true" signature="3261:3334" ph="insert into $... " />
-            <marker date="1485767169642" expanded="true" signature="3785:3824" ph="update ${{$t... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/cookie.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -634,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -693,13 +785,6 @@
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="275" column="92" lean-forward="false" selection-start-line="275" selection-start-column="92" selection-end-line="275" selection-end-column="92" />
         </state>
       </provider>
     </entry>
@@ -777,22 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Setup/Config/dbc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Setup/Config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/user.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="539">
@@ -804,8 +873,64 @@
     <entry file="file://$PROJECT_DIR$/Android/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="15" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1485767169642" expanded="true" signature="3261:3334" ph="insert into $... " />
+            <marker date="1485767169642" expanded="true" signature="3785:3824" ph="update ${{$t... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Setup/Config/dbc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="386" column="22" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
+          <folding>
+            <marker date="1488470726035" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+            <marker date="1488470726035" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
+            <marker date="1488470726035" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
+            <marker date="1488470726035" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
+            <marker date="1488470726035" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
+            <marker date="1488470726035" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
+            <marker date="1488470726035" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
+            <marker date="1488470726035" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
+            <marker date="1488470726035" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
+            <marker date="1488470726035" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Setup/Config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/getOrders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <marker date="1488471256973" expanded="true" signature="76:1253" ph="SELECT o.ord... orders" />
+          </folding>
         </state>
       </provider>
     </entry>
