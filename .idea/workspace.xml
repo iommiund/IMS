@@ -33,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/Android/login.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="15" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -42,10 +42,12 @@
       <file leaf-file-name="getOrders.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Android/getOrders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+            <state relative-caret-position="238">
+              <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
               <folding>
-                <marker date="1488471256973" expanded="true" signature="76:1253" ph="SELECT o.ord... orders" />
+                <marker date="1488556301983" expanded="true" signature="208:243" ph="SELECT o.ord... orders" />
+                <marker date="1488556301983" expanded="true" signature="494:1671" ph="SELECT o.ord... orders" />
+                <marker date="1488556301983" expanded="true" signature="494:1698" ph="SELECT o.ord... orders" />
               </folding>
             </state>
           </provider>
@@ -64,7 +66,7 @@
       <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classes/order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="716">
+            <state relative-caret-position="6562">
               <caret line="386" column="22" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
               <folding>
                 <marker date="1488470726035" expanded="true" signature="362:539" ph="insert into ims.orders... " />
@@ -315,8 +317,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,11 +490,12 @@
       <workItem from="1488100425322" duration="6507000" />
       <workItem from="1488388863439" duration="1833000" />
       <workItem from="1488458657856" duration="4068000" />
+      <workItem from="1488554811816" duration="1636000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="539586000" />
+    <option name="totallyTimeSpent" value="541222000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -584,7 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="39" lean-forward="false" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -622,10 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
           <caret line="144" column="8" lean-forward="false" selection-start-line="144" selection-start-column="8" selection-end-line="150" selection-end-column="9" />
-          <folding>
-            <marker date="1487410197455" expanded="true" signature="3278:3371" ph="SELECT resou... resource_locations" />
-            <marker date="1487410197455" expanded="true" signature="4212:4360" ph="SELECT resou... resource_locations" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -674,9 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-          <folding>
-            <marker date="1487708620455" expanded="true" signature="3586:3827" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -766,10 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="65" column="44" lean-forward="false" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding>
-            <marker date="1488008531835" expanded="true" signature="4765:4870" ph="select natio... nationalities" />
-            <marker date="1488008531835" expanded="true" signature="5743:5790" ph="select town_... towns" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -784,7 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -828,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="13" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="30" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,7 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -858,7 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -873,7 +860,7 @@
     <entry file="file://$PROJECT_DIR$/Android/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="15" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -899,7 +886,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
+        <state relative-caret-position="6562">
           <caret line="386" column="22" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
           <folding>
             <marker date="1488470726035" expanded="true" signature="362:539" ph="insert into ims.orders... " />
@@ -926,10 +913,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/getOrders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
           <folding>
-            <marker date="1488471256973" expanded="true" signature="76:1253" ph="SELECT o.ord... orders" />
+            <marker date="1488556301983" expanded="true" signature="208:243" ph="SELECT o.ord... orders" />
+            <marker date="1488556301983" expanded="true" signature="494:1671" ph="SELECT o.ord... orders" />
+            <marker date="1488556301983" expanded="true" signature="494:1698" ph="SELECT o.ord... orders" />
           </folding>
         </state>
       </provider>
