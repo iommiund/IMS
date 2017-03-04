@@ -79,13 +79,5 @@ if($page<=$page_limit){
 } else {
     echo "No results to show";
 }
-/*
-if ($query) {
-    while($row=mysqli_fetch_array($query)){
-        $flag[] = $row;
-    }
 
-    print(json_encode($flag));
-}
-
-mysqli_close($con);*/
+mysqli_close($con);
