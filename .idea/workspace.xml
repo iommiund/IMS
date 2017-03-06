@@ -29,32 +29,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="install.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="install.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Android/install.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+            <state relative-caret-position="204">
+              <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="order.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classes/order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="499" column="21" lean-forward="false" selection-start-line="499" selection-start-column="21" selection-end-line="499" selection-end-column="21" />
+            <state relative-caret-position="430">
+              <caret line="526" column="52" lean-forward="true" selection-start-line="526" selection-start-column="52" selection-end-line="526" selection-end-column="52" />
               <folding>
-                <marker date="1488822303431" expanded="true" signature="362:539" ph="insert into ims.orders... " />
-                <marker date="1488822303431" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
-                <marker date="1488822303431" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
-                <marker date="1488822303431" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
-                <marker date="1488822303431" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
-                <marker date="1488822303431" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
-                <marker date="1488822303431" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
-                <marker date="1488822303431" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
-                <marker date="1488822303431" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
-                <marker date="1488822303431" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+                <marker date="1488826113468" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
+                <marker date="1488826113468" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
+                <marker date="1488826113468" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
+                <marker date="1488826113468" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
+                <marker date="1488826113468" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+                <marker date="1488826113468" expanded="true" signature="18739:18782" ph="select * fro... orders" />
+                <marker date="1488826113468" expanded="true" signature="18739:18815" ph="select * fro... orders" />
+                <marker date="1488826113468" expanded="true" signature="19107:19312" ph="select * fro... resources" />
+                <marker date="1488826113468" expanded="true" signature="19238:19301" ph="select o.res... orders" />
+                <marker date="1488826113468" expanded="true" signature="19238:19311" ph="select o.res... orders" />
               </folding>
             </state>
           </provider>
@@ -160,8 +165,8 @@
         <option value="$PROJECT_DIR$/Android/getOrders.php" />
         <option value="$PROJECT_DIR$/Android/replace.php" />
         <option value="$PROJECT_DIR$/Android/collect.php" />
-        <option value="$PROJECT_DIR$/Classes/order.php" />
         <option value="$PROJECT_DIR$/Android/install.php" />
+        <option value="$PROJECT_DIR$/Classes/order.php" />
       </list>
     </option>
   </component>
@@ -450,16 +455,16 @@
       <workItem from="1488618173241" duration="2017000" />
       <workItem from="1488641199610" duration="1145000" />
       <workItem from="1488699780942" duration="2401000" />
-      <workItem from="1488820580089" duration="1590000" />
+      <workItem from="1488820580089" duration="5111000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="548375000" />
+    <option name="totallyTimeSpent" value="551896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122395836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -852,6 +857,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Android/install.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/user.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -862,28 +875,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="499" column="21" lean-forward="false" selection-start-line="499" selection-start-column="21" selection-end-line="499" selection-end-column="21" />
+        <state relative-caret-position="430">
+          <caret line="526" column="52" lean-forward="true" selection-start-line="526" selection-start-column="52" selection-end-line="526" selection-end-column="52" />
           <folding>
-            <marker date="1488822303431" expanded="true" signature="362:539" ph="insert into ims.orders... " />
-            <marker date="1488822303431" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
-            <marker date="1488822303431" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
-            <marker date="1488822303431" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
-            <marker date="1488822303431" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
-            <marker date="1488822303431" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
-            <marker date="1488822303431" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
-            <marker date="1488822303431" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
-            <marker date="1488822303431" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
-            <marker date="1488822303431" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+            <marker date="1488826113468" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
+            <marker date="1488826113468" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
+            <marker date="1488826113468" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
+            <marker date="1488826113468" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
+            <marker date="1488826113468" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
+            <marker date="1488826113468" expanded="true" signature="18739:18782" ph="select * fro... orders" />
+            <marker date="1488826113468" expanded="true" signature="18739:18815" ph="select * fro... orders" />
+            <marker date="1488826113468" expanded="true" signature="19107:19312" ph="select * fro... resources" />
+            <marker date="1488826113468" expanded="true" signature="19238:19301" ph="select o.res... orders" />
+            <marker date="1488826113468" expanded="true" signature="19238:19311" ph="select o.res... orders" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Android/install.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>

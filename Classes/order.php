@@ -497,7 +497,61 @@ class order
     }
 
     public function androidInstall($orderId,$resource){
+
+        // check that order id is valid and that order is still status pending
+        $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2";
+
+        //get data
+        $get = $this->_db->query($sql);
+
+        //if data returned
+        if (!$get->count()) {
+
+            return false;
+
+        } else {
+
+            // confirm that resource exists on field location, and is of the same type as order resource
+            $sql = "select * from ims.resources r where r.resource_unique_value = '$resource' and r.resource_location_id = 5 and r.resource_type_id = (select o.resource_type_id from ims.orders o where o.order_id = '$orderId')";
+
+            //get data
+            $get = $this->_db->query($sql);
+
+            //if data returned
+            if (!$get->count()) {
+
+                return false;
+
+            } else {
+
+                // update orders where order = order
+                    // set new resource = scanned resource
+                    // set order status = complete
+                    // set closing uid = field user
+                    // set closing timestamp = now
+                    // if ok, update resources table where resource_unique_value = scanned resource
+                // set resource status = allocated
+                // set latitude
+                // set longitude
+                // set last update user
+                // if ok, insert transaction for resource
+                // set user id = field user
+                // set resource id
+                // set resource status = allocated
+                // set resource location = customer
+                // set customer id
+                // set initiation timestamp
+                // set transaction type = install
+                // set transaction status = 1
+                // set latitude
+                // set longitude
+
+            }
+
+        }
+
         return false;
+
     }
 
 }

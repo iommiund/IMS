@@ -16,5 +16,5 @@ if ($orderId == null || $resource == null){
     } else {
         echo 'Install Unsuccessful';
     }
-    
+
 }
