@@ -496,4 +496,8 @@ class order
 
     }
 
+    public function androidInstall($orderId,$resource){
+        return false;
+    }
+
 }
