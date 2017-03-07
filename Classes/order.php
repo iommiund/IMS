@@ -530,7 +530,7 @@ class order
             //if data returned
             if (!$get->count()) {
 
-                echo 'Resource is not available on your location or is not of the same type requested by order';
+                echo 'Resource is not available on your location, or is not of the same type';
                 die();
 
             } else {
@@ -579,6 +579,14 @@ class order
 
         return false;
 
+    }
+
+    public function androidReplace($orderId,$resource){
+        return false;
+    }
+
+    public function androidCollect($orderId,$resource){
+        return false;
     }
 
 }

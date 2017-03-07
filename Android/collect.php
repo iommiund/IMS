@@ -1,15 +1,15 @@
 <?php
 require_once '../core/init.php';
 
-$username = escape($_POST['username']);
-$password = escape($_POST['password']);
+$orderId = escape($_POST['orderId']);
+$resource = escape($_POST['resource']);
 
-$user = new user();
+$order = new order();
 
-$login = $user->androidLogin($username,$password);
-
-if($login){
-    echo 'Login Success';
+if ($orderId == null || $resource == null){
+    echo 'All fields are required';
 } else {
-    echo 'Login Unsuccessful';
+
+    $collect = $order->androidCollect($orderId,$resource);
+
 }
