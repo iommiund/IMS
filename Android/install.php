@@ -11,10 +11,5 @@ if ($orderId == null || $resource == null){
 } else {
 
     $install = $order->androidInstall($orderId,$resource);
-    if($install){
-        echo 'Install Successful';
-    } else {
-        echo 'Install Unsuccessful';
-    }
-
+    
 }

@@ -498,8 +498,11 @@ class order
 
     public function androidInstall($orderId,$resource){
 
-        // check that order id is valid and that order is still status pending
-        $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2";
+        $resourceId = null;
+        $customerId = null;
+
+        // check that order id is valid, and that order is still status pending, and that order type is install
+        $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2 and order_type_id = 4";
 
         //get data
         $get = $this->_db->query($sql);
@@ -507,9 +510,16 @@ class order
         //if data returned
         if (!$get->count()) {
 
-            return false;
+            echo 'Install order provided not found';
+            die();
 
         } else {
+
+            foreach ($get->results() as $o){
+
+                $customerId = escape($o->customer_id);
+
+            }
 
             // confirm that resource exists on field location, and is of the same type as order resource
             $sql = "select * from ims.resources r where r.resource_unique_value = '$resource' and r.resource_location_id = 5 and r.resource_type_id = (select o.resource_type_id from ims.orders o where o.order_id = '$orderId')";
@@ -520,31 +530,48 @@ class order
             //if data returned
             if (!$get->count()) {
 
-                return false;
+                echo 'Resource is not available on your location or is not of the same type requested by order';
+                die();
 
             } else {
 
+                foreach ($get->results() as $r) {
+
+                    $resourceId = escape($r->resource_id);
+
+                }
+
                 // update orders where order = order
-                    // set new resource = scanned resource
-                    // set order status = complete
-                    // set closing uid = field user
-                    // set closing timestamp = now
-                    // if ok, update resources table where resource_unique_value = scanned resource
-                // set resource status = allocated
-                // set latitude
-                // set longitude
-                // set last update user
-                // if ok, insert transaction for resource
-                // set user id = field user
-                // set resource id
-                // set resource status = allocated
-                // set resource location = customer
-                // set customer id
-                // set initiation timestamp
-                // set transaction type = install
-                // set transaction status = 1
-                // set latitude
-                // set longitude
+                if (!db::getInstance()->query("UPDATE ims.orders o SET o.order_status_id = 1, o.resource_id = '$resourceId', o.closing_uid = 25, o.closing_timestamp = NOW() WHERE o.order_id = '$orderId'")) {
+
+                    echo 'Orders table could not be updated';
+                    die();
+
+                } else {
+
+                    // update resources table where resource_unique_value = scanned resource
+                    if (!db::getInstance()->query("UPDATE ims.resources r SET r.resource_status_id = 2, r.resource_location_id = 7, r.customer_account_id = '$customerId', r.resource_latitude = NULL, r.resource_longitude = NULL, r.last_update_user = 25 WHERE r.resource_id = '$resourceId'")) {
+
+                        echo 'Resources table could not be updated';
+                        die();
+
+                    } else {
+
+                        //insert transaction for resource
+                        if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, 2,'$resourceId', 7, '$customerId', now(), 4, 1, null, null)")) {
+
+                            echo 'Transactions table could not be updated';
+                            die();
+
+                        } else {
+
+                            echo 'Install Successful';
+
+                        }
+
+                    }
+
+                }
 
             }
 
