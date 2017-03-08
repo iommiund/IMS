@@ -1330,8 +1330,13 @@ class inventory
     public function getInventoryOptions($resourceId)
     {
 
+        $resourceUniqueValue = null;
+        $resourceTypeId = null;
+
         $sql = "select
                     r.resource_id,
+                    r.resource_unique_value,
+                    r.resource_type_id,
                     rs.resource_status_id,
                     rl.resource_location_id,
                     rl.resource_location_type_id,
@@ -1361,6 +1366,8 @@ class inventory
 
                 //Set variables from result set
                 $resourceId = escape($r->resource_id);
+                $resourceUniqueValue = escape($r->resource_unique_value);
+                $resourceTypeId = escape($r->resource_type_id);
                 $resourceStatusId = escape($r->resource_status_id);
                 $resourceLocationId = escape($r->resource_location_id);
                 $resourceLocationTypeId = escape($r->resource_location_type_id);
@@ -1385,10 +1392,10 @@ class inventory
                     echo '<table class="ctable">';
                     echo '<tr>';
                     if ($user->hasPermission('orderReplaceResource') || $user->hasPermission('allAccess')) {
-                        echo '<td><a href="replaceResource.php?id=' . $resourceId . '">Replace</a></td>';
+                        echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Replace</a></td>';
                     }
                     if ($user->hasPermission('orderCollectResource') || $user->hasPermission('allAccess')) {
-                        echo '<td><a href="collectResource.php?id=' . $resourceId . '">Collect</a></td>';
+                        echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Collect</a></td>';
                     }
                     echo '</tr>';
                     echo '</table>';
