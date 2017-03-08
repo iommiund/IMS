@@ -558,7 +558,7 @@ class order
                     } else {
 
                         //insert transaction for resource
-                        if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, 2,'$resourceId', 7, '$customerId', now(), 4, 1, null, null)")) {
+                        if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, '$resourceId', 2, 7, '$customerId', now(), 4, 1, 0.000000, 0.000000)")) {
 
                             echo 'Transactions table could not be updated';
                             die();
