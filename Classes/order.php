@@ -582,11 +582,193 @@ class order
     }
 
     public function androidReplace($orderId,$resource){
+
+        $resourceId = null;
+        $customerId = null;
+
+        // check that order id is valid, and that order is still status pending, and that order type is replace
+        $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2 and order_type_id = 5";
+
+        //get data
+        $get = $this->_db->query($sql);
+
+        //if data returned
+        if (!$get->count()) {
+
+            echo 'Replace order provided not found';
+            die();
+
+        } else {
+
+            foreach ($get->results() as $o){
+
+                $customerId = escape($o->customer_id);
+
+            }
+
+            // confirm that resource exists on field location, and is of the same type as order resource
+            $sql = "select * from ims.resources r where r.resource_unique_value = '$resource' and r.resource_location_id = 5 and r.resource_type_id = (select o.resource_type_id from ims.orders o where o.order_id = '$orderId')";
+
+            //get data
+            $get = $this->_db->query($sql);
+
+            //if data returned
+            if (!$get->count()) {
+
+                echo 'Resource is not available on your location, or is not of the same type';
+                die();
+
+            } else {
+
+                foreach ($get->results() as $r) {
+
+                    $resourceId = escape($r->resource_id);
+
+                }
+
+                // update orders where order = input order
+                if (!db::getInstance()->query("UPDATE ims.orders o SET o.order_status_id = 1, o.resource_id = '$resourceId', o.closing_uid = 25, o.closing_timestamp = NOW() WHERE o.order_id = '$orderId'")) {
+
+                    echo 'Orders table could not be updated';
+                    die();
+
+                } else {
+
+                    // for new resource update resources table where resource_unique_value = scanned resource
+                    if (!db::getInstance()->query("UPDATE ims.resources r SET r.resource_status_id = 2, r.resource_location_id = 7, r.customer_account_id = '$customerId', r.resource_latitude = NULL, r.resource_longitude = NULL, r.last_update_user = 25 WHERE r.resource_id = '$resourceId'")) {
+
+                        echo 'Resources table could not be updated for new resource';
+                        die();
+
+                    } else {
+
+                        //for old resource update resources table where resource_unique_value = old_resource in orders table, set status as available at field location
+                        if (!db::getInstance()->query("UPDATE ims.resources r SET r.resource_status_id = 1, r.resource_location_id = 5, r.customer_account_id = NULL, r.resource_latitude = NULL, r.resource_longitude = NULL, r.last_update_user = 25 WHERE r.resource_unique_value = (select o.old_resource from ims.orders o where o.order_id = '$orderId')")) {
+
+                            echo 'Resources table could not be updated for old resource';
+                            die();
+
+                        } else {
+
+                            //Insert transaction for new resource
+                            if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, '$resourceId', 2, 7, '$customerId', now(), 5, 1, 0.000000, 0.000000)")) {
+
+                                echo 'Transactions table could not be updated for new resource';
+                                die();
+
+                            } else {
+
+                                //Insert transaction for old resource
+                                if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, (select r.resource_id from ims.resources r WHERE r.resource_unique_value = (select o.old_resource from ims.orders o where o.order_id = 17)), 1, 5, null, now(), 5, 1, 0.000000, 0.000000)")) {
+
+                                    echo 'Transactions table could not be updated for old resource';
+                                    die();
+
+                                } else {
+
+                                    echo 'Install Successful';
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
         return false;
+
     }
 
     public function androidCollect($orderId,$resource){
+
+        $resourceId = null;
+        $customerId = null;
+
+        // check that order id is valid, and that order is still status pending, and that order type is install
+        $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2 and order_type_id = 4";
+
+        //get data
+        $get = $this->_db->query($sql);
+
+        //if data returned
+        if (!$get->count()) {
+
+            echo 'Install order provided not found';
+            die();
+
+        } else {
+
+            foreach ($get->results() as $o){
+
+                $customerId = escape($o->customer_id);
+
+            }
+
+            // confirm that resource exists on field location, and is of the same type as order resource
+            $sql = "select * from ims.resources r where r.resource_unique_value = '$resource' and r.resource_location_id = 5 and r.resource_type_id = (select o.resource_type_id from ims.orders o where o.order_id = '$orderId')";
+
+            //get data
+            $get = $this->_db->query($sql);
+
+            //if data returned
+            if (!$get->count()) {
+
+                echo 'Resource is not available on your location, or is not of the same type';
+                die();
+
+            } else {
+
+                foreach ($get->results() as $r) {
+
+                    $resourceId = escape($r->resource_id);
+
+                }
+
+                // update orders where order = order
+                if (!db::getInstance()->query("UPDATE ims.orders o SET o.order_status_id = 1, o.resource_id = '$resourceId', o.closing_uid = 25, o.closing_timestamp = NOW() WHERE o.order_id = '$orderId'")) {
+
+                    echo 'Orders table could not be updated';
+                    die();
+
+                } else {
+
+                    // update resources table where resource_unique_value = scanned resource
+                    if (!db::getInstance()->query("UPDATE ims.resources r SET r.resource_status_id = 2, r.resource_location_id = 7, r.customer_account_id = '$customerId', r.resource_latitude = NULL, r.resource_longitude = NULL, r.last_update_user = 25 WHERE r.resource_id = '$resourceId'")) {
+
+                        echo 'Resources table could not be updated';
+                        die();
+
+                    } else {
+
+                        //insert transaction for resource
+                        if (!db::getInstance()->query("insert into ims.transactions (uid, resource_id, resource_status_id, resource_location_id, customer_account_id, initiation_timestamp, transaction_type_id, transaction_status_id, resource_latitude, resource_longitude) values (25, '$resourceId', 2, 7, '$customerId', now(), 4, 1, 0.000000, 0.000000)")) {
+
+                            echo 'Transactions table could not be updated';
+                            die();
+
+                        } else {
+
+                            echo 'Install Successful';
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
         return false;
+
     }
 
 }
