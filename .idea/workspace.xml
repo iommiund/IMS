@@ -28,7 +28,35 @@
     <favorites_list name="IMS" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="search.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customer.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/customer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="46" column="51" lean-forward="true" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+              <folding>
+                <marker date="1489167808189" expanded="true" signature="567:1596" ph="SELECT ca.cu... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="3377:4444" ph="SELECT CONCA... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="7688:7777" ph="select custo... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="8595:8735" ph="update ims.c... " />
+                <marker date="1489167808189" expanded="true" signature="9027:9167" ph="update ims.c... " />
+                <marker date="1489167808189" expanded="true" signature="9791:11178" ph="SELECT r.res... resources" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -108,7 +136,6 @@
         <option value="$PROJECT_DIR$/streetdd.php" />
         <option value="$PROJECT_DIR$/main.php" />
         <option value="$PROJECT_DIR$/installResource.php" />
-        <option value="$PROJECT_DIR$/Classes/customer.php" />
         <option value="$PROJECT_DIR$/replaceResource.php" />
         <option value="$PROJECT_DIR$/collectResource.php" />
         <option value="$PROJECT_DIR$/viewCustomerDetails.php" />
@@ -126,6 +153,7 @@
         <option value="$PROJECT_DIR$/Classes/order.php" />
         <option value="$PROJECT_DIR$/newCustomer.php" />
         <option value="$PROJECT_DIR$/Classes/validate.php" />
+        <option value="$PROJECT_DIR$/Classes/customer.php" />
       </list>
     </option>
   </component>
@@ -418,18 +446,18 @@
       <workItem from="1488902876404" duration="7863000" />
       <workItem from="1488987497728" duration="74000" />
       <workItem from="1488991232561" duration="8576000" />
-      <workItem from="1489164731198" duration="2867000" />
+      <workItem from="1489164731198" duration="3081000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="571276000" />
+    <option name="totallyTimeSpent" value="571490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706374" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -549,13 +577,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enableCustomer.php" />
     <entry file="file://$PROJECT_DIR$/disableCustomer.php" />
-    <entry file="file://$PROJECT_DIR$/search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/changeCustomerStatus.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -875,21 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="204" column="59" lean-forward="false" selection-start-line="204" selection-start-column="53" selection-end-line="204" selection-end-column="59" />
-          <folding>
-            <marker date="1488021617621" expanded="true" signature="567:1451" ph="SELECT ca.cu... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="3232:4299" ph="SELECT CONCA... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="7543:7632" ph="select custo... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="8450:8590" ph="update ims.c... " />
-            <marker date="1488021617621" expanded="true" signature="8882:9022" ph="update ims.c... " />
-            <marker date="1488021617621" expanded="true" signature="9646:11033" ph="SELECT r.res... resources" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/replaceResource.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -921,6 +927,29 @@
           <folding>
             <marker date="1489167284415" expanded="true" signature="4763:4868" ph="select natio... nationalities" />
             <marker date="1489167284415" expanded="true" signature="5741:5788" ph="select town_... towns" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="46" column="51" lean-forward="true" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+          <folding>
+            <marker date="1489167808189" expanded="true" signature="567:1596" ph="SELECT ca.cu... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="3377:4444" ph="SELECT CONCA... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="7688:7777" ph="select custo... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="8595:8735" ph="update ims.c... " />
+            <marker date="1489167808189" expanded="true" signature="9027:9167" ph="update ims.c... " />
+            <marker date="1489167808189" expanded="true" signature="9791:11178" ph="SELECT r.res... resources" />
           </folding>
         </state>
       </provider>

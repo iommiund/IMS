@@ -44,6 +44,9 @@ class customer
                     ca.customer_account_id LIKE '%$field%'
                         OR ca.customer_name LIKE '%$field%'
                         OR ca.customer_surname LIKE '%$field%'
+                        OR CONCAT(ca.customer_name,
+                            ' ',
+                            ca.customer_surname) = '$field'
                         OR ca.customer_email LIKE '%$field%'
                 ORDER BY 2 , 3";
 
