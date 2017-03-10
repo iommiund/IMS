@@ -5,19 +5,11 @@ include_once ("header.php");
 if ($user->isLoggedIn()){
 
     //check if user has permission
-    if ($user->hasPermission('reports') || $user->hasPermission('allAccess')){
+    if ($user->hasPermission('changeWarningLevels') || $user->hasPermission('allAccess')){
         ?>
         <div class="content">
             <div class="container">
                 <!-- CONTENT -->
-
-                <!-- For every resource show depletion -->
-
-                <!-- -->
-
-                <!-- -->
-
-                <!-- -->
             </div>
         </div>
         <?php

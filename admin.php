@@ -51,7 +51,10 @@ if ($user->isLoggedIn()) {
                             echo '<li><a href="addResourceModel.php">Add New Resource Model</a></li><br><br>';
                         }
                         if ($user->hasPermission('addResourceBrand') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addResourceBrand.php">Add New Resource Brand</a></li>';
+                            echo '<li><a href="addResourceBrand.php">Add New Resource Brand</a></li><br><br>';
+                        }
+                        if ($user->hasPermission('changeWarningLevels') || $user->hasPermission('allAccess')) {
+                            echo '<li><a href="changeWarningLevels.php">Change Resource Warning Levels</a></li><br><br>';
                         }
                         ?>
                     </ul>
