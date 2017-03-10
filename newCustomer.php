@@ -34,7 +34,7 @@ if ($user->isLoggedIn()){
                     ),
                     'customer_dob' => array(
                         'required' => true,
-                        'adult' => true
+                        '18+' => true
                     ),
                     'nationality_id' => array('required' => true),
                     'town' => array('required' => true),

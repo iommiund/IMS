@@ -60,6 +60,13 @@ class validate
                                 $this->addError("{$item} already exists.");
                             }
                             break;
+                        case '18+';
+
+                            // check that dob >= 18 years
+                            if (time() < strtotime('+18 years', strtotime($value))) {
+                                $this->addError("DOB must me greater than 18 years");
+                            }
+                        break;
                     }
                 }
 
