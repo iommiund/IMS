@@ -25,8 +25,8 @@ class order
 
     public function createReplaceOrder($customerId,$resource,$resourceTypeId,$uid){
 
-        //prepare sql query to check whether a replace order
-        $sql = "SELECT * FROM ims.orders o WHERE o.customer_id = {$customerId} AND o.old_resource = '$resource' AND o.order_type_id = 5 AND o.order_status_id = 2";
+        //prepare sql query to check whether an order already exists
+        $sql = "SELECT * FROM ims.orders o WHERE o.customer_id = {$customerId} AND o.old_resource = '$resource' AND o.order_status_id = 2";
 
         //get data
         $get = $this->_db->query($sql);
@@ -50,8 +50,8 @@ class order
 
     public function createCollectOrder($customerId,$resource,$resourceTypeId,$uid){
 
-        //prepare sql query to check whether a collect order
-        $sql = "SELECT * FROM ims.orders o WHERE o.customer_id = {$customerId} AND o.old_resource = '$resource' AND o.order_type_id = 6 AND o.order_status_id = 2";
+        //prepare sql query to check whether an order already exists
+        $sql = "SELECT * FROM ims.orders o WHERE o.customer_id = {$customerId} AND o.old_resource = '$resource' AND o.order_status_id = 2";
 
         //get data
         $get = $this->_db->query($sql);
@@ -353,55 +353,6 @@ class order
 
     }
 
-    /*public function androidGetOrders()
-    {
-
-        $sql = "SELECT 
-                o.order_id,
-                ca.customer_account_id,
-                CONCAT(ca.customer_name,
-                        ' ',
-                        ca.customer_surname) AS customerName,
-                CONCAT(s.street_name, ', ', t.town_name) AS address,
-                tt.transaction_type,
-                o.old_resource,
-                rt.resource_type,
-                o.initiation_timestamp,
-                u.username
-            FROM
-                ims.orders o
-                    INNER JOIN
-                ims.transaction_types tt ON o.order_type_id = tt.transaction_type_id
-                    INNER JOIN
-                ims.customer_accounts ca ON o.customer_id = ca.customer_account_id
-                    INNER JOIN
-                ims.streets s ON ca.street_id = s.street_id
-                    INNER JOIN
-                ims.towns t ON ca.town_id = t.town_id
-                    INNER JOIN
-                ims.resource_types rt ON o.resource_type_id = rt.resource_type_id
-                    INNER JOIN
-                ims.users u ON o.initiation_uid = u.uid
-            WHERE
-                o.order_status_id = 2
-            ORDER BY 1";
-
-        //get data
-        $get = $this->_db->query($sql);
-
-        //if data returned
-        if (!$get->count()) {
-
-        } else {
-
-            $results = $get->results();
-            return $results;
-
-        }
-
-        return false;
-    }*/
-
     public function getAllPendingOrders(){
 
     $sql = "SELECT 
@@ -565,6 +516,24 @@ class order
 
                         } else {
 
+                            //once install is complete, check if customer account is status disabled and enable customer account status
+                            $sql = "select customer_account_status_id from ims.customer_accounts where customer_account_id = '$customerId' and customer_account_status_id = 2";
+
+                            //get data
+                            $get = $this->_db->query($sql);
+
+                            //if data returned
+                            if (!$get->count()) {
+
+                            } else {
+
+                                //enable customer
+                                $customer = new customer();
+
+                                $customer->changeCustomerStatus($customerId,1);
+
+                            }
+
                             echo 'Install Successful';
 
                         }
@@ -688,6 +657,8 @@ class order
 
     public function androidCollect($orderId,$resource){
 
+        $customerId = null;
+
         // check that order id is valid, and that order is still status pending, and that order type is collect
         $sql = "select * from ims.orders where order_id = '$orderId' and order_status_id = 2 and order_type_id = 6";
 
@@ -701,6 +672,12 @@ class order
             die();
 
         } else {
+
+            foreach ($get->results() as $o){
+
+                $customerId = escape($o->customer_id);
+
+            }
 
             // confirm that the scanned resource is the same as the old_resource for the input order
             $sql = "select * from ims.orders o where o.order_id = '$orderId' and o.old_resource = '$resource'";
@@ -739,6 +716,18 @@ class order
                             die();
 
                         } else {
+
+                            //check if last resource in customer account, if so disable customer account
+
+                            //get data
+                            $get = $this->_db->query($sql);
+
+                            //if data returned
+                            if (!$get->count()) {
+
+
+
+                            }
 
                             echo 'Collection Successful';
 

@@ -32,82 +32,99 @@
       <file leaf-file-name="order.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classes/order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="668" column="49" lean-forward="false" selection-start-line="668" selection-start-column="42" selection-end-line="668" selection-end-column="49" />
+            <state relative-caret-position="357">
+              <caret line="730" column="0" lean-forward="true" selection-start-line="730" selection-start-column="0" selection-end-line="730" selection-end-column="0" />
               <folding>
-                <marker date="1489000102995" expanded="true" signature="362:539" ph="insert into ims.orders... " />
-                <marker date="1489000102995" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
-                <marker date="1489000102995" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
-                <marker date="1489000102995" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
-                <marker date="1489000102995" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
-                <marker date="1489000102995" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
-                <marker date="1489000102995" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
-                <marker date="1489000102995" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
-                <marker date="1489000102995" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
-                <marker date="1489000102995" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
-                <marker date="1489000102995" expanded="true" signature="18829:18872" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="18829:18905" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="18829:18927" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="19382:19587" ph="select * fro... resources" />
-                <marker date="1489000102995" expanded="true" signature="19513:19576" ph="select o.res... orders" />
-                <marker date="1489000102995" expanded="true" signature="19513:19586" ph="select o.res... orders" />
-                <marker date="1489000102995" expanded="true" signature="20096:20251" ph="insert into ims.orders... " />
-                <marker date="1489000102995" expanded="true" signature="20518:20754" ph="UPDATE ims.r... " />
-                <marker date="1489000102995" expanded="true" signature="21005:21301" ph="insert into ims.transactions... " />
-                <marker date="1489000102995" expanded="true" signature="21877:21975" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="22430:22635" ph="select * fro... resources" />
-                <marker date="1489000102995" expanded="true" signature="22561:22634" ph="select o.res... orders" />
-                <marker date="1489000102995" expanded="true" signature="23063:23149" ph="update order... " />
-                <marker date="1489000102995" expanded="true" signature="23150:23305" ph="UPDATE ims.o... " />
-                <marker date="1489000102995" expanded="true" signature="23589:23825" ph="UPDATE ims.r... " />
-                <marker date="1489000102995" expanded="true" signature="24203:24498" ph="UPDATE ims.r... " />
-                <marker date="1489000102995" expanded="true" signature="24790:25086" ph="insert into ims.transactions... " />
-                <marker date="1489000102995" expanded="true" signature="25401:25822" ph="insert into ims.transactions... " />
-                <marker date="1489000102995" expanded="true" signature="25630:25775" ph="select r.res... resources" />
-                <marker date="1489000102995" expanded="true" signature="25705:25764" ph="select o.old... orders" />
-                <marker date="1489000102995" expanded="true" signature="25705:25774" ph="select o.old... orders" />
-                <marker date="1489000102995" expanded="true" signature="26456:26553" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="26456:26554" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="26888:26977" ph="select * fro... orders" />
-                <marker date="1489000102995" expanded="true" signature="27327:27451" ph="UPDATE ims.o... " />
-                <marker date="1489000102995" expanded="true" signature="27790:28085" ph="UPDATE ims.r... " />
-                <marker date="1489000102995" expanded="true" signature="28357:28778" ph="insert into ims.transactions... " />
-                <marker date="1489000102995" expanded="true" signature="28586:28731" ph="select r.res... resources" />
-                <marker date="1489000102995" expanded="true" signature="28661:28720" ph="select o.old... orders" />
-                <marker date="1489000102995" expanded="true" signature="28661:28730" ph="select o.old... orders" />
+                <marker date="1489166724116" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+                <marker date="1489166724116" expanded="true" signature="950:1071" ph="SELECT * FRO... orders" />
+                <marker date="1489166724116" expanded="true" signature="1340:1542" ph="insert into ims.orders... " />
+                <marker date="1489166724116" expanded="true" signature="2092:2213" ph="SELECT * FRO... orders" />
+                <marker date="1489166724116" expanded="true" signature="2482:2684" ph="insert into ims.orders... " />
+                <marker date="1489166724116" expanded="true" signature="3503:4772" ph="SELECT o.ord... orders" />
+                <marker date="1489166724116" expanded="true" signature="6903:8103" ph="SELECT o.ord... orders" />
+                <marker date="1489166724116" expanded="true" signature="10281:11574" ph="SELECT o.ord... orders" />
+                <marker date="1489166724116" expanded="true" signature="13800:14977" ph="SELECT o.ord... orders" />
+                <marker date="1489166724116" expanded="true" signature="17304:17347" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="17304:17380" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="17304:17402" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="17857:18062" ph="select * fro... resources" />
+                <marker date="1489166724116" expanded="true" signature="17988:18051" ph="select o.res... orders" />
+                <marker date="1489166724116" expanded="true" signature="17988:18061" ph="select o.res... orders" />
+                <marker date="1489166724116" expanded="true" signature="18571:18726" ph="insert into ims.orders... " />
+                <marker date="1489166724116" expanded="true" signature="18993:19229" ph="UPDATE ims.r... " />
+                <marker date="1489166724116" expanded="true" signature="19480:19776" ph="insert into ims.transactions... " />
+                <marker date="1489166724116" expanded="true" signature="20101:20238" ph="select custo... customer_accounts" />
+                <marker date="1489166724116" expanded="true" signature="21124:21222" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="21677:21882" ph="select * fro... resources" />
+                <marker date="1489166724116" expanded="true" signature="21808:21881" ph="select o.res... orders" />
+                <marker date="1489166724116" expanded="true" signature="22310:22396" ph="update order... " />
+                <marker date="1489166724116" expanded="true" signature="22397:22552" ph="UPDATE ims.o... " />
+                <marker date="1489166724116" expanded="true" signature="22836:23072" ph="UPDATE ims.r... " />
+                <marker date="1489166724116" expanded="true" signature="23450:23745" ph="UPDATE ims.r... " />
+                <marker date="1489166724116" expanded="true" signature="24037:24333" ph="insert into ims.transactions... " />
+                <marker date="1489166724116" expanded="true" signature="24648:25069" ph="insert into ims.transactions... " />
+                <marker date="1489166724116" expanded="true" signature="24877:25022" ph="select r.res... resources" />
+                <marker date="1489166724116" expanded="true" signature="24952:25011" ph="select o.old... orders" />
+                <marker date="1489166724116" expanded="true" signature="24952:25021" ph="select o.old... orders" />
+                <marker date="1489166724116" expanded="true" signature="25732:25829" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="25732:25830" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="26281:26370" ph="select * fro... orders" />
+                <marker date="1489166724116" expanded="true" signature="26720:26844" ph="UPDATE ims.o... " />
+                <marker date="1489166724116" expanded="true" signature="27183:27478" ph="UPDATE ims.r... " />
+                <marker date="1489166724116" expanded="true" signature="27750:28171" ph="insert into ims.transactions... " />
+                <marker date="1489166724116" expanded="true" signature="27979:28124" ph="select r.res... resources" />
+                <marker date="1489166724116" expanded="true" signature="28054:28113" ph="select o.old... orders" />
+                <marker date="1489166724116" expanded="true" signature="28054:28123" ph="select o.old... orders" />
+                <marker date="1489166724116" expanded="true" signature="28482:28556" ph="select * fro... resources" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/db.php">
+      <file leaf-file-name="viewCustomerDetails.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="11" />
+            <state relative-caret-position="1292">
+              <caret line="82" column="39" lean-forward="false" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="39" />
               <folding>
-                <marker date="1485767169642" expanded="true" signature="3261:3334" ph="insert into $... " />
-                <marker date="1485767169642" expanded="true" signature="3785:3824" ph="update ${{$t... " />
+                <marker date="1488023039673" expanded="true" signature="3412:4003" ph="SELECT rt.re... resource_types" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collect.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Android/collect.php">
+      <file leaf-file-name="customer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/customer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="136">
+              <caret line="204" column="59" lean-forward="false" selection-start-line="204" selection-start-column="53" selection-end-line="204" selection-end-column="59" />
+              <folding>
+                <marker date="1488021617621" expanded="true" signature="567:1451" ph="SELECT ca.cu... customer_accounts" />
+                <marker date="1488021617621" expanded="true" signature="3232:4299" ph="SELECT CONCA... customer_accounts" />
+                <marker date="1488021617621" expanded="true" signature="7543:7632" ph="select custo... customer_accounts" />
+                <marker date="1488021617621" expanded="true" signature="8450:8590" ph="update ims.c... " />
+                <marker date="1488021617621" expanded="true" signature="8882:9022" ph="update ims.c... " />
+                <marker date="1488021617621" expanded="true" signature="9646:11033" ph="SELECT r.res... resources" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="replaceResource.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/replaceResource.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="replace.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Android/replace.php">
+      <file leaf-file-name="collectResource.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collectResource.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="323">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -139,10 +156,12 @@
       <find>FULL</find>
       <find>date</find>
       <find>main.php</find>
-      <find>android</find>
       <find>$password</find>
       <find>insert</find>
       <find>try</find>
+      <find>android</find>
+      <find>alreadyCreated</find>
+      <find>enable</find>
     </findStrings>
     <replaceStrings>
       <replace>$customer</replace>
@@ -223,8 +242,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -276,6 +295,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -319,7 +339,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -503,13 +522,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="568409000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1265625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706374" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -757,25 +775,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collectResource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="28" lean-forward="false" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/viewOrders.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="37" column="33" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/replaceResource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -845,37 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Android/collect.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="345" column="172" lean-forward="false" selection-start-line="345" selection-start-column="34" selection-end-line="345" selection-end-column="172" />
-          <folding>
-            <marker date="1488021617621" expanded="true" signature="567:1451" ph="SELECT ca.cu... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="3232:4299" ph="SELECT CONCA... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="7543:7632" ph="select custo... customer_accounts" />
-            <marker date="1488021617621" expanded="true" signature="8450:8590" ph="update ims.c... " />
-            <marker date="1488021617621" expanded="true" signature="8882:9022" ph="update ims.c... " />
-            <marker date="1488021617621" expanded="true" signature="9646:11033" ph="SELECT r.res... resources" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/inventory.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1158">
@@ -930,12 +902,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
+        <state relative-caret-position="17">
           <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="11" />
           <folding>
             <marker date="1485767169642" expanded="true" signature="3261:3334" ph="insert into $... " />
             <marker date="1485767169642" expanded="true" signature="3785:3824" ph="update ${{$t... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/collect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -947,51 +927,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/replaceResource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collectResource.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="82" column="39" lean-forward="false" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="39" />
+          <folding>
+            <marker date="1488023039673" expanded="true" signature="3412:4003" ph="SELECT rt.re... resource_types" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="204" column="59" lean-forward="false" selection-start-line="204" selection-start-column="53" selection-end-line="204" selection-end-column="59" />
+          <folding>
+            <marker date="1488021617621" expanded="true" signature="567:1451" ph="SELECT ca.cu... customer_accounts" />
+            <marker date="1488021617621" expanded="true" signature="3232:4299" ph="SELECT CONCA... customer_accounts" />
+            <marker date="1488021617621" expanded="true" signature="7543:7632" ph="select custo... customer_accounts" />
+            <marker date="1488021617621" expanded="true" signature="8450:8590" ph="update ims.c... " />
+            <marker date="1488021617621" expanded="true" signature="8882:9022" ph="update ims.c... " />
+            <marker date="1488021617621" expanded="true" signature="9646:11033" ph="SELECT r.res... resources" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Classes/order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="668" column="49" lean-forward="false" selection-start-line="668" selection-start-column="42" selection-end-line="668" selection-end-column="49" />
+        <state relative-caret-position="357">
+          <caret line="730" column="0" lean-forward="true" selection-start-line="730" selection-start-column="0" selection-end-line="730" selection-end-column="0" />
           <folding>
-            <marker date="1489000102995" expanded="true" signature="362:539" ph="insert into ims.orders... " />
-            <marker date="1489000102995" expanded="true" signature="942:1087" ph="SELECT * FRO... orders" />
-            <marker date="1489000102995" expanded="true" signature="1356:1558" ph="insert into ims.orders... " />
-            <marker date="1489000102995" expanded="true" signature="2100:2245" ph="SELECT * FRO... orders" />
-            <marker date="1489000102995" expanded="true" signature="2514:2716" ph="insert into ims.orders... " />
-            <marker date="1489000102995" expanded="true" signature="3535:4804" ph="SELECT o.ord... orders" />
-            <marker date="1489000102995" expanded="true" signature="6935:8135" ph="SELECT o.ord... orders" />
-            <marker date="1489000102995" expanded="true" signature="10313:11606" ph="SELECT o.ord... orders" />
-            <marker date="1489000102995" expanded="true" signature="13840:15017" ph="SELECT o.ord... orders" />
-            <marker date="1489000102995" expanded="true" signature="15325:16502" ph="SELECT o.ord... orders" />
-            <marker date="1489000102995" expanded="true" signature="18829:18872" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="18829:18905" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="18829:18927" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="19382:19587" ph="select * fro... resources" />
-            <marker date="1489000102995" expanded="true" signature="19513:19576" ph="select o.res... orders" />
-            <marker date="1489000102995" expanded="true" signature="19513:19586" ph="select o.res... orders" />
-            <marker date="1489000102995" expanded="true" signature="20096:20251" ph="insert into ims.orders... " />
-            <marker date="1489000102995" expanded="true" signature="20518:20754" ph="UPDATE ims.r... " />
-            <marker date="1489000102995" expanded="true" signature="21005:21301" ph="insert into ims.transactions... " />
-            <marker date="1489000102995" expanded="true" signature="21877:21975" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="22430:22635" ph="select * fro... resources" />
-            <marker date="1489000102995" expanded="true" signature="22561:22634" ph="select o.res... orders" />
-            <marker date="1489000102995" expanded="true" signature="23063:23149" ph="update order... " />
-            <marker date="1489000102995" expanded="true" signature="23150:23305" ph="UPDATE ims.o... " />
-            <marker date="1489000102995" expanded="true" signature="23589:23825" ph="UPDATE ims.r... " />
-            <marker date="1489000102995" expanded="true" signature="24203:24498" ph="UPDATE ims.r... " />
-            <marker date="1489000102995" expanded="true" signature="24790:25086" ph="insert into ims.transactions... " />
-            <marker date="1489000102995" expanded="true" signature="25401:25822" ph="insert into ims.transactions... " />
-            <marker date="1489000102995" expanded="true" signature="25630:25775" ph="select r.res... resources" />
-            <marker date="1489000102995" expanded="true" signature="25705:25764" ph="select o.old... orders" />
-            <marker date="1489000102995" expanded="true" signature="25705:25774" ph="select o.old... orders" />
-            <marker date="1489000102995" expanded="true" signature="26456:26553" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="26456:26554" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="26888:26977" ph="select * fro... orders" />
-            <marker date="1489000102995" expanded="true" signature="27327:27451" ph="UPDATE ims.o... " />
-            <marker date="1489000102995" expanded="true" signature="27790:28085" ph="UPDATE ims.r... " />
-            <marker date="1489000102995" expanded="true" signature="28357:28778" ph="insert into ims.transactions... " />
-            <marker date="1489000102995" expanded="true" signature="28586:28731" ph="select r.res... resources" />
-            <marker date="1489000102995" expanded="true" signature="28661:28720" ph="select o.old... orders" />
-            <marker date="1489000102995" expanded="true" signature="28661:28730" ph="select o.old... orders" />
+            <marker date="1489166724116" expanded="true" signature="362:539" ph="insert into ims.orders... " />
+            <marker date="1489166724116" expanded="true" signature="950:1071" ph="SELECT * FRO... orders" />
+            <marker date="1489166724116" expanded="true" signature="1340:1542" ph="insert into ims.orders... " />
+            <marker date="1489166724116" expanded="true" signature="2092:2213" ph="SELECT * FRO... orders" />
+            <marker date="1489166724116" expanded="true" signature="2482:2684" ph="insert into ims.orders... " />
+            <marker date="1489166724116" expanded="true" signature="3503:4772" ph="SELECT o.ord... orders" />
+            <marker date="1489166724116" expanded="true" signature="6903:8103" ph="SELECT o.ord... orders" />
+            <marker date="1489166724116" expanded="true" signature="10281:11574" ph="SELECT o.ord... orders" />
+            <marker date="1489166724116" expanded="true" signature="13800:14977" ph="SELECT o.ord... orders" />
+            <marker date="1489166724116" expanded="true" signature="17304:17347" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="17304:17380" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="17304:17402" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="17857:18062" ph="select * fro... resources" />
+            <marker date="1489166724116" expanded="true" signature="17988:18051" ph="select o.res... orders" />
+            <marker date="1489166724116" expanded="true" signature="17988:18061" ph="select o.res... orders" />
+            <marker date="1489166724116" expanded="true" signature="18571:18726" ph="insert into ims.orders... " />
+            <marker date="1489166724116" expanded="true" signature="18993:19229" ph="UPDATE ims.r... " />
+            <marker date="1489166724116" expanded="true" signature="19480:19776" ph="insert into ims.transactions... " />
+            <marker date="1489166724116" expanded="true" signature="20101:20238" ph="select custo... customer_accounts" />
+            <marker date="1489166724116" expanded="true" signature="21124:21222" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="21677:21882" ph="select * fro... resources" />
+            <marker date="1489166724116" expanded="true" signature="21808:21881" ph="select o.res... orders" />
+            <marker date="1489166724116" expanded="true" signature="22310:22396" ph="update order... " />
+            <marker date="1489166724116" expanded="true" signature="22397:22552" ph="UPDATE ims.o... " />
+            <marker date="1489166724116" expanded="true" signature="22836:23072" ph="UPDATE ims.r... " />
+            <marker date="1489166724116" expanded="true" signature="23450:23745" ph="UPDATE ims.r... " />
+            <marker date="1489166724116" expanded="true" signature="24037:24333" ph="insert into ims.transactions... " />
+            <marker date="1489166724116" expanded="true" signature="24648:25069" ph="insert into ims.transactions... " />
+            <marker date="1489166724116" expanded="true" signature="24877:25022" ph="select r.res... resources" />
+            <marker date="1489166724116" expanded="true" signature="24952:25011" ph="select o.old... orders" />
+            <marker date="1489166724116" expanded="true" signature="24952:25021" ph="select o.old... orders" />
+            <marker date="1489166724116" expanded="true" signature="25732:25829" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="25732:25830" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="26281:26370" ph="select * fro... orders" />
+            <marker date="1489166724116" expanded="true" signature="26720:26844" ph="UPDATE ims.o... " />
+            <marker date="1489166724116" expanded="true" signature="27183:27478" ph="UPDATE ims.r... " />
+            <marker date="1489166724116" expanded="true" signature="27750:28171" ph="insert into ims.transactions... " />
+            <marker date="1489166724116" expanded="true" signature="27979:28124" ph="select r.res... resources" />
+            <marker date="1489166724116" expanded="true" signature="28054:28113" ph="select o.old... orders" />
+            <marker date="1489166724116" expanded="true" signature="28054:28123" ph="select o.old... orders" />
+            <marker date="1489166724116" expanded="true" signature="28482:28556" ph="select * fro... resources" />
           </folding>
         </state>
       </provider>
