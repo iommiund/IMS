@@ -718,6 +718,7 @@ class order
                         } else {
 
                             //check if last resource in customer account, if so disable customer account
+                            $sql = "select * from ims.resources r where r.customer_account_id =  '$customerId'";
 
                             //get data
                             $get = $this->_db->query($sql);
@@ -725,7 +726,12 @@ class order
                             //if data returned
                             if (!$get->count()) {
 
+                                //disable customer
+                                $customer = new customer();
 
+                                $customer->changeCustomerStatus($customerId,2);
+
+                            } else {
 
                             }
 
