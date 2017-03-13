@@ -29,41 +29,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="changeLocationType.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="changeLocationType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/changeLocationType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="63" column="26" lean-forward="false" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+              <folding>
+                <marker date="1485539569392" expanded="true" signature="799:895" ph="update ims.r... " />
+                <marker date="1485539569392" expanded="true" signature="1014:1239" ph="select rl.re... resource_locations" />
+                <marker date="1485539569392" expanded="true" signature="3085:3175" ph="select resou... resource_locations" />
+                <marker date="1485539569392" expanded="true" signature="4030:4082" ph="select * fro... resource_location_types" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="changeWarningLevels.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/changeWarningLevels.php">
+      <file leaf-file-name="viewCustomerDetails.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-              <folding />
+            <state relative-caret-position="342">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="36" selection-end-column="25" />
+              <folding>
+                <marker date="1488023039673" expanded="true" signature="3412:4003" ph="SELECT rt.re... resource_types" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basic template.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/basic template.php">
+      <file leaf-file-name="customer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/customer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
+            <state relative-caret-position="-660">
+              <caret line="97" column="20" lean-forward="false" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+              <folding>
+                <marker date="1489167808189" expanded="true" signature="567:1596" ph="SELECT ca.cu... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="3377:4444" ph="SELECT CONCA... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="7688:7777" ph="select custo... customer_accounts" />
+                <marker date="1489167808189" expanded="true" signature="8595:8735" ph="update ims.c... " />
+                <marker date="1489167808189" expanded="true" signature="9027:9167" ph="update ims.c... " />
+                <marker date="1489167808189" expanded="true" signature="9791:11178" ph="SELECT r.res... resources" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1955">
+              <caret line="115" column="33" lean-forward="true" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -165,8 +179,8 @@
         <option value="$PROJECT_DIR$/Classes/validate.php" />
         <option value="$PROJECT_DIR$/Classes/customer.php" />
         <option value="$PROJECT_DIR$/reports.php" />
-        <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/changeWarningLevels.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
       </list>
     </option>
   </component>
@@ -183,8 +197,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -237,6 +251,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -279,7 +294,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -460,17 +474,18 @@
       <workItem from="1488987497728" duration="74000" />
       <workItem from="1488991232561" duration="8576000" />
       <workItem from="1489164731198" duration="4500000" />
+      <workItem from="1489394534700" duration="1706000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="572909000" />
+    <option name="totallyTimeSpent" value="574615000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12552084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32706374" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -861,16 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="82" column="39" lean-forward="false" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="39" />
-          <folding>
-            <marker date="1488023039673" expanded="true" signature="3412:4003" ph="SELECT rt.re... resource_types" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/replaceResource.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -906,21 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="46" column="51" lean-forward="true" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
-          <folding>
-            <marker date="1489167808189" expanded="true" signature="567:1596" ph="SELECT ca.cu... customer_accounts" />
-            <marker date="1489167808189" expanded="true" signature="3377:4444" ph="SELECT CONCA... customer_accounts" />
-            <marker date="1489167808189" expanded="true" signature="7688:7777" ph="select custo... customer_accounts" />
-            <marker date="1489167808189" expanded="true" signature="8595:8735" ph="update ims.c... " />
-            <marker date="1489167808189" expanded="true" signature="9027:9167" ph="update ims.c... " />
-            <marker date="1489167808189" expanded="true" signature="9791:11178" ph="SELECT r.res... resources" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/search.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -937,18 +927,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/changeLocationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="63" column="26" lean-forward="false" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+          <folding>
+            <marker date="1485539569392" expanded="true" signature="799:895" ph="update ims.r... " />
+            <marker date="1485539569392" expanded="true" signature="1014:1239" ph="select rl.re... resource_locations" />
+            <marker date="1485539569392" expanded="true" signature="3085:3175" ph="select resou... resource_locations" />
+            <marker date="1485539569392" expanded="true" signature="4030:4082" ph="select * fro... resource_location_types" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/basic template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="69" />
           <folding />
         </state>
       </provider>
@@ -961,10 +956,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/changeLocationType.php">
+    <entry file="file://$PROJECT_DIR$/Classes/customer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+        <state relative-caret-position="-660">
+          <caret line="97" column="20" lean-forward="false" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+          <folding>
+            <marker date="1489167808189" expanded="true" signature="567:1596" ph="SELECT ca.cu... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="3377:4444" ph="SELECT CONCA... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="7688:7777" ph="select custo... customer_accounts" />
+            <marker date="1489167808189" expanded="true" signature="8595:8735" ph="update ims.c... " />
+            <marker date="1489167808189" expanded="true" signature="9027:9167" ph="update ims.c... " />
+            <marker date="1489167808189" expanded="true" signature="9791:11178" ph="SELECT r.res... resources" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewCustomerDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="36" selection-end-column="25" />
+          <folding>
+            <marker date="1488023039673" expanded="true" signature="3412:4003" ph="SELECT rt.re... resource_types" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="115" column="33" lean-forward="true" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="33" />
           <folding />
         </state>
       </provider>

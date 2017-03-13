@@ -14,50 +14,113 @@ if ($user->isLoggedIn()) {
                         <h1>Administration</h1>
                         <h2>Users</h2>
                     </div>
-                    <br>
-                    <ul class="admin">
-                        <?php
-                        if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addUser.php">Add New User</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('changeUserStatus') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="changeUserStatus.php">Change User Status</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('changeUserType') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="changeUserType.php">Change User Type</a></li><br><br>';
-                        }
-                        echo '<div class="separator">';
-                        echo '<h2>Locations</h2>';
-                        echo '</div><br>';
-                        if ($user->hasPermission('addLocation') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addLocation.php">Add New Location</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('addLocationType') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addLocationType.php">Add New Location Type</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('changeLocationType') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="changeLocationType.php">Change Location Type</a></li><br><br>';
-                        }
-                        echo '<div class="separator">';
-                        echo '<h2>Resources</h2>';
-                        echo '</div><br>';
-                        if ($user->hasPermission('addResourceType') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addResourceType.php">Add New Resource Type</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('addResourceStatus') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addResourceStatus.php">Add New Resource Status</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('addResourceModel') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addResourceModel.php">Add New Resource Model</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('addResourceBrand') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="addResourceBrand.php">Add New Resource Brand</a></li><br><br>';
-                        }
-                        if ($user->hasPermission('changeWarningLevels') || $user->hasPermission('allAccess')) {
-                            echo '<li><a href="changeWarningLevels.php">Change Resource Warning Levels</a></li><br><br>';
-                        }
-                        ?>
-                    </ul>
+                    <table class="ctable">
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('addUser') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addUser.php">Add New User</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('changeUserStatus') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="changeUserStatus.php">Change User Status</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('changeUserType') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="changeUserType.php">Change User Type</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="separator">
+                        <h2>Locations</h2>
+                    </div>
+                    <table class="ctable">
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('addLocation') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addLocation.php">Add New Location</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('addLocationType') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addLocationType.php">Add New Location Type</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <?php
+                                if ($user->hasPermission('changeLocationType') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="changeLocationType.php">Change Location Type</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="separator">
+                        <h2>Resources</h2>
+                    </div>
+                    <table class="ctable">
+                        <tr>
+                            <td>
+                                <?php
+                                if ($user->hasPermission('addResourceType') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addResourceType.php">Add New Resource Type</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                if ($user->hasPermission('addResourceStatus') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addResourceStatus.php">Add New Resource Status</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                if ($user->hasPermission('addResourceModel') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addResourceModel.php">Add New Resource Model</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                if ($user->hasPermission('addResourceBrand') || $user->hasPermission('allAccess')) {
+                                    echo '<a href="addResourceBrand.php">Add New Resource Brand</a>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('table tr:nth-child(odd)').addClass('alt');
+                        });
+                    </script>
                 </div>
             </div>
         </div>
