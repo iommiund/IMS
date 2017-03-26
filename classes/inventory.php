@@ -789,7 +789,7 @@ class inventory
             ?>
 
             <div class="separator">
-                <h2>Pending Transfers for your location</h2>
+                <h2>Incoming Pending Transfers</h2>
             </div>
             <div class="center-table">
                 <table>
