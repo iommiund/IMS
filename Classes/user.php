@@ -79,7 +79,7 @@ class user
 
         //If data is returned check that the password+salt match password in db
         if ($user) {
-            if ($this->data()->password === hash::make($password, $this->data()->salt)) {
+            if ($this->data()->password === hash::make($password, $this->data()->salt) && $this->data()->user_type_id == 4) {
 
                 //check whether user is disabled or enabled
                 if ($this->data()->user_status_id === '1'){
