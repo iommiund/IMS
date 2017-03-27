@@ -9,15 +9,14 @@ if ($user->isLoggedIn()){
         ?>
         <div class="content">
             <div class="container">
-                <!-- CONTENT -->
+            <?php
+            $inventory = new inventory();
 
-                <!-- For every resource show depletion -->
-
-                <!-- -->
-
-                <!-- -->
-
-                <!-- -->
+            //show stock levels at location
+            $inventory->salesInYearChart();
+            $inventory->replaceInYearChart();
+            $inventory->collectInYearChart();
+            ?>
             </div>
         </div>
         <?php

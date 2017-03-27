@@ -1095,6 +1095,207 @@ class inventory
         <?php
     }
 
+    public function salesInYearChart(){
+        echo '<div class="separator">';
+        echo '<h2>All sales in the current year</h2>';
+        echo '</div>';
+        ?>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Model', 'Qty']
+                    <?php
+                    $sql="SELECT 
+                                CONCAT(rb.resource_brand,
+                                        ' ',
+                                        rm.resource_model,
+                                        ' ',
+                                        rt.resource_type) AS model,
+                                COUNT(*) AS total
+                            FROM
+                                ims.transactions t
+                                    INNER JOIN
+                                ims.resources r ON t.resource_id = r.resource_id
+                                    INNER JOIN
+                                ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                                    INNER JOIN
+                                ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                                    INNER JOIN
+                                ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                            WHERE
+                                t.transaction_type_id IN (3 , 4)
+                            AND YEAR(t.initiation_timestamp) = YEAR(CURDATE())
+                            GROUP BY model
+                            ORDER BY 2 DESC";
+
+                    $get = $this->_db->query($sql);
+
+                    if (!$get->count()) {
+                    echo 'could not get data';
+                    } else {
+
+                        foreach ($get->results() as $m) {
+
+                            //set variables from result set
+                            $model = escape($m->model);
+                            $qty = escape($m->total);
+
+                            echo ",['" . $model . "', " . $qty . "]";
+
+                        }
+
+                    }
+                    ?>
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('salesInYear'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="salesInYear" style="width: 900px; height: 500px;"></div>
+        <?php
+    }
+
+    public function replaceInYearChart(){
+        echo '<div class="separator">';
+        echo '<h2>All replace orders in the current year</h2>';
+        echo '</div>';
+        ?>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Model', 'Qty']
+                    <?php
+                    $sql="SELECT 
+                                CONCAT(rb.resource_brand,
+                                        ' ',
+                                        rm.resource_model,
+                                        ' ',
+                                        rt.resource_type) AS model,
+                                COUNT(*) AS total
+                            FROM
+                                ims.transactions t
+                                    INNER JOIN
+                                ims.resources r ON t.resource_id = r.resource_id
+                                    INNER JOIN
+                                ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                                    INNER JOIN
+                                ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                                    INNER JOIN
+                                ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                            WHERE
+                                t.transaction_type_id = 5
+                            AND YEAR(t.initiation_timestamp) = YEAR(CURDATE())
+                            GROUP BY model
+                            ORDER BY 2 DESC";
+
+                    $get = $this->_db->query($sql);
+
+                    if (!$get->count()) {
+                        echo 'could not get data';
+                    } else {
+
+                        foreach ($get->results() as $m) {
+
+                            //set variables from result set
+                            $model = escape($m->model);
+                            $qty = escape($m->total);
+
+                            echo ",['" . $model . "', " . $qty . "]";
+
+                        }
+
+                    }
+                    ?>
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('replaceInYear'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="replaceInYear" style="width: 900px; height: 500px;"></div>
+        <?php
+    }
+
+    public function collectInYearChart(){
+        echo '<div class="separator">';
+        echo '<h2>All collect orders in the current year</h2>';
+        echo '</div>';
+        ?>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Model', 'Qty']
+                    <?php
+                    $sql="SELECT 
+                                CONCAT(rb.resource_brand,
+                                        ' ',
+                                        rm.resource_model,
+                                        ' ',
+                                        rt.resource_type) AS model,
+                                COUNT(*) AS total
+                            FROM
+                                ims.transactions t
+                                    INNER JOIN
+                                ims.resources r ON t.resource_id = r.resource_id
+                                    INNER JOIN
+                                ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                                    INNER JOIN
+                                ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                                    INNER JOIN
+                                ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                            WHERE
+                                t.transaction_type_id = 6
+                            AND YEAR(t.initiation_timestamp) = YEAR(CURDATE())
+                            GROUP BY model
+                            ORDER BY 2 DESC";
+
+                    $get = $this->_db->query($sql);
+
+                    if (!$get->count()) {
+                        echo 'could not get data';
+                    } else {
+
+                        foreach ($get->results() as $m) {
+
+                            //set variables from result set
+                            $model = escape($m->model);
+                            $qty = escape($m->total);
+
+                            echo ",['" . $model . "', " . $qty . "]";
+
+                        }
+
+                    }
+                    ?>
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('collectInYear'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="collectInYear" style="width: 900px; height: 500px;"></div>
+        <?php
+    }
+
     public function getInventoryDetails($resourceId)
     {
 
