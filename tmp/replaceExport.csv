@@ -1,0 +1,6 @@
+salesPerson,saleDate,customerAccount,transactionType,oldResource,newResource,resourceModel
+"Iommi Underwood","2017-03-08 19:12:56",90,Replace,7CB21B000001,7CB21B000011,"Cisco EPC3925 Modem"
+"Iommi Underwood","2017-03-08 19:17:55",107,Replace,24767D000016,7CB21B000014,"Cisco EPC3925 Modem"
+"Iommi Underwood","2017-03-08 19:28:25",107,Replace,7CB21B000014,24767D000020,"Cisco EPC3925 Modem"
+"Iommi Underwood","2017-03-08 20:13:40",33,Replace,24767D000018,24767D000026,"Cisco EPC3925 Modem"
+"Iommi Underwood","2017-03-26 16:01:50",107,Replace,109868000001,109868000002,"Nagra NV TV Set-Top Box"

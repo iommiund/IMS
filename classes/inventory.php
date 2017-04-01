@@ -1095,19 +1095,20 @@ class inventory
         <?php
     }
 
-    public function salesInYearChart(){
+    public function salesInYearChart()
+    {
         echo '<div class="separator">';
         echo '<h2>All sales in the current year</h2>';
         echo '</div>';
         ?>
         <script type="text/javascript">
-            google.charts.load("current", {packages:["corechart"]});
+            google.charts.load("current", {packages: ["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['Model', 'Qty']
                     <?php
-                    $sql="SELECT 
+                    $sql = "SELECT 
                                 CONCAT(rb.resource_brand,
                                         ' ',
                                         rm.resource_model,
@@ -1133,7 +1134,7 @@ class inventory
                     $get = $this->_db->query($sql);
 
                     if (!$get->count()) {
-                    echo 'could not get data';
+                        echo 'could not get data';
                     } else {
 
                         foreach ($get->results() as $m) {
@@ -1162,19 +1163,102 @@ class inventory
         <?php
     }
 
-    public function replaceInYearChart(){
+    public function exportSalesCsv()
+    {
+
+        $conn = new PDO('mysql:host=' . config::get('mysql/host') . ';dbname=' . config::get('mysql/db'), config::get('mysql/username'), config::get('mysql/password'));
+        $sql = "SELECT 
+                    CONCAT(u.name, ' ', u.surname) AS salesPerson,
+                    t.initiation_timestamp AS saleDate,
+                    t.customer_account_id AS customerAccount,
+                    tt.transaction_type AS transactionType,
+                    r.resource_unique_value AS soldResource,
+                    CONCAT(rb.resource_brand,
+                            ' ',
+                            rm.resource_model,
+                            ' ',
+                            rt.resource_type) AS resourceModel,
+                    r.voucher_value_id as value
+                FROM
+                    ims.transactions t
+                        INNER JOIN
+                    ims.resources r ON t.resource_id = r.resource_id
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                        INNER JOIN
+                    ims.users u ON t.uid = u.uid
+                        INNER JOIN
+                    ims.transaction_types tt ON t.transaction_type_id = tt.transaction_type_id
+                WHERE
+                    t.transaction_type_id = 3
+                        AND YEAR(t.initiation_timestamp) = YEAR(CURDATE()) 
+                UNION SELECT 
+                    CONCAT(u.name, ' ', u.surname) AS salesPerson,
+                    o.closing_timestamp AS saleDate,
+                    o.customer_id AS customerAccount,
+                    tt.transaction_type AS transactionType,
+                    r.resource_unique_value AS soldResource,
+                    CONCAT(rb.resource_brand,
+                            ' ',
+                            rm.resource_model,
+                            ' ',
+                            rt.resource_type) AS resourceModel,
+                    r.voucher_value_id as value
+                FROM
+                    orders o
+                        INNER JOIN
+                    ims.users u ON o.initiation_uid = u.uid
+                        INNER JOIN
+                    ims.transaction_types tt ON o.order_type_id = tt.transaction_type_id
+                        INNER JOIN
+                    ims.resources r ON o.resource_id = r.resource_id
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                WHERE
+                    o.order_type_id = 4
+                        AND order_status_id = 1
+                        AND YEAR(o.closing_timestamp) = YEAR(CURDATE())";
+        $results = $conn->query($sql);
+
+        $filename = "tmp/salesExport.csv";
+
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('salesPerson','saleDate','customerAccount','transactionType','soldResource','resourceModel','value'));
+
+        foreach($results as $row)
+        {
+            fputcsv($handle, array($row['salesPerson'], $row['saleDate'], $row['customerAccount'], $row['transactionType'], $row['soldResource'], $row['resourceModel'], $row[escape('value')]));
+        }
+
+        fclose($handle);
+
+        redirect::to('tmp/salesExport.csv');
+
+    }
+
+    public function replaceInYearChart()
+    {
         echo '<div class="separator">';
         echo '<h2>All replace orders in the current year</h2>';
         echo '</div>';
         ?>
         <script type="text/javascript">
-            google.charts.load("current", {packages:["corechart"]});
+            google.charts.load("current", {packages: ["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['Model', 'Qty']
                     <?php
-                    $sql="SELECT 
+                    $sql = "SELECT 
                                 CONCAT(rb.resource_brand,
                                         ' ',
                                         rm.resource_model,
@@ -1229,19 +1313,73 @@ class inventory
         <?php
     }
 
-    public function collectInYearChart(){
+    public function exportReplaceCsv()
+    {
+
+        $conn = new PDO('mysql:host=' . config::get('mysql/host') . ';dbname=' . config::get('mysql/db'), config::get('mysql/username'), config::get('mysql/password'));
+        $sql = "SELECT 
+                    CONCAT(u.name, ' ', u.surname) AS salesPerson,
+                    o.closing_timestamp AS saleDate,
+                    o.customer_id AS customerAccount,
+                    tt.transaction_type AS transactionType,
+                    o.old_resource as oldResource,
+                    r.resource_unique_value AS newResource,
+                    CONCAT(rb.resource_brand,
+                            ' ',
+                            rm.resource_model,
+                            ' ',
+                            rt.resource_type) AS resourceModel
+                FROM
+                    orders o
+                        INNER JOIN
+                    ims.users u ON o.initiation_uid = u.uid
+                        INNER JOIN
+                    ims.transaction_types tt ON o.order_type_id = tt.transaction_type_id
+                        INNER JOIN
+                    ims.resources r ON o.resource_id = r.resource_id
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                WHERE
+                    o.order_type_id = 5
+                        AND order_status_id = 1
+                        AND YEAR(o.closing_timestamp) = YEAR(CURDATE())";
+        $results = $conn->query($sql);
+
+        $filename = "tmp/replaceExport.csv";
+
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('salesPerson','saleDate','customerAccount','transactionType','oldResource','newResource','resourceModel'));
+
+        foreach($results as $row)
+        {
+            fputcsv($handle, array($row['salesPerson'], $row['saleDate'], $row['customerAccount'], $row['transactionType'], $row['oldResource'], $row['newResource'], $row['resourceModel']));
+        }
+
+        fclose($handle);
+
+        redirect::to('tmp/replaceExport.csv');
+
+    }
+
+    public function collectInYearChart()
+    {
         echo '<div class="separator">';
         echo '<h2>All collect orders in the current year</h2>';
         echo '</div>';
         ?>
         <script type="text/javascript">
-            google.charts.load("current", {packages:["corechart"]});
+            google.charts.load("current", {packages: ["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['Model', 'Qty']
                     <?php
-                    $sql="SELECT 
+                    $sql = "SELECT 
                                 CONCAT(rb.resource_brand,
                                         ' ',
                                         rm.resource_model,
@@ -1294,6 +1432,58 @@ class inventory
         </script>
         <div id="collectInYear" style="width: 900px; height: 500px;"></div>
         <?php
+    }
+
+    public function exportCollectCsv()
+    {
+
+        $conn = new PDO('mysql:host=' . config::get('mysql/host') . ';dbname=' . config::get('mysql/db'), config::get('mysql/username'), config::get('mysql/password'));
+        $sql = "SELECT 
+                    CONCAT(u.name, ' ', u.surname) AS salesPerson,
+                    o.closing_timestamp AS saleDate,
+                    o.customer_id AS customerAccount,
+                    tt.transaction_type AS transactionType,
+                    o.old_resource as collectedResource,
+                    CONCAT(rb.resource_brand,
+                            ' ',
+                            rm.resource_model,
+                            ' ',
+                            rt.resource_type) AS resourceModel
+                FROM
+                    orders o
+                        INNER JOIN
+                    ims.users u ON o.initiation_uid = u.uid
+                        INNER JOIN
+                    ims.transaction_types tt ON o.order_type_id = tt.transaction_type_id
+                        INNER JOIN
+                    ims.resources r ON o.old_resource = r.resource_unique_value
+                        INNER JOIN
+                    ims.resource_models rm ON r.resource_model_id = rm.resource_model_id
+                        INNER JOIN
+                    ims.resource_brands rb ON rm.resource_brand_id = rb.resource_brand_id
+                        INNER JOIN
+                    ims.resource_types rt ON rm.resource_type_id = rt.resource_type_id
+                WHERE
+                    o.order_type_id = 6
+                        AND order_status_id = 1
+                        AND YEAR(o.closing_timestamp) = YEAR(CURDATE())";
+        $results = $conn->query($sql);
+
+        $filename = "tmp/collectExport.csv";
+
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('salesPerson','saleDate','customerAccount','transactionType','collectedResource','resourceModel'));
+
+        foreach($results as $row)
+        {
+            fputcsv($handle, array($row['salesPerson'], $row['saleDate'], $row['customerAccount'], $row['transactionType'], $row['collectedResource'], $row['resourceModel']));
+        }
+
+        fclose($handle);
+
+        redirect::to('tmp/collectExport.csv');
+
     }
 
     public function getInventoryDetails($resourceId)
@@ -1709,7 +1899,8 @@ class inventory
 
     }
 
-    public function cancelOrder($orderId,$uid,$customerId) {
+    public function cancelOrder($orderId, $uid, $customerId)
+    {
 
         if (!db::getInstance()->query("update ims.orders o set o.order_status_id = 3, o.closing_uid = {$uid}, o.closing_timestamp = now() where o.order_id = {$orderId}")) {
             redirect::to('viewOrders.php?id=' . $customerId . '&notCancelled');
@@ -1721,8 +1912,8 @@ class inventory
     }
 
 
-    public function completeInstallOrder(){
-
+    public function completeInstallOrder()
+    {
 
 
     }
