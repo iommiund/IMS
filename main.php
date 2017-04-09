@@ -4,6 +4,15 @@ include_once ("header.php");
 
 if ($user->isLoggedIn()){
 
+    //redirect users to specific pages
+    if ($user->data()->user_type_id == 3){
+        redirect::to('newCustomer.php');
+    } else if ($user->data()->user_type_id == 7){
+        redirect::to('reports.php');
+    } else if ($user->data()->user_type_id == 1){
+        redirect::to('admin.php');
+    }
+
     //check if user has permission
     if ($user->hasPermission('access') || $user->hasPermission('allAccess')){
         ?>

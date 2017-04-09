@@ -473,7 +473,19 @@ class order
             }
 
             // confirm that resource exists on field location, and is of the same type as order resource
-            $sql = "select * from ims.resources r where r.resource_unique_value = '$resource' and r.resource_location_id = 5 and r.resource_type_id = (select o.resource_type_id from ims.orders o where o.order_id = '$orderId')";
+            $sql = "SELECT 
+                        *
+                    FROM
+                        ims.resources r
+                    WHERE
+                        r.resource_unique_value = '$resource'
+                            AND r.resource_location_id = 5
+                            AND r.resource_type_id = (SELECT 
+                                o.resource_type_id
+                            FROM
+                                ims.orders o
+                            WHERE
+                                o.order_id = '$orderId')";
 
             //get data
             $get = $this->_db->query($sql);
