@@ -304,6 +304,7 @@ class inventory
                     rb.resource_brand,
                     rm.resource_model,
                     rt.resource_type,
+                    rt.resource_type_id,
                     vv.voucher_value,
                     rs.resource_status_id,
                     rs.resource_status,
@@ -368,6 +369,7 @@ class inventory
                         $resourceBrand = escape($r->resource_brand);
                         $resourceModel = escape($r->resource_model);
                         $resourceType = escape($r->resource_type);
+                        $resourceTypeId = escape($r->resource_type_id);
                         if (isset($r->voucher_value)) {
                             $voucherValue = escape($r->voucher_value);
                         }
@@ -403,7 +405,7 @@ class inventory
                         } elseif ($installFlag == 1 && $customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7) {
 
                             if ($user->hasPermission('orderReplaceResource') || $user->hasPermission('allAccess')) {
-                                echo '<td><a href="replaceResource.php?id=' . $resourceId . '">Replace</a></td>';
+                                echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Replace</a></td>';
                             }
 
                             //else leave blank
@@ -418,7 +420,7 @@ class inventory
                             //else if customer id is not null, and status = allocated and location = customer and install = 1 insert link for collection
                         } elseif ($customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7 && $installFlag == 1) {
 
-                            if ($user->hasPermission('orderCollectResource') || $user->hasPermission('allAccess')) {
+                            if ($user->hasPermission('orderPickupResource') || $user->hasPermission('allAccess')) {
                                 echo '<td><a href="collectResource.php?id=' . $resourceId . '">Collect</a></td>';
                             }
 
@@ -1785,7 +1787,7 @@ class inventory
                     if ($user->hasPermission('orderReplaceResource') || $user->hasPermission('allAccess')) {
                         echo '<td><a href="replaceResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Replace</a></td>';
                     }
-                    if ($user->hasPermission('orderCollectResource') || $user->hasPermission('allAccess')) {
+                    if ($user->hasPermission('orderPickupResource') || $user->hasPermission('allAccess')) {
                         echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Collect</a></td>';
                     }
                     echo '</tr>';
