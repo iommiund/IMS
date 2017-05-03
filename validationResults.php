@@ -74,7 +74,6 @@ if ($user->isLoggedIn()) {
                         $inventory->getValidationResults('=', '1');
                         ?>
                     </table>
-                    <hr>
                     <?php
                     }
 

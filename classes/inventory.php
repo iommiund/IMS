@@ -421,7 +421,7 @@ class inventory
                         } elseif ($customerId !== null && $resourceStatusId == 2 && $resourceLocationId == 7 && $installFlag == 1) {
 
                             if ($user->hasPermission('orderPickupResource') || $user->hasPermission('allAccess')) {
-                                echo '<td><a href="collectResource.php?id=' . $resourceId . '">Collect</a></td>';
+                                echo '<td><a href="collectResource.php?customerId=' . $customerId . '&resource=' . $resourceUniqueValue . '&resourceTypeId=' . $resourceTypeId . '">Collect</a></td>';
                             }
 
                             //else leave blank
